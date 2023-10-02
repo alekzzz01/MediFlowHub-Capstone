@@ -26,8 +26,8 @@ $firstName = $_SESSION["first_name"];
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="dashboard.css">
-    <link rel="stylesheet" href="transitions.css">
+    <link rel="stylesheet" type="text/css" href="style/dashboard.css">
+    <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

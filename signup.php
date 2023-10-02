@@ -76,8 +76,8 @@ if (isset($_POST["submit"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup | MediFlowHub</title>
     <link rel="icon" href="images/Logo.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="Signup.css">
-    <link rel="stylesheet" href="transitions.css">
+    <link rel="stylesheet" type="text/css" href="style/Signup.css">
+    <link rel="stylesheet" href="style/transitions.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
