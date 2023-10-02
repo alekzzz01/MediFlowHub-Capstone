@@ -73,7 +73,7 @@
 
                 <li>
                     <a href="#">
-                        <i class='bx bxs-location-plus'></i>
+                    <i class='bx bxs-map'></i>
                         <span>Locations</span>
                     </a>
                 </li>
