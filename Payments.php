@@ -147,6 +147,9 @@
                     <div class="payments">
 
 
+
+
+
                         <div class="paymentContainer">
                                         
                                         <label>
@@ -199,9 +202,9 @@
 
 
 
-                    <div class="confirm-button">
-                        <button>Confirm Button</button>
-                    </div>
+                        <div class="confirm-button">
+                            <button>Confirm Button</button>
+                        </div>
 
 
 
@@ -223,6 +226,9 @@
 
                                     
                     <h2>Summary</h2> 
+
+
+                    
 
             </div>
             

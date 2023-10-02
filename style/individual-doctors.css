@@ -6,14 +6,16 @@
 
 
 
+
+
 :root{
     
     --clr-text: #030104;
     --clr-text-lessopacity: #424242;
 
     --clr-nav-bar-color: #62645B;
-
     --clr-background-color: #292D32;
+
     --clr-primary-color: #01BCD6;
     --clr-button-color: #6C70DC;
     
@@ -29,6 +31,9 @@
 
     
 
+
+    
+
 }
 
 
@@ -41,7 +46,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
 
-    height: 100vh;
+
 
 
 
@@ -78,13 +83,24 @@ body {
 .logo {
     height: 100px;
     padding: 32px 24px;
-   
+
+    display: flex;
+    align-items: center;
+    gap: 32px;
 
 
 }
 
 .logo img {
     width:150px;
+
+}
+
+.logo i {
+    color: white;
+    font-size: 24px;
+    opacity: 0;
+    cursor: pointer;
 
 }
 
@@ -189,16 +205,12 @@ li.active a span {
 
 
 
-
-
-
 .main--content {
     position: relative;
     background-color: white; 
     
     width: 100%;
     padding: 32px 40px;
-
 
 }
 
@@ -248,17 +260,19 @@ li.active a span {
     height: 48px;
     border: 1px solid var(--fw-light);
     border-radius: 24px;
-    background-image: url(images/PROFILE.png);
+ 
+    background-image: url(../images/PROFILE.png);
 }
 
 .user--info {
     display: flex;
     align-items: center;
     gap: 24px;
+    position: relative;
     
 }
 
-.user--info i{
+.bx-bell{
     font-size: 20px;
     border: 1px solid #ccc;
     padding: 12px;
@@ -330,140 +344,276 @@ li.active a span {
 
 
 
+.dropdown-profile {
+    display: none;
+    opacity: 0; /* Initially set opacity to 0 */
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 4px;
+    background: #FFF;
+    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
 
 
-
-
-.first-container {
-    display: flex;
-    gap: 36px;
-    align-items: start;
+    padding: 20px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
 }
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap:22px;
+    cursor: pointer;
+}
+
+.user-info button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+  
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+}
+.edit-profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.edit-profile1 i {
+    background-color: #D9D9D9;
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-profile1 {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.help-support {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .container1 {
     margin-top: 40px;
+
 }
 
-.Title-1 {
-    font-size: 21px;
-    font-weight: var(--fw-semibold);
+
+.container1 h2 {
+    margin: 0;
+
     color: var(--clr-text-lessopacity);
+   
+}
+
+
+
+.inside-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+
+    margin-top: 36px;
+}
+
+
+.appointment-card {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 32px;
+    gap: 16px;
+
+    width: 400px;
+    max-height: 260px;
+
+    border-radius: 16px;
+    background: #F5F6F8;
+}
+
+
+
+
+
+.profile button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50px;
+
+    outline: none;
+    border: none;
+}
+
+.info p {
+    margin: 0;
+    font-weight: var(--fw-medium);
+    font-size: 0.75rem;
+}
+
+.info span {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.50);
+    font-weight: var(--fw-medium);
+    font-size: 0.75rem;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.profession p {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: var(--fw-medium);
+}
+
+.date-time {
+    display: flex;
+    gap: 28px;
+}
+
+.date-time-container p {
+    margin: 0;
+    font-size: 0.75rem;
+}
+
+.date-time-title {
+    color: rgba(0, 0, 0, 0.50);
+    font-weight: var(--fw-medium);
+}
+
+.date-time-desc {
+    font-weight: var(--fw-medium);
+}
+
+
+.button-schedule {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    
+}
+
+.button-schedule button {
+    padding: 8px 16px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    background: #6C70DC;
+
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-bold);
+    font-size: 0.75rem;
+}
+
+.button-schedule i {
+    background-color: white;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.icons-schedule {
+    display: flex;
+    gap: 12px;
+}
+
+
+
+
+
+
+.schedule-card {
+   
+    border-radius: 15px;
+    border: 1px solid #CCC;
+    background: #FFF;
+
+    padding: 40px 48px;
+}
+
+
+.hour {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hour img {
+    width: 40px;
+    height: 40px;
+
+}
+
+.hour-desc p, span {
     margin: 0;
 }
-
 
 
 
 .divider {
     border-top: 1px solid #E9E9E9;
+
+    margin: 60px 0;
     
     }   
     
 
-.payments {
-    position: relative;
-    
+.time-card {
     display: flex;
-    flex-direction: column;
-    gap: 28px;
+   flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 24px;
+
+    margin-top: 60px;
+}
+
+.time-box {
+    max-width: 180px;
     border-radius: 8px;
     border: 1px solid #CCC;
-
-    padding: 36px;
-
-}
-
-
-.paymentContainer{
-
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-
-   
-}
-
-    
-
-.paymentContainer label {
-
-    display: flex;
-    gap: 24px;
-}
-
-.confirm-button {
-    position: absolute;
-    bottom: 36px;
-    right: 36px;
-
-
-}
-
-.confirm-button button {
-    border: none;
-    outline: none;
-    border-radius: 8px;
- 
-    background: #6C70DC;
     padding: 16px 32px;
+}
 
-    font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-semibold);
-    color: white;
+.time-box label {
+    margin-left: 10px;
 }
 
 
 
-.Description p, span {
-    margin: 0;
-
-}
-.Description span {
-    color: #424242;
-    font-size: 12px;
-    font-weight: var(--fw-regular);
-}
-.Description p{
-    letter-spacing: 1.6px;
-    font-weight: var(--fw-semibold);
-}
-
-
-
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-
-.form-container h2 {
-    margin: 0;
-   
-}
-
-.form-field label {
-    font-family: 'Poppins', sans-serif;
-}
-
-.form-field input  {
-    margin-left: 16px;
-    border-radius: 6px;
-    border: 1px solid #CCC;
-    padding: 12px;
-    font-family: 'Poppins', sans-serif;
-}
-
-
-.container2 {
-    margin-top: 40px;
-}
-
-.container2 p {
-    font-size: 21px;
-    font-weight: var(--fw-semibold);
-    color: var(--clr-text-lessopacity);
-    margin: 0;
-    opacity: 0;
-}
 
