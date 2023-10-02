@@ -131,13 +131,6 @@
                         </div>
 
 
-                        <div class="menu2">
-
-                            <i class='bx bx-map-pin'></i>
-                            <p>Location</p>
-
-                        </div>
-
                         <div class="menu3">
 
                         <i class='bx bx-slider'></i>
