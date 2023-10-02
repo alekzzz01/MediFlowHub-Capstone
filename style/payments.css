@@ -466,4 +466,60 @@ li.active a span {
     margin: 0;
     opacity: 0;
 }
+.second-container {
+    display: flex;
+    gap: 36px;
+    align-items: start;
+}
+.container3 {
+    margin-top: 40px;
+    
+}
+
+.doc-1 {
+    font-size: 21px;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-text-lessopacity);
+    margin: 0;
+}
+
+.doc-c {
+    font-size: 20px;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-text-lessopacity);
+    margin: 0;
+}
+.ol {
+     
+    margin: 1;
+}
+
+.container4 {
+    margin-top: 40px;
+}
+
+.phar {
+    font-size: 20px;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-text-lessopacity);
+    margin: 0;
+}
+.Time p, span {
+    margin: 0;
+}
+.Date p, span {
+    margin: 0;
+}
+.Note p, span {
+    margin: 0;
+}
+.Time p {
+    font-weight: var(--fw-semibold);
+}
+.Date p {
+    font-weight: var(--fw-semibold);
+}
+.Note p {
+    font-weight: var(--fw-semibold);
+}
 

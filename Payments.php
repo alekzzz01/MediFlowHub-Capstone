@@ -227,6 +227,73 @@
                                     
                     <h2>Summary</h2> 
 
+                    <div class="second-container">
+                    
+     
+                    <div class="container3">
+                             
+                            <div class="payments">
+        
+        
+                                <div class="Doctorscontainer">
+                                                
+                                                <label>
+                                                <div class="doctor-field">
+                                                <p class="doc-1" >Dr. Quack</p>
+        
+                                                <div class="Time"><p>TIME:</p>
+                                                    <span>12:00</span></div>
+                                                    <div class="Date"><p>DATE:</p>
+                                                    <span>16 Feb 2023</span></div>
+                                                    <div class="Note"><p>NOTES:</p>
+        
+                                                <div class="special"><span>General Medicine</span></div>
+                                                    
+                                                </label> 
+                                                <br>
+                                                
+        
+        
+                                                <div class="container3">
+                                                <div class="fee">
+                                                <p class="doc-c" >DOCTOR'S FEE:</p>
+                                                
+                                                <p class="ol" >Online Consultation</p>
+                                                
+                                                <label for="fee1">200.00 PHP</label> 
+                                                <br>
+                                                </div>
+        
+        
+        
+                                                <div class="container4">
+        
+                                                
+                                                <div class="doctor-field">
+                                                <p class="phar" >PHARMACY:</p>
+        
+                                                <div class="fee2">
+                                                <label for="Doctor">Mucosolvan 24hrs 75mg <br>Capsule
+                                                <br>(₱ 232.50 PHP)</label>  
+        
+                                                <div class="total">
+                                                <label for="tot">TOTAL:     ₱ 1,492.5</label>  
+        
+        
+                                                </div>   
+                                </div>  
+                                <div class="doctor-container">
+                                </div>
+        
+        
+                        
+                        
+        
+        
+        </div>
+
+
+
 
                     
 
