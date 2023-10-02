@@ -11,7 +11,7 @@
     <link rel="icon" href="images/logo.png" type="image/png">
 
     <link rel="stylesheet" type="text/css" href="style/payments.css">
-    <link rel="stylesheet" href="transitions.css">
+    <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,7 +99,7 @@
 
 
 
-    <div class="main--content">
+<div class="main--content">
 
         <div class="header--wrapper">
          
@@ -133,193 +133,189 @@
 
 
 
-    <div class="first-container">
-                    
-   
-            
-            <div class="container1">
+        <div class="first-container">
+                        
+    
+                
+                <div class="container1">
 
-                <p class="Title-1" >Payments</p>
+                    <p class="Title-1" >Payments</p>
 
-                                    
-                <h2>Choose your payment method</h2> 
-
-                    <div class="payments">
-
-
-
-
-
-                        <div class="paymentContainer">
                                         
-                                        <label>
-                                            <input type="radio" name="paymentMethod" value="Over the Counter">
-                                            <div class="Description"><p>Over the counter</p>
-                                            <span>process payments by using cash over-the-counter at physical clinic branches, as well as by cash and payment cards using ATMs.</span></div>
+                    <h2>Choose your payment method</h2> 
+
+                        <div class="payments">
+
+
+
+
+
+                            <div class="paymentContainer">
                                             
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="paymentMethod" value="GCash"> 
-                                            <div class="Description"><p>Gcash</p>
-                                            <span>process payments by using cash over-the-counter at physical clinic branches, as well as by cash and payment cards using ATMs.</span></div>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="paymentMethod" value="Credit Card">
-                                            <div class="Description"><p>Credit Card</p>
-                                            <span>process payments by using cash over-the-counter at physical clinic branches, as well as by cash and payment cards using ATMs.</span></div>
-                                        </label>
-    
-    
+                                            <label>
+                                                <input type="radio" name="paymentMethod" value="Over the Counter">
+                                                <div class="Description"><p>Over the counter</p>
+                                                <span>process payments by using cash over-the-counter at physical clinic branches, as well as by cash and payment cards using ATMs.</span></div>
+                                                
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="paymentMethod" value="GCash"> 
+                                                <div class="Description"><p>Gcash</p>
+                                                <span>process payments by using cash over-the-counter at physical clinic branches, as well as by cash and payment cards using ATMs.</span></div>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="paymentMethod" value="Credit Card">
+                                                <div class="Description"><p>Credit Card</p>
+                                                <span>process payments by using cash over-the-counter at physical clinic branches, as well as by cash and payment cards using ATMs.</span></div>
+                                            </label>
+        
+        
+                            </div>
+        
+                            <div class="divider"></div>
+        
+        
+        
+                            <div class="form-container">
+                                    <h2>Credit Card Information</h2>
+
+                                        <div class="form-field">
+                                        <label for="cardNumber">CARD NUMBER:</label>
+                                        <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter Card Number">
+                                        </div>
+
+                                        <div class="form-field">
+                                        <label for="nameOnCard">NAME ON CARD:</label>
+                                        <input type="text" id="nameOnCard" name="nameOnCard" placeholder="Enter Name on Card">
+                                        </div>
+
+                                        <div class="form-field">
+                                        <label for="expirationDate">EXPIRATION DATE:</label> 
+                                        <input type="text" id="expirationDate" name="expirationDate" class="expiration-date" placeholder="MM">
+                                        <input type="text" id="expirationYear" name="expirationYear" class="expiration-date" placeholder="YYYY">
+                                        </div>
+        
+        
+                            </div>
+        
+        
+
+
+
+                            <div class="confirm-button">
+                                <button>Confirm Button</button>
+                            </div>
+
+
+
                         </div>
-    
-                        <div class="divider"></div>
-    
-    
-    
-                        <div class="form-container">
-                                <h2>Credit Card Information</h2>
-
-                                    <div class="form-field">
-                                    <label for="cardNumber">CARD NUMBER:</label>
-                                    <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter Card Number">
-                                    </div>
-
-                                    <div class="form-field">
-                                    <label for="nameOnCard">NAME ON CARD:</label>
-                                    <input type="text" id="nameOnCard" name="nameOnCard" placeholder="Enter Name on Card">
-                                    </div>
-
-                                    <div class="form-field">
-                                    <label for="expirationDate">EXPIRATION DATE:</label> 
-                                    <input type="text" id="expirationDate" name="expirationDate" class="expiration-date" placeholder="MM">
-                                    <input type="text" id="expirationYear" name="expirationYear" class="expiration-date" placeholder="YYYY">
-                                    </div>
-    
-    
-                        </div>
-    
-    
+                        
 
 
 
-                        <div class="confirm-button">
-                            <button>Confirm Button</button>
-                        </div>
 
 
+
+                </div>
+
+
+                <div class="container2">
+
+                
+                        <p class="hiddentext"> Hidden Text</p>
+
+                                        
+                        <h2>Summary</h2> 
+
+            
+                    <div class="payments2">
+                
+                
+                            <div class="Doctorscontainer">
+                                                        
+                                                    
+                                        <div class="doctor-field">
+
+                                                <div class="profile-doc">
+                                                        <button></button>
+                                                        <div class="name-doc">
+
+                                                                <p>Dr. Names</p>
+                                                                <p>General Medicine</p>
+
+                                                        </div>
+                                                        
+
+                                                 </div>
+
+
+
+                                                <div class="time-field">
+                                                        <div class="time-doc">
+                                                                <p>Time</p>
+                                                                <span>09:00 am</span>
+                                                        </div>
+
+                                                        <div class="time-doc">
+                                                                <p>Date</p>
+                                                                <span>16 Feb 2023</span>
+                                                        </div>
+    
+                                                </div>
+                                                
+                                        </div>
+
+
+                                        <div class="notes-field">
+                                                <p>Notes</p>
+                                                <p>  </p>
+
+                                        </div>
+
+
+
+            
+                
+                
+                            </div>
+
+
+                            <div class="doctors-fee">
+                                <p>DOCTOR'S FEE: </p>
+                                <p>Online Consultation</p>
+                                <p>200.00 PHP</p>
+                            </div>
+
+
+                            <div class="Pharmacy-fee">
+                                <p>DOCTOR'S FEE: </p>
+                                <p>Online Consultation</p>
+                                <p>200.00 PHP</p>
+                            </div>
+
+
+
+
+
+                            
 
                     </div>
-                       
+                
+        
 
 
 
 
 
+                </div>
 
-            </div>
 
 
-            <div class="container2">
 
-            
-                    <p> Hidden Text</p>
 
-                                    
-                    <h2>Summary</h2> 
-
-                    <div class="second-container">
-                    
-     
-                    <div class="container3">
-                             
-                            <div class="payments">
-        
-        
-                                <div class="Doctorscontainer">
-                                                
-                                                <label>
-                                                <div class="doctor-field">
-                                                <p class="doc-1" >Dr. Quack</p>
-        
-                                                <div class="Time"><p>TIME:</p>
-                                                    <span>12:00</span></div>
-                                                    <div class="Date"><p>DATE:</p>
-                                                    <span>16 Feb 2023</span></div>
-                                                    <div class="Note"><p>NOTES:</p>
-        
-                                                <div class="special"><span>General Medicine</span></div>
-                                                    
-                                                </label> 
-                                                <br>
-                                                
-        
-        
-                                                <div class="container3">
-                                                <div class="fee">
-                                                <p class="doc-c" >DOCTOR'S FEE:</p>
-                                                
-                                                <p class="ol" >Online Consultation</p>
-                                                
-                                                <label for="fee1">200.00 PHP</label> 
-                                                <br>
-                                                </div>
-        
-        
-        
-                                                <div class="container4">
-        
-                                                
-                                                <div class="doctor-field">
-                                                <p class="phar" >PHARMACY:</p>
-        
-                                                <div class="fee2">
-                                                <label for="Doctor">Mucosolvan 24hrs 75mg <br>Capsule
-                                                <br>(₱ 232.50 PHP)</label>  
-        
-                                                <div class="total">
-                                                <label for="tot">TOTAL:     ₱ 1,492.5</label>  
-        
-        
-                                                </div>   
-                                </div>  
-                                <div class="doctor-container">
-                                </div>
-        
-        
-                        
-                        
-        
-        
         </div>
 
-
-
-
-                    
-
-            </div>
-            
-    
-
-    
-    
-    
-    
-    
-    
-    </div>
-
-
-
 </div>
-
-
-
-
-
-    </div>
-
-
    
 </body>
 </html>

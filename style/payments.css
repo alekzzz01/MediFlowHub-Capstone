@@ -365,7 +365,7 @@ li.active a span {
     
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 8px;
     border-radius: 8px;
     border: 1px solid #CCC;
 
@@ -457,69 +457,124 @@ li.active a span {
 
 .container2 {
     margin-top: 40px;
+
 }
 
-.container2 p {
+.hiddentext {
     font-size: 21px;
     font-weight: var(--fw-semibold);
     color: var(--clr-text-lessopacity);
     margin: 0;
     opacity: 0;
 }
-.second-container {
+
+
+
+.payments2 {
+    position: relative;
+    
     display: flex;
-    gap: 36px;
-    align-items: start;
+    flex-direction: column;
+   gap: 8px;
+    border-radius: 8px;
+    border: 1px solid #CCC;
+
+    padding: 36px;
+
 }
-.container3 {
-    margin-top: 40px;
+
+
+
+.Doctorscontainer {
+    display: flex;
+    gap: 8px;
+}
+
+
+
+.doctor-field {
+    display: flex;
+    align-items: center;
+ 
+    gap: 36px;
+    background-color: #F5F6F8;
+    width: 400px;
+ 
+    padding: 12px;
+    border-radius: 4px;
+   
+}
+
+.profile-doc {
+    display: flex;
+    align-items: center;
+    gap:16px;
+}
+
+.profile-doc button {
+ 
+    border: none;
+    outline: none;
+    width: 48px;
+    height: 48px;
+
+    border-radius: 32px;
     
 }
 
-.doc-1 {
-    font-size: 21px;
-    font-weight: var(--fw-semibold);
-    color: var(--clr-text-lessopacity);
+.name-doc p {
     margin: 0;
 }
 
-.doc-c {
-    font-size: 20px;
-    font-weight: var(--fw-semibold);
-    color: var(--clr-text-lessopacity);
-    margin: 0;
-}
-.ol {
-     
-    margin: 1;
+
+.time-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.container4 {
-    margin-top: 40px;
+.time-doc p{ 
+    margin: 0;
 }
 
-.phar {
-    font-size: 20px;
-    font-weight: var(--fw-semibold);
-    color: var(--clr-text-lessopacity);
+
+
+.notes-field {
+    display: flex;
+    align-items: start;
+ 
+  
+    background-color: #F5F6F8;
+    width:200px;
+ 
+    padding: 12px;
+    border-radius: 4px;
+   
+}
+
+.notes-field p {
     margin: 0;
 }
-.Time p, span {
-    margin: 0;
+
+
+.doctors-fee {
+   
+
+    background-color: #F5F6F8;
+    padding: 12px;
+    border-radius: 4px;
+
 }
-.Date p, span {
-    margin: 0;
+
+.Pharmacy-fee {
+   
+
+    background-color: #F5F6F8;
+    padding: 12px;
+    border-radius: 4px;
+
 }
-.Note p, span {
-    margin: 0;
-}
-.Time p {
-    font-weight: var(--fw-semibold);
-}
-.Date p {
-    font-weight: var(--fw-semibold);
-}
-.Note p {
-    font-weight: var(--fw-semibold);
-}
+
+
+
 
