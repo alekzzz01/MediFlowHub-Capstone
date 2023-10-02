@@ -141,7 +141,7 @@ if (isset($_POST["submit"])) {
           }
       </script>
 
-<script src="script.js"></script>
+<script src="script/script.js"></script>
 
 </body>
 

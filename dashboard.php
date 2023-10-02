@@ -536,7 +536,7 @@ $firstName = $_SESSION["first_name"];
     </div>
 
 
-    <script src="script.js"></script>
+    <script src="script/script.js"></script>
 
 
  
