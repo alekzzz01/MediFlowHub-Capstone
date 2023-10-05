@@ -75,7 +75,7 @@ $firstName = $_SESSION["first_name"];
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="Payments.php">
                         <i class='bx bxs-credit-card'></i>
                         <span>Payments</span>
                     </a>
