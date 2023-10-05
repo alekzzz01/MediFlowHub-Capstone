@@ -28,7 +28,7 @@
         </div>
             <ul class="menu">
 
-                <li class="active">
+                <li>
                     <a href="dashboard.php" >
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
@@ -37,7 +37,7 @@
 
                 
                 <li>
-                    <a href="#">
+                    <a href="appointments.php">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
                     </a>
@@ -46,13 +46,13 @@
 
                 
                 <li>
-                    <a href="#">
+                    <a href="availabledoctors.php">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="#">
                         <i class='bx bxs-credit-card'></i>
                         <span>Payments</span>

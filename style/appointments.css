@@ -31,6 +31,8 @@
 }
 
 
+
+
 body {
   
     display: flex;
@@ -40,7 +42,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
 
-    height: 100vh;
+
 
 
 
@@ -77,13 +79,24 @@ body {
 .logo {
     height: 100px;
     padding: 32px 24px;
-   
+
+    display: flex;
+    align-items: center;
+    gap: 32px;
 
 
 }
 
 .logo img {
     width:150px;
+
+}
+
+.logo i {
+    color: white;
+    font-size: 24px;
+    opacity: 0;
+    cursor: pointer;
 
 }
 
@@ -188,16 +201,12 @@ li.active a span {
 
 
 
-
-
-
 .main--content {
     position: relative;
     background-color: white; 
     
     width: 100%;
     padding: 32px 40px;
-    
 
 }
 
@@ -208,7 +217,6 @@ li.active a span {
 
 .header--wrapper {
     display: flex;
-   
     justify-content: space-between;
     align-items: center;
 }
@@ -248,17 +256,19 @@ li.active a span {
     height: 48px;
     border: 1px solid var(--fw-light);
     border-radius: 24px;
-    background-image: url(images/PROFILE.png);
+ 
+    background-image: url(../images/PROFILE.png);
 }
 
 .user--info {
     display: flex;
     align-items: center;
     gap: 24px;
+    position: relative;
     
 }
 
-.user--info i{
+.bx-bell{
     font-size: 20px;
     border: 1px solid #ccc;
     padding: 12px;
@@ -328,6 +338,84 @@ li.active a span {
     font-size:16px;
 }
 
+
+
+.dropdown-profile {
+    display: none;
+    opacity: 0; /* Initially set opacity to 0 */
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 4px;
+    background: #FFF;
+    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
+
+
+    padding: 20px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+}
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap:22px;
+    cursor: pointer;
+}
+
+.user-info button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+  
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+}
+.edit-profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.edit-profile1 i {
+    background-color: #D9D9D9;
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-profile1 {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.help-support {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
 .inside-container{
 border-radius: 8px;
 background-color: white ;
@@ -342,7 +430,7 @@ margin-top: 36px;
 table {
     font-family: 'Poppins', sans-serif;
    font-weight: var(--fw-normal);
-   font-size: 12px;
+   font-size: 16px;
     color: #424242;
     border-collapse: collapse;
     width: 100%;
@@ -369,23 +457,9 @@ table {
     line-height: normal;    
 }
 
-.calendar{
-    display: inline-flex;
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-
 
 
     
    
     
 
-/* CSS for page transitions */
-.page-transition {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-  

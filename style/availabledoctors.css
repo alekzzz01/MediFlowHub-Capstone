@@ -287,7 +287,7 @@ li.active a span {
     height: 48px;
     border: 1px solid var(--fw-light);
     border-radius: 24px;
-    background-image: url(images/PROFILE.png);
+    background-image: url(../images/PROFILE.png);
 }
 
 .user--info {
@@ -519,6 +519,10 @@ li.active a span {
     height: 90px;
     border-radius: 50px;
 
+    background-size: cover;
+
+
+    background-image: url(../images/DOCTORS-PROFILE.png);
     outline: none;
     border: none;
 }

@@ -59,7 +59,7 @@ $firstName = $_SESSION["first_name"];
 
                 
                 <li>
-                    <a href="#">
+                    <a href="appointments.php">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
                     </a>
