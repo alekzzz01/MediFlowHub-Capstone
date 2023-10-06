@@ -140,8 +140,8 @@ $firstName = $_SESSION["first_name"];
            
             <div class="user--info">
 
-                        <div class="notification">
-                                    <i class='bx bx-bell' id="notif-icon" ></i>
+                        <div class="notification" id="notif-icon">
+                                    <i class='bx bx-bell'   ></i>
                                     <span class="num">8</span>
 
                         </div>

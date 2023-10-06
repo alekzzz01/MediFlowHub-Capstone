@@ -53,33 +53,33 @@ document.addEventListener("click", function (event) {
 
 
 
-const notifIcon = document.getElementById('notif-icon');
-const dropdownNotif = document.querySelector(".dropdown-notifications");
+// Get references to the notif-icon and notifications-dropdown elements
+const notifIcon = document.getElementById("notif-icon");
+const notificationsDropdown = document.querySelector(".dropdown-notifications");
 
-
-notifIcon.addEventListener("click", function (){
-
-  if (dropdownNotif.style.display === "block") {
-    dropdownProfile.style.opacity = "0"; // Fade out
+// Add a click event listener to the notif-icon
+notifIcon.addEventListener("click", function () {
+  // Toggle the visibility and opacity of the notifications-dropdown
+  if (notificationsDropdown.style.display === "block") {
+    notificationsDropdown.style.opacity = "0"; // Fade out
     setTimeout(() => {
-      dropdownNotif.style.display = "none"; // Hide after fading out
+      notificationsDropdown.style.display = "none"; // Hide after fading out
     }, 300); // Delay matching the transition duration
   } else {
-    dropdownNotif.style.display = "block"; // Show
+    notificationsDropdown.style.display = "block"; // Show
     setTimeout(() => {
-      dropdownNotif.style.opacity = "1"; // Fade in after showing
+      notificationsDropdown.style.opacity = "1"; // Fade in after showing
     }, 0); // Delay to ensure smooth transition
   }
 });
 
-
-
-// Close the dropdown if the user clicks outside of it
+// Close the notifications dropdown if the user clicks outside of it
 document.addEventListener("click", function (event) {
-  if (!dropdownNotif.contains(event.target) && !notifIcon.contains(event.target)) {
-    dropdownNotif.style.opacity = "0"; // Fade out
+  if (!notificationsDropdown.contains(event.target) && !notifIcon.contains(event.target)) {
+    notificationsDropdown.style.opacity = "0"; // Fade out
     setTimeout(() => {
-      dropdownNotif.style.display = "none"; // Hide after fading out
+      notificationsDropdown.style.display = "none"; // Hide after fading out
     }, 300); // Delay matching the transition duration
   }
 });
+
