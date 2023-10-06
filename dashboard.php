@@ -141,7 +141,7 @@ $firstName = $_SESSION["first_name"];
             <div class="user--info">
 
                         <div class="notification">
-                                    <i class='bx bx-bell'></i>
+                                    <i class='bx bx-bell' id="notif-icon" ></i>
                                     <span class="num">8</span>
 
                         </div>
@@ -185,6 +185,17 @@ $firstName = $_SESSION["first_name"];
 
 
                         </div>
+
+                        <div class="dropdown-notifications">
+                                <p>Notifications</p>
+
+
+
+
+                        </div>
+
+
+
                        
 
             </div>

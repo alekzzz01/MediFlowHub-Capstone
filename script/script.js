@@ -50,3 +50,36 @@ document.addEventListener("click", function (event) {
     }, 300); // Delay matching the transition duration
   }
 });
+
+
+
+const notifIcon = document.getElementById('notif-icon');
+const dropdownNotif = document.querySelector(".dropdown-notifications");
+
+
+notifIcon.addEventListener("click", function (){
+
+  if (dropdownNotif.style.display === "block") {
+    dropdownProfile.style.opacity = "0"; // Fade out
+    setTimeout(() => {
+      dropdownNotif.style.display = "none"; // Hide after fading out
+    }, 300); // Delay matching the transition duration
+  } else {
+    dropdownNotif.style.display = "block"; // Show
+    setTimeout(() => {
+      dropdownNotif.style.opacity = "1"; // Fade in after showing
+    }, 0); // Delay to ensure smooth transition
+  }
+});
+
+
+
+// Close the dropdown if the user clicks outside of it
+document.addEventListener("click", function (event) {
+  if (!dropdownNotif.contains(event.target) && !notifIcon.contains(event.target)) {
+    dropdownNotif.style.opacity = "0"; // Fade out
+    setTimeout(() => {
+      dropdownNotif.style.display = "none"; // Hide after fading out
+    }, 300); // Delay matching the transition duration
+  }
+});
