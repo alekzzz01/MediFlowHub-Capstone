@@ -287,10 +287,10 @@
                             </div>
 
                             <div class="Pharmacy-fee">
-                                <span>PHARMACY: </span>
+                                <h4>PHARMACY: </h4>
                                 <p>Mucosolvan 24hrs 75mg Capsule  Capsule<br>(₱ 232.50 PHP)</p>
                                 <P>Neurotain Capsule - 20s <br> (₱ 1,260.00 PHP)</P>
-                                <span>TOTAL: ₱ 1,492.5</span>
+                                <h4>TOTAL: ₱ 1,492.5</h4>
                             </div>
 
 

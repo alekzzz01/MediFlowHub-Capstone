@@ -539,27 +539,20 @@ li.active a span {
 }
 
 
-
 .notes-field {
     display: flex;
     align-items: start;
- 
-  
     background-color: #F5F6F8;
     width:200px;
- 
     padding: 12px;
     border-radius: 4px;
-   
-}
 
+}
 .notes-field p {
     margin: 0;
     font-weight: var(--fw-semibold);
 }
-
-
-.doctors-fee {
+.doctors-fee span {
    
     background-color: #F5F6F8;
     padding: 12px;
@@ -575,6 +568,6 @@ li.active a span {
     background-color: #F5F6F8;
     padding: 12px;
     border-radius: 4px;  
-    font-weight: var(--fw-semibold); 
+    
 }
 
