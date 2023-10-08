@@ -553,18 +553,22 @@ li.active a span {
     margin: 0;
     font-weight: var(--fw-semibold);
 }
-.doctors-fee span {
+.doctors-fee {
    
     background-color: #F5F6F8;
     padding: 12px;
     border-radius: 4px;  
 }
 
+
+
 .doctors-fee p {
 
     margin: 0;
 }
-.Pharmacy-fee span  {
+
+
+.Pharmacy-fee {
    
     background-color: #F5F6F8;
     padding: 12px;

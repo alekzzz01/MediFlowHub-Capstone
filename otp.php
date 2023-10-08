@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -25,10 +27,10 @@
                     <input type="number" disabled />
                     <input type="number" disabled />
                     <input type="number" disabled />
-</div>
+                </div>
 
-<button> Verify OTP </button>
-</form>
+                <button> Verify OTP </button>
+            </form>
     
 
 
