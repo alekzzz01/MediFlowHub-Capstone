@@ -241,7 +241,7 @@
                                                         <div class="name-doc">
 
                                                                 <p>Dr. Names</p>
-                                                                <p>General Medicine</p>
+                                                                <span>General Medicine</span>
 
                                                         </div>
                                                         
@@ -281,17 +281,16 @@
 
 
                             <div class="doctors-fee">
-                                <p>DOCTOR'S FEE: </p>
+                                <h4>DOCTOR'S FEE: </h4>
                                 <p>Online Consultation</p>
                                 <p>200.00 PHP</p>
                             </div>
 
-
                             <div class="Pharmacy-fee">
-                                <p>PHARMACY: </p>
-                                <p>Mucosolvan 24hrs 75mg Capsule <br> Capsule<br>(₱ 232.50 PHP)</p>
+                                <h4>PHARMACY: </h4>
+                                <p>Mucosolvan 24hrs 75mg Capsule  Capsule<br>(₱ 232.50 PHP)</p>
                                 <P>Neurotain Capsule - 20s <br> (₱ 1,260.00 PHP)</P>
-                                <p>TOTAL: ₱ 1,492.5</p>
+                                <h4>TOTAL: ₱ 1,492.5</h4>
                             </div>
 
 
