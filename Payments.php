@@ -139,8 +139,7 @@
                 
                 <div class="container1">
 
-                    <p class="Title-1" >Payments</p>
-
+            
                                         
                     <h2>Choose your payment method</h2> 
 
@@ -222,7 +221,7 @@
                 <div class="container2">
 
                 
-                        <p class="hiddentext"> Hidden Text</p>
+                     
 
                                         
                         <h2>Summary</h2> 
