@@ -570,11 +570,11 @@ li.active a span {
 
     margin: 0;
 }
-.Pharmacy-fee  {
+.Pharmacy-fee span  {
    
     background-color: #F5F6F8;
     padding: 12px;
-    border-radius: 4px;
-      
+    border-radius: 4px;  
+    font-weight: var(--fw-semibold); 
 }
 
