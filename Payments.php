@@ -288,9 +288,10 @@
 
 
                             <div class="Pharmacy-fee">
-                                <p>DOCTOR'S FEE: </p>
-                                <p>Online Consultation</p>
-                                <p>200.00 PHP</p>
+                                <p>PHARMACY: </p>
+                                <p>Mucosolvan 24hrs 75mg Capsule <br> Capsule<br>(₱ 232.50 PHP)</p>
+                                <P>Neurotain Capsule - 20s <br> (₱ 1,260.00 PHP)</P>
+                                <p>TOTAL: ₱ 1,492.5</p>
                             </div>
 
 
