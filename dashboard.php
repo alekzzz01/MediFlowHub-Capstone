@@ -59,7 +59,7 @@ $firstName = $_SESSION["first_name"];
 
                 
                 <li>
-                    <a href="#">
+                    <a href="appointments.php">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
                     </a>
@@ -75,7 +75,7 @@ $firstName = $_SESSION["first_name"];
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="Payments.php">
                         <i class='bx bxs-credit-card'></i>
                         <span>Payments</span>
                     </a>
@@ -140,8 +140,8 @@ $firstName = $_SESSION["first_name"];
            
             <div class="user--info">
 
-                        <div class="notification">
-                                    <i class='bx bx-bell'></i>
+                        <div class="notification" id="notif-icon">
+                                    <i class='bx bx-bell'   ></i>
                                     <span class="num">8</span>
 
                         </div>
@@ -185,6 +185,17 @@ $firstName = $_SESSION["first_name"];
 
 
                         </div>
+
+                        <div class="dropdown-notifications">
+                                <p>Notifications</p>
+
+
+
+
+                        </div>
+
+
+
                        
 
             </div>

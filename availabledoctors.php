@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +47,7 @@
 
                 
                 <li>
-                    <a href="#">
+                    <a href="appointments.php">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
                     </a>
@@ -65,7 +63,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="Payments.php">
                         <i class='bx bxs-credit-card'></i>
                         <span>Payments</span>
                     </a>
@@ -148,14 +146,14 @@
                                     <span class="num">8</span>
 
                         </div>
-               
+
                         <div class="user-profile">
 
                             <button class="profile-icon" id="profile-icon"></button>
                             
                         </div>
 
-                        
+
                         <div class="dropdown-profile">
 
                             <div class="sub-menu">
@@ -188,7 +186,7 @@
 
 
                         </div>
-                       
+
 
             </div>
            

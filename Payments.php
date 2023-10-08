@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Payments</title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">
@@ -28,7 +28,7 @@
         </div>
             <ul class="menu">
 
-                <li class="active">
+                <li>
                     <a href="dashboard.php" >
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
@@ -37,7 +37,7 @@
 
                 
                 <li>
-                    <a href="#">
+                    <a href="appointments.php">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
                     </a>
@@ -46,13 +46,13 @@
 
                 
                 <li>
-                    <a href="#">
+                    <a href="availabledoctors.php">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="#">
                         <i class='bx bxs-credit-card'></i>
                         <span>Payments</span>
@@ -61,7 +61,7 @@
 
                 <li>
                     <a href="#">
-                        <i class='bx bxs-location-plus'></i>
+                    <i class='bx bxs-map'></i>
                         <span>Locations</span>
                     </a>
                 </li>
@@ -139,8 +139,7 @@
                 
                 <div class="container1">
 
-                    <p class="Title-1" >Payments</p>
-
+            
                                         
                     <h2>Choose your payment method</h2> 
 
@@ -222,7 +221,7 @@
                 <div class="container2">
 
                 
-                        <p class="hiddentext"> Hidden Text</p>
+                     
 
                                         
                         <h2>Summary</h2> 
@@ -317,6 +316,11 @@
 
 </div>
    
+
+
+
+<script src="script/script.js"></script>
+
 </body>
 </html>
 

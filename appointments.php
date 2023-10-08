@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Appointments</title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">
@@ -29,6 +29,9 @@
     <div id="sidebar" class="sidebar">
         <div class="logo">
             <img src="images/MediFlowHub.png" alt="">
+
+            
+            <i class='bx bx-x' id="close-sidebar"></i>
         </div>
             <ul class="menu">
 
@@ -50,14 +53,14 @@
 
                 
                 <li>
-                    <a href="#">
+                    <a href="availabledoctors.php">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="Payments.php">
                         <i class='bx bxs-credit-card'></i>
                         <span>Payments</span>
                     </a>
@@ -65,7 +68,7 @@
 
                 <li>
                     <a href="#">
-                        <i class='bx bxs-location-plus'></i>
+                        <i class='bx bxs-map'></i>
                         <span>Locations</span>
                     </a>
                 </li>
@@ -129,22 +132,56 @@
 
 
 
-            <div class="user--info">
+                    <div class="user--info">
 
-                        <div class="notification">
-                                    <i class='bx bx-bell'></i>
-                                    <span class="num">8</span>
+            <div class="notification">
+                        <i class='bx bx-bell'></i>
+                        <span class="num">8</span>
 
-                                    
-                        </div>
-               
-             
-                        <button class="profile-icon"></button>
+            </div>
 
-                        
+            <div class="user-profile">
 
+                <button class="profile-icon" id="profile-icon"></button>
                 
             </div>
+
+
+                <div class="dropdown-profile">
+
+                    <div class="sub-menu">
+
+                            <div class="user-info">
+                                <button class="usermain-profile"></button>
+                                <p>Username</p>
+                            </div>
+
+                            <div class="edit-profile">
+                                <div class="edit-profile1">
+                                <i class='bx bxs-user-circle' ></i>
+                                <p>Edit Profile</p>
+                                </div>
+                            
+                                <i class='bx bx-chevron-right' ></i>
+                            </div>
+
+                            <div class="help-support">
+                                <div class="edit-profile1">
+                                <i class='bx bxs-help-circle' ></i>
+                                <p>Help & Support</p>
+                                </div>
+                                <i class='bx bx-chevron-right' ></i>
+                            </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+
+                </div>
            
    
        

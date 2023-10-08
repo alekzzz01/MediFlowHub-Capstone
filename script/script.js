@@ -50,3 +50,36 @@ document.addEventListener("click", function (event) {
     }, 300); // Delay matching the transition duration
   }
 });
+
+
+
+// Get references to the notif-icon and notifications-dropdown elements
+const notifIcon = document.getElementById("notif-icon");
+const notificationsDropdown = document.querySelector(".dropdown-notifications");
+
+// Add a click event listener to the notif-icon
+notifIcon.addEventListener("click", function () {
+  // Toggle the visibility and opacity of the notifications-dropdown
+  if (notificationsDropdown.style.display === "block") {
+    notificationsDropdown.style.opacity = "0"; // Fade out
+    setTimeout(() => {
+      notificationsDropdown.style.display = "none"; // Hide after fading out
+    }, 300); // Delay matching the transition duration
+  } else {
+    notificationsDropdown.style.display = "block"; // Show
+    setTimeout(() => {
+      notificationsDropdown.style.opacity = "1"; // Fade in after showing
+    }, 0); // Delay to ensure smooth transition
+  }
+});
+
+// Close the notifications dropdown if the user clicks outside of it
+document.addEventListener("click", function (event) {
+  if (!notificationsDropdown.contains(event.target) && !notifIcon.contains(event.target)) {
+    notificationsDropdown.style.opacity = "0"; // Fade out
+    setTimeout(() => {
+      notificationsDropdown.style.display = "none"; // Hide after fading out
+    }, 300); // Delay matching the transition duration
+  }
+});
+
