@@ -11,12 +11,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Locations</title>
+    <title>Notifications</title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="style/locations.css">
+    <link rel="stylesheet" type="text/css" href="style/profile.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +71,7 @@
                     </a>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="locations.php">
                     <i class='bx bxs-map'></i>
                         <span>Locations</span>
@@ -85,7 +85,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="Profile.php">
                         <i class='bx bxs-cog' ></i>
                         <span>Settings</span>
@@ -194,102 +194,126 @@
 
 
         <div class="first-container">
-            <h1>Health Centers near you</h1>
+            <h1>Account settings</h1>
 
-            <div class="hospital-container">
+            <div class="account-container">
 
-                <div class="hospital-info">
+                <div class="account-options">
 
-                        <h2>St. Lukes</h2>
-                        <p class="title-hospital">Hospital</p>
+                        <li class="active">
+                            <i class='bx bxs-user-circle'></i>
+                            <p>Profile</p>
+                        </li>
+                            
+                   
+                        <li class="active2" >
+                            <i class='bx bxs-lock-alt' ></i>
+                            <p>Password</p>
+                        </li>
 
-                        <img src="images/hospital.png" alt="">
+                </div>
 
-                        <p>Address</p>
 
-                        <p class="address">St. Luke's Medical Center - BGC, 5th Ave, Taguig,
-                            1634 Metro Manila
-                        </p>
 
-                        <p>Office Hours</p>
 
-                        <p class="hours">8:00 am to 10:30 pm</p>
 
-                        <button class="directions-btn">Directions</button>
+                <div class="account-edit">
+
+                    <div class="image-edit">
+
+                            <div class="image-prof">
+                                <img src="images/PROFILE1.png" alt="">
+                                <i class='bx bxs-camera' ></i>
+                            </div>
+                            <div class="image-buttons">
+
+                                <button class="upload-btn">Upload here</button>
+                                <button class="delete-btn">Delete</button>
+
+                            </div>
+                        
+
+                    </div>
+
+                    <form class="form-input">
+
+                        <div class="input-box">
+                                <p>FIRST NAME<span>*</span></p>
+                                <input type="text"  placeholder="First Name....." required="required">
+                                
+                        </div>
+
+                        <div class="input-box">
+                                <p>LAST NAME <span>*</span></p>
+                                <input type="text"  placeholder="Last Name....." required="required">
+                                
+                        </div>
+
+                        <div class="input-box">
+                                <p>EMAIL <span>*</span></p>
+                                <input type="text"  placeholder="Email Address....." required="required">
+                                
+                        </div>
+
+                        <div class="input-box">
+                                <p>MOBILE NO. <span>*</span></p>
+                                <input type="text"  placeholder="63+" required="required">
+                                
+                        </div>
+
+                        <div class="input-box">
+                                <p>ADDRESS <span>*</span></p>
+                                <input type="text"  placeholder="Address...." required="required">
+                                
+                        </div>
+
+                        <div class="input-box">
+                                <p>ZIP CODE <span>*</span></p>
+                                <input type="text"  placeholder="Zip Code...." required="required">
+                                
+                        </div>
+
+                        <div class="input-radio">
+                                <p>GENDER <span>*</span></p>
+
+                                <div class="radio-inputs">
+
+                                        <div class="gender">
+                                            <input type="radio" id="gender" name="age" value="30">
+                                            <label for="gender">Male</label><br>
+
+                                        </div>
+
+                                        <div class="gender">
+                                            <input type="radio" id="gender" name="age" value="30">
+                                            <label for="gender">Female</label><br>
+
+                                        </div>
+                                            
+
+                                            
+
+                                </div>
+
+                                
+                        </div>
+
+
+
+                    </form>
+
+
+                    <div class="confirmchanges">
+                        <button class="confirm-btn">Confirm Changes</button>
+                    </div>
+
 
 
 
                 </div>
 
-                <div class="hospital-info">
-
-                    <h2>St. Lukes</h2>
-                    <p class="title-hospital">Hospital</p>
-
-                    <img src="images/hospital.png" alt="">
-
-                    <p>Address</p>
-
-                    <p class="address">St. Luke's Medical Center - BGC, 5th Ave, Taguig,
-                        1634 Metro Manila
-                    </p>
-
-                    <p>Office Hours</p>
-
-                    <p class="hours">8:00 am to 10:30 pm</p>
-
-                    <button class="directions-btn">Directions</button>
 
 
-
-                </div>
-
-                <div class="hospital-info">
-
-                    <h2>St. Lukes</h2>
-                    <p class="title-hospital">Hospital</p>
-
-                    <img src="images/hospital.png" alt="">
-
-                    <p>Address</p>
-
-                    <p class="address">St. Luke's Medical Center - BGC, 5th Ave, Taguig,
-                        1634 Metro Manila
-                    </p>
-
-                    <p>Office Hours</p>
-
-                    <p class="hours">8:00 am to 10:30 pm</p>
-
-                    <button class="directions-btn">Directions</button>
-
-
-
-                </div>
-
-
-                <div class="hospital-info">
-
-                    <h2>St. Lukes</h2>
-                    <p class="title-hospital">Hospital</p>
-
-                    <img src="images/hospital.png" alt="">
-
-                    <p>Address</p>
-
-                    <p class="address">St. Luke's Medical Center - BGC, 5th Ave, Taguig,
-                        1634 Metro Manila
-                    </p>
-
-                    <p>Office Hours</p>
-
-                    <p class="hours">8:00 am to 10:30 pm</p>
-
-                    <button class="directions-btn">Directions</button>
-
-
-
-                </div>
 
 
 
@@ -297,6 +321,7 @@
 
             </div>
 
+            
 
 
 

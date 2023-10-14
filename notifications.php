@@ -86,7 +86,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="Profile.php">
                         <i class='bx bxs-cog' ></i>
                         <span>Settings</span>
                     </a>
