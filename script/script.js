@@ -83,3 +83,33 @@ document.addEventListener("click", function (event) {
   }
 });
 
+
+
+
+var profilebtn = document.getElementById("profile-btn");
+var passwordbtn = document.getElementById("password-btn");
+
+
+var accountedit = document.getElementById("account-edit");
+var passwordedit = document.getElementById("password-edit");
+
+
+passwordbtn.addEventListener("click", () => {
+    accountedit.style.display = "none";
+    passwordedit.style.display = "block";
+
+    profilebtn.style.backgroundColor = "#F5F6F8"
+    passwordbtn.style.backgroundColor = "rgba(91, 91, 91, 0.20)";
+
+});
+
+profilebtn.addEventListener("click", () => {
+  accountedit.style.display = "block";
+  passwordedit.style.display = "none";
+
+  profilebtn.style.backgroundColor = "rgba(91, 91, 91, 0.20)"
+  passwordbtn.style.backgroundColor = "#F5F6F8";
+
+});
+
+

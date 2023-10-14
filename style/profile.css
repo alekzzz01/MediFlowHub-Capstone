@@ -496,6 +496,7 @@ body {
 }
 
 .account-edit {
+
     width: 84%;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -556,7 +557,7 @@ body {
 
 .form-input {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
   
     row-gap: 24px;
@@ -583,10 +584,20 @@ body {
     outline: none;
 
     border-bottom: 1px solid #ccc;
-
     font-family: 'Poppins', sans-serif;
- 
+
+}
+
+.input-box input:focus {
+    border-bottom: 1px solid var(--clr-text);
+}
+
+.input-box input::placeholder {
+    font-family: 'Poppins', sans-serif;
+    color: #ccc;
+    letter-spacing: 2px;
    
+ 
 }
 
 
@@ -610,11 +621,27 @@ body {
     gap: 36px;
 }
 
+
+
+
+
+.password-edit {
+    display: none;
+    gap: 24px;
+    width: 84%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0 32px 32px 32px;
+}
+
+
+
+
 .confirmchanges {
     margin-top: 48px;
 }
 
-.confirm-btn {
+.confirm-btn, .confpass-btn {
     border: none;
     outline: none;
     border-radius: 8px;
@@ -625,6 +652,11 @@ body {
 
     color: white;
     background: var(--clr-button-color);
+}
+
+
+.confpass-btn {
+    margin-top: 36px;
 }
 
 
@@ -647,11 +679,52 @@ body {
     }
 
     
+    .form-input {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+    
+        row-gap: 24px;
+        margin-top: 48px;
+    }
+
+    
 
   
 
 
 } 
+
+
+
+@media screen and (max-width: 1024px) {
+
+    .form-input {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+
+    
+        row-gap: 24px;
+        margin-top: 48px;
+    }
+
+
+    
+        .image-edit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 64px;
+        }
+
+
+  
+
+    
+}
+
+
+
 
 
 
@@ -703,6 +776,20 @@ body {
     }
 
 
+    
+    .form-input {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+
+    
+        row-gap: 24px;
+        margin-top: 48px;
+    }
+
+
+    
+
+
 
 
 
@@ -711,8 +798,29 @@ body {
 
 @media screen and (max-width: 425px) {
 
+    .account-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .account-edit, .password-edit {
+        width: 100%;
+    }
+
     
-  
+    .input-box {
+
+       
+        width: 100%;
+    
+     
+       
+    }
+    
+    .input-box input {
+        width: 100%;
+    
+    }
 
     
 }

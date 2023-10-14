@@ -200,13 +200,13 @@
 
                 <div class="account-options">
 
-                        <li class="active">
+                        <li id="profile-btn" class="active">
                             <i class='bx bxs-user-circle'></i>
                             <p>Profile</p>
                         </li>
                             
                    
-                        <li class="active2" >
+                        <li id="password-btn" class="active2" >
                             <i class='bx bxs-lock-alt' ></i>
                             <p>Password</p>
                         </li>
@@ -214,10 +214,7 @@
                 </div>
 
 
-
-
-
-                <div class="account-edit">
+                <div id="account-edit" class="account-edit">
 
                     <div class="image-edit">
 
@@ -313,13 +310,40 @@
                 </div>
 
 
+                <div id="password-edit" class="password-edit">
 
 
+                        <form class="form-input">
+                            <div class="input-box">
+                                    <p>CURRENT PASSWORD <span>*</span></p>
+                                    <input type="text"  placeholder="Current Password....." required="required">
+                                    
+                            </div>
 
+                            <div class="input-box">
+                                    <p>NEW PASSWORD <span>*</span></p>
+                                    <input type="text"  placeholder="New Password....." required="required">
+                                    
+                            </div>
+
+                        </form>
+
+                            <div class="confirmpassword">
+                                <button class="confpass-btn">
+                                    Confim Password
+                                </button>
+                            </div>
+
+                </div>
 
 
 
             </div>
+
+
+          
+
+
 
             
 
