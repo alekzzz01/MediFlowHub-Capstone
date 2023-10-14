@@ -1,7 +1,6 @@
 <?php
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -218,13 +217,16 @@
 
                     <div class="image-edit">
 
-                            <div class="image-prof">
-                                <img src="images/PROFILE1.png" alt="">
-                                <i class='bx bxs-camera' ></i>
-                            </div>
+                    <div class="image-prof">
+                        <img id="profile-image" src="images/PROFILE1.png" alt="">
+                        <i id="upload-icon" class="bx bxs-camera"></i>
+                        <input type="file" id="image-upload" style="display: none;">
+                    </div>
+
                             <div class="image-buttons">
 
                                 <button class="upload-btn">Upload here</button>
+                              
                                 <button class="delete-btn">Delete</button>
 
                             </div>

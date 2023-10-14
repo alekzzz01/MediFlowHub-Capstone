@@ -86,6 +86,12 @@ document.addEventListener("click", function (event) {
 
 
 
+
+
+
+
+//PROFILE SIDE 
+
 var profilebtn = document.getElementById("profile-btn");
 var passwordbtn = document.getElementById("password-btn");
 
@@ -112,4 +118,35 @@ profilebtn.addEventListener("click", () => {
 
 });
 
+
+//PROFILE SIDE 
+
+
+
+
+
+
+
+//UPLOAD IMAGE
+
+
+document.getElementById('upload-icon').addEventListener('click', function () {
+  document.getElementById('image-upload').click();
+});
+
+// Add an event listener to the file input
+document.getElementById('image-upload').addEventListener('change', function () {
+  // Check if a file is selected
+  if (this.files && this.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          // Update the profile image source
+          document.getElementById('profile-image').src = e.target.result;
+      };
+
+      // Read the selected image as a data URL
+      reader.readAsDataURL(this.files[0]);
+  }
+});
 
