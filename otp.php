@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +11,9 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <box-icon type='solid' name='check-shield'></box-icon>
 
+
+
+    
     <link rel="stylesheet" href="otp.css">
     <script src="otp.js" defer></script>
 
@@ -20,20 +26,22 @@
             <i class="bx bxs-check-shield"></i>
             </header>   
 
-            <h4>Enter OTP </h4>
-            <form action="#">
-                <div class="input-field">
-                    <input type="number"  />
-                    <input type="number" disabled />
-                    <input type="number" disabled />
-                    <input type="number" disabled />
-                </div>
+            <h4>We emailed you the four digit code </h4>
+            <form action="dashboard.php" method="post">
+        <div class="input-field">
+        <input type="number" name="otp1" />
+        <input type="number" name="otp2" disabled />
+        <input type="number" name="otp3" disabled />
+        <input type="number" name="otp4" disabled />
+    </div>
 
-                <button> Verify OTP </button>
-            </form>
+  
+    <button type="submit" name="verify_otp"> Verify OTP </button>
+</form>
     
+            <?php 
 
 
 
-</body>
-</html>
+
+

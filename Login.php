@@ -20,7 +20,7 @@ if (isset($_POST["submit"])) {
     if (!$result) {
         die("Database query error: " . mysqli_error($conn));
     }
-
+    
     if (mysqli_num_rows($result) == 1) {
         // User found, check the password
         $row = mysqli_fetch_assoc($result);
@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
             session_start();
             $_SESSION["username"] = $row["Email"];
             $_SESSION["first_name"] = $row["First Name"]; 
-            header("Location: dashboard.php"); // Redirect to the user's dashboard or a protected page
+            header("Location: otp.php"); // Redirect to the user's dashboard or a protected page
             exit;
         } else {
             echo "<script>alert('Incorrect password.')</script>";
