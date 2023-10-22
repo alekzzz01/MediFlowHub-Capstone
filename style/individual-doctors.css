@@ -470,6 +470,7 @@ li.active a span {
     width: 48px;
     height: 48px;
     border-radius: 50px;
+    background-image: url(../images/PROFILE.png);
 
     outline: none;
     border: none;

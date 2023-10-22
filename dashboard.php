@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION["username"])) {
 
-    header("Location: index.php"); 
+    header("Location: login.php"); 
     exit;
 }
 
@@ -187,7 +187,47 @@ $firstName = $_SESSION["first_name"];
                         </div>
 
                         <div class="dropdown-notifications">
-                                <p>Notifications</p>
+                                <p class="Notiftitle">Notifications</p>
+
+                                <p class="ReminderTitle">Reminder</p>
+                               
+                                <div class="notif-box">
+
+                                        <div class="notif-message">
+                                            <p>Your appointment with Dr. Quack Quack starts in 1hr.</p>
+
+                                            <i class='bx bx-chevron-right'></i>
+
+                                        </div>
+
+                                        <div class="notif-time">
+
+                                             <i class='bx bxs-time-five'></i>
+                                             <p>Now</p>
+                                            
+                                        </div>
+                                       
+
+                                </div>
+
+                                <div class="notif-box">
+
+                                        <div class="notif-message">
+                                            <p>Your appointment with Dr. Quack Quack starts in 1hr.</p>
+
+                                            <i class='bx bx-chevron-right'></i>
+
+                                        </div>
+
+                                        <div class="notif-time">
+
+                                             <i class='bx bxs-time-five'></i>
+                                             <p>Now</p>
+                                            
+                                        </div>
+                                       
+
+                                </div>
 
 
 

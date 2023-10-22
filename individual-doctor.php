@@ -249,7 +249,7 @@
         <div class="schedule-card">
 
                 <div class="hour">
-                        <img src="https://s3-alpha-sig.figma.com/img/2958/84d3/64147a8ca6f213244f769ccd90cf558b?Expires=1697414400&Signature=JrLi97y3wDiZyPWLQdaFScrX4QAylZKVnJVg~fLj2hEcgzRnzzWfdgEFVq4l-H6EER1fv2rVIgeIclhw8WDxQ4BhIN2rOXCUfHWMWqzZAXZdHdQ9BoTipw0r0LVAsaAtK-Zb7~Mp0UACnXdgzm78GugIVQS5EAlInGiMHUUTTaGABi12IVrI0ct~ZnmGYUgbsCNM1NcAZVpF~ANr9q5J~cVCN2kZ0jlaas2o8b2vr7Zr8Gb6QXxeLqu5HRn1qFlOw6OaEKbQWelamtRJAn7eikXtGZwts23yw4z~oOyk15wtRtQcyz3-i3-VtJQGjt33z7pGCzFaThR9PNrUF-9iGw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="">
+                        <img src="https://s3-alpha-sig.figma.com/img/2958/84d3/64147a8ca6f213244f769ccd90cf558b?Expires=1698624000&Signature=bZ773-7JRdrkYX5y2Ipb6AizYcQB6X1s5szRPTY3oe7xdYDFMhY1LqsieU0ls976Cy2FhVCu4mIETW3EXBUfsUPwQUJTupxth8ltRoRHGKyQhwjUHc7xSi41C9-tO5wY6JJph0q7DoTxDj1xHA6G4QMF3MyyoGoNdMrhrOYgC5clxQLEX-CP3uy8pw2kJaIwsVK9vmGXZ1mAak3-LxpmPOU5-QE4sG-Na8MlRkRmPfIl5tEclVUBGHUJoOj0CTk3ncIZdy3UTrAvDB7X~T~M15ebq4~gK7rE4Jv4htviH886ka-uRg0LmgZm30C2hgIQt~SdQS5h1O32v4gXwMhLjQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="">
                         <div class="hour-desc">
                             <p>Morning</p>
                             <span>09:00 AM to 12:00 PM</span>
@@ -305,7 +305,7 @@
 
 
                 <div class="hour">
-                        <img src="https://s3-alpha-sig.figma.com/img/7f27/91a0/8cca3b8f1a92722a37fb165347da7126?Expires=1697414400&Signature=ljKKZYsEaLhqxwKDgzk9CPP99S-Jm3Dj2nNV1IWp0FnqNv8BlDEme1W1O5CPm83skL4tHGk~TLtUXGqBDFolXsraLPJxwa75iqzYkaaSuqrpNHmG0dnKMt9O6IT4Iyepcj3vGhesXRbdH6Od1RqxziSzDHFFu009rcZSPs25yBvFmcMOHo02otKcgDIiSYP~DvBDCBSMIzzLHrFjExHkDBLQjNzBulq86UbIjEFfTKt0jboEli48-r1tqoIUbdkZe5jCiQdYHa84j~q9nEEatsv7wG8wRtLujMJUE38m4BpInJfSdfVbUDUBYOxdUrmyYeGsFU0XMeCg1r9ge-tCGw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="">
+                        <img src="https://s3-alpha-sig.figma.com/img/7f27/91a0/8cca3b8f1a92722a37fb165347da7126?Expires=1698624000&Signature=E0z05Wz4GR7iHRLNeSrsdQjQBLhUK1g6OiwQVBKS3Fr2ShiLkT5QDlbKxEtovQKJuY29~4Ef54y3G1iPfAV2KfdZrtgWCa54-AnP3nJdIHYqKoX3wV5uFpA~0tNyypT6tZCAZXC4TmjHLzH1hJnMhjDnz~0lsmSD5BOVvoRLvi5nBJsNUUWPPfC8HeLsNMAt3urKUz2kgW52ryurzCb1va6fhZtzStSJDYCsFb4abKORaX6Cj9yL9UJ9uSxYJwPhVU-lTgzpAsbdH1cXObGee5-fb4SeFTaMLQzgW35SYzdmkW4923BB3w9094~8kdkG-BpV3tuH-iEQXMEopLUOUQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="">
                         <div class="hour-desc">
                             <p>Evening</p>
                             <span>05:00 PM to 9:00 PM</span>

@@ -429,6 +429,74 @@ body {
 
 
 
+.dropdown-notifications {
+    display: none;
+    opacity: 0; /* Initially set opacity to 0 */
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 4px;
+    background: #FFF;
+    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
+    
+    padding: 20px;
+    position:  absolute;
+    top: 100%;
+    right: 60%;
+    min-width: 500px;
+}
+
+
+.dropdown-notifications p {
+    margin: 0;
+}
+
+
+
+.Notiftitle {
+    color: var(--clr-text);
+    font-size: 24px;
+    font-weight: var(--fw-semibold);
+}
+
+.notif-box {
+    margin-top: 24px;
+}
+
+
+
+.dropdown-notifications .ReminderTitle {
+   
+    color: var(--clr-text);
+    font-size: 1rem;
+    font-weight: var(--fw-semibold);
+    margin-top: 24px;
+    
+    
+}
+
+.notif-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.notif-message i {
+    font-size: 24px;
+}
+
+.notif-time {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+
+
+
+
+
+
 
 
 
