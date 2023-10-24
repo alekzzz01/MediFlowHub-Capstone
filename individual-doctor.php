@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    <div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar" id="content">
         <div class="logo">
             <img src="images/MediFlowHub.png" alt="">
         </div>
@@ -110,7 +110,7 @@
     
    
     
-    <div class="main--content">
+    <div class="main--content" id="content">
         
 
         <div class="header--wrapper">
@@ -130,7 +130,7 @@
            
             <div class="user--info">
 
-                        <div class="notification">
+                        <div class="notification" id="notif-icon">
                                     <i class='bx bx-bell'></i>
                                     <span class="num">8</span>
 
@@ -178,6 +178,56 @@
                         </div>
 
 
+                        <div class="dropdown-notifications">
+                                <p class="Notiftitle">Notifications</p>
+
+                                <p class="ReminderTitle">Reminder</p>
+                               
+                                <div class="notif-box">
+
+                                        <div class="notif-message">
+                                            <p>Your appointment with Dr. Quack Quack starts in 1hr.</p>
+
+                                            <i class='bx bx-chevron-right'></i>
+
+                                        </div>
+
+                                        <div class="notif-time">
+
+                                             <i class='bx bxs-time-five'></i>
+                                             <p>Now</p>
+                                            
+                                        </div>
+                                       
+
+                                </div>
+
+                                <div class="notif-box">
+
+                                        <div class="notif-message">
+                                            <p>Your appointment with Dr. Quack Quack starts in 1hr.</p>
+
+                                            <i class='bx bx-chevron-right'></i>
+
+                                        </div>
+
+                                        <div class="notif-time">
+
+                                             <i class='bx bxs-time-five'></i>
+                                             <p>Now</p>
+                                            
+                                        </div>
+                                       
+
+                                </div>
+
+
+
+
+                        </div>
+
+
+
             </div>
            
         </div>
@@ -188,10 +238,11 @@
 
 <div class="container1">
 
-<h2>AVAILABLE SCHEDULE</h2>
-        
 
-<div class="inside-container">
+
+
+
+<div class="inside-container" id="content">
 
 
 
@@ -207,10 +258,7 @@
                         </div>
 
 
-                        <div class="profession">
-                            <p>Surgeon</p>
-                            <p>Heart Surgeon</p>
-                        </div>
+                     
 
                         <div class="date-time">
 
@@ -356,6 +404,11 @@
 
                 </div>
 
+
+                <div class="add-appointment" id="add-appointment-btn">
+                    <button onclick="myFunction()">Add Appointment</button>
+                </div>
+
         </div>
             
      
@@ -380,11 +433,209 @@
 
 </div>
 
+
+
+
+<div class="request-appointment-box" id="myDIV">
+
+
+        <div class="header-request">
+
+                <p>REQUEST AN APPOINTMENT</p>
+
+                <i onclick="myFunction()" id="close-btn" class='bx bx-x'></i>
+
+
+
+        </div>
+
+        <div class="customer-options">
+
+            <div class="customer">
+                <input type="radio" id="New-Customer" >
+                <label for="New-Customer">New Customer</label><br>
+
+            </div>
+
+            <div class="customer">
+                <input type="radio" id="Current-Customer">
+                <label for="Current-Customer">Current Customer</label><br>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="paragraph1">
+            <p>Please confirm that you would like to request the following appointment.</p>
+        </div>
+
+
+
+        <div class="doctors-description">
+
+            <div class="doctors-description1">
+                <p>Dr. Names</p>
+                <p>Heart Surgeon</p>
+            </div>
+
+            <div class="date-description">
+
+                <i class='bx bxs-calendar-check'></i>
+                <p>September 28, 2023</p>
+                <p>at 9:00 am</p>
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+        <h2>Registration: </h2>
+
+
+        <div class="paragraph1">
+            <p>Please enter your name & email address</p>
+        </div>
+
+
+
+
+        <form class="form-input">
+
+                    <div class="names">
+
+                        <div class="input-box">
+                                
+                                <input type="text"  placeholder="First Name....." required="required" >
+                                
+                        </div>
+
+                        <div class="input-box">
+                                
+                                <input type="text"  placeholder="Last Name....." required="required" >
+                                
+                        </div>
+
+
+                    
+                    </div>
+
+
+                    <div class="email-address">
+
+                            <div class="input-box">
+                                    
+                                    <input type="text"  placeholder="Email Address....." required="required" >
+                                    
+                            </div>
+
+                    </div>
+                                        
+        </form>
+
+
+        <h2>Reason for Booking </h2>
+
+        <div class="paragraph1">
+            <p>Choose a reason that best describes</p>
+        </div>
+
+
+        
+        <form class="form-input">
+
+                        <div class="input-box">
+                                
+                            <select name="reason" id="reason-box">
+                                    <option hidden>Choose...</option>
+                                    <option value="saab">Saab</option>
+                                    <option value="mercedes">Mercedes</option>
+                                    <option value="audi">Audi</option>
+                            </select>
+                                
+                        </div>
+                       
+        </form>
+
+
+        <h2>Phone No. </h2>
+
+            <div class="paragraph1">
+                <p>Input your phone number below</p>
+            </div>
+
+
+
+            <form class="form-input">
+
+                            <div class="input-box">
+
+                            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="+639.....">
+                                    
+                                
+                                    
+                            </div>
+                        
+            </form>
+
+
+        <div class="bottom-buttons">
+
+            <button class="Req-Btn">Request Appointment</button>
+            <button onclick="myFunction()" class="Cancel-Btn" id="close-btn">Cancel</button>
+
+
+        </div>
+
+
+
+
+
+
+</div>
+
   
 
 
-    <script src="script/script.js"></script>
+<script src="script/script.js"></script>
 
+<script>
+      function myFunction() {
+        var x = document.getElementById("myDIV");
+        var y = document.getElementById("content");
+        var closebtn = document.getElementById("close-btn");
+
+
+
+        if (x.style.display === "none" || x.style.display === "") {
+          x.style.display = "block";
+          // Add a slight delay to allow the element to transition from hidden to visible
+          setTimeout(() => {
+            x.style.opacity = 1;
+          }, 10);
+
+          // Reduce the opacity of the body
+          y.style.opacity = 0.5; 
+
+        } else {
+          x.style.opacity = 0;
+         
+          setTimeout(() => {
+            x.style.display = "none";
+          }, 300);
+
+         
+          y.style.opacity = 1;
+        }
+      }
+    </script>
 
  
 </body>

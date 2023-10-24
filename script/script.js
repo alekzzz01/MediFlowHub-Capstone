@@ -94,29 +94,52 @@ document.addEventListener("click", function (event) {
 
 var profilebtn = document.getElementById("profile-btn");
 var passwordbtn = document.getElementById("password-btn");
+var addressbtn = document.getElementById("address-btn");
 
 
 var accountedit = document.getElementById("account-edit");
 var passwordedit = document.getElementById("password-edit");
+var addressedit = document.getElementById("address-edit");
 
 
-passwordbtn.addEventListener("click", () => {
-    accountedit.style.display = "none";
-    passwordedit.style.display = "block";
 
-    profilebtn.style.backgroundColor = "#F5F6F8"
-    passwordbtn.style.backgroundColor = "rgba(91, 91, 91, 0.20)";
-
-});
 
 profilebtn.addEventListener("click", () => {
   accountedit.style.display = "block";
   passwordedit.style.display = "none";
+  addressedit.style.display = "none";
 
   profilebtn.style.backgroundColor = "rgba(91, 91, 91, 0.20)"
   passwordbtn.style.backgroundColor = "#F5F6F8";
+  addressbtn.style.backgroundColor = "#F5F6F8"
 
 });
+
+
+addressbtn.addEventListener("click", () => {
+  addressedit.style.display = "block";
+  accountedit.style.display = "none";
+  passwordedit.style.display = "none";
+
+  addressbtn.style.backgroundColor = "rgba(91, 91, 91, 0.20)"
+  passwordbtn.style.backgroundColor = "#F5F6F8";
+  profilebtn.style.backgroundColor = "#F5F6F8"
+
+});
+
+
+passwordbtn.addEventListener("click", () => {
+  passwordedit.style.display = "block";
+  accountedit.style.display = "none";
+  addressedit.style.display = "none";
+
+  profilebtn.style.backgroundColor = "#F5F6F8"
+  passwordbtn.style.backgroundColor = "rgba(91, 91, 91, 0.20)";
+  addressbtn.style.backgroundColor = "#F5F6F8"
+
+});
+
+
 
 
 //PROFILE SIDE 
@@ -149,4 +172,18 @@ document.getElementById('image-upload').addEventListener('change', function () {
       reader.readAsDataURL(this.files[0]);
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

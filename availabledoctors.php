@@ -70,21 +70,21 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="locations.php">
                     <i class='bx bxs-map'></i>
                         <span>Locations</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="notifications.php">
                         <i class='bx bxs-bell' ></i>
                         <span>Notifications</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="Profile.php">
                         <i class='bx bxs-cog' ></i>
                         <span>Settings</span>
                     </a>
