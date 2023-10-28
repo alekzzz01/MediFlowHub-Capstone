@@ -1,9 +1,35 @@
 <?php 
 
+require 'admin-db.php';
+
+if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM admin_table WHERE Admin_Username = '$username'";
+    $result = mysqli_query($conn, $query);
+
+    if (!$result) {
+        die("Database query error: " . mysqli_error($conn));
+    }
+
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+
+        if ($password === $row["Admin_Password"]) {
+            session_start();
+            header("Location: admin-dashboard.php");
+            exit;
+        } else {
+            echo "<script>alert('Incorrect password.')</script>";
+        }
+    } else {
+        echo "<script>alert('User not found. Please register.')</script>";
+    }
+}
+
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,8 +44,8 @@
 
 
 
-    <link rel="stylesheet" type="text/css" href="admin/Login.css">
-    <link rel="stylesheet" href="style/transitions.css">
+    <link rel="stylesheet" type="text/css" href="adminlogin.css">
+    <link rel="stylesheet" href="transitions.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -43,8 +69,9 @@
     <div class="login-container">
 
     
+    <form action="" method="post">
 
-        <form action="login.php" method="post">
+
 
           <h1>Login</h1>
                 
@@ -71,7 +98,7 @@
        
    
             <button name="submit" class="login-button" type="submit"><span>Login</span></button>
-            <p class="Signup-btn"> Don't have an account yet? <a href="signup.php"><span>Register</span></a></p>
+      
         
     </form>
         
@@ -99,7 +126,6 @@
           }
       </script>
 
-<script src="script/script.js"></script>
 
 </body>
 

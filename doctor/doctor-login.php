@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login | MediFlowHub</title>
+    <title>Doctor Login | MediFlowHub</title>
 
 
     <link rel="icon" href="images/Logo.png" type="image/png">
@@ -71,7 +71,7 @@
        
    
             <button name="submit" class="login-button" type="submit"><span>Login</span></button>
-            <p class="Signup-btn"> Don't have an account yet? <a href="signup.php"><span>Register</span></a></p>
+        
         
     </form>
         
