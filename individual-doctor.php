@@ -530,10 +530,10 @@ if (isset($_GET['doctor_id'])) {
         </form>
 
 
-        <h2>Reason for Booking </h2>
+        <h2>Diagnosis </h2>
 
         <div class="paragraph1">
-            <p>Choose a reason that best describes</p>
+            <p>Choose a diagnosis that best describes</p>
         </div>
 
 
@@ -544,9 +544,9 @@ if (isset($_GET['doctor_id'])) {
                                 
                             <select name="reason" id="reason-box">
                                     <option hidden>Choose...</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
+                                    <option value="saab">Eye</option>
+                                    <option value="mercedes">General</option>
+                                    <option value="audi">Hand</option>
                             </select>
                                 
                         </div>
