@@ -1,46 +1,4 @@
 <?php 
-require 'db.php';
-
-if (isset($_POST["submit"])) {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    // Validate the username as a valid email address
-    if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-        // Username is a valid email address
-    } else {
-        echo "<script>alert('Username is not a valid email address.')</script>";
-        exit; // Stop further processing if the email is invalid
-    }
-
-    // Retrieve the user's information from the database
-    $query = "SELECT * FROM users WHERE Email = '$username'";
-    $result = mysqli_query($conn, $query);
-
-    if (!$result) {
-        die("Database query error: " . mysqli_error($conn));
-    }
-    
-    if (mysqli_num_rows($result) == 1) {
-        // User found, check the password
-        $row = mysqli_fetch_assoc($result);
-        $hashedPassword = $row["Password"]; // Check the column name in your database
-    
-        if (password_verify($password, $hashedPassword)) {
-            // Password is correct, log the user in
-            session_start();
-            $_SESSION["username"] = $row["Email"];
-            $_SESSION["first_name"] = $row["First Name"]; 
-            header("Location: otp.php"); // Redirect to the user's dashboard or a protected page
-            exit;
-        } else {
-            echo "<script>alert('Incorrect password.')</script>";
-        }
-    } else {
-        echo "<script>alert('User not found. Please register.')</script>";
-    }
-    
-}
 
 
 ?>
@@ -53,14 +11,14 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | MediFlowHub</title>
+    <title>Admin Login | MediFlowHub</title>
 
 
     <link rel="icon" href="images/Logo.png" type="image/png">
 
 
 
-    <link rel="stylesheet" type="text/css" href="style/Login.css">
+    <link rel="stylesheet" type="text/css" href="doctor-login.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

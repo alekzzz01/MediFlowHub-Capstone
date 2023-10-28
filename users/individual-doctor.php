@@ -5,7 +5,7 @@ if (isset($_GET['doctor_id'])) {
     $doctor_id = $_GET['doctor_id'];
 
     // Query the database to fetch the doctor's information
-    $sql = "SELECT First_Name, Surname, Specialty, Experience, Fee FROM `doctors-table` WHERE doctor_id = $doctor_id";
+    $sql = "SELECT First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors-table` WHERE doctor_id = $doctor_id";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -272,7 +272,7 @@ if (isset($_GET['doctor_id'])) {
                     <div class="profile">
                         <button></button>
                         <div class="info">
-                            <p><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Surname']; ?></p>
+                            <p><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Last_Name']; ?></p>
                             <span><?php echo $row['Specialty']; ?></span>
                         </div>
                     </div>
@@ -437,22 +437,15 @@ if (isset($_GET['doctor_id'])) {
 
         </div>
 
-       <!-- <div class="customer-options">
+      <form class="customer-options">
+        
+                <input type="radio" id="New-Patient" class="customer" name="customer-type" checked>
+                <label for="New-Customer">New Patient</label><br>
 
-            <div class="customer">
-                <input type="radio" id="New-Customer" >
-                <label for="New-Customer">New Customer</label><br>
+                <input type="radio" id="Current-Patient" class="customer"  name="customer-type">
+                <label for="Current-Patient">Current Patient</label><br>
 
-            </div>
-
-            <div class="customer">
-                <input type="radio" id="Current-Customer">
-                <label for="Current-Customer">Current Customer</label><br>
-
-            </div>
-
-
-        </div> -->
+    </form> 
 
 
         <div class="paragraph1">
@@ -464,7 +457,7 @@ if (isset($_GET['doctor_id'])) {
         <div class="doctors-description">
 
             <div class="doctors-description1">
-                <p><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Surname']; ?></p>
+                <p><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Last_Name']; ?></p>
                 <p><?php echo $row['Specialty']; ?></p>
             </div>
 
@@ -483,7 +476,7 @@ if (isset($_GET['doctor_id'])) {
 
         </div>
 
-
+<div class="New_PatientBox" id="New_Patient">
 
         <h2>Registration: </h2>
 
@@ -496,6 +489,8 @@ if (isset($_GET['doctor_id'])) {
 
 
         <form class="form-input">
+
+        
 
                     <div class="names">
 
@@ -528,6 +523,81 @@ if (isset($_GET['doctor_id'])) {
                     </div>
                                         
         </form>
+
+</div>
+
+
+
+
+
+<div class="CurrentPatientsBox"  id="Current_Patient">
+
+
+
+
+        <h2>Patients Info: </h2>
+
+
+        <div class="paragraph1">
+            <p>Here is your information</p>
+        </div>
+
+
+
+
+        <form class="form-input">
+
+
+               
+                    <div class="patient-search">
+                        
+                        <input type="text" placeholder="Search name or ID No.">
+               
+                    </div>
+
+
+    
+
+                    <div class="names">
+
+                        <div class="input-box">
+                                
+                                <input type="text"  placeholder="First Name....." required="required" >
+                                
+                        </div>
+
+                        <div class="input-box">
+                                
+                                <input type="text"  placeholder="Last Name....." required="required" >
+                                
+                        </div>
+
+
+                    
+                    </div>
+
+
+
+                    <div class="email-address">
+
+                            <div class="input-box">
+                                    
+                            <input type="date"  placeholder="Date of Birth....." required="required" >
+                                    
+                            </div>
+
+                    </div>
+                                        
+        </form>
+
+
+
+</div>
+
+
+
+
+
 
 
         <h2>Diagnosis </h2>
@@ -624,7 +694,46 @@ if (isset($_GET['doctor_id'])) {
           y.style.opacity = 1;
         }
       }
-    </script>
+</script>
+
+
+<script>
+
+    // Get the radio buttons and the boxes
+const newPatientRadio = document.getElementById("New-Patient");
+const currentPatientRadio = document.getElementById("Current-Patient");
+const newBox = document.getElementById("New_Patient");
+const currentBox = document.getElementById("Current_Patient");
+
+// Add event listeners to the radio buttons
+newPatientRadio.addEventListener("change", function () {
+  if (newPatientRadio.checked) {
+    newBox.style.display = "block";
+    currentBox.style.display = "none";
+  }
+});
+
+currentPatientRadio.addEventListener("change", function () {
+  if (currentPatientRadio.checked) {
+    currentBox.style.display = "block";
+    newBox.style.display = "none";
+  }
+});
+
+    
+    
+    
+    
+    
+</script>
+
+
+
+
+
+
+
+
 
  
 </body>

@@ -2,12 +2,8 @@
 include('db.php'); // Include the database connection file
 
 // Query the database to get doctor information from the 'doctors-table'
-$sql = "SELECT doctor_id, First_Name, Surname, Specialty, Experience, Fee FROM `doctors-table`"; // Enclose the table name in backticks
+$sql = "SELECT doctor_id, First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors-table`"; // Enclose the table name in backticks
 $result = $conn->query($sql);
-
-
-
-
 
 
 
@@ -298,7 +294,7 @@ $conn->close();
                         <div class="doctors-information">
                             <button class="profile-image"></button>
                             <div class="doctors-names">
-                                <p class="doctor-name"><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Surname']; ?></p>
+                                <p class="doctor-name"><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Last_Name']; ?></p>
                                 <p class="profession"><?php echo $row['Specialty']; ?></p>
                                 <p class="profession"><?php echo $row['Experience'] . ' yrs. of experience'; ?></p>
                             </div>
