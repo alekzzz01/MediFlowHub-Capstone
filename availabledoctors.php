@@ -1,3 +1,29 @@
+<?php
+include('db.php'); // Include the database connection file
+
+// Query the database to get doctor information from the 'doctors-table'
+$sql = "SELECT doctor_id, First_Name, Surname, Specialty, Experience, Fee FROM `doctors-table`"; // Enclose the table name in backticks
+$result = $conn->query($sql);
+
+
+
+
+
+
+
+// Close the database connection (if needed)
+$conn->close();
+?>
+
+
+
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -256,55 +282,51 @@
         </div>
 
         <div class="number-results">
-            <p>We've found 100 Doctors/Providers you can book with!</p>
+            <p>We've found 2 Doctors/Providers you can book with!</p>
         </div>
 
+       
+
+
         <div class="doctors-results">
-
-
-            <div class="doctors-container">
-                <div class="information">
-
-                    <div class ="doctors-information">
-
-                            <button class="profile-image">
-                            </button>
-
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                ?>
+                <div class="doctors-container">
+                    <div class="information">
+                        <div class="doctors-information">
+                            <button class="profile-image"></button>
                             <div class="doctors-names">
-                                <p class="doctor-name">DR. QUACK QUACK</p>
-                                <p class="profession">General Practicioner</p>
-                                <p class="profession">5 yrs. of experience</p>
-
-                            
+                                <p class="doctor-name"><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Surname']; ?></p>
+                                <p class="profession"><?php echo $row['Specialty']; ?></p>
+                                <p class="profession"><?php echo $row['Experience'] . ' yrs. of experience'; ?></p>
                             </div>
-
-
+                        </div>
+                        <div class="schedule">
+                            <p class="title">EARLIEST AVAILABLE SCHEDULE</p>
+                            <p class="time">Today, 09:00 AM - 11:00 PM</p>
+                            <p class="time">Fee: ₱<?php echo number_format($row['Fee'], 2); ?></p>
+                        </div>
                     </div>
 
 
-                    
-                    <div class="schedule">
-                                <p class="title">EARLIEST AVAILABLE SCHEDULE</p>
-                                <p class="time">Today, 09:00 AM - 11:00 PM</p>
-                                <p class="time">Fee: ₱400.00</p>
-                            </div>
+
+                    <form action="individual-doctor.php" method="GET">
+                        <input type="hidden" name="doctor_id" value="<?php echo $row['doctor_id']; ?>">
+                        <button type="submit" class="viewdoctor">VIEW DOCTOR</button>
+                    </form>
+
+
 
 
                 </div>
-          
-                <button class="viewdoctor">VIEW  DOCTOR</button>
-                  
-                        
-            </div>
-
-
-
-
-          
-
-
-
-
+                <?php
+                    }
+                } else {
+                    echo "No data found in the 'doctors-table'.";
+                }
+                ?>
         </div>
 
 
@@ -319,6 +341,7 @@
 
 
     <script src="script/script.js"></script>
+
 
     
 </body>

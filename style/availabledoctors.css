@@ -573,11 +573,13 @@ li.active a span {
 
 
 .information {
+    width: 800px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap:156px;
+
+
 }
 
 
@@ -590,6 +592,7 @@ li.active a span {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+   
 
     padding: 20px 36px;
 
@@ -666,6 +669,8 @@ li.active a span {
     padding: 16px 32px;
     border-radius: 8px;
     background: var(--clr-button-color);
+
+    text-decoration: none;
 
     border: none;
     outline: none;

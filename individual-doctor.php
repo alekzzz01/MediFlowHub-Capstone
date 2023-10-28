@@ -1,3 +1,25 @@
+<?php
+include('db.php'); // Include the database connection file
+
+if (isset($_GET['doctor_id'])) {
+    $doctor_id = $_GET['doctor_id'];
+
+    // Query the database to fetch the doctor's information
+    $sql = "SELECT First_Name, Surname, Specialty, Experience, Fee FROM `doctors-table` WHERE doctor_id = $doctor_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+?>
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -246,52 +268,18 @@
 
 
 
-        <div class="appointment-card">
-                        <div class="profile">
-                            <button></button>
-
-                            <div class="info">
-                                <p>Dr. Names</p>
-                                <span>Hearth Surgeon, London</span>
-                            </div>
-
+            <div class="appointment-card">
+                    <div class="profile">
+                        <button></button>
+                        <div class="info">
+                            <p><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Surname']; ?></p>
+                            <span><?php echo $row['Specialty']; ?></span>
                         </div>
-
-
-                     
-
-                        <div class="date-time">
-
-                            <div class="date-time-container">
-                                <p class="date-time-title">Date</p>
-                                <p class="date-time-desc">16 Sept 2023</p>
-                            </div>
-
-                            
-                            <div class="date-time-container">
-                                <p class="date-time-title">Time</p>
-                                <p class="date-time-desc">09:00am</p>
-                            </div>
-
-
-                        </div>
-
-                        <div class="button-schedule">
-                            <button>Schedule</button>
-                            <div class="icons-schedule">
-                            <i class='bx bxs-phone'></i>
-                            <i class='bx bxs-video' ></i>
-
-                            </div>
-                            
-                        </div>
-
-
-
+                    </div>
                     
+                </div>
 
 
-        </div>  
 
 
         <div class="schedule-card">
@@ -640,3 +628,17 @@
  
 </body>
 </html>
+
+
+
+<?php
+    } else {
+        echo "Doctor not found.";
+    }
+} else {
+    echo "Doctor ID not specified in the URL.";
+}
+
+// Close the database connection
+$conn->close();
+?>

@@ -523,13 +523,12 @@ li.active a span {
 
 
 .appointment-card {
-    display: flex;
-    flex-direction: column;
+ 
     padding: 16px 32px;
     gap: 16px;
 
-    width: 400px;
-    max-height: 210px;
+    width: 500px;
+    max-height: 150px;
 
     border-radius: 16px;
     background: #F5F6F8;
@@ -537,7 +536,13 @@ li.active a span {
 
 
 
-
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    
+}
 
 .profile button {
     width: 48px;
@@ -549,24 +554,28 @@ li.active a span {
     border: none;
 }
 
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .info p {
     margin: 0;
     font-weight: var(--fw-medium);
-    font-size: 0.75rem;
+    font-size: 1rem;
+    
 }
 
 .info span {
     margin: 0;
     color: rgba(0, 0, 0, 0.50);
     font-weight: var(--fw-medium);
-    font-size: 0.75rem;
+    font-size: 1rem;
+    text-align: center;
+
 }
 
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
 
 
 
