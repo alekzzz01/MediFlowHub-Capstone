@@ -123,6 +123,13 @@ if (isset($_POST["submit"])) {
                 <i class="fa fa-eye-slash toggle" id="eye-confirm-password" onclick="togglePasswordVisibility('confirm-password', 'eye-confirm-password')"></i>
             </div>
 
+          
+
+
+
+
+
+
             <div class="agree-terms">
                 <input type="checkbox" name="agree-terms">
                 <label for="agree-terms">I agree to the <a href="#">Terms and Conditions</a></label>
@@ -130,7 +137,7 @@ if (isset($_POST["submit"])) {
             
             
             <button name="submit" class="Signup-btn" type="submit"><span>Signup</span></button>
-            <p class="Login-btn"> Already have an Account? <a href="index.php"><span>Login</span></a></p>
+            <p class="Login-btn"> Already have an Account? <a href="login.php"><span>Login</span></a></p>
         </form>
     </div>
 

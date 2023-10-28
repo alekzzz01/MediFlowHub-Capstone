@@ -69,7 +69,7 @@ if (isset($_GET['doctor_id'])) {
 
                 
                 <li>
-                    <a href="#">
+                    <a href="appointments.php">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
                     </a>
@@ -78,35 +78,35 @@ if (isset($_GET['doctor_id'])) {
 
                 
                 <li class="active">
-                    <a href="#">
+                    <a href="availabledoctors.php">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="Payments.php">
                         <i class='bx bxs-credit-card'></i>
                         <span>Payments</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="locations.php">
                         <i class='bx bxs-location-plus'></i>
                         <span>Locations</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="notifications.php">
                         <i class='bx bxs-bell' ></i>
                         <span>Notifications</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="Profile.php">
                         <i class='bx bxs-cog' ></i>
                         <span>Settings</span>
                     </a>
@@ -437,7 +437,7 @@ if (isset($_GET['doctor_id'])) {
 
         </div>
 
-        <div class="customer-options">
+       <!-- <div class="customer-options">
 
             <div class="customer">
                 <input type="radio" id="New-Customer" >
@@ -452,7 +452,7 @@ if (isset($_GET['doctor_id'])) {
             </div>
 
 
-        </div>
+        </div> -->
 
 
         <div class="paragraph1">
@@ -464,8 +464,8 @@ if (isset($_GET['doctor_id'])) {
         <div class="doctors-description">
 
             <div class="doctors-description1">
-                <p>Dr. Names</p>
-                <p>Heart Surgeon</p>
+                <p><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Surname']; ?></p>
+                <p><?php echo $row['Specialty']; ?></p>
             </div>
 
             <div class="date-description">
@@ -489,7 +489,7 @@ if (isset($_GET['doctor_id'])) {
 
 
         <div class="paragraph1">
-            <p>Please enter your name & email address</p>
+            <p>Please enter Patient's name & Date of Birth</p>
         </div>
 
 
@@ -516,11 +516,12 @@ if (isset($_GET['doctor_id'])) {
                     </div>
 
 
+
                     <div class="email-address">
 
                             <div class="input-box">
                                     
-                                    <input type="text"  placeholder="Email Address....." required="required" >
+                            <input type="date"  placeholder="Date of Birth....." required="required" >
                                     
                             </div>
 

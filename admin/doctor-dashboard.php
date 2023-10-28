@@ -35,7 +35,7 @@
             <ul class="menu">
 
                 <li class="active">
-                    <a href="dashboard.php" >
+                    <a href="../doctor-dashboard.php" >
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
                     </a>
@@ -43,7 +43,7 @@
 
                 
                 <li>
-                    <a href="appointments.php">
+                    <a href="../appointsments.php">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
                     </a>

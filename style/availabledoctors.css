@@ -678,6 +678,8 @@ li.active a span {
     color: white;
     font-family: 'Poppins', sans-serif;
     font-weight: var(--fw-bold);
+
+    cursor: pointer;
 }
 
 

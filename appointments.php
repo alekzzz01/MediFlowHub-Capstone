@@ -244,68 +244,36 @@
             <div class="rectangle">
                 <table>
                     <tr>
-                      <th>#</th>
-                      <th>Doctor's Name</th>
-                      <th>Specialization</th>
-                      <th>Mobile No </th>
+                      <th>Appointment No.</th>
+                      <th>Patient Name</th>
+                      <th>Doctor Name</th>
+                      <th>Hospital/Clinic  </th>
+                      <th>Appointment Time </th>
                       <th>Appointment Date </th>
-                      <th>Hospital  </th>
-                      <th>Action</th> </th>
+                      <th>Status </th>
+                      <th>View</th> </th>
+                    
                     </tr>
     
                    
                     <tr>
-                     <td>1</td>
+                    <td>1</td>
                       <td>Fajartin, Alexander</td>
-                      <td>Panthology</td>
-                      <td>092193654821</td>
-                      <td>Sept 26 2023</td>
-                      <td></td>
-                      <td></td>
-                     
-                    </tr>
-                    <tr>
-                     <td>2</td>
-                      <td>Etesam, Paolo</td>
-                      <td>General Practictioner</td>
-                      <td>0932731281</td>
-                      <td>Sept 26 2023</td>
-                      <td></td>
-                      <td></td>
-                    
-                    </tr>
+                      <td>Dr. Names</td>
+                      <td>Brgy. East Rembo Clinic</td>
+                      <td>09:00am - 10:00am</td>
+                      <td>October 11, 2023</td>
+                      <td>In Progress</td>
+                      <td>View Button</td>
                    
-                    <tr>
-    
-                     <td>3</td>
-                      <td>Furigay, Ronrick</td>
-                      <td>Dentist</td>
-                      <td>09758124581</td>
-                      <td>Sept 26 2023</td>
-                      <td></td>
-                      <td></td>
-                      
                     </tr>
-                    
-                    <tr>
-                        
-                      <td>4</td>
-                      <td>Garcia, Marie</td>
-                      <td>Psychiatry</td>
-                      <td>09351958123</td>
-                      <td>Sept 26 2023</td>
-                      <td></td>
-                      <td></td>
-                      
-                    
-                      </tr>
-    
+
                      
                   </table>
             </div>
 
 
-            <button class="request">Request Appointment</button>
+           <!-- <button class="request">Request Appointment</button> -->
            
          
             
