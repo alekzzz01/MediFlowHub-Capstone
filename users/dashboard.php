@@ -280,11 +280,7 @@ $firstName = $_SESSION["first_name"];
                                 <div class="schedule-container">
             
                                     <button class="schedule-btn">Schedule</button>
-                                    <div class="icons-schedule">
-                                        <i class='bx bxs-phone' ></i>
-                                        <i class='bx bxs-video' ></i>
-            
-                                    </div>
+                                    
                                 </div>
                                 
                             </div>
@@ -311,11 +307,7 @@ $firstName = $_SESSION["first_name"];
                                 <div class="schedule-container">
             
                                     <button class="schedule-btn">Schedule</button>
-                                    <div class="icons-schedule">
-                                        <i class='bx bxs-phone' ></i>
-                                        <i class='bx bxs-video' ></i>
-            
-                                    </div>
+                                  
                                 </div>
                                 
                             </div>

@@ -289,6 +289,7 @@ $conn->close();
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                 ?>
+
                 <div class="doctors-container">
                     <div class="information">
                         <div class="doctors-information">
@@ -317,6 +318,8 @@ $conn->close();
 
 
                 </div>
+
+                
                 <?php
                     }
                 } else {

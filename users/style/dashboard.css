@@ -629,9 +629,10 @@ html.is-animating .first-container{
 .schedule-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-top: 60px;
 
+    justify-content: center;
+    margin-top: 60px;
+  
 }
 
 
@@ -645,22 +646,10 @@ html.is-animating .first-container{
         font-family: 'Poppins', sans-serif;
         font-weight: var(--fw-bold);
         letter-spacing: 0.8px;
+        width: 80%;
+   
 
 }
-
-.icons-schedule {
-    display: flex;
-    gap:24px;
-}
-
-.icons-schedule i {
-    background-color: white !important;
-    padding: 16px;
-    border-radius: 16px;
-    font-size: 16px;
-
-}
-
 
 
 

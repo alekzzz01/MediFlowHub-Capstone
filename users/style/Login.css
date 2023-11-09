@@ -357,6 +357,8 @@ cursor: pointer;
     justify-content: center;
     font-size: 15px;
 
+    text-decoration: none;
+
   }
 
   .btn1 span {
