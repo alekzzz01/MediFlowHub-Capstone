@@ -84,12 +84,6 @@ $conn->close();
                     </a>
                 </li>
 
-                <li>
-                    <a href="Payments.php">
-                        <i class='bx bxs-credit-card'></i>
-                        <span>Payments</span>
-                    </a>
-                </li>
 
                 <li>
                     <a href="locations.php">

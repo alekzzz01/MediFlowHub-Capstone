@@ -59,13 +59,7 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="Payments.php">
-                        <i class='bx bxs-credit-card'></i>
-                        <span>Payments</span>
-                    </a>
-                </li>
-
+           
                 <li>
                     <a href="locations.php">
                         <i class='bx bxs-map'></i>
@@ -247,7 +241,7 @@
                       <th>Appointment No.</th>
                       <th>Patient Name</th>
                       <th>Doctor Name</th>
-                      <th>Hospital/Clinic  </th>
+                      <th>Health Center  </th>
                       <th>Appointment Time </th>
                       <th>Appointment Date </th>
                       <th>Status </th>
@@ -264,8 +258,7 @@
                       <td>09:00am - 10:00am</td>
                       <td>October 11, 2023</td>
                       <td>In Progress</td>
-                      <td>View Button</td>
-                   
+                      <td><a href="viewappoitnemtn">View Appointment</a></td>
                     </tr>
 
                      

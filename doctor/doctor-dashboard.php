@@ -8,7 +8,7 @@
     <title>Doctor's Dashboard</title>
 
 
-    <link rel="icon" href="../images/logo.png" type="image/png">
+    <link rel="icon" href="images/logo.png" type="image/png">
 
     <link rel="stylesheet" type="text/css" href="doctor-dashboard.css">
     <link rel="stylesheet" href="style/transitions.css">
@@ -28,7 +28,7 @@
 
     <div id="sidebar" class="sidebar">
         <div class="logo">
-            <img src="../images/MediFlowHub.png" alt="">
+            <img src="images/MediFlowHub.png" alt="">
 
             <i class='bx bx-x' id="close-sidebar"></i>
         </div>

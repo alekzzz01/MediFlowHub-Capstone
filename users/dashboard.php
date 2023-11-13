@@ -74,12 +74,7 @@ $firstName = $_SESSION["first_name"];
                     </a>
                 </li>
 
-                <li>
-                    <a href="Payments.php">
-                        <i class='bx bxs-credit-card'></i>
-                        <span>Payments</span>
-                    </a>
-                </li>
+              
 
                 <li>
                     <a href="locations.php">
@@ -254,7 +249,7 @@ $firstName = $_SESSION["first_name"];
 
                     <div class="info-available">
 
-                        <p>Let's track your health today!</p>
+                        <p>Home / Dashboard </p>
         
                         <div class="available-container">
         
