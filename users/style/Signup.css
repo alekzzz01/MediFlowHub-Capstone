@@ -291,7 +291,7 @@ cursor: pointer;
 .Signup-btn span {
     color: #424242;
     font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-medium);
+    font-weight: var(--fw-semibold);
     font-size: 1rem;
   
 }
