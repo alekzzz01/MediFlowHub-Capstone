@@ -58,11 +58,20 @@ $firstName = $_SESSION["first_name"];
                 </li>
 
                 
+            
                 <li>
-                    <a href="appointments.php">
+                    <button class="dropdown-btn">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
-                    </a>
+                        <i class='bx bxs-chevron-down'></i>
+                    </button>
+
+                    <div class="dropdown-container">
+                            <a href="appointments.php">View Appointments</a>
+                            <a href="#">Book Appointments</a>
+
+                    </div>
+
                 </li>
 
 
@@ -307,11 +316,13 @@ $firstName = $_SESSION["first_name"];
                                 
                             </div>
 
+                          
+
                             <div class="daily-progress">
                                 <p>Daily Progress</p>
                                 <span>Keep track to your daily health</span>
 
-                            </div>
+                            </div> 
                             
         
                         </div>
@@ -575,6 +586,29 @@ $firstName = $_SESSION["first_name"];
 
 
     <script src="script/script.js"></script>
+
+
+    <script> 
+
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+                var dropdown = document.getElementsByClassName("dropdown-btn");
+                var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+                } else {
+                dropdownContent.style.display = "block";
+                }
+                });
+                }
+
+
+    </script>
+
 
 
  

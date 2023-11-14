@@ -729,12 +729,8 @@ li.active a span {
 
 .request-appointment-box {
     
-    display: none;
-    transition: opacity 0.3s;
-     
-   
-    
 
+    transition: opacity 0.3s;
     position: absolute;
     top: 50%;
     left: 50%;

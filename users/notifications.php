@@ -32,76 +32,86 @@
 </head>
 <body>
 
-    <div id="sidebar" class="sidebar">
-        <div class="logo">
-            <img src="images/MediFlowHub.png" alt="">
+        <div id="sidebar" class="sidebar">
+                <div class="logo">
+                    <img src="images/MediFlowHub.png" alt="">
 
-            <i class='bx bx-x' id="close-sidebar"></i>
+                    <i class='bx bx-x' id="close-sidebar"></i>
+                </div>
+                    <ul class="menu">
+
+                        <li>
+                            <a href="dashboard.php" >
+                                <i class='bx bxs-dashboard'></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        
+                    
+                        <li>
+                            <button class="dropdown-btn">
+                                <i class='bx bxs-time-five'></i>
+                                <span>Appointments</span>
+                                <i class='bx bxs-chevron-down'></i>
+                            </button>
+
+                            <div class="dropdown-container">
+                                    <a href="appointments.php">View Appointments</a>
+                                    <a href="#">Book Appointments</a>
+
+                            </div>
+
+                        </li>
+
+
+                        
+                        <li>
+                            <a href="availabledoctors.php">
+                                <i class='bx bxs-user-rectangle' ></i>
+                                <span>Doctors</span>
+                            </a>
+                        </li>
+
+                    
+
+                        <li>
+                            <a href="locations.php">
+                            <i class='bx bxs-map'></i>
+                                <span>Locations</span>
+                            </a>
+                        </li>
+
+                        <li class="active">
+                            <a href="notifications.php">
+                                <i class='bx bxs-bell' ></i>
+                                <span>Notifications</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="Profile.php">
+                                <i class='bx bxs-cog' ></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+
+
+                        <li class="logout">
+                            <a href="logout.php" id="logout-link">
+                                <i class='bx bx-log-out'></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+
+
+
+
+
+
+                    </ul>
+            
         </div>
-            <ul class="menu">
-
-                <li>
-                    <a href="dashboard.php" >
-                        <i class='bx bxs-dashboard'></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
-                
-                <li>
-                    <a href="appointments.php">
-                        <i class='bx bxs-time-five'></i>
-                        <span>Appointments</span>
-                    </a>
-                </li>
-
-
-                
-                <li>
-                    <a href="availabledoctors.php">
-                        <i class='bx bxs-user-rectangle' ></i>
-                        <span>Doctors</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="locations.php">
-                    <i class='bx bxs-map'></i>
-                        <span>Locations</span>
-                    </a>
-                </li>
-
-                <li class="active">
-                    <a href="notifications.php">
-                        <i class='bx bxs-bell' ></i>
-                        <span>Notifications</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="Profile.php">
-                        <i class='bx bxs-cog' ></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-
-
-                <li class="logout">
-                    <a href="logout.php" id="logout-link">
-                        <i class='bx bx-log-out'></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-
-
-
-
-
-
-            </ul>
-    
-    </div>
 
 
 
@@ -344,6 +354,31 @@
 
 
     <script src="script/script.js"></script>
+
+
+    
+    <script> 
+
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+                var dropdown = document.getElementsByClassName("dropdown-btn");
+                var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+                } else {
+                dropdownContent.style.display = "block";
+                }
+                });
+                }
+
+
+    </script>
+
+
 
 
  

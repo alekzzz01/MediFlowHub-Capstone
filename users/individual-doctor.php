@@ -280,7 +280,7 @@ if (isset($_GET['doctor_id'])) {
                 </div>
 
 
-
+<!--
 
         <div class="schedule-card">
 
@@ -397,7 +397,7 @@ if (isset($_GET['doctor_id'])) {
                     <button onclick="myFunction()">Add Appointment</button>
                 </div>
 
-        </div>
+        </div> -->
             
      
 
@@ -424,243 +424,6 @@ if (isset($_GET['doctor_id'])) {
 
 
 
-<div class="request-appointment-box" id="myDIV">
-
-
-        <div class="header-request">
-
-                <p>REQUEST AN APPOINTMENT</p>
-
-                <i onclick="myFunction()" id="close-btn" class='bx bx-x'></i>
-
-
-
-        </div>
-
-      <form class="customer-options">
-        
-                <input type="radio" id="New-Patient" class="customer" name="customer-type" checked>
-                <label for="New-Customer">New Patient</label><br>
-
-                <input type="radio" id="Current-Patient" class="customer"  name="customer-type">
-                <label for="Current-Patient">Current Patient</label><br>
-
-    </form> 
-
-
-        <div class="paragraph1">
-            <p>Please confirm that you would like to request the following appointment.</p>
-        </div>
-
-
-
-        <div class="doctors-description">
-
-            <div class="doctors-description1">
-                <p><?php echo 'Dr. ' . $row['First_Name'] . ' ' . $row['Last_Name']; ?></p>
-                <p><?php echo $row['Specialty']; ?></p>
-            </div>
-
-            <div class="date-description">
-
-                <i class='bx bxs-calendar-check'></i>
-                <p>September 28, 2023</p>
-                <p>at 9:00 am</p>
-
-
-            </div>
-
-
-
-
-
-        </div>
-
-<div class="New_PatientBox" id="New_Patient">
-
-        <h2>Registration: </h2>
-
-
-        <div class="paragraph1">
-            <p>Please enter Patient's name & Date of Birth</p>
-        </div>
-
-
-
-
-        <form class="form-input">
-
-        
-
-                    <div class="names">
-
-                        <div class="input-box">
-                                
-                                <input type="text"  placeholder="First Name....." required="required" >
-                                
-                        </div>
-
-                        <div class="input-box">
-                                
-                                <input type="text"  placeholder="Last Name....." required="required" >
-                                
-                        </div>
-
-
-                    
-                    </div>
-
-
-
-                    <div class="email-address">
-
-                            <div class="input-box">
-                                    
-                            <input type="date"  placeholder="Date of Birth....." required="required" >
-                                    
-                            </div>
-
-                    </div>
-                                        
-        </form>
-
-</div>
-
-
-
-
-
-<div class="CurrentPatientsBox"  id="Current_Patient">
-
-
-
-
-        <h2>Patients Info: </h2>
-
-
-        <div class="paragraph1">
-            <p>Here is your information</p>
-        </div>
-
-
-
-
-        <form class="form-input">
-
-
-               
-                    <div class="patient-search">
-                        
-                        <input type="text" placeholder="Search name or ID No.">
-               
-                    </div>
-
-
-    
-
-                    <div class="names">
-
-                        <div class="input-box">
-                                
-                                <input type="text"  placeholder="First Name....." required="required" >
-                                
-                        </div>
-
-                        <div class="input-box">
-                                
-                                <input type="text"  placeholder="Last Name....." required="required" >
-                                
-                        </div>
-
-
-                    
-                    </div>
-
-
-
-                    <div class="email-address">
-
-                            <div class="input-box">
-                                    
-                            <input type="date"  placeholder="Date of Birth....." required="required" >
-                                    
-                            </div>
-
-                    </div>
-                                        
-        </form>
-
-
-
-</div>
-
-
-
-
-
-
-
-        <h2>Diagnosis </h2>
-
-        <div class="paragraph1">
-            <p>Choose a diagnosis that best describes</p>
-        </div>
-
-
-        
-        <form class="form-input">
-
-                        <div class="input-box">
-                                
-                            <select name="reason" id="reason-box">
-                                    <option hidden>Choose...</option>
-                                    <option value="saab">Eye</option>
-                                    <option value="mercedes">General</option>
-                                    <option value="audi">Hand</option>
-                            </select>
-                                
-                        </div>
-                       
-        </form>
-
-
-        <h2>Phone No. </h2>
-
-            <div class="paragraph1">
-                <p>Input your phone number below</p>
-            </div>
-
-
-
-            <form class="form-input">
-
-                            <div class="input-box">
-
-                            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="+639.....">
-                                    
-                                
-                                    
-                            </div>
-                        
-            </form>
-
-
-        <div class="bottom-buttons">
-
-            <button class="Req-Btn">Request Appointment</button>
-            <button onclick="myFunction()" class="Cancel-Btn" id="close-btn">Cancel</button>
-
-
-        </div>
-
-
-
-
-
-
-</div>
-
-  
 
 
 <script src="script/script.js"></script>
@@ -697,35 +460,6 @@ if (isset($_GET['doctor_id'])) {
 </script>
 
 
-<script>
-
-    // Get the radio buttons and the boxes
-const newPatientRadio = document.getElementById("New-Patient");
-const currentPatientRadio = document.getElementById("Current-Patient");
-const newBox = document.getElementById("New_Patient");
-const currentBox = document.getElementById("Current_Patient");
-
-// Add event listeners to the radio buttons
-newPatientRadio.addEventListener("change", function () {
-  if (newPatientRadio.checked) {
-    newBox.style.display = "block";
-    currentBox.style.display = "none";
-  }
-});
-
-currentPatientRadio.addEventListener("change", function () {
-  if (currentPatientRadio.checked) {
-    currentBox.style.display = "block";
-    newBox.style.display = "none";
-  }
-});
-
-    
-    
-    
-    
-    
-</script>
 
 
 
