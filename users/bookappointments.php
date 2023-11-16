@@ -1,8 +1,63 @@
 <?php
 
+require 'db.php';
 
+// Check if the form is submitted
+if (isset($_POST["submit"])) {
+    // Get the form data
+    $customerType = $_POST["customer-type"];
+    $firstName = $_POST["firstName"];
+    $lastName = $_POST["lastName"];
+    $dob = $_POST["dob"];
+    $diagnosis = $_POST["diagnosis"];
+    $phone = $_POST["phone"];
+    $doctorId = $_POST["doctor"];
+    $patientId = $_POST["patient"]; 
+    $clinicId = $_POST["clinic"]; 
+
+    if ($customerType == "New-Patient") {
+        // Insert data into the patients-table for new patients
+        $sqlNewPatient = "INSERT INTO patients_table (First_Name, Last_Name, Date_of_Birth) VALUES ('$firstName', '$lastName', '$dob')";
+
+        if ($conn->query($sqlNewPatient) === TRUE) {
+            // Retrieve the patient_id of the newly inserted patient
+            $patientId = $conn->insert_id;
+
+            // Proceed with the appointment insertion
+            $sqlAppointment = "INSERT INTO appointments (customer_type, Diagnosis, Patient_Phone_Num, doctor_id, Patient_id, Clinic_ID) VALUES ('$customerType', '$diagnosis', '$phone', '$doctorId', '$patientId', '$clinicId')";
+
+            if ($conn->query($sqlAppointment) === TRUE) {
+                echo "Appointment requested successfully";
+            } else {
+                echo "Error: " . $sqlAppointment . "<br>" . $conn->error;
+            }
+        } else {
+            echo "Error: " . $sqlNewPatient . "<br>" . $conn->error;
+        }
+    } else {
+        // Insert data into the appointments table for current patients
+        // Check if the Patient_id exists in the patients_table
+        $checkPatient = "SELECT Patient_id FROM patients_table WHERE Patient_id = '$patientId'";
+        $result = $conn->query($checkPatient);
+
+        if ($result->num_rows > 0) {
+            // The Patient_id is valid, proceed with the appointment insertion
+            $sqlAppointment = "INSERT INTO appointments (customer_type, Diagnosis, Patient_Phone_Num, doctor_id, Patient_id, Clinic_ID) VALUES ('$customerType', '$diagnosis', '$phone', '$doctorId', '$patientId', '$clinicId')";
+
+            if ($conn->query($sqlAppointment) === TRUE) {
+                echo "Appointment requested successfully";
+            } else {
+                echo "Error: " . $sqlAppointment . "<br>" . $conn->error;
+            }
+        } else {
+            echo "Error: Invalid Patient_id";
+        }
+    }
+}
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,8 +112,8 @@
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="appointments.php">View Appointments</a>
-                            <a href="#">Book Appointments</a>
+                            <a href="appointments.php">View Appointment</a>
+                            <a href="#">Book Appointment</a>
 
                     </div>
 
@@ -130,83 +185,55 @@
 
         </div>
 
-                    <form class="customer-options">
+        <form class="form-input" action="bookappointments.php" method="post">
 
-                            <input type="radio" id="New-Patient" class="customer" name="customer-type" checked>
-                            <label for="New-Customer">New Patient</label><br>
+                    <div class="customer-options">
+                        <input type="radio" id="New-Patient" class="customer" name="customer-type" checked>
+                        <label for="New-Customer">New Patient</label><br>
 
-                            <input type="radio" id="Current-Patient" class="customer"  name="customer-type">
-                            <label for="Current-Patient">Current Patient</label><br>
+                        <input type="radio" id="Current-Patient" class="customer"  name="customer-type">
+                        <label for="Current-Patient">Current Patient</label><br>
+                    </div>
 
-                    </form> 
 
+        <div class="formcontainer">
+
+     
 
                     <div class="paragraph1">
                         <p>Please confirm that you would like to request the following appointment.</p>
                     </div>
 
+                    <div class="New_PatientBox" id="New_Patient">
+                      
+                        <h2>Registration: </h2>
 
 
+                            <div class="paragraph2">
+                                <p>Please enter Patient's name & Date of Birth</p> 
+                            </div>
 
-                <div class="New_PatientBox" id="New_Patient">
 
-                    <h2>Registration: </h2>
+                            <div class="names">
+                                    <div class="input-box">
+                                        <input type="text" name="firstName" placeholder="First Name....." required="required">
+                                    </div>
+                                    <div class="input-box">
+                                        <input type="text" name="lastName" placeholder="Last Name....." required="required">
+                                    </div>
+                            </div>
 
+                            <div class="dob">
+                                    <div class="input-box">
+                                        <input type="date" name="dob" placeholder="Date of Birth....." required="required">
+                                    </div>
+                            </div>
+                            
 
-                    <div class="paragraph1">
-                        <p>Please enter Patient's name & Date of Birth</p>
                     </div>
 
-
-
-
-                    <form class="form-input">
-
-                    
-
-                                <div class="names">
-
-                                    <div class="input-box">
-                                            
-                                            <input type="text"  placeholder="First Name....." required="required" >
-                                            
-                                    </div>
-
-                                    <div class="input-box">
-                                            
-                                            <input type="text"  placeholder="Last Name....." required="required" >
-                                            
-                                    </div>
-
-
-                                
-                                </div>
-
-
-
-                                <div class="email-address">
-
-                                        <div class="input-box">
-                                                
-                                        <input type="date"  placeholder="Date of Birth....." required="required" >
-                                                
-                                        </div>
-
-                                </div>
-                                                    
-                    </form>
-
-                </div>
-
-
-
-
-
-                <div class="CurrentPatientsBox"  id="Current_Patient">
-
-
-
-
+                    <div class="CurrentPatientsBox"  id="Current_Patient">
+                       
                         <h2>Patients Info: </h2>
 
 
@@ -214,164 +241,129 @@
                             <p>Here is your information</p>
                         </div>
 
-
-
-
-                        <form class="form-input">
-
-
                             
-                                    <div class="patient-search">
+                        <div class="patient-search">
                                         
-                                        <input type="text" placeholder="Search name or ID No.">
-                            
-                                    </div>
+                                    <select name="patient" id="reason-box">
+                                        <option hidden>Select a Patient or Search...</option>
+                                        <?php
+                                            // Fetch list of doctors from the database
+                                            $sql = "SELECT Patient_id, Last_Name, First_Name, Date_of_Birth FROM `patients_table`";
+                                            $result = $conn->query($sql);
 
+                                            // Check if there are rows in the result
+                                            if ($result->num_rows > 0) {
+                                                // Output data of each row
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo '<option value="' . $row["Patient_id"] . '">' . $row["Last_Name"] ."," ." " . $row["First_Name"]  ." - " . $row["Date_of_Birth"] . '</option>';
+                                                }
+                                            } else {
+                                                echo '<option hidden>No doctors found</option>';
+                                            }
 
-
-
-                                    <div class="names">
-
-                                        <div class="input-box">
-                                                
-                                                <input type="text"  placeholder="First Name....." required="required" >
-                                                
-                                        </div>
-
-                                        <div class="input-box">
-                                                
-                                                <input type="text"  placeholder="Last Name....." required="required" >
-                                                
-                                        </div>
-
-
+                                        ?>
+                                    </select>
                                     
-                                    </div>
+                        </div>
 
+                                      
+                    </div>
 
+                    <h2>Diagnosis </h2>
 
-                                    <div class="email-address">
+                    <div class="paragraph1">
+                        <p>Choose a diagnosis that best describes</p>
+                    </div>
+                    <div class="input-box">
+                        <select name="diagnosis" id="reason-box">
+                            <option hidden>Choose...</option>
+                            <option value="saab">Eye</option>
+                            <option value="mercedes">General</option>
+                            <option value="audi">Hand</option>
+                        </select>
+                    </div>
 
-                                            <div class="input-box">
-                                                    
-                                            <input type="date"  placeholder="Date of Birth....." required="required" >
-                                                    
-                                            </div>
-
-                                    </div>
-                                                        
-                        </form>
-
-
-
-                </div>
-
-
-
-                        <h2>Diagnosis </h2>
-
+                    <div class="doctors-description">
+                        <h2>Doctor: </h2>
                         <div class="paragraph1">
-                            <p>Choose a diagnosis that best describes</p>
+                            <p>Please enter Doctor's name</p>
                         </div>
+                        <div class="doctor-search">
+                            <select name="doctor" id="reason-box">
+                                <option hidden>Select a Doctor...</option>
+                                <?php
+                                    // Fetch list of doctors from the database
+                                    $sql = "SELECT doctor_id, First_Name, Last_Name, Specialty FROM `doctors_table`";
+                                    $result = $conn->query($sql);
 
+                                    // Check if there are rows in the result
+                                    if ($result->num_rows > 0) {
+                                        // Output data of each row
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<option value="' . $row["doctor_id"] . '">' . $row["First_Name"] ." " . $row["Last_Name"]  ." - " . $row["Specialty"] . '</option>';
+                                        }
+                                    } else {
+                                        echo '<option hidden>No doctors found</option>';
+                                    }
 
-
-                        <form class="form-input">
-
-                                        <div class="input-box">
-                                                
-                                            <select name="reason" id="reason-box">
-                                                    <option hidden>Choose...</option>
-                                                    <option value="saab">Eye</option>
-                                                    <option value="mercedes">General</option>
-                                                    <option value="audi">Hand</option>
-                                            </select>
-                                                
-                                        </div>
-                                    
-                        </form>
-
-
-                        <div class="doctors-description">
-
-                                    <h2>Doctor: </h2>
-
-
-                                    <div class="paragraph1">
-                                        <p>Please enter Doctor's name</p>
-                                    </div>
-
-
-
-                                    <form class="form-input">
-
-
-                                        
-                                                <div class="patient-search">
-                                                    
-                                                    <input type="text" placeholder="Search name or ID No.">
-                                        
-                                                </div>
-
-
-
-
-                                                <div class="names">
-
-                                                    <div class="input-box">
-                                                            
-                                                            <input type="text"  placeholder="First Name....." required="required" >
-                                                            
-                                                    </div>
-
-                                                    <div class="input-box">
-                                                            
-                                                            <input type="text"  placeholder="Last Name....." required="required" >
-                                                            
-                                                    </div>
-
-
-                                                
-                                                </div>
-
-                                                                    
-                                    </form>
-
-
-
-
+                               
+                                ?>
+                            </select>
                         </div>
-
-
-                        <h2>Phone No. </h2>
-
-                            <div class="paragraph1">
-                                <p>Input your phone number below</p>
-                            </div>
+                    </div>
 
 
 
-                            <form class="form-input">
-
-                                            <div class="input-box">
-
-                                            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="+639.....">
-                                                    
-                                                
-                                                    
-                                            </div>
-                                        
-                            </form>
-
-
-                        <div class="bottom-buttons">
-
-                            <button class="Req-Btn">Request Appointment</button>
-                            <button onclick="myFunction()" class="Cancel-Btn" id="close-btn">Cancel</button>
-
-
+                    <div class="doctors-description">
+                        <h2>Clinic: </h2>
+                        <div class="paragraph1">
+                            <p>Please select a Clinic near you</p>
                         </div>
+                        <div class="doctor-search">
+                            <select name="clinic" id="reason-box">
+                                <option hidden>Select a clinic...</option>
+                                <?php
+                                    // Fetch list of doctors from the database
+                                    $sql = "SELECT Clinic_id, Clinic_Name, Address FROM `clinic_info`";
+                                    $result = $conn->query($sql);
 
+                                    // Check if there are rows in the result
+                                    if ($result->num_rows > 0) {
+                                        // Output data of each row
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<option value="' . $row["Clinic_id"] . '">' . $row["Clinic_Name"] . " - " . $row["Address"] . '</option>';
+                                        }
+                                    } else {
+                                        echo '<option hidden>No doctors found</option>';
+                                    }
+
+                                    // Close connection
+                                    $conn->close();
+                                ?>
+
+
+                  
+                            </select>
+                        </div>
+                    </div>
+
+                    <h2>Phone No. </h2>
+                    <div class="paragraph1">
+                        <p>Input your phone number below</p>
+                    </div>
+                    <div class="input-box">
+                        <input type="tel" id="phone" name="phone" pattern="[+]?[0-9]+[-]?[0-9]+[-]?[0-9]+" placeholder="+639.....">
+
+                    </div>
+
+                    <div class="bottom-buttons">
+                        <button type="submit" class="Req-Btn" name="submit">Request Appointment</button>
+                        <button onclick="myFunction()" class="Cancel-Btn" id="close-btn">Cancel</button>
+                    </div>
+
+        </div>
+
+                    </form>
 
 
 
@@ -415,33 +407,35 @@ if (dropdownContent.style.display === "block") {
 
 
 <script>
-
     // Get the radio buttons and the boxes
-const newPatientRadio = document.getElementById("New-Patient");
-const currentPatientRadio = document.getElementById("Current-Patient");
-const newBox = document.getElementById("New_Patient");
-const currentBox = document.getElementById("Current_Patient");
+    const newPatientRadio = document.getElementById("New-Patient");
+    const currentPatientRadio = document.getElementById("Current-Patient");
+    const newBox = document.getElementById("New_Patient");
+    const currentBox = document.getElementById("Current_Patient");
 
-// Add event listeners to the radio buttons
-newPatientRadio.addEventListener("change", function () {
-  if (newPatientRadio.checked) {
-    newBox.style.display = "block";
-    currentBox.style.display = "none";
-  }
-});
+    // Add event listeners to the radio buttons
+    newPatientRadio.addEventListener("change", function () {
+        if (newPatientRadio.checked) {
+            newBox.style.display = "block";
+            currentBox.style.display = "none";
+        }
+    });
 
-currentPatientRadio.addEventListener("change", function () {
-  if (currentPatientRadio.checked) {
-    currentBox.style.display = "block";
-    newBox.style.display = "none";
-  }
-});
+    currentPatientRadio.addEventListener("change", function () {
+        if (currentPatientRadio.checked) {
+            currentBox.style.display = "block";
+            newBox.style.display = "none";
+        }
+    });
 
-    
-    
-    
-    
-    
+    // Validate patient dropdown when submitting the form
+    document.querySelector("form").addEventListener("submit", function (event) {
+        const patientDropdown = document.getElementById("reason-box");
+        if (currentPatientRadio.checked && patientDropdown.value === "") {
+            alert("Please select a patient.");
+            event.preventDefault(); // Prevent form submission
+        }
+    });
 </script>
 
 

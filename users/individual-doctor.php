@@ -5,7 +5,7 @@ if (isset($_GET['doctor_id'])) {
     $doctor_id = $_GET['doctor_id'];
 
     // Query the database to fetch the doctor's information
-    $sql = "SELECT First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors-table` WHERE doctor_id = $doctor_id";
+    $sql = "SELECT First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors_table` WHERE doctor_id = $doctor_id";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
