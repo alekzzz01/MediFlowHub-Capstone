@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.getElementById("menu-toggle");
+    
     const sidebar = document.querySelector(".sidebar");
 
     menuToggle.addEventListener("click", function () {
         sidebar.classList.toggle("minimized");
+    
     });
 
 
@@ -11,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
        const closeSidebarButton = document.getElementById("close-sidebar");
        closeSidebarButton.addEventListener("click", function () {
            sidebar.classList.remove("minimized");
+        
+        
        });
    });
 

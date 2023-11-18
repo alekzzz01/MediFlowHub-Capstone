@@ -157,10 +157,12 @@ font-weight: var(--fw-medium);
 
 
 .bxs-chevron-down {
-
+opacity: 1;
 position: absolute;
 right: 0;
 margin-right: 20px;
+
+transition: all 0.5s ease-in-out;
 }
 
 
@@ -571,280 +573,34 @@ outline: none;
 
 
 
-
-.main--content {
- 
-
-    padding: 40px;
-   
-}
-
-
-.doctors-description {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-}
-
-
-.formcontainer h2 {
-    margin: 0;
-
-    color: var(--clr-text);
-}
-
-.formcontainer .paragraph1 {
-    margin: 0;
- 
-}
-
-
-
-.doctors-description h2 {
-    margin: 0;
-  
-    color: var(--clr-text);
-}
-
-
-
-.paragraph  {
-    font-size: 24px;
-    font-weight: var(--fw-regular);
-}
-
-
-.DateInfo  {
-   
-    font-weight: var(--fw-regular);
-}
-
-.DoctorInfo {
-   
-    font-weight: var(--fw-regular);
-}
-
-
-
-
-.paragraph1 {
-    margin: 0;
-    color: rgba(51, 51, 51, 0.80);
-    font-weight: var(--fw-regular);
-}
-
-
-
-.doctor-search select, input {
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 0.5px solid #CCC;
-    width: 100%;
-
-    background: #FFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: var(--fw-regular);
-    letter-spacing: 0.5px;
-
-
-
-}
-
-
-.patient-search select {
-    margin-top: 12px;
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 0.5px solid #CCC;
-    width: 100%;
-
-    background: #FFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: var(--fw-light);
-    letter-spacing: 0.5px;
-
-    margin-bottom: 12px;
-
-}
-
-
-
-
-.dialog_select select {
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 0.5px solid #CCC;
-    width: 100%;
-
-    background: #FFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: var(--fw-regular);
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-
+form {
+    width: 800px;
 }
 
 
 .inputboxes {
     display: flex;
-    gap: 24px;
-    margin-bottom: 12px;
-
-}
-
-.timeslots {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-  
-    
-}
-
-
-.timeslot-container {
-    display: flex;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 12px 12px;
-}
-
-
-
-.timeslot-button{
-    outline: none;
-    border: none;
-    background-color: transparent;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: var(--fw-regular);
-    letter-spacing: 0.5px;
-    
-
-}
-
-
-.booknow-button {
-    outline: none;
-    border: none;
-    background-color: green;
-    border-radius: 4px;
-    padding: 0px 8px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    color: var(--clr-light);
-    font-weight: var(--fw-regular);
-    letter-spacing: 0.5px;
-
-    cursor: pointer;
-
-}
-
-
-
-
-
-
-
-
-
-.formcontainer {
-    
-
-    display: none;
-    background-color: var(--clr-light);
-    width: 800px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 8px 16px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    
-}
-
-
-
-
-
-.bottom-buttons {
-    padding: 24px 0px;
-    display: flex;
-    align-items:center;
+    flex-direction: column;
     gap: 24px;
 }
 
 
 
-.Req-Btn {
-    
-    cursor: pointer;
 
+.inputboxes select, input {
     padding: 8px 16px;
-    border: none;
-    outline: none;
     border-radius: 4px;
-    border: 1px solid var(--clr-button-color);
-    background:var(--clr-button-color);
+    border: 0.5px solid #CCC;
+    width: 100%;
 
-    color: white;
+    background: #FFF;
     font-family: 'Poppins', sans-serif;
+    font-size: 16px;
     font-weight: var(--fw-regular);
-    font-size: 1rem;
-}
-
-.Cancel-Btn {
-
-    cursor: pointer;
-
-    padding: 8px 16px;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background:transparent;
-
-    color: var(--clr-text-lessopacity);
-    font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-regular);
-    font-size: 1rem;
-
-
-}
-
-
-.br {
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 16px;
-}
+    letter-spacing: 0.5px;
 
 
 
-
-
-.success-message {
-    display: none;
-    position: absolute;
-    bottom: 20px;
-    color: #270;
-    background-color: #DFF2BF;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-
-.error-message {
-    display: none;
-    position: absolute;
-    bottom: 20px;
-    color: #D8000C;
-    background-color: #FFBABA;
-    padding: 10px;
-    border-radius: 5px;
 }
 
 

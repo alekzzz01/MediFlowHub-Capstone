@@ -2,6 +2,9 @@
 // Include your database connection file
 require 'db.php';
 
+
+
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the 'timeSlot' key exists in the $_POST array
@@ -48,12 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Appointment 2</title>
+    <title>Book Appointment</title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="style/booking.css">
+    <link rel="stylesheet" type="text/css" href="style/legitnabooking.css">
     <link rel="stylesheet" href="style/transitions.css">
     
 
@@ -64,14 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
 
-        <!-- Add this script in your HTML file -->
+      
     <script defer>
         document.getElementById("appointmentForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent the default form submission
+            event.preventDefault();
 
             // You can add any additional validation here if needed
 
-            // Submit the form using JavaScript
+        
             this.submit();
         });
     </script>
@@ -183,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <p>Select a Doctor and a preferred Date</p>
                         </div>
 
-            <div class="inputboxes">
+        <div class="inputboxes">
 
             <div class="doctor-search">
                         <select name="doctor" id="reason-box" onchange="updateDoctorInfo(this)">
@@ -218,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              
     
 
-            </div>
+        </div>
 
 
 
@@ -406,6 +409,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!-- Add this script in your HTML file -->
 <script>
+    
+
+
+
 
 
     function updateSelectedDate() {
@@ -479,14 +486,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
     var errorMessage = "<?php echo isset($errorMessage) ? $errorMessage : ''; ?>";
-    if (errorMessage !== "") {
-        var errorMessageDiv = document.getElementById("errorMessage");
-        errorMessageDiv.textContent = errorMessage;
-        errorMessageDiv.style.display = "block";
+        if (errorMessage !== "") {
+            var errorMessageDiv = document.getElementById("errorMessage");
+            errorMessageDiv.textContent = errorMessage;
+            errorMessageDiv.style.display = "block";
 
-        // Scroll to the error message for better visibility
-        errorMessageDiv.scrollIntoView({ behavior: 'smooth' });
-    }
+            // Scroll to the error message for better visibility
+            errorMessageDiv.scrollIntoView({ behavior: 'smooth' });
+        }
 
 
 

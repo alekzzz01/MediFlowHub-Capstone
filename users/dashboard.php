@@ -63,7 +63,7 @@ $firstName = $_SESSION["first_name"];
                     <button class="dropdown-btn">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
-                        <i class='bx bxs-chevron-down'></i>
+                        <i id="chevron-down" class='bx bxs-chevron-down'></i>
                     </button>
 
                     <div class="dropdown-container">
