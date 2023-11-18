@@ -63,12 +63,12 @@ $firstName = $_SESSION["first_name"];
                     <button class="dropdown-btn">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
-                        <i class='bx bxs-chevron-down'></i>
+                        <i id="chevron-down" class='bx bxs-chevron-down'></i>
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="appointments.php">View Appointments</a>
-                            <a href="#">Book Appointments</a>
+                            <a href="appointments.php">View Appointment</a>
+                            <a href="booking.php">Book Appointment</a>
 
                     </div>
 

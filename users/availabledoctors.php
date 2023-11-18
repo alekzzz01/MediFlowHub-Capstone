@@ -2,7 +2,7 @@
 include('db.php'); // Include the database connection file
 
 // Query the database to get doctor information from the 'doctors-table'
-$sql = "SELECT doctor_id, First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors-table`"; // Enclose the table name in backticks
+$sql = "SELECT doctor_id, First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors_table`"; // Enclose the table name in backticks
 $result = $conn->query($sql);
 
 
