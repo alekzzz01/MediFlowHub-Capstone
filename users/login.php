@@ -29,6 +29,7 @@ if (isset($_POST["submit"])) {
         if (password_verify($password, $hashedPassword)) {
             // Password is correct, log the user in
             session_start();
+            $_SESSION["user_id"] = $row["user_id"]; // Assuming 'user_id' is the column name in your database
             $_SESSION["username"] = $row["Email"];
             $_SESSION["first_name"] = $row["First Name"]; 
             header("Location: otp.php"); // Redirect to the user's dashboard or a protected page
@@ -41,9 +42,8 @@ if (isset($_POST["submit"])) {
     }
     
 }
-
-
 ?>
+
 
 
 

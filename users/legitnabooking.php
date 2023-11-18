@@ -418,6 +418,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     function updateSelectedDate() {
         // Get the selected date from the input element
         var selectedDate = document.getElementById("selecteddate").value;
+        
 
         // Display the selected date in the Doctor Info section
         document.querySelector("#formcontainer .DateInfo p").textContent = "Date: " + selectedDate;

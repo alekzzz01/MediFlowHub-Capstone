@@ -2,9 +2,91 @@
 // Include your database connection file
 require 'db.php';
 
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+// Assuming you have a session variable storing the user ID
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login or handle unauthorized access
+    header("Location: login.php");
+    exit();
+}
+
+// Fetch clinics
+$clinicQuery = "SELECT clinic_id, clinic_name, address FROM clinic_info";
+$clinicResult = $conn->query($clinicQuery);
+
+// Fetch specialties
+$specialtyQuery = "SELECT DISTINCT specialty FROM doctors_table";
+$specialtyResult = $conn->query($specialtyQuery);
+
+// Fetch doctors
+$doctorQuery = "SELECT doctor_id, CONCAT(First_Name, ' ', Last_Name) AS doctor_name, clinic_id, specialty FROM doctors_table";
+$doctorResult = $conn->query($doctorQuery);
+
+// Fetch patients
+$patientQuery = "SELECT Patient_id, CONCAT(First_Name, ' ', Last_Name) AS patient_name, Date_of_Birth FROM patients_table";
+$patientResult = $conn->query($patientQuery);
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Check if the 'timeSlot' key exists in the $_POST array
+    if (isset($_POST['timeSlot'])) {
+        // Retrieve form data
+        $date = $_POST['selecteddate'];
+        $timeSlot = $_POST['timeSlot'];
+        $diagnosis = $_POST['diagnosis'];
+        $patientPhoneNum = $_POST['phone'];
+        $doctorId = $_POST['doctor'];
+        
+        // Check if the 'patient' key exists in the $_POST array
+        $patientId = isset($_POST['patient']) ? $_POST['patient'] : null;
+
+        $clinicId = $_POST['clinic'];
+
+        // Get the user ID from the session
+        $userId = $_SESSION['user_id'];
+
+        // Check if any required field is empty
+        if (empty($date) || empty($timeSlot) || empty($diagnosis) || empty($patientPhoneNum) || empty($doctorId) || empty($patientId) || empty($clinicId) || empty($userId)) {
+            // Set an error message for empty fields
+            $errorMessage = "Please fill in all required fields.";
+        } else {
+            // Prepare and execute the SQL query to insert data into the appointment table
+            $sql = "INSERT INTO appointments (Date, time_slot, Diagnosis, Patient_Phone_Num, doctor_id, Patient_id, user_id)
+                    VALUES ('$date', '$timeSlot', '$diagnosis', '$patientPhoneNum', '$doctorId', '$patientId', '$userId')";
+
+            // Echo or log the SQL query for debugging
+            echo "SQL Query: $sql";
+
+            if ($conn->query($sql) === TRUE) {
+                // Set the success message
+                $successMessage = "Appointment booked successfully!";
+                // Redirect to the same page to avoid form resubmission
+                header("Location: bookappointment.php?success=true");
+                exit();
+            } else {
+                // Set an error message if there's an issue
+                $errorMessage = "Error: " . $sql . "<br>" . $conn->error;
+            }
+        }
+    } else {
+        echo "Error: 'timeSlot' is not set in the form submission.";
+    }
+}
+
+// Close the database connection
+$conn->close();
 
 ?>
+
+
+
+
+
 
 
 
@@ -30,6 +112,65 @@ require 'db.php';
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+$(document).ready(function () {
+    var clinics = <?php echo json_encode($clinicResult->fetch_all(MYSQLI_ASSOC)); ?>;
+    var specialties = <?php echo json_encode($specialtyResult->fetch_all(MYSQLI_ASSOC)); ?>;
+    var doctors = <?php echo json_encode($doctorResult->fetch_all(MYSQLI_ASSOC)); ?>;
+    var patients = <?php echo json_encode($patientResult->fetch_all(MYSQLI_ASSOC)); ?>;
+
+    // Populate Clinic dropdown
+    var clinicDropdown = $('#clinic-box');
+    clinicDropdown.append('<option value="all">Select a Clinic</option>');
+    clinics.forEach(function (clinic) {
+        clinicDropdown.append('<option value="' + clinic.clinic_id + '">' + clinic.clinic_name + " - " + clinic.address + '</option>');
+    });
+
+    // Populate Specialty dropdown
+    var specialtyDropdown = $('#specialty-box');
+    specialtyDropdown.append('<option value="all">Select a Specialty</option>');
+    specialties.forEach(function (specialty) {
+        specialtyDropdown.append('<option value="' + specialty.specialty + '">' + specialty.specialty + '</option>');
+    });
+
+    // Update Doctor dropdown based on Clinic and Specialty selection
+    $('#clinic-box, #specialty-box').on('change', function () {
+        var selectedClinic = $('#clinic-box').val();
+        var selectedSpecialty = $('#specialty-box').val();
+
+        var filteredDoctors = doctors.filter(function (doctor) {
+            return (selectedClinic == 'all' || doctor.clinic_id == selectedClinic) &&
+                (selectedSpecialty == 'all' || doctor.specialty == selectedSpecialty);
+        });
+
+        var doctorDropdown = $('#doctor-box');
+        doctorDropdown.empty();
+
+        if (filteredDoctors.length > 0) {
+            // If there are available doctors, populate the dropdown
+            doctorDropdown.append('<option hidden>Select a Doctor</option>');
+            filteredDoctors.forEach(function (doctor) {
+                doctorDropdown.append('<option value="' + doctor.doctor_id + '">' + doctor.doctor_name + '</option>');
+            });
+        } else {
+            // If no doctors are available, display a message
+            doctorDropdown.append('<option hidden>No doctors available </option>');
+            doctorDropdown.append('<option value="" disabled>No doctors available</option>');
+        }
+    });
+
+    // Populate Patient dropdown
+    var patientDropdown = $('#patient-box');
+    patientDropdown.append('<option hidden>Select a Patient or Search...</option>');
+    patients.forEach(function (patient) {
+        patientDropdown.append('<option value="' + patient.Patient_id + '">' + patient.patient_name + " - (" + patient.Date_of_Birth + ")" + '</option>');
+    });
+});
+</script>
+
 
 
 
@@ -64,7 +205,7 @@ require 'db.php';
 
                     <div class="dropdown-container">
                             <a href="appointments.php">View Appointment</a>
-                            <a href="booking.php">Book Appointment</a>
+                            <a href="bookappointment.php">Book Appointment</a>
 
                     </div>
 
@@ -124,7 +265,7 @@ require 'db.php';
     <div class="main--content">
 
 
-        <div class="header--wrapper">
+        <div class="header--wrapper" id="lessopacity">
          
          <div class="menu-search">
          
@@ -244,58 +385,180 @@ require 'db.php';
         </div>
 
         
-        <h1>Book Appointment</h1>
+        <h1 id="h1" >Book Appointment</h1>
 
-        <p>Home / Dashboard </p>
 
 
     <form method="post" action="bookappointment.php" id="appointmentForm">
 
 
        
+        
 
-
-        <div class="inputboxes">
-
-            <div class="clinic-search">
-                            <select name="doctor" id="reason-box" >
-                                <option hidden>Select a Clinic</option>
-                               
-                            </select>
-                        </div>
-
+        <div class="inputboxes" id="inputboxes">
 
                         <div class="clinic-search">
-                            <select name="doctor" id="reason-box" >
-                                <option hidden>Specialty</option>
-                               
+                            <select name="clinic" id="clinic-box">
+                                <!-- Clinic options will be populated dynamically using JavaScript -->
+                            </select>
+
+                         
+                            
+                        </div>
+
+                        <div class="specialty-search">
+                            <select name="specialty" id="specialty-box">
+                                <!-- Specialty options will be populated dynamically using JavaScript -->
                             </select>
                         </div>
 
-
-                <div class="doctor-search">
-                            <select name="doctor" id="reason-box" >
+                        <div class="doctor-search">
+                            <select name="doctor" id="doctor-box">
                                 <option hidden>Select a Doctor</option>
-                               
+                                <!-- Doctor options will be populated dynamically using JavaScript -->
                             </select>
                         </div>
-
-
-
-                     
-
 
 
                         <div class="selecteddate">
-                                    <div class="input-box">
+                                    <div class="inputbox">
                                         <input type="date" name="selecteddate" id="selecteddate" placeholder="Select a date" required="required" onchange="updateSelectedDate()">
                                     </div>
-                                </div>
+                        </div>
 
                 
 
 
-                </div>
+        </div>
+
+
+        <div id="br" class="br"></div>
+
+
+
+
+        <div  id="timeslots"  class="timeslots">
+                    <?php
+                    // Set the start and end times
+                    $start_time = strtotime('09:00 AM');
+                    $end_time = strtotime('09:00 PM');
+
+                    // Set the fixed duration for each timeslot (in seconds)
+                    $duration = 5400; // 1.5 hours (5400 seconds)
+
+                    // Set the interval to 2 hours (7200 seconds)
+                    $interval = 7200;
+
+                    // Initialize the current time variable with the start time
+                    $current_time = $start_time;
+
+                    while ($current_time + $duration <= $end_time) {
+                        // Format the start and end times of the current timeslot as readable strings
+                        $start_time_formatted = date('h:i A', $current_time);
+                        $end_time_formatted = date('h:i A', $current_time + $duration);
+
+                        // Output the timeslot button
+                        echo '<div class="timeslot-container">';
+                        echo '<button type="button" class="timeslot-button">' . $start_time_formatted . ' - ' . $end_time_formatted . '</button>';
+                        echo '<button type="button" id="booknow" class="booknow-button" onclick="showFormContainer(\'' . $start_time_formatted . ' - ' . $end_time_formatted . '\')">Book Now</button>';
+
+        echo '</div>';
+                    
+              
+                
+                        // Increment the current time by the interval
+                        $current_time += $interval;
+                    }
+        ?>
+
+
+        </div>
+
+
+
+
+
+        <div id="formcontainer" class="formcontainer">
+
+
+
+                                <div class="paragraph">
+                                    <p>Booking for Slot: </p>
+                                </div>
+
+                                <div class="DateInfo">
+                                    <p>Date: </p>
+                                </div>
+
+                                <div class="ClinicInfo">
+                                    <p>Clinic: </p>
+                                </div>
+
+
+
+
+                                <div class="DoctorInfo">
+                                    <p>Doctor Info: </p>
+                                </div>
+
+
+                                <div class="br2"></div>
+
+
+
+
+                                <div class="paragraph1">
+                                    <p>Please confirm that you would like to request the following appointment.</p>
+                                </div>
+
+
+                                <div class="CurrentPatientsBox" id="Current_Patient">
+                                        <h2>Select a patient: </h2>
+                                        <div class="patient-search">
+                                            <select name="patient" id="patient-box">
+                                                <!-- Patient options will be populated dynamically using JavaScript -->
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                <h2>Diagnosis </h2>
+
+                                <div class="paragraph1">
+                                    <p>Choose a diagnosis that best describes</p>
+                                </div>
+
+                                <div class="dialog_select">
+                                    <select name="diagnosis" id="reason-box">
+                                        <option hidden>Choose...</option>
+                                        <option value="Mental Health">Mental Health</option>
+                                        <option value="Eye">Eye</option>
+                                        <option value="General">General</option>
+                                        <option value="Hand">Hand</option>
+                                    </select>
+                                </div>
+
+
+
+                                <h2>Phone No. </h2>
+                                <div class="paragraph1">
+                                    <p>Input your phone number below</p>
+                                </div>
+
+                                <div class="input-box">
+                                    <input type="tel" id="phone" name="phone" pattern="[+]?[0-9]+[-]?[0-9]+[-]?[0-9]+" placeholder="+639.....">
+
+                                </div>
+
+                                <div class="bottom-buttons">
+                                    <button type="submit" class="Req-Btn" name="submit">Request Appointment</button>
+                                    <button onclick="myFunction()" class="Cancel-Btn" id="close-btn">Close</button>
+                                </div>
+
+        </div>
+
+
+
 
 
     </form>
@@ -303,9 +566,12 @@ require 'db.php';
 
 
 
+<div id="successMessage" class="success-message"><i class='bx bx-check'></i> Appointment booked successfully!</div>
+<div id="errorMessage" class="error-message"><i class='bx bxs-x-circle'></i> </div>
 
 
-    </div>
+
+</div>
 
 
 
@@ -337,10 +603,106 @@ require 'db.php';
                     });
                     }
 
+</script>
+
+
+<script>
+    function showFormContainer(timeSlot) {
+        // Set the selected time slot in the form
+        document.querySelector('.formcontainer .paragraph p').innerHTML = 'Booking for Slot: ' + timeSlot;
+
+         // Add a hidden input field to store the selected time slot
+         var hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "timeSlot";
+        hiddenInput.value = timeSlot;
+        document.getElementById("appointmentForm").appendChild(hiddenInput);
+
+        // Get the selected date, clinic, and doctor
+        var selectedDate = document.getElementById('selecteddate').value;
+        var selectedClinic = document.getElementById('clinic-box').options[document.getElementById('clinic-box').selectedIndex].text;
+        var selectedDoctor = document.getElementById('doctor-box').options[document.getElementById('doctor-box').selectedIndex].text;
+        var selectedSpecialty = document.getElementById('specialty-box').options[document.getElementById('specialty-box').selectedIndex].text;
+        // Display the selected date, clinic, and doctor in the form container
+        document.querySelector('.formcontainer .DateInfo p').innerHTML = 'Date: ' + selectedDate;
+        document.querySelector('.formcontainer .ClinicInfo p').innerHTML = 'Clinic: ' + selectedClinic;
+        document.querySelector('.formcontainer .DoctorInfo p').innerHTML = 'Doctor Info: ' + selectedDoctor + " - " + selectedSpecialty;
+
+        // Show the form container with smooth transition
+        var formContainer = document.getElementById('formcontainer');
+        formContainer.style.display = 'block';
+        setTimeout(() => {
+            formContainer.style.opacity = '1';
+        }, 10);
+
+        // Reduce opacity for other elements
+        setElementOpacity('lessopacity', '0.3');
+        setElementOpacity('inputboxes', '0.3');
+        setElementOpacity('h1', '0.3');
+        setElementOpacity('timeslots', '0.3');
+    }
+
+   function myFunction() {
+    // Reset the form fields to their default or empty state
+    document.getElementById('clinic-box').value = 'all';
+    document.getElementById('specialty-box').value = 'all';
+    document.getElementById('doctor-box').innerHTML = '<option hidden>Select a Doctor</option>';
+    document.getElementById('selecteddate').value = '';
+    document.getElementById('patient-box').value = '';
+    document.getElementById('reason-box').value = 'Choose...';
+    document.getElementById('phone').value = '';
+
+    // Close the form container with smooth transition
+    var formContainer = document.getElementById('formcontainer');
+    formContainer.style.opacity = '0';
+    setTimeout(() => {
+        formContainer.style.display = 'none';
+    }, 500);
+
+    // Restore opacity for other elements
+    setElementOpacity('lessopacity', '1');
+    setElementOpacity('inputboxes', '1');
+    setElementOpacity('h1', '1');
+    setElementOpacity('timeslots', '1');
+}
+
+
+    function setElementOpacity(elementId, opacityValue) {
+        var element = document.getElementById(elementId);
+        element.style.opacity = opacityValue;
+    }
 
 
 
-                    
+      // Check if the success parameter is present in the URL
+      var successParam = "<?php echo isset($_GET['success']) ? $_GET['success'] : ''; ?>";
+
+if (successParam === "true") {
+    var successMessageDiv = document.getElementById("successMessage");
+    successMessageDiv.textContent = "Appointment booked successfully!";
+    successMessageDiv.style.display = "block";
+
+    // Scroll to the success message for better visibility
+    successMessageDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+var errorMessage = "<?php echo isset($errorMessage) ? $errorMessage : ''; ?>";
+if (errorMessage !== "") {
+    var errorMessageDiv = document.getElementById("errorMessage");
+    errorMessageDiv.textContent = errorMessage;
+    errorMessageDiv.style.display = "block";
+
+    // Scroll to the error message for better visibility
+    errorMessageDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+
+
+
+
+
+
+
 
 
 </script>
@@ -348,7 +710,20 @@ require 'db.php';
 
 
 
+
+
+
+
+
+
+
+
 <script src="script/script.js"></script>
+
+
+
+
+
 
 
 
