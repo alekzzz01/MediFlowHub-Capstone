@@ -1,3 +1,57 @@
+<?php 
+
+
+require 'db.php';
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Assuming you have a session variable storing the user ID
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login or handle unauthorized access
+    header("Location: login.php");
+    exit();
+}
+
+
+
+// Get the current user ID from the session
+$currentUserId = $_SESSION['user_id'];
+
+$query = "SELECT a.Appointment_ID, p.Last_Name AS Last_Name, p.First_Name AS First_Name, 
+                 d.Last_Name AS Last_Name, d.First_Name AS First_Name, 
+                 d.Clinic_ID AS Clinic_ID, a.time_slot, a.Date,
+                 c.Clinic_Name, c.Address
+          FROM appointments a
+          JOIN patients_table p ON a.Patient_id = p.Patient_id
+          JOIN doctors_table d ON a.doctor_id = d.doctor_id
+          JOIN clinic_info c ON d.Clinic_ID = c.Clinic_ID
+          WHERE a.user_id = $currentUserId";
+
+$result = $conn->query($query);
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -246,41 +300,75 @@
 
         <div class="inside-container">
             <div class="rectangle">
-                <table>
-                    <tr>
-                      <th>Appointment No.</th>
-                      <th>Patient Name</th>
-                      <th>Doctor Name</th>
-                      <th>Health Center  </th>
-                      <th>Appointment Time </th>
-                      <th>Appointment Date </th>
-                      <th>Status </th>
-                      <th>View</th> </th>
-                    
-                    </tr>
-    
-                   
-                    <tr>
-                    <td>1</td>
-                      <td>Fajartin, Alexander</td>
-                      <td>Dr. Names</td>
-                      <td>Brgy. East Rembo Clinic</td>
-                      <td>09:00am - 10:00am</td>
-                      <td>October 11, 2023</td>
-                      <td>In Progress</td>
-                      <td><a href="viewappoitnemtn">View Appointment</a></td>
-                    </tr>
+            <table>
+            <tr>
+                <th>Appointment No.</th>
+                <th>Patient Name</th>
+                <th>Doctor Name</th>
+                <th>Clinic</th>
+                <th>Appointment Time</th>
+                <th>Appointment Date</th>
+                <th>Status</th>
+             <!-- <th>View</th> -->
+            </tr>
 
-                     
-                  </table>
+                    <?php
+                    // Display appointments in the HTML table
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>{$row['Appointment_ID']}</td>";
+
+                        echo "<td>{$row['Last_Name']}, {$row['First_Name']}</td>";
+                        echo "<td>{$row['Last_Name']}, {$row['First_Name']}</td>";
+
+                        // Display Clinic_Name based on Clinic_ID
+                        $clinicId = $row['Clinic_ID'];
+                        $clinicName = getClinicName($clinicId, $conn);
+                        echo "<td>{$clinicName}</td>";// Replace this with a function to fetch Clinic_Name based on Clinic_ID
+
+                       
+                        echo "<td>{$row['time_slot']}</td>";
+                        echo "<td>{$row['Date']}</td>";
+                       // echo "<td>{$row['Status']}</td>";
+                      
+                     //   echo "<td><a href='viewappointment.php?appointment_id={$row['Appointment_ID']}'>View Appointment</a></td>";
+                        echo "</tr>";
+                    }
+
+
+
+                    function getClinicName($clinicId, $conn) {
+                        // Sanitize Clinic_ID to prevent SQL injection
+                        $clinicId = mysqli_real_escape_string($conn, $clinicId);
+                    
+                        // Query to fetch Clinic_Name based on Clinic_ID
+                        $query = "SELECT Clinic_Name FROM clinic_info WHERE Clinic_ID = $clinicId";
+                        $result = $conn->query($query);
+                    
+                        // Check if the query was successful
+                        if ($result === false) {
+                            die("Error executing the query: " . $conn->error);
+                        }
+                    
+                        // Check if a row was returned
+                        if ($result->num_rows > 0) {
+                            $row = $result->fetch_assoc();
+                            return $row['Clinic_Name'];
+                        } else {
+                            // Return an empty string or a default value if Clinic_ID is not found
+                            return "Clinic Not Found";
+                        }
+                    }
+
+
+                  
+                    ?>
+
+                </table>
             </div>
 
 
-           <!-- <button class="request">Request Appointment</button> -->
-           
-         
-            
-
+      
 
         </div>
        

@@ -1,8 +1,16 @@
 <?php
+include('db.php'); // Include the database connection file
+
+
+$sql = "SELECT Clinic_ID, Clinic_Name, Address FROM `clinic_info`";
+$result = $conn->query($sql);
 
 
 
+// Close the database connection (if needed)
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -241,107 +249,53 @@
         <div class="first-container">
             <h1>Health Centers near you</h1>
 
+     
+
             <div class="hospital-container">
+
+            <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                ?>
+
+          
 
                 <div class="hospital-info">
 
-                        <h2>St. Lukes</h2>
-                        <p class="title-hospital">Hospital</p>
+                        <h2><?php echo $row['Clinic_Name']; ?></h2>
+                        <p class="title-hospital">Health Center</p>
 
                         <img src="images/hospital.png" alt="">
 
                         <p>Address</p>
 
-                        <p class="address">St. Luke's Medical Center - BGC, 5th Ave, Taguig,
-                            1634 Metro Manila
+                        <p class="address"><?php echo $row['Address']; ?>
                         </p>
 
                         <p>Office Hours</p>
 
                         <p class="hours">8:00 am to 10:30 pm</p>
 
-                        <button class="directions-btn">Directions</button>
+                       <!--  <button class="directions-btn">Directions</button> -->
 
 
 
                 </div>
 
-                <div class="hospital-info">
-
-                    <h2>St. Lukes</h2>
-                    <p class="title-hospital">Hospital</p>
-
-                    <img src="images/hospital.png" alt="">
-
-                    <p>Address</p>
-
-                    <p class="address">St. Luke's Medical Center - BGC, 5th Ave, Taguig,
-                        1634 Metro Manila
-                    </p>
-
-                    <p>Office Hours</p>
-
-                    <p class="hours">8:00 am to 10:30 pm</p>
-
-                    <button class="directions-btn">Directions</button>
+                <?php
+                        }
+                    } else {
+                        echo "No data found in the 'doctors-table'.";
+                    }
+                ?>
 
 
-
-                </div>
-
-                <div class="hospital-info">
-
-                    <h2>St. Lukes</h2>
-                    <p class="title-hospital">Hospital</p>
-
-                    <img src="images/hospital.png" alt="">
-
-                    <p>Address</p>
-
-                    <p class="address">St. Luke's Medical Center - BGC, 5th Ave, Taguig,
-                        1634 Metro Manila
-                    </p>
-
-                    <p>Office Hours</p>
-
-                    <p class="hours">8:00 am to 10:30 pm</p>
-
-                    <button class="directions-btn">Directions</button>
-
-
-
-                </div>
-
-
-                <div class="hospital-info">
-
-                    <h2>St. Lukes</h2>
-                    <p class="title-hospital">Hospital</p>
-
-                    <img src="images/hospital.png" alt="">
-
-                    <p>Address</p>
-
-                    <p class="address">St. Luke's Medical Center - BGC, 5th Ave, Taguig,
-                        1634 Metro Manila
-                    </p>
-
-                    <p>Office Hours</p>
-
-                    <p class="hours">8:00 am to 10:30 pm</p>
-
-                    <button class="directions-btn">Directions</button>
-
-
-
-                </div>
-
-
-
-
+             
 
             </div>
 
+            
+        
 
 
 

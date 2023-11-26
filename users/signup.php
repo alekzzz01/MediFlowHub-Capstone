@@ -1,3 +1,18 @@
+<?php 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
+require '../vendor/autoload.php';
+
+
+
+
+
+?>
+
 <?php
 include 'db.php'; // Include your database connection file
 
@@ -59,6 +74,46 @@ if (isset($_POST["submit"])) {
                 $query = "INSERT INTO users (`Last Name`, `First Name`, Email, password, `Phone Number`) VALUES ('$last_name', '$first_name', '$username', '$hashedPassword', '$phonenumber')";
                 mysqli_query($conn, $query);
                 echo "<script>alert('Registration Successful');</script>";
+
+
+                $otp = mt_rand(100000, 999999);
+
+                // Send the OTP via email
+                $mail = new PHPMailer(true);
+
+                try {
+                    //Server settings
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+                    $mail->Username = 'tatsuki.ryota01@gmail.com';
+                    $mail->Password = 'pazq ktqa mbfi ljzi';
+
+    
+                    $mail->setFrom('tatsuki.ryota01@gmail.com', 'OTP Verification');
+                    $mail->addAddress($username); 
+
+                    
+
+            
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'OTP for Registration';
+                    $mail->Body    = 'Your OTP is: ' . $otp;
+            
+                    $mail->send();
+                    echo "<script>alert('OTP sent to your email.');</script>";
+            
+                    $lastInsertedUserId = mysqli_insert_id($conn); // Get the ID of the last inserted user
+                    $query = "UPDATE users SET OTP = '$otp' WHERE user_id = $lastInsertedUserId";
+                    mysqli_query($conn, $query);
+                } catch (Exception $e) {
+                    echo "<script>alert('Error sending OTP. Please try again. Error: " . $e->getMessage() . "');</script>";
+                }
+
+
             } else {
                 echo "<script>alert('Password Does Not Match');</script>";
             }

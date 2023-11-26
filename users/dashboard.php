@@ -258,108 +258,51 @@ $firstName = $_SESSION["first_name"];
 
                     <div class="info-available">
 
-                        <p>Home / Dashboard </p>
+                        <p>Dashboard </p>
         
                         <div class="available-container">
         
-                            <div class="available-doctors">
-                                <p>Today's Available</p>
-                                <p>From <span>MEDIFLOW'S HOSPITAL</span></p>
-            
-                                <div class="doctorsprofile-icon">
-                                    <i class='bx bx-chevron-left' ></i>
-                                    <button class="profile">
-            
-                                    </button>
-                                    <i class='bx bx-chevron-right' ></i>
-                                </div>
-            
-                                <div class="info-doctor">
-                                    <p class="doctor-name">Dr. Quack Quack</p>
-                                    <p class="Specialty">General Practicioner</p>
-            
-                                </div>
-                        
-            
-                                <div class="schedule-container">
-            
-                                    <button class="schedule-btn">Schedule</button>
-                                    
-                                </div>
-                                
-                            </div>
-            
-                            <div class="available-doctors">
-                                <p>Today's Available</p>
-                                <p>From <span>MEDIFLOW'S HOSPITAL</span></p>
-            
-                                <div class="doctorsprofile-icon">
-                                    <i class='bx bx-chevron-left' ></i>
-                                    <button class="profile">
-            
-                                    </button>
-                                    <i class='bx bx-chevron-right' ></i>
-                                </div>
-            
-                                <div class="info-doctor">
-                                    <p class="doctor-name">Dr. Quack Quack</p>
-                                    <p class="Specialty">General Practicioner</p>
-            
-                                </div>
-                        
-            
-                                <div class="schedule-container">
-            
-                                    <button class="schedule-btn">Schedule</button>
-                                  
-                                </div>
-                                
-                            </div>
-
-                          
-
-                            <div class="daily-progress">
-                                <p>Daily Progress</p>
-                                <span>Keep track to your daily health</span>
-
-                            </div> 
+                         
+                            <img src="images/announcements/Rectangle 213.png" alt=""  >
+                            <img src="images/announcements/Rectangle 213-1.png" alt="" >
+                            <img class="third-image" src="images/announcements/Rectangle 214.png" alt=""  >
+                              
                             
-        
                         </div>
 
 
                         <div class="bottom-container">
-                            <p>Common Conditions</p>
+                            <p>Common Services</p>
 
                             <div class="conditions-slider">
                                 <div class="box">
                                     <img src="images/conditions-icon/condition-1.png" alt="">
-                                    <p>Diabetes</p>
+                                    <p>Baby Vaccines</p>
                                 </div>
 
                                 <div class="box">
                                     <img src="images/conditions-icon/condition-2.png" alt="">
-                                    <p>Hyperpyrexia</p>
+                                    <p>Animal Bite</p>
                                 </div>
 
                                 <div class="box">
                                     <img src="images/conditions-icon/condition-3.png" alt="">
-                                    <p>PCOS</p>
+                                    <p>Animal Vaccine</p>
                                 </div>
 
                                 <div class="box">
                                     <img src="images/conditions-icon/condition-4.png" alt="">
-                                    <p>UTI</p>
+                                    <p>Flu Vaccine</p>
                                 </div>
 
                                 <div class="box">
                                     <img src="images/conditions-icon/condition-5.png" alt="">
-                                    <p>Cough</p>
+                                    <p>Mental Health</p>
                                 </div>
 
                                 <div class="box">
                                     <img src="images/conditions-icon/condition-6.png" alt="">
-                                    <p>High Blood</p>
+                                    <p>Family Planning</p>
                                 </div>
                             </div>
                         </div>
@@ -367,212 +310,8 @@ $firstName = $_SESSION["first_name"];
         
         
                         </div>
-                
-                    <div class="vl"></div>
+             
 
-                    <div class="upcoming-container">
-                        <p>Upcoming Appointments</p>
-
-                        <div class="appointments-box">
-
-                            <div class="hospital-container">
-
-                                    <div class="hospital-name">
-                                        <p class="hos-name">St. Lukes</p>
-                                        <p class="hos-text">Hospital</p>
-                                    </div>
-
-                                    <div class="doctors-description">
-                                        <button class="doctors-image"></button>
-        
-                                        <div class="doctors-name">
-                                            <p class="doc-name">Dr. Names</p>
-                                            <p class="specialty">Heart Surgeon, <span>London</span></p>
-                                        </div>
-                                    </div>
-                                                    
-                            </div>
-
-                            <div class="description-container">
-
-
-                                <div class="hospital-image">
-                                    <img src="images/hospital.png" alt="">
-                                </div>
-                            
-                                    <div class="time-date-container">
-
-                                        <div class="time-date">
-                                            <div class="date">
-                                                <p class="title-date">Date</p>
-                                                <p class="text-date">16 Sept 2023</p>
-                                            </div>
-        
-                                            <div class="time">
-                                                <p class="title-time">Time</p>
-                                                <p class="text-time">09:00am</p>
-                                            </div>                                      
-                                        </div>
-        
-                                        <div class="sched-container">
-                                            <button class="schedule">Schedule</button>
-                                            <div class="call-video">
-                                                <i class='bx bxs-phone'></i>
-                                                <i class='bx bxs-video' ></i>
-                                            </div>
-                                            
-                                        </div>
-
-
-
-
-
-                                    </div>
-                                
-    
-                            </div>
-
-                        </div>
-
-                        <div class="divider"></div>
-
-                        <div class="appointments-box">
-
-                            <div class="hospital-container">
-
-                                    <div class="hospital-name">
-                                        <p class="hos-name">St. Lukes</p>
-                                        <p class="hos-text">Hospital</p>
-                                    </div>
-
-                                    <div class="doctors-description">
-                                        <button class="doctors-image"></button>
-        
-                                        <div class="doctors-name">
-                                            <p class="doc-name">Dr. Names</p>
-                                            <p class="specialty">Heart Surgeon, <span>London</span></p>
-                                        </div>
-                                    </div>
-                                                    
-                            </div>
-
-
-
-
-
-                            <div class="description-container">
-
-
-                                <div class="hospital-image">
-                                    <img src="images/hospital.png" alt="">
-                                </div>
-                            
-                                    <div class="time-date-container">
-
-                                        <div class="time-date">
-                                            <div class="date">
-                                                <p class="title-date">Date</p>
-                                                <p class="text-date">16 Sept 2023</p>
-                                            </div>
-        
-                                            <div class="time">
-                                                <p class="title-time">Time</p>
-                                                <p class="text-time">09:00am</p>
-                                            </div>                                      
-                                        </div>
-        
-                                        <div class="sched-container">
-                                            <button class="schedule">Schedule</button>
-                                            <div class="call-video">
-                                                <i class='bx bxs-phone'></i>
-                                                <i class='bx bxs-video' ></i>
-                                            </div>
-                                            
-                                        </div>
-
-
-
-
-
-                                    </div>
-                                
-    
-                            </div>
-
-                        </div>
-
-                        <div class="divider"></div>
-
-
-                        <div class="appointments-box">
-
-                            <div class="hospital-container">
-
-                                    <div class="hospital-name">
-                                        <p class="hos-name">St. Lukes</p>
-                                        <p class="hos-text">Hospital</p>
-                                    </div>
-
-                                    <div class="doctors-description">
-                                        <button class="doctors-image"></button>
-        
-                                        <div class="doctors-name">
-                                            <p class="doc-name">Dr. Names</p>
-                                            <p class="specialty">Heart Surgeon, <span>London</span></p>
-                                        </div>
-                                    </div>
-                                                    
-                            </div>
-
-
-
-
-
-                            <div class="description-container">
-
-
-                                <div class="hospital-image">
-                                    <img src="images/hospital.png" alt="">
-                                </div>
-                            
-                                    <div class="time-date-container">
-
-                                        <div class="time-date">
-                                            <div class="date">
-                                                <p class="title-date">Date</p>
-                                                <p class="text-date">16 Sept 2023</p>
-                                            </div>
-        
-                                            <div class="time">
-                                                <p class="title-time">Time</p>
-                                                <p class="text-time">09:00am</p>
-                                            </div>                                      
-                                        </div>
-        
-                                        <div class="sched-container">
-                                            <button class="schedule">Schedule</button>
-                                            <div class="call-video">
-                                                <i class='bx bxs-phone'></i>
-                                                <i class='bx bxs-video' ></i>
-                                            </div>
-                                            
-                                        </div>
-
-
-
-
-
-                                    </div>
-                                
-    
-                            </div>
-
-                        </div>
-
-                        <div class="divider"></div>
-
-
-                    </div>
         
 
             </div>

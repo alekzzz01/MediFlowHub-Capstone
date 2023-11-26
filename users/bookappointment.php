@@ -116,7 +116,7 @@ $conn->close();
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-$(document).ready(function () {
+    $(document).ready(function () {
     var clinics = <?php echo json_encode($clinicResult->fetch_all(MYSQLI_ASSOC)); ?>;
     var specialties = <?php echo json_encode($specialtyResult->fetch_all(MYSQLI_ASSOC)); ?>;
     var doctors = <?php echo json_encode($doctorResult->fetch_all(MYSQLI_ASSOC)); ?>;
@@ -271,13 +271,7 @@ $(document).ready(function () {
          
                      <i class='bx bx-menu' id="menu-toggle"></i>
 
-                     <div class="search-box">
-                     
-                     <input type="text" placeholder="Search...">
-                     <i class='bx bx-search'></i>
                  
-                     </div>
-
          </div>
         
          <div class="user--info">
@@ -397,21 +391,21 @@ $(document).ready(function () {
 
         <div class="inputboxes" id="inputboxes">
 
+                        <label for="clinic-search">Clinic: </label>
                         <div class="clinic-search">
                             <select name="clinic" id="clinic-box">
                                 <!-- Clinic options will be populated dynamically using JavaScript -->
                             </select>
-
-                         
-                            
                         </div>
 
+                        <label for="specialty-search">Specialty: </label>
                         <div class="specialty-search">
                             <select name="specialty" id="specialty-box">
                                 <!-- Specialty options will be populated dynamically using JavaScript -->
                             </select>
                         </div>
 
+                        <label for="doctor-search">Doctor: </label>
                         <div class="doctor-search">
                             <select name="doctor" id="doctor-box">
                                 <option hidden>Select a Doctor</option>
@@ -420,19 +414,19 @@ $(document).ready(function () {
                         </div>
 
 
+                        <label for="selecteddate">Choose a Date</label>
                         <div class="selecteddate">
                                     <div class="inputbox">
                                         <input type="date" name="selecteddate" id="selecteddate" placeholder="Select a date" required="required" onchange="updateSelectedDate()">
                                     </div>
                         </div>
 
-                
 
-
+                       
         </div>
 
 
-        <div id="br" class="br"></div>
+  
 
 
 
