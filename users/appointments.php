@@ -165,7 +165,7 @@ $result = $conn->query($query);
 
 
 
-    <div class="main--content">
+<div class="main--content">
 
         <div class="header--wrapper">
 

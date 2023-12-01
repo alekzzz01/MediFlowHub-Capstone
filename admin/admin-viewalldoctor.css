@@ -151,7 +151,7 @@ body {
 
 .bxs-chevron-down {
    
-
+ 
     margin-right: 20px;
 }
 
@@ -491,259 +491,68 @@ li.active button span  {
 
 
 
-
-
-
 .main--content {
     position: relative;
     background-color: #F6F7FB; 
     
     width: 100%;
-   
     padding: 32px 40px;
 
 }
 
 
 
-.first-container {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-   
-    margin-top: 36px;
+
+
+
+.inside-container{
+    overflow-x: auto;
+border-radius: 4px;
+background-color: white ;
+border: 1px solid #dddddd;
+
+padding: 30px 30px;
+margin-top: 36px;
+
 }
 
 
 
-
-
-.add-doctor-container, .delete-doctor-container {
-    width: 520px;
-    background-color: white;
-    padding: 20px 20px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-
-
-
-
-
-
-.add-doctor-container input {
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 0.5px solid #CCC;
-    width: 480px;
-    background: #FFF;
+table {
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: var(--fw-regular);
-    letter-spacing: 0.5px;
-
-
-    margin-top: 12px;
-    margin-bottom: 20px;
-
-
-
-}
-
-
-.add-doctor-container select, .delete-doctor-container select{
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 0.5px solid #CCC;
-    width: 480px;
-    background: #FFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: var(--fw-regular);
-    letter-spacing: 0.5px;
-
-    margin-top: 12px;
-    margin-bottom: 20px;
-
-
-
-
-}
-
-
-
-.add-doctor-title {
-   
-    text-align: center;
-    font-size: 24px;
-    font-weight: var(--fw-bold);
-    margin: 0;
-    margin-bottom: 12px;
-    background-color: white;
-
-
-}
-
-
-
-.button-add, .delete-btn {
-   
-    display: flex;
-    align-items: center;
-    justify-content: end;
-}
-
-
-
-.button-add button {
-
-    cursor: pointer;
-
-    padding: 8px 16px;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    border: 1px solid var(--clr-button-color);
-    background:var(--clr-button-color);
-
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-regular);
-    font-size: 1rem;
-}
-
-
-.delete-btn button {
-
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    padding: 8px 16px;
-    border: none;
-    outline: none;
-    border-radius: 4px;
- 
-    background: red;
-
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-regular);
-    font-size: 1rem;
-}
-
-
-
-.success-message {
-
-    display: none;
-    position: absolute;
-    bottom: 20px;
-    left: 40%;
-    color: #270;
-    background-color: #DFF2BF;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-
-.deleteSuccessMessage {
-
-    display: none;
-    position: absolute;
-    bottom: 20px;
-    left: 40%;
-    color: #D8000C;
-    background-color: #FFBABA;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-
-
-.delete-modal {
-display: none;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-
-
-.delete-modal-content {
-background-color: white;
-padding: 36px 36px;
-position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+   font-weight: var(--fw-normal);
+   font-size: 16px;
+    color: #424242;
+    border-collapse: collapse;
+    width: 100%;
+  }
   
-}
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
 
-
-.modal-buttons {
-    display: flex;
-    justify-content: end;
-    gap: 12px;
-
-
-}
-
-
-.confirm {
-
-    cursor: pointer;
-
-    padding: 8px 16px;
+.request{
+    margin-top: 32px;
+    border-radius: 8px;
+    background: #6C70DC;
     border: none;
     outline: none;
-    border-radius: 4px;
-    border: 1px solid #C70000;
-    background:#C70000;
-
-    color: white;
+    padding: 16px 32px;
+    color: #FFF;
     font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-regular);
-    font-size: 1rem;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;    
 }
 
-
-.close-btn {
-    cursor: pointer;
-
-    padding: 8px 16px;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background:transparent;
-
-    color: var(--clr-text-lessopacity);
-    font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-regular);
-    font-size: 1rem;
+table p {
+    padding: 0;
+    margin: 0;
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -3,6 +3,9 @@
 require 'admin-db.php';
 
 
+
+session_start();
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -30,43 +33,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['Add'])) {
         $FirstName = $_POST['FirstName'];
         $LastName = $_POST['LastName'];
-        $doctorId = $_POST['clinic'];
+        $clinicId = $_POST['clinic'];
         $Specialty = $_POST['specialty'];
         $Experience = $_POST['Experience'];
         $patientPhoneNum = $_POST['phone'];
         $Email = $_POST['email'];
-    
-       
 
-        // Prepare and execute the SQL query to insert data into the appointment table
-        $sql = "INSERT INTO doctors_table (First_Name, Last_Name , Clinic_ID,  Specialty, Experience, Phone_Number , Email)
-                VALUES ('$FirstName', ' $LastName', ' $clinicId', '$Specialty', ' $Experience ', ' $patientPhoneNum' , '$Email')";
+        // Use prepared statement to prevent SQL injection
+        $stmt = $conn->prepare("INSERT INTO doctors_table (First_Name, Last_Name, Clinic_ID, Specialty, Experience, Phone_Number, Email) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssisiss", $FirstName, $LastName, $clinicId, $Specialty, $Experience, $patientPhoneNum, $Email);
 
-        if ($conn->query($sql) === TRUE) {
+        if ($stmt->execute()) {
             // Set the success message
-            $successMessage = "Doctor added successfully!";
+            $_SESSION['successMessage'] = "Doctor added successfully!";
             // Redirect to the same page to avoid form resubmission
-            header("Location: admin-adddoctor.php?success=true");
+            header("Location: admin-adddoctor.php");
             exit();
         } else {
             // Set an error message if there's an issue
-            $errorMessage = "Error: " . $sql . "<br>" . $conn->error;
+            $errorMessage = "Error: " . $stmt->error;
         }
 
-
+        // Close the statement
+        $stmt->close();
     }
 
-    if (isset($_POST['Delete'])) {
-      
+
+    if (isset($_POST['ConfirmDelete'])) {
         $doctorId = $_POST['doctor'];
-      
-    
 
 
-      
+         // Debugging output
+    echo "Doctor ID: " . $doctorId;
 
+        // Check if a doctor is selected
+        if (empty($doctorId) || $doctorId == "none") {
+            $errorMessage = "Please select a doctor before confirming deletion.";
+        } else {
+            // Use prepared statement to prevent SQL injection
+            $deleteStmt = $conn->prepare("DELETE FROM doctors_table WHERE doctor_id = ?");
+            $deleteStmt->bind_param("i", $doctorId);
+
+            if ($deleteStmt->execute()) {
+                // Set the delete success message
+                $_SESSION['deleteSuccessMessage'] = "Doctor deleted successfully!";
+                header("Location: admin-adddoctor.php");
+                exit();
+            } else {
+                // Set an error message if there's an issue
+                $errorMessage = "Error: " . $deleteStmt->error;
+            }
+
+            // Close the statement
+            $deleteStmt->close();
+        }
     }
-
 
 
 
@@ -126,10 +147,11 @@ $conn->close();
 
 
     var doctorDropdown = $('#doctor-box');
-    doctorDropdown.append('<option hidden>Select a Doctor</option>');
+    doctorDropdown.append('<option value="" hidden>Select a Doctor</option>');
     doctors.forEach(function (doctor) {
         doctorDropdown.append('<option value="' + doctor.doctor_id + '">' + doctor.Last_Name + " , " + doctor.First_Name + " - " + doctor.Specialty + '</option>');
     });
+
 
 
 
@@ -184,8 +206,9 @@ $conn->close();
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="#">Add New Doctor</a>
-                            <a href="#">View All Doctor</a>
+                            <a href="admin-adddoctor.php">Add New Patient</a>
+                            <a href="admin-viewalldoctor.php">View All Patient</a>
+                          
                           
                     </div>
 
@@ -400,68 +423,61 @@ $conn->close();
 
 
     
-    <div id="successMessage" class="success-message"><i class='bx bx-check'></i> Doctor added successfully!</div>
+    <div id="successMessage" class="success-message"><i class='bx bx-check'></i> </div>
+
+    <div id="deleteSuccessMessage" class="deleteSuccessMessage"><i class='bx bx-check'></i> </div>
+
              
 
 
-    <form method="post" action="admin-adddoctor.php" class="delete">
-
-    
-        <div class="delete-doctor-container">
+    <form method="post" action="admin-adddoctor.php" id="deleteForm">
 
 
+    <div class="delete-doctor-container">
 
-
-
-
-                <p class="add-doctor-title"> 
-                        DELETE DOCTOR
-                    </p>
+        <p class="add-doctor-title"> 
+                DELETE DOCTOR
+            </p>
 
 
 
-                    <div class="selection-container">
+            <div class="selection-container">
 
-                    <label for="doctor-search">Doctor: </label>
-                    <div class="doctor-search">
-                        <select name="doctor" id="doctor-box">
-                            <option hidden>Select a Doctor</option>
-                            <!-- Doctor options will be populated dynamically using JavaScript -->
-                        </select>
-                    </div>
-
-
-
-                    </div>
-
-
-                    <div class="delete-btn">
+            <label for="doctor-search">Doctor: </label>
+            <div class="doctor-search">
+                <select name="doctor" id="doctor-box" required="required">
+                    <option hidden>Select a Doctor</option>
+                    <!-- Doctor options will be populated dynamically using JavaScript -->
+                </select>
+            </div>
 
 
 
-                            <button name="Delete" id="myBtn"><i class='bx bxs-trash'></i>Delete Doctor</button>
+            </div>
 
 
-                    
-
-
-
-
-
-
-                    </div>
-
-
-
-
-
-
+            <div class="delete-btn">
+                <button id="myBtn" type="button"><i class='bx bxs-trash'></i>Delete Doctor</button>
+            </div> 
 
 
         </div>
 
 
+
+        <div class="delete-modal" id="delete-modal">
+                    <div class="delete-modal-content">
+                        <p>Are you sure you want to remove this doctor?</p>
+                        <div class="modal-buttons">
+                            <button id="close-btn" class="close-btn">Close</button>
+                            <button type="submit" class="confirm" name="ConfirmDelete">Confirm</button>
+                        </div>
+                    </div>
+                
+        </div>
+
     </form>
+
 
 
 
@@ -482,33 +498,7 @@ $conn->close();
 
 
 
-    <div class="delete-modal" id="delete-modal">
 
-
-            <div class="delete-modal-content">
-
-                        <p>Are you sure you want to remove this doctor?</p>
-
-                        <div class="modal-buttons">
-
-                            
-                        <button id="close-btn" class="close-btn">Close</button>
-                        <button class="confirm">Confirm</button>
-
-
-
-                        </div>
-
-
-
-            </div>
-
-
-
-
-
-
-    </div>
 
 
     <script src="script/script.js"></script>
@@ -534,27 +524,32 @@ for (i = 0; i < dropdown.length; i++) {
 
 
 
-      // Check if the success parameter is present in the URL
-      var successParam = "<?php echo isset($_GET['success']) ? $_GET['success'] : ''; ?>";
-
-
-if (successParam === "true") {
+  // Check if the success parameter is present in the URL
+var successMessage = "<?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ''; ?>";
+if (successMessage !== "") {
     var successMessageDiv = document.getElementById("successMessage");
-    successMessageDiv.textContent = "Doctor added successfully!";
+    successMessageDiv.textContent = successMessage;
     successMessageDiv.style.display = "block";
 
     // Scroll to the success message for better visibility
     successMessageDiv.scrollIntoView({ behavior: 'smooth' });
+
+    // Remove the session variable to avoid displaying the message on subsequent page loads
+    <?php unset($_SESSION['successMessage']); ?>
 }
 
-var errorMessage = "<?php echo isset($errorMessage) ? $errorMessage : ''; ?>";
-if (errorMessage !== "") {
-    var errorMessageDiv = document.getElementById("errorMessage");
-    errorMessageDiv.textContent = errorMessage;
-    errorMessageDiv.style.display = "block";
+// Check if the deleteSuccess parameter is present in the URL
+var deleteSuccessMessage = "<?php echo isset($_SESSION['deleteSuccessMessage']) ? $_SESSION['deleteSuccessMessage'] : ''; ?>";
+if (deleteSuccessMessage !== "") {
+    var deleteSuccessMessageDiv = document.getElementById("deleteSuccessMessage");
+    deleteSuccessMessageDiv.textContent = deleteSuccessMessage;
+    deleteSuccessMessageDiv.style.display = "block";
 
-    // Scroll to the error message for better visibility
-    errorMessageDiv.scrollIntoView({ behavior: 'smooth' });
+    // Scroll to the delete success message for better visibility
+    deleteSuccessMessageDiv.scrollIntoView({ behavior: 'smooth' });
+
+    // Remove the session variable to avoid displaying the message on subsequent page loads
+    <?php unset($_SESSION['deleteSuccessMessage']); ?>
 }
 
 
@@ -572,21 +567,46 @@ if (errorMessage !== "") {
 // Get the modal
 var modal = document.getElementById("delete-modal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
 // Get the <span> element that closes the modal
 var span = document.getElementById("close-btn");
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
+
+var deleteBtn = document.getElementById("myBtn");
+deleteBtn.onclick = function() {
+    modal.style.display = "block";
+    return false; // Prevent default form submission
 }
 
-// When the user clicks on <span> (x), close the modal
+
+// When the user clicks on "Close", close the modal
 span.onclick = function() {
-  modal.style.display = "none";
+    modal.style.display = "none";
 }
+
+// When the user clicks on "Confirm", submit the delete form
+var confirmBtn = document.querySelector(".confirm");
+confirmBtn.onclick = function() {
+    document.getElementById("deleteForm").submit();
+}
+
+
+document.getElementById("deleteForm").addEventListener("submit", function (event) {
+    var selectedDoctor = document.getElementById("doctor-box").value;
+
+    // Check if the "Confirm" button is clicked and a doctor is not selected
+    if (event.submitter && event.submitter.classList.contains("confirm")) {
+        console.log("Selected Doctor:", selectedDoctor);
+
+        // Check if the selectedDoctor is the default value
+        if (selectedDoctor === "Select a Doctor") {
+            alert("Please select a doctor before confirming deletion.");
+            event.preventDefault();  // Prevent the form submission
+        }
+    }
+});
+
+
+
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {

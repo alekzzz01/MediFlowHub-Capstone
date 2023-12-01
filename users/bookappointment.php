@@ -2,7 +2,6 @@
 
 require 'db.php';
 
-
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -15,9 +14,6 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-
-
-
 
 // Fetch clinics
 $clinicQuery = "SELECT clinic_id, clinic_name, address FROM clinic_info";
@@ -45,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $diagnosis = $_POST['diagnosis'];
         $patientPhoneNum = $_POST['phone'];
         $doctorId = $_POST['doctor'];
-        
+
         // Check if the 'patient' key exists in the $_POST array
         $patientId = isset($_POST['patient']) ? $_POST['patient'] : null;
 
@@ -60,29 +56,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errorMessage = "Please fill in all required fields.";
         } else {
             // Prepare and execute the SQL query to insert data into the appointment table
-            $sql = "INSERT INTO appointments (Date, time_slot, Diagnosis, Patient_Phone_Num, doctor_id, Patient_id, user_id, Status)
-                    VALUES ('$date', '$timeSlot', '$diagnosis', '$patientPhoneNum', '$doctorId', '$patientId', '$userId' , 'Pending')";
+            $stmt = $conn->prepare("INSERT INTO appointments (Date, time_slot, Diagnosis, Patient_Phone_Num, doctor_id, Patient_id, user_id, Status) VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending')");
 
-            // Echo or log the SQL query for debugging
-            echo "SQL Query: $sql";
+            // Bind parameters
+            $stmt->bind_param("sssssss", $date, $timeSlot, $diagnosis, $patientPhoneNum, $doctorId, $patientId, $userId);
 
-            if ($conn->query($sql) === TRUE) {
-
-
-                
-           
-             
-
-
+            // Execute the statement
+            if ($stmt->execute()) {
                 // Set the success message
-                $successMessage = "Appointment booked successfully!";
+                $_SESSION['successMessage'] = "Doctor added successfully!";
                 // Redirect to the same page to avoid form resubmission
-                header("Location: bookappointment.php?success=true");
+                header("Location: bookappointment.php");
                 exit();
             } else {
                 // Set an error message if there's an issue
-                $errorMessage = "Error: " . $sql . "<br>" . $conn->error;
+                $errorMessage = "Error: " . $stmt->error;
             }
+
+            // Close the statement
+            $stmt->close();
         }
     } else {
         echo "Error: 'timeSlot' is not set in the form submission.";
@@ -93,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $conn->close();
 
 ?>
+
 
 
 
@@ -627,16 +620,19 @@ $conn->close();
 
 
       // Check if the success parameter is present in the URL
-      var successParam = "<?php echo isset($_GET['success']) ? $_GET['success'] : ''; ?>";
-
-if (successParam === "true") {
+    var successMessage = "<?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ''; ?>";
+if (successMessage !== "") {
     var successMessageDiv = document.getElementById("successMessage");
-    successMessageDiv.textContent = "Appointment booked successfully!";
+    successMessageDiv.textContent = successMessage;
     successMessageDiv.style.display = "block";
 
     // Scroll to the success message for better visibility
     successMessageDiv.scrollIntoView({ behavior: 'smooth' });
+
+    // Remove the session variable to avoid displaying the message on subsequent page loads
+    <?php unset($_SESSION['successMessage']); ?>
 }
+
 
 var errorMessage = "<?php echo isset($errorMessage) ? $errorMessage : ''; ?>";
 if (errorMessage !== "") {

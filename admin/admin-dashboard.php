@@ -71,7 +71,7 @@
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="#">Add New Doctor</a>
+                            <a href="admin-adddoctor.php">Add/Delete Doctor</a>
                             <a href="#">View All Doctor</a>
                           
                     </div>
@@ -87,8 +87,8 @@
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="#">Add New Patient</a>
-                            <a href="#">View All Patient</a>
+                            <a href="admin-adddoctor.php">Add New Patient</a>
+                            <a href="admin-viewalldoctor.php">View All Patient</a>
                           
                     </div>
 
