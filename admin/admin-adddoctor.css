@@ -2,7 +2,6 @@
 *::before,
 *::after{
     box-sizing: border-box;
-  
 }
 
 
@@ -46,9 +45,6 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-
-
-  
 
 
 
@@ -120,7 +116,22 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
+}
+
+.menu button {
+    padding: 0;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+   
+    gap: 2rem;
+    background-color: transparent;
+
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size:24px;
 }
 
 
@@ -136,6 +147,13 @@ body {
     font-size: 1rem;
     font-weight: var(--fw-medium);
 } 
+
+
+.bxs-chevron-down {
+   
+
+    margin-right: 20px;
+}
 
 
 
@@ -159,33 +177,89 @@ body {
 
 
 
-li a i {
+li a i  {
     transition: all 0.5s ease-in-out;
 }
 
-li a span {
+li a span  {
      transition: all 0.5s ease-in-out;
     
 }
 
-li:hover a i {
+li:hover a i  {
     color: var(--clr-primary-color);
 }
 
 
-li.active a i {
+li.active a i  {
     color: var(--clr-primary-color);
 }
 
 
-li:hover a span {
+li:hover a span  {
     color: var(--clr-light);
 }
 
 
-li.active a span {
+li.active a span  {
     color: var(--clr-light); 
 }
+
+
+
+
+.dropdown-container {
+    display: none;
+    padding: 16px 0 0 55px;
+    margin-top: 16px;
+   
+
+}
+
+.dropdown-container a {
+  color: var(--clr-nav-bar-color);
+  font-size: 1rem;
+  font-weight: var(--fw-medium);
+  transition: all 0.5s ease-in-out;
+  margin-bottom: 24px;
+}
+
+.dropdown-container a:hover {
+    color: var(--clr-light);
+}
+
+
+
+li button i  {
+    transition: all 0.5s ease-in-out;
+}
+
+li button span  {
+     transition: all 0.5s ease-in-out;
+    
+}
+
+li:hover button i  {
+    color: var(--clr-primary-color);
+}
+
+
+li.active button i  {
+    color: var(--clr-primary-color);
+}
+
+
+li:hover button span  {
+    color: var(--clr-light);
+}
+
+
+li.active button span  {
+    color: var(--clr-light); 
+}
+
+
+
 
 
 
@@ -205,22 +279,6 @@ li.active a span {
     border: none;
     outline: none;
 }
-
-
-
-
-.main--content {
-    position: relative;
-    background-color: #F6F7FB; 
-    
-    width: 100%;
-    padding: 32px 40px;
-
-}
-
-
-
-
 
 
 .header--wrapper {
@@ -436,107 +494,280 @@ li.active a span {
 
 
 
-.first-container h1 {
+.main--content {
+    position: relative;
+    background-color: #F6F7FB; 
+    
+    width: 100%;
+   
+    padding: 32px 40px;
 
-    font-weight: var(--fw-semibold);
-    margin: 0;
-    padding: 0;
+}
+
+
+
+.first-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+   
     margin-top: 36px;
-    font-size: 36px;
 }
 
 
 
-.info-available p {
+
+
+.add-doctor-container, .delete-doctor-container {
+    width: 520px;
+    background-color: white;
+    padding: 20px 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+
+
+
+
+
+
+.add-doctor-container input {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 0.5px solid #CCC;
+    width: 480px;
+    background: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: var(--fw-regular);
+    letter-spacing: 0.5px;
+
+
+    margin-top: 12px;
+    margin-bottom: 20px;
+
+
+
+}
+
+
+.add-doctor-container select, .delete-doctor-container select{
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 0.5px solid #CCC;
+    width: 480px;
+    background: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: var(--fw-regular);
+    letter-spacing: 0.5px;
+
+    margin-top: 12px;
+    margin-bottom: 20px;
+
+
+
+
+}
+
+
+
+.add-doctor-title {
+   
+    text-align: center;
+    font-size: 24px;
+    font-weight: var(--fw-bold);
     margin: 0;
-    padding: 0;
-    margin-top: 8px;
-    margin-bottom: 36px;
-    font-weight: var(--fw-medium);
-    color: var(--clr-text);
-}
-
-
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 36px;
-    align-items: center;
-
-    margin-top: 36px;
-
-
-
+    margin-bottom: 12px;
+    background-color: white;
 
 
 }
 
 
-.card-box {
+
+.button-add, .delete-btn {
+   
     display: flex;
     align-items: center;
+    justify-content: end;
+}
 
-    background-color: white;
-    border-radius: 8px;
+
+
+.button-add button {
+
+    cursor: pointer;
+
+    padding: 8px 16px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid var(--clr-button-color);
+    background:var(--clr-button-color);
+
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size: 1rem;
+}
+
+
+.delete-btn button {
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    padding: 8px 16px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+ 
+    background: red;
+
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size: 1rem;
+}
+
+
+
+.success-message {
+
+    display: none;
+  
+    position: absolute;
+
+  
     
-   
-    gap: 56px;
-
-    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
-    padding: 24px 24px;
-}
-
-.card-box i {
-    font-size: 24px;
-    padding: 12px;
-    border-radius: 24px;
+    bottom: 20px;
+  left: 40%;
+    color: #270;
+    background-color: #DFF2BF;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 
-.bxs-bed {
-    color: var(--clr-button-color);
-    background-color: #F1EDFB;
-}
+.successDeleteMessage {
 
-.bxs-group {
-    color: var(--clr-primary-color);
-    background-color: #d3f3fa;
-}
+    display: none;
+  
+    position: absolute;
 
-.bxs-wallet {
-    color: #DA9470;
-    background-color: #fce8de;
-}
-
-.bxs-ambulance {
-    color: #E25782;
-    background-color: #fcd6e2;
+  
+    
+    bottom: 20px;
+  left: 40%;
+    color: #270;
+    background-color: #DFF2BF;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 
-.text-number {
-    font-weight: var(--fw-bold);
+
+.delete-modal {
+display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.text-patients {
+
+
+.delete-modal-content {
+background-color: white;
+padding: 36px 36px;
+position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+}
+
+
+.modal-buttons {
+    display: flex;
+    justify-content: end;
+    gap: 12px;
+
+
+}
+
+
+.confirm {
+
+    cursor: pointer;
+
+    padding: 8px 16px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #C70000;
+    background:#C70000;
+
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size: 1rem;
+}
+
+
+.close-btn {
+    cursor: pointer;
+
+    padding: 8px 16px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background:transparent;
+
     color: var(--clr-text-lessopacity);
-}
-
-
-.chart-container {
-    background-color: white;
-    margin-top: 36px;
-    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
-    border-radius: 8px;
-    padding: 24px 24px;
-    height: 1000px;
-    
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size: 1rem;
 
 }
 
 
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 768px) and (max-width: 1800px) {
 
     .main--content {
         width: 100%;
@@ -545,24 +776,52 @@ li.active a span {
     .search-box  {
     width: 300px;
     }
+  
+    .inside-container {
+        flex-direction: column;
+        justify-content: center;
+    }
 
-
+    .available-container {
+        width: 100%;
+    }
+    .available-doctors {
+        width: 100%;
+    }
     
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 24px;
-        row-gap: 24px;
+    .schedule-container {
+        justify-content: center;
+        gap: 24px;
+    } 
 
+
+
+    .daily-progress {
+        width: 100%;
+    }
+    
+    .bottom-container {
+        width: 100%; 
+     
+    }
+
+    .conditions-slider {
+        overflow-x: scroll;
     }
 
 
-  
-  
+    
+    .appointments-box {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
 
 
 
 } 
+
 
 
 @media screen and (min-width: 0px) and (max-width: 768px) {
@@ -582,6 +841,46 @@ li.active a span {
     }
 
  
+  
+    .inside-container {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .available-container {
+        width: 100%;
+    }
+    .available-doctors {
+        width: 100%;
+    }
+    
+    .schedule-container {
+        justify-content: center;
+        gap: 24px;
+    } 
+
+
+
+    .daily-progress {
+        width: 100%;
+    }
+    
+    .bottom-container {
+        width: 100%; 
+     
+    }
+
+    .conditions-slider {
+        overflow-x: scroll;
+    }
+
+
+    .appointments-box {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
 
 
     .sidebar {
@@ -611,27 +910,12 @@ li.active a span {
     }
 
 
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 24px;
-        row-gap: 24px;
-
-    }
-
-
-
-
-
-
    
  
 
 
 
 } 
-
-
 
 
 
@@ -666,6 +950,10 @@ li.active a span {
     
 
 }
+
+
+
+
 
 
 

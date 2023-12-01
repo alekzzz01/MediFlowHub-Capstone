@@ -1,6 +1,7 @@
 <?php
-// Include your database connection file
+
 require 'db.php';
+
 
 // Check connection
 if ($conn->connect_error) {
@@ -14,6 +15,9 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+
+
 
 // Fetch clinics
 $clinicQuery = "SELECT clinic_id, clinic_name, address FROM clinic_info";
@@ -56,13 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errorMessage = "Please fill in all required fields.";
         } else {
             // Prepare and execute the SQL query to insert data into the appointment table
-            $sql = "INSERT INTO appointments (Date, time_slot, Diagnosis, Patient_Phone_Num, doctor_id, Patient_id, user_id)
-                    VALUES ('$date', '$timeSlot', '$diagnosis', '$patientPhoneNum', '$doctorId', '$patientId', '$userId')";
+            $sql = "INSERT INTO appointments (Date, time_slot, Diagnosis, Patient_Phone_Num, doctor_id, Patient_id, user_id, Status)
+                    VALUES ('$date', '$timeSlot', '$diagnosis', '$patientPhoneNum', '$doctorId', '$patientId', '$userId' , 'Pending')";
 
             // Echo or log the SQL query for debugging
             echo "SQL Query: $sql";
 
             if ($conn->query($sql) === TRUE) {
+
+
+                
+           
+             
+
+
                 // Set the success message
                 $successMessage = "Appointment booked successfully!";
                 // Redirect to the same page to avoid form resubmission
@@ -274,107 +285,7 @@ $conn->close();
                  
          </div>
         
-         <div class="user--info">
-
-                     <div class="notification" id="notif-icon">
-                                 <i class='bx bx-bell'   ></i>
-                                 <span class="num">8</span>
-
-                     </div>
-            
-                     <div class="user-profile">
-
-                         <button class="profile-icon" id="profile-icon"></button>
-                         
-                     </div>
-
-                     
-                     <div class="dropdown-profile">
-
-                         <div class="sub-menu">
-
-                                 <div class="user-info">
-                                     <button class="usermain-profile"></button>
-                                     <p>Username</p>
-                                 </div>
-
-                                 <div class="edit-profile">
-                                     <div class="edit-profile1">
-                                     <i class='bx bxs-user-circle' ></i>
-                                     <p>Edit Profile</p>
-                                     </div>
-                                 
-                                     <i class='bx bx-chevron-right' ></i>
-                                 </div>
-
-                                 <div class="help-support">
-                                     <div class="edit-profile1">
-                                     <i class='bx bxs-help-circle' ></i>
-                                     <p>Help & Support</p>
-                                     </div>
-                                     <i class='bx bx-chevron-right' ></i>
-                                 </div>
-
-
-
-                         </div>
-
-
-                     </div>
-
-                     <div class="dropdown-notifications">
-                             <p class="Notiftitle">Notifications</p>
-
-                             <p class="ReminderTitle">Reminder</p>
-                            
-                             <div class="notif-box">
-
-                                     <div class="notif-message">
-                                         <p>Your appointment with Dr. Quack Quack starts in 1hr.</p>
-
-                                         <i class='bx bx-chevron-right'></i>
-
-                                     </div>
-
-                                     <div class="notif-time">
-
-                                          <i class='bx bxs-time-five'></i>
-                                          <p>Now</p>
-                                         
-                                     </div>
-                                    
-
-                             </div>
-
-                             <div class="notif-box">
-
-                                     <div class="notif-message">
-                                         <p>Your appointment with Dr. Quack Quack starts in 1hr.</p>
-
-                                         <i class='bx bx-chevron-right'></i>
-
-                                     </div>
-
-                                     <div class="notif-time">
-
-                                          <i class='bx bxs-time-five'></i>
-                                          <p>Now</p>
-                                         
-                                     </div>
-                                    
-
-                             </div>
-
-
-
-
-                     </div>
-
-
-
-                    
-
-         </div>
+        
         
         </div>
 
@@ -391,19 +302,34 @@ $conn->close();
 
         <div class="inputboxes" id="inputboxes">
 
+
+
+                    <div class="selection-container">
+
                         <label for="clinic-search">Clinic: </label>
                         <div class="clinic-search">
                             <select name="clinic" id="clinic-box">
                                 <!-- Clinic options will be populated dynamically using JavaScript -->
                             </select>
                         </div>
+                    </div>
 
+
+                    <div class="selection-container">
+
+                        
                         <label for="specialty-search">Specialty: </label>
                         <div class="specialty-search">
                             <select name="specialty" id="specialty-box">
                                 <!-- Specialty options will be populated dynamically using JavaScript -->
                             </select>
                         </div>
+
+
+                    </div>
+
+
+                    <div class="selection-container">
 
                         <label for="doctor-search">Doctor: </label>
                         <div class="doctor-search">
@@ -414,12 +340,28 @@ $conn->close();
                         </div>
 
 
-                        <label for="selecteddate">Choose a Date</label>
+                    
+                    </div>
+
+
+                    <div class="selection-container">
+
+                        
+                        <label for="selecteddate">Choose a Date:</label>
                         <div class="selecteddate">
                                     <div class="inputbox">
                                         <input type="date" name="selecteddate" id="selecteddate" placeholder="Select a date" required="required" onchange="updateSelectedDate()">
                                     </div>
                         </div>
+
+                    
+                    </div>
+
+
+                       
+
+                       
+
 
 
                        
@@ -456,7 +398,7 @@ $conn->close();
                         echo '<button type="button" class="timeslot-button">' . $start_time_formatted . ' - ' . $end_time_formatted . '</button>';
                         echo '<button type="button" id="booknow" class="booknow-button" onclick="showFormContainer(\'' . $start_time_formatted . ' - ' . $end_time_formatted . '\')">Book Now</button>';
 
-        echo '</div>';
+                        echo '</div>';
                     
               
                 
@@ -471,8 +413,11 @@ $conn->close();
 
 
 
+<div id="formcontainer" class="modal-container">
 
-        <div id="formcontainer" class="formcontainer">
+
+        
+        <div  class="formcontainer">
 
 
 
@@ -526,9 +471,12 @@ $conn->close();
                                     <select name="diagnosis" id="reason-box">
                                         <option hidden>Choose...</option>
                                         <option value="Mental Health">Mental Health</option>
-                                        <option value="Eye">Eye</option>
-                                        <option value="General">General</option>
-                                        <option value="Hand">Hand</option>
+                                        <option value="Vision changes">Vision changes</option>
+                                        <option value="Cough">Cough</option>
+                                        <option value="Shortness of breath">Shortness of breath</option>
+                                        <option value="Fatigue">Fatigue</option>
+                                        <option value="Pain">Pain</option>
+                                       
                                     </select>
                                 </div>
 
@@ -545,9 +493,18 @@ $conn->close();
                                 </div>
 
                                 <div class="bottom-buttons">
-                                    <button type="submit" class="Req-Btn" name="submit">Request Appointment</button>
+                                    <button  id="generatePdfButton" type="submit" class="Req-Btn" name="submit">Request Appointment</button>
                                     <button onclick="myFunction()" class="Cancel-Btn" id="close-btn">Close</button>
                                 </div>
+
+        </div>
+
+
+
+
+
+
+
 
         </div>
 
@@ -627,13 +584,14 @@ $conn->close();
         formContainer.style.display = 'block';
         setTimeout(() => {
             formContainer.style.opacity = '1';
+          
+           
         }, 10);
 
-        // Reduce opacity for other elements
-        setElementOpacity('lessopacity', '0.3');
-        setElementOpacity('inputboxes', '0.3');
-        setElementOpacity('h1', '0.3');
-        setElementOpacity('timeslots', '0.3');
+       
+
+
+        
     }
 
    function myFunction() {
