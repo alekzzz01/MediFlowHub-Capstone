@@ -72,7 +72,7 @@
 
                     <div class="dropdown-container">
                             <a href="admin-adddoctor.php">Add/Delete Doctor</a>
-                            <a href="#">View All Doctor</a>
+                            <a href="admin-viewalldoctor.php">View All Doctor</a>
                           
                     </div>
 

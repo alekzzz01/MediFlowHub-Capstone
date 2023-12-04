@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'db.php';
 
 if (isset($_POST["submit"])) {
@@ -20,19 +20,26 @@ if (isset($_POST["submit"])) {
     if (!$result) {
         die("Database query error: " . mysqli_error($conn));
     }
-    
+
     if (mysqli_num_rows($result) == 1) {
         // User found, check the password
         $row = mysqli_fetch_assoc($result);
         $hashedPassword = $row["Password"]; // Check the column name in your database
-    
+
         if (password_verify($password, $hashedPassword)) {
             // Password is correct, log the user in
             session_start();
             $_SESSION["user_id"] = $row["user_id"]; // Assuming 'user_id' is the column name in your database
             $_SESSION["username"] = $row["Email"];
-            $_SESSION["first_name"] = $row["First Name"]; 
-            header("Location: otp.php"); // Redirect to the user's dashboard or a protected page
+            $_SESSION["first_name"] = $row["First Name"];
+            $_SESSION["role"] = $row["Role"]; // Assuming 'Role' is the column name in your database
+            if ($_SESSION["role"] == "admin") {
+                // Redirect to admin dashboard or perform admin-specific actions
+                header("Location: ../admin/admin-dashboard.php");
+            } else {
+                // Redirect to user dashboard or perform user-specific actions
+                header("Location: dashboard.php");
+            }
             exit;
         } else {
             echo "<script>alert('Incorrect password.')</script>";
@@ -40,7 +47,6 @@ if (isset($_POST["submit"])) {
     } else {
         echo "<script>alert('User not found. Please register.')</script>";
     }
-    
 }
 ?>
 

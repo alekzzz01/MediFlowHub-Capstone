@@ -97,8 +97,8 @@ $conn->close();
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="#">Add New Patient</a>
-                            <a href="#">View All Patient</a>
+                            <a href="admin-adddoctor.php">Add New Patient</a>
+                            <a href="admin-viewalldoctor.php">View All Patient</a>
                           
                     </div>
 
@@ -138,15 +138,18 @@ $conn->close();
 
 
  
-    <div class="menu-search">
+<div class="menu-search">
+            
+            <i class='bx bx-menu' id="menu-toggle"></i>
 
+            <div class="search-box">
+            
+            <input type="text" placeholder="Search...">
+            <i class='bx bx-search'></i>
+        
+            </div>
 
-    
-                <i class='bx bx-menu' id="menu-toggle"></i>
-
-               
-
-    </div>
+</div>
 
   
 
@@ -169,10 +172,11 @@ $conn->close();
         <th>Full Name</th>
         <th>Specialty</th>
         <th>Experience</th>
+        <th>Fee</th>
         <th>Clinic</th>
         <th>Phone Number</th>
-        <th>Schedule Availability</th>
-     <!-- <th>View</th> -->
+       <!--  <th>Schedule Availability</th>
+        <th>View</th> -->
     </tr>
 
     <?php
@@ -182,15 +186,16 @@ $conn->close();
                 echo "<td>{$row['Email']}</td>";
                 echo "<td>{$row['First_Name']} {$row['Last_Name']}</td>";
                 echo "<td>{$row['Specialty']}</td>";
-                echo "<td>{$row['Experience']}</td>";
+                echo "<td>{$row['Experience']} yrs.</td>";
+                echo "<td>₱" . number_format($row['Fee'], 2) . "</td>";
                 echo "<td>{$row['Clinic_Name']}</td>";
                 echo "<td>{$row['Phone_Number']}</td>";
-                echo "<td>{$row['Schedule_Availability']}</td>";
+                // echo "<td>{$row['Schedule_Availability']}</td>";
                 // Uncomment the line below if needed
                 // echo "<td>{$row['View']}</td>";
                 echo "</tr>";
             }
-            ?>
+    ?>
 
 
          

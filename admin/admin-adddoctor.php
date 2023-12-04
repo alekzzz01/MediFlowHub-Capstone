@@ -2,9 +2,54 @@
 
 require 'admin-db.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../vendor/autoload.php';
+
 
 
 session_start();
+
+
+// Function to generate a random 16-character password
+function generateRandomPassword() {
+    // Generate 8 bytes of random data
+    $randomBytes = random_bytes(8);
+    // Convert the random data to a hexadecimal string
+    $password = bin2hex($randomBytes);
+    return $password;
+}
+
+
+function sendDoctorDetailsEmail($to, $subject, $message) {
+    $mail = new PHPMailer;
+
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->Username = 'tatsuki.ryota01@gmail.com';
+    $mail->Password = 'pazq ktqa mbfi ljzi';
+
+
+    $mail->setFrom('tatsuki.ryota01@gmail.com', 'Doctors Account'); // Replace with your email and name
+    $mail->addAddress($to);
+    $mail->Subject = $subject;
+    $mail->Body = $message;
+
+
+
+    if (!$mail->send()) {
+        echo 'Error: ' . $mail->ErrorInfo;
+    }
+
+    
+}
+
 
 // Check connection
 if ($conn->connect_error) {
@@ -31,32 +76,78 @@ $doctorResult = $conn->query($doctorQuery);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['Add'])) {
-        $FirstName = $_POST['FirstName'];
-        $LastName = $_POST['LastName'];
+        $FirstName = ucwords(strtolower($_POST['FirstName']));
+        $LastName = ucwords(strtolower($_POST['LastName']));
         $clinicId = $_POST['clinic'];
         $Specialty = $_POST['specialty'];
+        $Fee = $_POST['Fee'];
         $Experience = $_POST['Experience'];
         $patientPhoneNum = $_POST['phone'];
         $Email = $_POST['email'];
 
-        // Use prepared statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO doctors_table (First_Name, Last_Name, Clinic_ID, Specialty, Experience, Phone_Number, Email) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssisiss", $FirstName, $LastName, $clinicId, $Specialty, $Experience, $patientPhoneNum, $Email);
+        $randomPassword = generateRandomPassword();
 
-        if ($stmt->execute()) {
-            // Set the success message
-            $_SESSION['successMessage'] = "Doctor added successfully!";
-            // Redirect to the same page to avoid form resubmission
+
+          // Hash the password
+        $hashedPassword = password_hash($randomPassword, PASSWORD_DEFAULT);
+
+                // Check if the email already exists in the database
+        $emailCheckQuery = "SELECT doctor_id FROM doctors_table WHERE Email = ?";
+        $emailCheckStmt = $conn->prepare($emailCheckQuery);
+        $emailCheckStmt->bind_param("s", $Email);
+        $emailCheckStmt->execute();
+        $emailCheckStmt->store_result();
+
+        if ($emailCheckStmt->num_rows > 0) {
+            // Email already exists, display an error message or handle accordingly
+            $_SESSION['errorMessage'] = 'Error: Email already exists in the database.';
+            $emailCheckStmt->close();
             header("Location: admin-adddoctor.php");
             exit();
-        } else {
-            // Set an error message if there's an issue
-            $errorMessage = "Error: " . $stmt->error;
         }
 
-        // Close the statement
-        $stmt->close();
+        $emailCheckStmt->close();
+
+
+        
+
+            // Use the generated password in the SQL query
+            $stmt = $conn->prepare("INSERT INTO doctors_table (First_Name, Last_Name, Clinic_ID, Specialty, Experience, Fee, Phone_Number, Email, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssisissss", $FirstName, $LastName, $clinicId, $Specialty, $Experience, $Fee, $patientPhoneNum, $Email, $hashedPassword);
+
+
+            if ($stmt->execute()) {
+                // Set the success message
+                $_SESSION['successMessage'] = "Doctor added successfully!";
+                // Redirect to the same page to avoid form resubmission
+
+                // Send email with doctor details
+                $emailSubject = "New Doctor Added";
+                $emailMessage = "Dear $FirstName,\n\n";
+                $emailMessage .= "A new doctor has been added with the following details:\n";
+                $emailMessage .= "Name: $FirstName $LastName\n";
+                $emailMessage .= "Email: $Email\n";
+                $emailMessage .= "Password: $randomPassword\n\n";
+                $emailMessage .= "Thank you for joining!\n";
+
+                sendDoctorDetailsEmail($Email, $emailSubject, $emailMessage);
+
+                echo "<script>alert('Email and Password successfully sent.');</script>";
+
+                header("Location: admin-adddoctor.php");
+                exit();
+            } else {
+                // Set an error message if there's an issue
+                $errorMessage = "Error: " . $stmt->error;
+            }
+
+            // Close the statement
+            $stmt->close();
+
+
+
     }
+
 
 
     if (isset($_POST['ConfirmDelete'])) {
@@ -149,7 +240,7 @@ $conn->close();
     var doctorDropdown = $('#doctor-box');
     doctorDropdown.append('<option value="" hidden>Select a Doctor</option>');
     doctors.forEach(function (doctor) {
-        doctorDropdown.append('<option value="' + doctor.doctor_id + '">' + doctor.Last_Name + " , " + doctor.First_Name + " - " + doctor.Specialty + '</option>');
+        doctorDropdown.append('<option value="' + doctor.doctor_id + '">'+ doctor.doctor_id + " - " + doctor.Last_Name + " , " + doctor.First_Name + " - " + doctor.Specialty + '</option>');
     });
 
 
@@ -366,6 +457,20 @@ $conn->close();
                 <div class="selection-container">
 
                         
+                <label for="selecteddate">Consultation Fee:</label>
+                <div class="selecteddate">
+                            <div class="inputbox">
+                                <input name="Fee" type="text" placeholder="Fee " required="required">
+                            </div>
+                </div>
+
+
+                </div>
+
+
+                <div class="selection-container">
+
+                        
                 <label for="selecteddate">Phone Number:</label>
                 <div class="selecteddate">
                             <div class="inputbox">
@@ -423,9 +528,11 @@ $conn->close();
 
 
     
-    <div id="successMessage" class="success-message"><i class='bx bx-check'></i> </div>
+    <div id="successMessage" class="success-message"><i id="bx-check" class='bx bx-check'></i> </div>
 
-    <div id="deleteSuccessMessage" class="deleteSuccessMessage"><i class='bx bx-check'></i> </div>
+    <div id="errorMessage" class="errorMessage"><i id="bx-error" class='bx bx-x-circle'></i> </div>
+
+    <div id="deleteSuccessMessage" class="deleteSuccessMessage"><i id="bx-error2" class='bx bx-x-circle'></i> </div>
 
              
 
@@ -528,15 +635,33 @@ for (i = 0; i < dropdown.length; i++) {
 var successMessage = "<?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ''; ?>";
 if (successMessage !== "") {
     var successMessageDiv = document.getElementById("successMessage");
+   
     successMessageDiv.textContent = successMessage;
     successMessageDiv.style.display = "block";
-
+   
     // Scroll to the success message for better visibility
     successMessageDiv.scrollIntoView({ behavior: 'smooth' });
 
     // Remove the session variable to avoid displaying the message on subsequent page loads
     <?php unset($_SESSION['successMessage']); ?>
 }
+
+
+
+
+var errorMessage = "<?php echo isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : ''; ?>";
+if (errorMessage !== "") {
+    var errorMessageDiv = document.getElementById("errorMessage");
+    errorMessageDiv.textContent = errorMessage;
+    errorMessageDiv.style.display = "block";
+
+    // Scroll to the success message for better visibility
+    errorMessageDiv.scrollIntoView({ behavior: 'smooth' });
+
+    // Remove the session variable to avoid displaying the message on subsequent page loads
+    <?php unset($_SESSION['errorMessage']); ?>
+}
+
 
 // Check if the deleteSuccess parameter is present in the URL
 var deleteSuccessMessage = "<?php echo isset($_SESSION['deleteSuccessMessage']) ? $_SESSION['deleteSuccessMessage'] : ''; ?>";

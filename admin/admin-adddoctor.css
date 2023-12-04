@@ -641,7 +641,7 @@ li.active button span  {
 
     display: none;
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     left: 40%;
     color: #270;
     background-color: #DFF2BF;
@@ -654,12 +654,36 @@ li.active button span  {
 
     display: none;
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     left: 40%;
     color: #D8000C;
     background-color: #FFBABA;
     padding: 10px;
     border-radius: 5px;
+}
+
+.deleteSuccessMessage i {
+    color: #D8000C;
+}
+
+
+
+.errorMessage {
+
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 40%;
+    color: #D8000C;
+    background-color: #FFBABA;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+
+.errorMessage i {
+    color: #D8000C;
+
 }
 
 
