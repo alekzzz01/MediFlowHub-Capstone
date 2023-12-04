@@ -76,7 +76,54 @@ $result = $conn->query($query);
 
 
 
- 
+   
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+<!-- Include DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+<!-- Include DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+
+<!-- Your other styles and scripts -->
+
+<script defer>
+    $(document).ready(function () {
+        // Initialize DataTable with additional options
+        $('#myTable').DataTable({
+            "lengthMenu": [10, 25, 50, 75, 100],
+            "pageLength": 10,
+            "pagingType": "full_numbers",
+            "language": {
+                "lengthMenu": "Show _MENU_ entries",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "paginate": {
+                    "first": "First",
+                    "last": "Last",
+                    "next": "Next",
+                    "previous": "Previous"
+                }
+            }
+        });
+    });
+
+    /* Other scripts and functions */
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
     
 </head>
 <body>
@@ -194,9 +241,15 @@ $result = $conn->query($query);
 
 
 
-        <div class="inside-container">
-            <div class="rectangle">
-            <table>
+    <div class="inside-container">
+        <div class="rectangle">
+
+ 
+       
+            <table id="myTable" class="display">
+
+            <thead id="thead" >
+
             <tr>
                 <th>Appointment No.</th>
                 <th>Patient Name</th>
@@ -205,9 +258,16 @@ $result = $conn->query($query);
                 <th>Appointment Time</th>
                 <th>Appointment Date</th>
                 <th>Status</th>
-                <th>Action</th>
-             <!-- <th>View</th> -->
+             <!--   <th>Action</th>
+             <th>View</th> -->
             </tr>
+
+
+
+            </thead>
+
+
+            <tbody>
 
                     <?php
                     // Display appointments in the HTML table
@@ -295,13 +355,18 @@ $result = $conn->query($query);
                   
                     ?>
 
+
+                        </tbody>
+
                 </table>
-            </div>
 
+            
 
-      
 
         </div>
+
+
+    </div>
        
 
 
@@ -335,7 +400,21 @@ $result = $conn->query($query);
                 }
 
 
+
+
+                	
+            
     </script>
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,12 +1,4 @@
-<?php 
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require '../vendor/autoload.php';
-
-?>
 
 <?php
 include 'db.php'; // Include your database connection file
@@ -36,12 +28,15 @@ if (isset($_POST["submit"])) {
 
         if (mysqli_num_rows($result) > 0) {
             echo "<script>alert('Username already exists');</script>";
+            header("Location: signup.php");
+            exit();
         } else {
             // Validate the username as a valid email address
             if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
                 // Username is a valid email address
             } else {
                 echo "<script>alert('Username is not a valid email address.')</script>";
+                header("Location: signup.php");
                 exit; // Stop further processing if the email is invalid
             }
 
@@ -53,6 +48,7 @@ if (isset($_POST["submit"])) {
                 // Phone number is valid
             } else {
                 echo "<script>alert('Phone number is not a valid mobile number.')</script>";
+                header("Location: signup.php");
                 exit; // Stop further processing if the phone number is invalid
             }
 
@@ -65,48 +61,29 @@ if (isset($_POST["submit"])) {
                 // Hash the password for security (you should use a proper hashing method)
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-                // Insert data into the database
-                $query = "INSERT INTO users (`Last Name`, `First Name`, Email, password, `Phone Number`) VALUES ('$last_name', '$first_name', '$username', '$hashedPassword', '$phonenumber')";
-                mysqli_query($conn, $query);
-                echo "<script>alert('Registration Successful');</script>";
-
-
-                $otp = mt_rand(100000, 999999);
-
-                // Send the OTP via email
-                $mail = new PHPMailer(true);
-
-                try {
-                    //Server settings
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
-                    $mail->SMTPAuth = true;
-                    $mail->SMTPSecure = 'tls';
-                    $mail->Port = 587;
-                    $mail->Username = 'tatsuki.ryota01@gmail.com';
-                    $mail->Password = 'pazq ktqa mbfi ljzi';
-
-    
-                    $mail->setFrom('tatsuki.ryota01@gmail.com', 'OTP Verification');
-                    $mail->addAddress($username); 
-
-                    
-
-            
-                    // Content
-                    $mail->isHTML(true);
-                    $mail->Subject = 'OTP for Registration';
-                    $mail->Body    = 'Your OTP is: ' . $otp;
-            
-                    $mail->send();
-                    echo "<script>alert('OTP sent to your email.');</script>";
-            
-                    $lastInsertedUserId = mysqli_insert_id($conn); // Get the ID of the last inserted user
-                    $query = "UPDATE users SET OTP = '$otp' WHERE user_id = $lastInsertedUserId";
-                    mysqli_query($conn, $query);
-                } catch (Exception $e) {
-                    echo "<script>alert('Error sending OTP. Please try again. Error: " . $e->getMessage() . "');</script>";
+                $query = "INSERT INTO users (`Last Name`, `First Name`, Email, password, `Phone Number`, `Role`) VALUES (?, ?, ?, ?, ?, 'user')";
+                $stmt = mysqli_prepare($conn, $query);
+                
+                // Bind the parameters
+                mysqli_stmt_bind_param($stmt, "sssss", $last_name, $first_name, $username, $hashedPassword, $phonenumber, );
+                
+                // Execute the statement
+                mysqli_stmt_execute($stmt);
+                
+                // Check if the insertion was successful
+                if (mysqli_stmt_affected_rows($stmt) > 0) {
+                    echo "<script>alert('Registration Successful');</script>";
+                 
+                } else {
+                    echo "<script>alert('Error registering user');</script>";
                 }
+                
+                // Close the statement
+                mysqli_stmt_close($stmt);
+
+
+                //otp
+
 
 
             } else {

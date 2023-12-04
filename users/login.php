@@ -1,3 +1,15 @@
+<?php 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../vendor/autoload.php';
+
+?>
+
+
+
 <?php
 require 'db.php';
 
@@ -33,6 +45,51 @@ if (isset($_POST["submit"])) {
             $_SESSION["username"] = $row["Email"];
             $_SESSION["first_name"] = $row["First Name"];
             $_SESSION["role"] = $row["Role"]; // Assuming 'Role' is the column name in your database
+
+
+
+            $otp = mt_rand(100000, 999999);
+
+            // Send the OTP via email
+            $mail = new PHPMailer(true);
+
+            try {
+                //Server settings
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                $mail->Username = 'tatsuki.ryota01@gmail.com';
+                $mail->Password = 'pazq ktqa mbfi ljzi';
+
+
+                $mail->setFrom('tatsuki.ryota01@gmail.com', 'MediflowHub | OTP Verification');
+                $mail->addAddress($username); 
+
+                
+
+        
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = 'OTP Code for Login';
+                $mail->Body    = 'Your OTP is: ' . $otp;
+        
+                $mail->send();
+                echo "<script>alert('OTP sent to your email.');</script>";
+        
+                $lastInsertedUserId = $row["user_id"]; // Use the user ID from the fetched user data
+
+                $query = "UPDATE users SET OTP = '$otp' WHERE user_id = $lastInsertedUserId";
+                mysqli_query($conn, $query);
+
+                header("Location: otp.php");
+                exit;
+            } catch (Exception $e) {
+                echo "<script>alert('Error sending OTP. Please try again. Error: " . $e->getMessage() . "');</script>";
+            }
+
+
             if ($_SESSION["role"] == "admin") {
                 // Redirect to admin dashboard or perform admin-specific actions
                 header("Location: ../admin/admin-dashboard.php");

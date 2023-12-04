@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Execute the statement
             if ($stmt->execute()) {
                 // Set the success message
-                $_SESSION['successMessage'] = "Doctor added successfully!";
+                $_SESSION['successMessage'] = "Appointment added successfully!";
                 // Redirect to the same page to avoid form resubmission
                 header("Location: bookappointment.php");
                 exit();
