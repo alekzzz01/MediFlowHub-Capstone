@@ -1,7 +1,7 @@
 <?php 
 
 
-require 'admin-db.php';
+require '../users/db.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -47,8 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($updateResult === false) {
         die("Error updating the status: " . $conn->error);
-    }
-
+     } 
     // Redirect back to the appointments page after updating the status
     header("Location: admin-appointment.php");
     exit();
@@ -73,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="admin-appointment.css">
+    <link rel="stylesheet" type="text/css" href="style/admin-appointment.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,6 +80,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+
+
+
+    <!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+<!-- Include DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+<!-- Include DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+
+
+
+<script defer>
+    $(document).ready(function () {
+        // Initialize DataTable with additional options
+        $('#myTable').DataTable({
+            "lengthMenu": [10, 25, 50, 75, 100],
+            "pageLength": 10,
+            "pagingType": "full_numbers",
+            "language": {
+                "lengthMenu": "Show _MENU_ entries",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "paginate": {
+                    "first": "First",
+                    "last": "Last",
+                    "next": "Next",
+                    "previous": "Previous"
+                }
+            }
+        });
+    });
+
+    /* Other scripts and functions */
+</script>
 
 
 
@@ -121,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
 
                 <li>
-                    <button class="dropdown-btn">
+                <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
@@ -137,17 +175,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
                 <li>
-                    <button class="dropdown-btn">
+                <button class="dropdown-btn">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
                         <i class='bx bxs-chevron-down'></i>
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="#">Add New Patient</a>
-                            <a href="#">View All Patient</a>
+                            <a href="admin-addpatient.php">Add New Patient</a>
+                            <a href="admin-viewallpatient.php">View All Patient</a>
                           
                     </div>
+
 
                 </li>
 
@@ -219,125 +258,134 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="inside-container">
             <div class="rectangle">
-            <table>
-            <tr>
-                <th>Appointment No.</th>
-                <th>Patient Name</th>
-                <th>Doctor Name</th>
-                <th>Clinic</th>
-                <th>Appointment Time</th>
-                <th>Appointment Date</th>
-                <th>Status</th>
-                <th>Action</th>
-                
-             <!-- <th>View</th> -->
-            </tr>
+            <table id="myTable" class="display">
 
-                    <?php
-                    // Display appointments in the HTML table
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>{$row['Appointment_ID']}</td>";
+                <thead id="thead" >
+                    <tr>
+                        <th>Appointment No.</th>
+                        <th>Patient Name</th>
+                        <th>Doctor Name</th>
+                        <th>Clinic</th>
+                        <th>Appointment Time</th>
+                        <th>Appointment Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        
+                    <!-- <th>View</th> -->
+                    </tr>
 
-                        echo "<td>{$row['Patient_Last_Name']}, {$row['Patient_First_Name']}</td>";
-                        echo "<td>{$row['Doctor_Last_Name']}, {$row['Doctor_First_Name']}</td>";
+                </thead>
 
-                        // Display Clinic_Name based on Clinic_ID
-                        $clinicId = $row['Clinic_ID'];
-                        $clinicName = getClinicName($clinicId, $conn);
-                        echo "<td>{$clinicName}</td>";// Replace this with a function to fetch Clinic_Name based on Clinic_ID
+                <tbody>
 
-                       
-                        echo "<td>{$row['time_slot']}</td>";
+                            <?php
+                            // Display appointments in the HTML table
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>{$row['Appointment_ID']}</td>";
 
-                        $dateString = $row['Date'];
+                                echo "<td>{$row['Patient_Last_Name']}, {$row['Patient_First_Name']}</td>";
+                                echo "<td>{$row['Doctor_Last_Name']}, {$row['Doctor_First_Name']}</td>";
 
-                        // Create a DateTime object from the database date string
-                        $dateTime = new DateTime($dateString);
+                                // Display Clinic_Name based on Clinic_ID
+                                $clinicId = $row['Clinic_ID'];
+                                $clinicName = getClinicName($clinicId, $conn);
+                                echo "<td>{$clinicName}</td>";// Replace this with a function to fetch Clinic_Name based on Clinic_ID
 
-                        // Format the date as desired, for example, 'November 23, 2023'
-                        $formattedDate = $dateTime->format('F j, Y');
+                            
+                                echo "<td>{$row['time_slot']}</td>";
 
-                        // Output the formatted date in your HTML
-                        echo "<td>{$formattedDate}</td>";
+                                $dateString = $row['Date'];
 
+                                // Create a DateTime object from the database date string
+                                $dateTime = new DateTime($dateString);
+
+                                // Format the date as desired, for example, 'November 23, 2023'
+                                $formattedDate = $dateTime->format('F j, Y');
+
+                                // Output the formatted date in your HTML
+                                echo "<td>{$formattedDate}</td>";
+
+
+
+                                
+
+                                $status = $row['Status'];
+                                $statusClass = '';
+                            
+                                switch ($status) {
+                                    case 'Pending':
+                                        $statusClass = 'c-pill c-pill--warning'; 
+                                        break;
+                                    case 'Confirmed':
+                                        $statusClass = 'c-pill c-pill--success'; 
+                                        break;
+                                    case 'Cancelled':
+                                        $statusClass = 'c-pill c-pill--danger'; 
+                                        break;
+                        
+                            
+                                    default:
+                            
+                                        $statusClass = 'default-status';
+                                        break;
+                                }
+                            
+                                // Apply the CSS class to the Status column
+                                echo "<td><p class='{$statusClass}'>{$status}</p></td>";
+
+
+                                echo "<td>
+                                        <form action='' method='post'>
+                                            <input type='hidden' name='appointment_id' value='{$row['Appointment_ID']}'>
+                                            <select name='new_status'>
+                                                <option value='Confirmed'>Confirm</option>
+                                                <option value='Cancelled'>Cancel</option>
+                                            </select>
+                                            <input type='submit' value='Update'>
+                                        </form>
+                                    </td>";
+                        
+                                
+                            
+                            //   echo "<td><a href='viewappointment.php?appointment_id={$row['Appointment_ID']}'>View Appointment</a></td>";
+                                echo "</tr>";
+                            }
+
+
+
+                            function getClinicName($clinicId, $conn) {
+                                // Sanitize Clinic_ID to prevent SQL injection
+                                $clinicId = mysqli_real_escape_string($conn, $clinicId);
+                            
+                                // Query to fetch Clinic_Name based on Clinic_ID
+                                $query = "SELECT Clinic_Name FROM clinic_info WHERE Clinic_ID = $clinicId";
+                                $result = $conn->query($query);
+                            
+                                // Check if the query was successful
+                                if ($result === false) {
+                                    die("Error executing the query: " . $conn->error);
+                                }
+                            
+                                // Check if a row was returned
+                                if ($result->num_rows > 0) {
+                                    $row = $result->fetch_assoc();
+                                    return $row['Clinic_Name'];
+                                } else {
+                                    // Return an empty string or a default value if Clinic_ID is not found
+                                    return "Clinic Not Found";
+                                }
+                            }
 
 
                         
-
-                        $status = $row['Status'];
-                        $statusClass = '';
-                    
-                        switch ($status) {
-                            case 'Pending':
-                                $statusClass = 'c-pill c-pill--warning'; 
-                                break;
-                            case 'Confirmed':
-                                $statusClass = 'c-pill c-pill--success'; 
-                                break;
-                            case 'Cancelled':
-                                $statusClass = 'c-pill c-pill--danger'; 
-                                break;
-                
-                    
-                            default:
-                    
-                                $statusClass = 'default-status';
-                                break;
-                        }
-                    
-                        // Apply the CSS class to the Status column
-                        echo "<td><p class='{$statusClass}'>{$status}</p></td>";
+                            ?>
 
 
-                        echo "<td>
-                                <form action='' method='post'>
-                                    <input type='hidden' name='appointment_id' value='{$row['Appointment_ID']}'>
-                                    <select name='new_status'>
-                                        <option value='Confirmed'>Confirm</option>
-                                        <option value='Cancelled'>Cancel</option>
-                                    </select>
-                                    <input type='submit' value='Update'>
-                                </form>
-                            </td>";
-                  
-                        
-                      
-                     //   echo "<td><a href='viewappointment.php?appointment_id={$row['Appointment_ID']}'>View Appointment</a></td>";
-                        echo "</tr>";
-                    }
+                </tbody>
 
-
-
-                    function getClinicName($clinicId, $conn) {
-                        // Sanitize Clinic_ID to prevent SQL injection
-                        $clinicId = mysqli_real_escape_string($conn, $clinicId);
-                    
-                        // Query to fetch Clinic_Name based on Clinic_ID
-                        $query = "SELECT Clinic_Name FROM clinic_info WHERE Clinic_ID = $clinicId";
-                        $result = $conn->query($query);
-                    
-                        // Check if the query was successful
-                        if ($result === false) {
-                            die("Error executing the query: " . $conn->error);
-                        }
-                    
-                        // Check if a row was returned
-                        if ($result->num_rows > 0) {
-                            $row = $result->fetch_assoc();
-                            return $row['Clinic_Name'];
-                        } else {
-                            // Return an empty string or a default value if Clinic_ID is not found
-                            return "Clinic Not Found";
-                        }
-                    }
-
-
-                  
-                    ?>
-
-                </table>
-            </div>
+            </table>
+        </div>
 
 
       

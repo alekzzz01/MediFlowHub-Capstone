@@ -3,16 +3,14 @@
 require '../users/db.php';
 
 
-$sql = "SELECT doctors_table.*, clinic_info.Clinic_Name
-        FROM doctors_table
-        JOIN clinic_info ON doctors_table.Clinic_ID = clinic_info.Clinic_ID";
-
-$result = $conn->query($sql);
-
-// Close the database connection (you should do this when you're done fetching data)
-$conn->close();
 
 ?>
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,12 +19,12 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | List of Doctors </title>
+    <title>Admin | Add Patient</title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="style/admin-viewalldoctor.css">
+    <link rel="stylesheet" type="text/css" href="style/admin-addpatient.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,44 +32,6 @@ $conn->close();
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-
-
-
-            <!-- Include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-
-<!-- Include DataTables JS -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-
-<!-- Include DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-
-
-
-<script defer>
-    $(document).ready(function () {
-        // Initialize DataTable with additional options
-        $('#myTable').DataTable({
-            "lengthMenu": [10, 25, 50, 75, 100],
-            "pageLength": 10,
-            "pagingType": "full_numbers",
-            "language": {
-                "lengthMenu": "Show _MENU_ entries",
-                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                "infoEmpty": "Showing 0 to 0 of 0 entries",
-                "infoFiltered": "(filtered from _MAX_ total entries)",
-                "paginate": {
-                    "first": "First",
-                    "last": "Last",
-                    "next": "Next",
-                    "previous": "Previous"
-                }
-            }
-        });
-    });
-
-    /* Other scripts and functions */
-</script>
 
 
 
@@ -112,7 +72,7 @@ $conn->close();
                 
         
 
-                <li class="active">
+                <li >
                     <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
@@ -120,15 +80,16 @@ $conn->close();
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="admin-adddoctor.php">Add/Delete Doctor</a>
-                            <a href="#">View All Doctor</a>
+                            <a href="admin-adddoctor.php">Add New Patient</a>
+                            <a href="admin-viewalldoctor.php">View All Patient</a>
+                          
                           
                     </div>
 
                 </li>
 
 
-                <li>
+                <li class="active">
                     <button class="dropdown-btn">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
@@ -140,6 +101,7 @@ $conn->close();
                             <a href="admin-viewallpatient.php">View All Patient</a>
                           
                     </div>
+
 
                 </li>
 
@@ -172,99 +134,67 @@ $conn->close();
 
     <div class="main--content">
 
-<div class="header--wrapper">
-
-
-
- 
-<div class="menu-search">
+        <div class="header--wrapper">
+         
+            <div class="menu-search">
             
-            <i class='bx bx-menu' id="menu-toggle"></i>
+                        <i class='bx bx-menu' id="menu-toggle"></i>
 
-            
-
-</div>
-
-
-<div class="navigation">
-
-<p>ADMIN <span>/ LIST OF DOCTOR</span></p>
+            </div>
+           
+        
+           
+        </div>
 
 
 
-</div>
+<div class="first-container">
 
-  
-
+    <form method="post" action="admin-adddoctor.php" class="add">
 
 
    
 
+    </form>
+
+
+   
+
+             
+
+
+    <form method="post" action="admin-adddoctor.php" id="deleteForm">
+
+
+   
+
+    </form>
+
+
+
+
+
+
+
+       
 
 
 </div>
 
 
 
-<div class="inside-container">
-    <div class="rectangle">
-    <table id="myTable" class="display">
-    <thead id="thead" >
-    <tr>
-        <th>Doctor ID</th>
-        <th>Email</th>
-        <th>Full Name</th>
-        <th>Specialty</th>
-        <th>Experience</th>
-        <th>Fee</th>
-        <th>Clinic</th>
-        <th>Phone Number</th>
-       <!--  <th>Schedule Availability</th>
-        <th>View</th> -->
-    </tr>
-    </thead>
+ 
 
-    <tbody>
-
-
-    <?php
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>{$row['doctor_id']}</td>";
-                echo "<td>{$row['Email']}</td>";
-                echo "<td>{$row['First_Name']} {$row['Last_Name']}</td>";
-                echo "<td>{$row['Specialty']}</td>";
-                echo "<td>{$row['Experience']} yrs.</td>";
-                echo "<td>₱" . number_format($row['Fee'], 2) . "</td>";
-                echo "<td>{$row['Clinic_Name']}</td>";
-                echo "<td>{$row['Phone_Number']}</td>";
-                // echo "<td>{$row['Schedule_Availability']}</td>";
-                // Uncomment the line below if needed
-                // echo "<td>{$row['View']}</td>";
-                echo "</tr>";
-            }
-    ?>
-
-
-</tbody>
-         
-
-        </table>
     </div>
 
 
 
 
-</div>
-
-
-
-
-</div>
 
 
 
     <script src="script/script.js"></script>
+
 
 
     <script> 
@@ -285,9 +215,8 @@ for (i = 0; i < dropdown.length; i++) {
   });
 }
 
-
-    </script>
-
+</script>
+    
 
 
 

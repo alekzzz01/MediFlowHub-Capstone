@@ -7,7 +7,7 @@ if (!isset($_SESSION["username"])) {
     exit;
 }
 
-// Display the user's first name
+
 $firstName = $_SESSION["first_name"];
 
 

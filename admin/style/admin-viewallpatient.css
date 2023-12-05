@@ -518,41 +518,30 @@ margin-top: 36px;
 
 
 
-table {
-    font-family: 'Poppins', sans-serif;
-   font-weight: var(--fw-normal);
-   font-size: 16px;
-    color: #424242;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-
-.request{
-    margin-top: 32px;
-    border-radius: 8px;
-    background: #6C70DC;
-    border: none;
-    outline: none;
-    padding: 16px 32px;
-    color: #FFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;    
-}
 
 table p {
     padding: 0;
     margin: 0;
 
 }
+
+
+
+
+
+.navigation p {
+    color:  var(--clr-primary-color);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.navigation span {
+    color: var(--clr-text-lessopacity);
+}
+
+
+
 
 
 

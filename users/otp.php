@@ -30,15 +30,16 @@ if (isset($_POST["verify"])) {
         // Concatenate individual OTP digits
         $enteredOTP = $_POST["otp1"] . $_POST["otp2"] . $_POST["otp3"] . $_POST["otp4"] . $_POST["otp5"] . $_POST["otp6"];
 
-        if ($enteredOTP == $storedOTP) {
-            // OTP is correct, redirect to the dashboard
-            echo "<script>alert('Correct OTP. Redirecting to Dashboard.'); window.location='dashboard.php';</script>";
-
-            exit;
+               
+        if ($_SESSION["role"] == "admin") {
+            // Redirect to admin dashboard or perform admin-specific actions
+            header("Location: ../admin/admin-dashboard.php");
         } else {
-            echo "<script>alert('Incorrect OTP. Please try again.'); window.location='login.php';</script>";
-            exit;
+            // Redirect to user dashboard or perform user-specific actions
+            header("Location: dashboard.php");
         }
+        exit;
+
     } else {
         // Handle the case where 'OTP' key is not present in the array
         echo "<script>alert('Error: OTP not found for the user.');</script>";
@@ -84,22 +85,37 @@ if (isset($_POST["verify"])) {
 
 
 
-<form action="" method="post">
+            <form action="" method="post" id="otpForm">
     <div class="input-field">
-        <input type="number" name="otp1" />
-        <input type="number" name="otp2" />
-        <input type="number" name="otp3" />
-        <input type="number" name="otp4" />
-        <input type="number" name="otp5" />
-        <input type="number" name="otp6" />
+        <input type="number" name="otp1" maxlength="1" oninput="moveToNextInput(this, 'otp2')" />
+        <input type="number" name="otp2" maxlength="1" oninput="moveToNextInput(this, 'otp3')" />
+        <input type="number" name="otp3" maxlength="1" oninput="moveToNextInput(this, 'otp4')" />
+        <input type="number" name="otp4" maxlength="1" oninput="moveToNextInput(this, 'otp5')" />
+        <input type="number" name="otp5" maxlength="1" oninput="moveToNextInput(this, 'otp6')" />
+        <input type="number" name="otp6" maxlength="1" oninput="moveToNextInput(this, null)" />
     </div>
 
     <button type="submit" name="verify">Verify OTP</button>
 </form>
 
 
-
-
+<script>
+    function moveToNextInput(currentInput, nextInputName) {
+        const currentInputValue = currentInput.value;
+        if (currentInputValue.length === 1) {
+            const nextInput = nextInputName ? document.getElementsByName(nextInputName)[0] : null;
+            if (nextInput) {
+                nextInput.focus();
+            }
+        } else if (currentInputValue.length === 0) {
+            // Handle backspacing
+            const previousInput = currentInput.previousElementSibling;
+            if (previousInput) {
+                previousInput.focus();
+            }
+        }
+    }
+</script>
 
 
 </body>

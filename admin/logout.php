@@ -2,8 +2,8 @@
 session_start();
 
 // Check if the user is already logged in, if not, redirect to the login page
-if (empty($_SESSION["id"])) {
-    header("Location: adminlogin.php");
+if (empty($_SESSION["user_id"])) {
+    header("Location: ../users/login.php");
     exit();
 }
 
@@ -11,6 +11,6 @@ if (empty($_SESSION["id"])) {
 session_destroy();
 
 // Redirect the user to the login page
-header("Location: adminlogin.php");
+header("Location: ../users/login.php");
 exit();
 ?>

@@ -3,9 +3,7 @@
 require '../users/db.php';
 
 
-$sql = "SELECT doctors_table.*, clinic_info.Clinic_Name
-        FROM doctors_table
-        JOIN clinic_info ON doctors_table.Clinic_ID = clinic_info.Clinic_ID";
+$sql = "SELECT * FROM patients_table";
 
 $result = $conn->query($sql);
 
@@ -21,12 +19,12 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | List of Doctors </title>
+    <title>Admin | List of Patients </title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="style/admin-viewalldoctor.css">
+    <link rel="stylesheet" type="text/css" href="style/admin-viewallpatient.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,8 +34,7 @@ $conn->close();
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
 
-
-            <!-- Include jQuery library -->
+        <!-- Include jQuery library -->
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
 <!-- Include DataTables JS -->
@@ -72,7 +69,6 @@ $conn->close();
 
     /* Other scripts and functions */
 </script>
-
 
 
 
@@ -112,7 +108,7 @@ $conn->close();
                 
         
 
-                <li class="active">
+                <li >
                     <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
@@ -121,14 +117,14 @@ $conn->close();
 
                     <div class="dropdown-container">
                             <a href="admin-adddoctor.php">Add/Delete Doctor</a>
-                            <a href="#">View All Doctor</a>
+                            <a href="admin-viewalldoctor.php">View All Doctor</a>
                           
                     </div>
 
                 </li>
 
 
-                <li>
+                <li class="active">
                     <button class="dropdown-btn">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
@@ -140,6 +136,7 @@ $conn->close();
                             <a href="admin-viewallpatient.php">View All Patient</a>
                           
                     </div>
+
 
                 </li>
 
@@ -181,18 +178,19 @@ $conn->close();
             
             <i class='bx bx-menu' id="menu-toggle"></i>
 
-            
+       
 
 </div>
 
 
 <div class="navigation">
 
-<p>ADMIN <span>/ LIST OF DOCTOR</span></p>
+<p>ADMIN <span>/ LIST OF PATIENTS</span></p>
 
 
 
 </div>
+
 
   
 
@@ -211,43 +209,39 @@ $conn->close();
     <table id="myTable" class="display">
     <thead id="thead" >
     <tr>
-        <th>Doctor ID</th>
-        <th>Email</th>
+        <th>Patient ID</th>
         <th>Full Name</th>
-        <th>Specialty</th>
-        <th>Experience</th>
-        <th>Fee</th>
-        <th>Clinic</th>
-        <th>Phone Number</th>
-       <!--  <th>Schedule Availability</th>
-        <th>View</th> -->
+        <th>Date of Birth</th>
+        
     </tr>
     </thead>
 
     <tbody>
 
-
     <?php
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>{$row['doctor_id']}</td>";
-                echo "<td>{$row['Email']}</td>";
-                echo "<td>{$row['First_Name']} {$row['Last_Name']}</td>";
-                echo "<td>{$row['Specialty']}</td>";
-                echo "<td>{$row['Experience']} yrs.</td>";
-                echo "<td>₱" . number_format($row['Fee'], 2) . "</td>";
-                echo "<td>{$row['Clinic_Name']}</td>";
-                echo "<td>{$row['Phone_Number']}</td>";
-                // echo "<td>{$row['Schedule_Availability']}</td>";
-                // Uncomment the line below if needed
-                // echo "<td>{$row['View']}</td>";
+                echo "<td>{$row['Patient_id']}</td>";
+                echo "<td>{$row['Last_Name']}, {$row['First_Name']} </td>";
+
+                $dateString = $row['Date_of_Birth'];
+
+                // Create a DateTime object from the database date string
+                $dateTime = new DateTime($dateString);
+
+                // Format the date as desired, for example, 'November 23, 2023'
+                $formattedDate = $dateTime->format('F j, Y');
+
+                // Output the formatted date in your HTML
+                echo "<td>{$formattedDate}</td>";
+                
+            
                 echo "</tr>";
             }
     ?>
 
 
 </tbody>
-         
 
         </table>
     </div>

@@ -505,106 +505,53 @@ li.active button span  {
 
 
 
+.inside-container{
+    overflow-x: auto;
+border-radius: 4px;
+background-color: white ;
+border: 1px solid #dddddd;
 
+padding: 30px 30px;
+margin-top: 36px;
 
-
-.first-container h1 {
-
-    font-weight: var(--fw-semibold);
-    margin: 0;
-    padding: 0;
-    margin-top: 36px;
-    font-size: 36px;
 }
 
 
 
-.info-available p {
-    margin: 0;
+
+
+table p {
     padding: 0;
-    margin-top: 8px;
-    margin-bottom: 36px;
+    margin: 0;
+
+}
+
+
+
+
+.navigation p {
+    color:  var(--clr-primary-color);
     font-weight: var(--fw-medium);
-    color: var(--clr-text);
+    letter-spacing: 0.5px;
+    margin: 0;
 }
 
-
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 36px;
-    align-items: center;
-
-    margin-top: 36px;
-
-
-
-
-
-}
-
-
-.card-box {
-    display: flex;
-    align-items: center;
-
-    background-color: white;
-    border-radius: 8px;
-    
-   
-    gap: 56px;
-
-    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
-    padding: 24px 24px;
-}
-
-.card-box i {
-    font-size: 24px;
-    padding: 12px;
-    border-radius: 24px;
-}
-
-
-.bxs-bed {
-    color: var(--clr-button-color);
-    background-color: #F1EDFB;
-}
-
-.bxs-group {
-    color: var(--clr-primary-color);
-    background-color: #d3f3fa;
-}
-
-.bxs-wallet {
-    color: #DA9470;
-    background-color: #fce8de;
-}
-
-.bxs-ambulance {
-    color: #E25782;
-    background-color: #fcd6e2;
-}
-
-
-.text-number {
-    font-weight: var(--fw-bold);
-}
-
-.text-patients {
+.navigation span {
     color: var(--clr-text-lessopacity);
 }
 
 
-.chart-container {
-    background-color: white;
-    margin-top: 36px;
-    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
-    border-radius: 8px;
-    padding: 24px 24px;
-    height: 1000px;
-    
 
-}
+
+
+
+
+
+
+
+
+
+
 
 
 

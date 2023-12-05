@@ -1,6 +1,6 @@
 <?php
 
-require 'admin-db.php';
+require '../users/db.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -210,8 +210,8 @@ $conn->close();
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="admin-adddoctor.css">
-    <link rel="stylesheet" href="transitions.css">
+    <link rel="stylesheet" type="text/css" href="style/admin-adddoctor.css">
+    <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -290,32 +290,32 @@ $conn->close();
         
 
                 <li class="active">
-                    <button class="dropdown-btn">
+                <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="admin-adddoctor.php">Add New Patient</a>
-                            <a href="admin-viewalldoctor.php">View All Patient</a>
-                          
+                            <a href="admin-adddoctor.php">Add/Delete Doctor</a>
+                            <a href="admin-viewalldoctor.php">View All Doctor</a>
                           
                     </div>
+
 
                 </li>
 
 
                 <li>
-                    <button class="dropdown-btn">
+                <button class="dropdown-btn">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
                         <i class='bx bxs-chevron-down'></i>
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="#">Add New Patient</a>
-                            <a href="#">View All Patient</a>
+                            <a href="admin-addpatient.php">Add New Patient</a>
+                            <a href="admin-viewallpatient.php">View All Patient</a>
                           
                     </div>
 
