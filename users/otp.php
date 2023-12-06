@@ -31,7 +31,7 @@ if (isset($_POST["verify"])) {
         $enteredOTP = $_POST["otp1"] . $_POST["otp2"] . $_POST["otp3"] . $_POST["otp4"] . $_POST["otp5"] . $_POST["otp6"];
 
                
-        if ($_SESSION["role"] == "admin") {
+        if ($_SESSION["role"] == "Admin") {
             // Redirect to admin dashboard or perform admin-specific actions
             header("Location: ../admin/admin-dashboard.php");
         } else {
