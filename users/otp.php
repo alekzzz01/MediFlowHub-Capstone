@@ -88,36 +88,56 @@ if (isset($_POST["verify"])) {
 
 
 
-            <form action="" method="post" id="otpForm">
-    <div class="input-field">
-        <input type="number" name="otp1" maxlength="1" oninput="moveToNextInput(this, 'otp2')" />
-        <input type="number" name="otp2" maxlength="1" oninput="moveToNextInput(this, 'otp3')" />
-        <input type="number" name="otp3" maxlength="1" oninput="moveToNextInput(this, 'otp4')" />
-        <input type="number" name="otp4" maxlength="1" oninput="moveToNextInput(this, 'otp5')" />
-        <input type="number" name="otp5" maxlength="1" oninput="moveToNextInput(this, 'otp6')" />
-        <input type="number" name="otp6" maxlength="1" oninput="moveToNextInput(this, null)" />
-    </div>
+<form action="" method="post" id="otpForm">
+
+
+            <div class="otp-input-fields">
+    <input type="number" name="otp1" class="otp__digit otp__field__1">
+    <input type="number" name="otp2" class="otp__digit otp__field__2">
+    <input type="number" name="otp3" class="otp__digit otp__field__3">
+    <input type="number" name="otp4" class="otp__digit otp__field__4">
+    <input type="number" name="otp5" class="otp__digit otp__field__5">
+    <input type="number" name="otp6" class="otp__digit otp__field__6">
+        </div>
+
+
 
     <button type="submit" name="verify">Verify OTP</button>
 </form>
 
 
+    </div>
+
 <script>
-    function moveToNextInput(currentInput, nextInputName) {
-        const currentInputValue = currentInput.value;
-        if (currentInputValue.length === 1) {
-            const nextInput = nextInputName ? document.getElementsByName(nextInputName)[0] : null;
-            if (nextInput) {
-                nextInput.focus();
-            }
-        } else if (currentInputValue.length === 0) {
-            // Handle backspacing
-            const previousInput = currentInput.previousElementSibling;
-            if (previousInput) {
-                previousInput.focus();
-            }
-        }
-    }
+   var otp_inputs = document.querySelectorAll(".otp__digit")
+var mykey = "0123456789".split("")
+otp_inputs.forEach((_)=>{
+  _.addEventListener("keyup", handle_next_input)
+})
+function handle_next_input(event){
+  let current = event.target
+  let index = parseInt(current.classList[1].split("__")[2])
+  current.value = event.key
+  
+  if(event.keyCode == 8 && index > 1){
+    current.previousElementSibling.focus()
+  }
+  if(index < 6 && mykey.indexOf(""+event.key+"") != -1){
+    var next = current.nextElementSibling;
+    next.focus()
+  }
+  var _finalKey = ""
+  for(let {value} of otp_inputs){
+      _finalKey += value
+  }
+  if(_finalKey.length == 6){
+    document.querySelector("#_otp").classList.replace("_notok", "_ok")
+    document.querySelector("#_otp").innerText = _finalKey
+  }else{
+    document.querySelector("#_otp").classList.replace("_ok", "_notok")
+    document.querySelector("#_otp").innerText = _finalKey
+  }
+}
 </script>
 
 

@@ -11,6 +11,13 @@ require '../config/config.php';
 
 session_start();
 
+
+
+if (isset($_GET['timeout']) && $_GET['timeout'] === 'true') {
+    echo "<script>alert('Session Timeout. Please login again.')</script>";
+}
+
+
 if (isset($_POST["submit"])) {
     $username = filter_var($_POST["username"], FILTER_VALIDATE_EMAIL);
     $password = $_POST["password"];

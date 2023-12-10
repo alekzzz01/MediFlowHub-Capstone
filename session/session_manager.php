@@ -9,6 +9,10 @@ function start_secure_session() {
         // Session expired, destroy it
         session_unset();
         session_destroy();
+
+        // Redirect to login page
+        header("Location: login.php");
+        exit();
     } else {
         // Update last activity time
         $_SESSION['last_activity'] = time();

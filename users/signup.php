@@ -1,11 +1,5 @@
 <?php
-
-
-
-
 session_start();
-
-
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -25,99 +19,85 @@ if (isset($_POST["submit"])) {
     $nowtime = date("Y-m-d");
 
     // Check if the checkbox is checked
-    if (isset($_POST["agree-terms"]) && $_POST["agree-terms"] == "on") {
-        $agreeTerms = true;
-    } else {
-        $agreeTerms = false;
+    $agreeTerms = isset($_POST["agree-terms"]) && $_POST["agree-terms"] === "on";
+
+    if (!$agreeTerms) {
+        $_SESSION['errorMessage'] = "Please agree to the Terms and Conditions.";
+        header("Location: signup.php");
+        exit();
     }
 
-    // Check if the user has agreed to the terms
-    if (!$agreeTerms) {
-        echo "<script>alert('Please agree to the Terms and Conditions.')</script>";
-    } else {
-        // Check if the user already exists
-        $query = "SELECT * FROM users WHERE Email = '$username'";
-        $result = mysqli_query($conn, $query);
+    // Check if the user already exists
+    $query = "SELECT * FROM users WHERE Email = '$username'";
+    $result = mysqli_query($conn, $query);
 
-        if (mysqli_num_rows($result) > 0) {
-        
+    if (mysqli_num_rows($result) > 0) {
+        $_SESSION['errorMessage'] = "Username already exists.";
+        header("Location: signup.php");
+        exit();
+    }
 
-            $_SESSION['errorMessage'] = "Username already exists.";
+    // Validate the username as a valid email address
+    if (!filter_var($username, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['errorMessage'] = "Username is not a valid email address.";
+        header("Location: signup.php");
+        exit();
+    }
+
+    // Remove spaces and non-numeric characters from the phone number
+    $phonenumber = preg_replace('/[^0-9]/', '', $phonenumber);
+
+    // Check if the phone number is exactly 11 digits long and starts with "09"
+    if (strlen($phonenumber) !== 11 || substr($phonenumber, 0, 2) !== '09') {
+        $_SESSION['errorMessage'] = "Phone number is not a valid mobile number.";
+        header("Location: signup.php");
+        exit();
+    }
+
+    $first_name = mb_convert_case($first_name, MB_CASE_TITLE);
+    $last_name = mb_convert_case($last_name, MB_CASE_TITLE);
+    $username = strtolower($username);
+
+    if ($password === $confpassword) {
+        // Hash the password for security (you should use a proper hashing method)
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Generate a unique token for email verification
+        $token = md5($username);
+
+        // Insert user data into the database with the token
+        $query = "INSERT INTO users (`Last Name`, `First Name`, Email, password, `Phone Number`, `Role`, `Token`, `Date_Added`) VALUES (?, ?, ?, ?, ?, 'User', ?, '$nowtime')";
+        $stmt = mysqli_prepare($conn, $query);
+
+        // Bind the parameters
+        mysqli_stmt_bind_param($stmt, "ssssss", $last_name, $first_name, $username, $hashedPassword, $phonenumber, $token);
+
+        // Execute the statement
+        mysqli_stmt_execute($stmt);
+
+        // Check if the insertion was successful
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            // Send verification email
+            sendVerificationEmail($username, $token, $first_name);
+            $_SESSION['successMessage'] = "Registration Successful , A verification link has been sent to your email account";
             header("Location: signup.php");
             exit();
-
-            
         } else {
-            // Validate the username as a valid email address
-            if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-                // Username is a valid email address
-            } else {
-            
-                $_SESSION['errorMessage'] = "Username is not a valid email address.";
-                header("Location: signup.php");
-                exit();
-            }
-
-            // Remove spaces and non-numeric characters from the phone number
-            $phonenumber = preg_replace('/[^0-9]/', '', $phonenumber);
-
-            // Check if the phone number is exactly 11 digits long and starts with "09"
-            if (strlen($phonenumber) == 11 && substr($phonenumber, 0, 2) == '09') {
-                // Phone number is valid
-            } else {
-               
-                $_SESSION['errorMessage'] = "Phone number is not a valid mobile number.";
-                header("Location: signup.php");
-                exit();
-            }
-
-            $first_name = mb_convert_case($first_name, MB_CASE_TITLE);
-            $last_name = mb_convert_case($last_name, MB_CASE_TITLE);
-            $username = strtolower($username);
-
-            if ($password == $confpassword) {
-                // Hash the password for security (you should use a proper hashing method)
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-                // Generate a unique token for email verification
-                $token = md5($username);
-
-                // Insert user data into the database with the token
-                $query = "INSERT INTO users (`Last Name`, `First Name`, Email, password, `Phone Number`, `Role`, `Token`, `Date_Added`) VALUES (?, ?, ?, ?, ?, 'User', ?, '$nowtime')";
-                $stmt = mysqli_prepare($conn, $query);
-
-                // Bind the parameters
-                mysqli_stmt_bind_param($stmt, "ssssss", $last_name, $first_name, $username, $hashedPassword, $phonenumber, $token);
-
-                // Execute the statement
-                mysqli_stmt_execute($stmt);
-
-                // Check if the insertion was successful
-                if (mysqli_stmt_affected_rows($stmt) > 0) {
-                    // Send verification email
-                    sendVerificationEmail($username, $token, $first_name);
-                    $_SESSION['successMessage'] = "Registration Successfully Added, Please check your Email for Verification";
-                    header("Location: signup.php");
-                    exit();
-                } else {
-                    $_SESSION['errorMessage'] = "Error registering user";
-                    header("Location: signup.php");
-                    exit();
-    
-                }
-
-                // Close the statement
-                mysqli_stmt_close($stmt);
-            } else {
-           
-                $_SESSION['errorMessage'] = "Password does not match";
-                header("Location: signup.php");
-                exit();
-
-            }
+            $_SESSION['errorMessage'] = "Error registering user";
+            header("Location: signup.php");
+            exit();
         }
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
+    } else {
+        $_SESSION['errorMessage'] = "Password does not match";
+        header("Location: signup.php");
+        exit();
     }
 }
+
+
 
 function sendVerificationEmail($username, $token, $first_name)
 {
@@ -297,42 +277,37 @@ $(document).ready(function() {
 });
 </script>
 
-
 <script>
+        var successMessage = "<?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ''; ?>";
+        if (successMessage !== "") {
+            var successMessageDiv = document.getElementById("successMessage");
+            successMessageDiv.textContent = successMessage;
+            successMessageDiv.style.display = "block";
 
-          // Check if the success parameter is present in the URL
-var successMessage = "<?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ''; ?>";
-if (successMessage !== "") {
-    var successMessageDiv = document.getElementById("successMessage");
-    successMessageDiv.textContent = successMessage;
-    successMessageDiv.style.display = "block";
+            // Scroll to the success message for better visibility
+            successMessageDiv.scrollIntoView({
+                behavior: 'smooth'
+            });
 
-    // Scroll to the success message for better visibility
-    successMessageDiv.scrollIntoView({ behavior: 'smooth' });
+            // Remove the session variable to avoid displaying the message on subsequent page loads
+            <?php unset($_SESSION['successMessage']); ?>;
+        }
 
-    // Remove the session variable to avoid displaying the message on subsequent page loads
-    <?php unset($_SESSION['successMessage']); ?>
-}
+        var errorMessage = "<?php echo isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : ''; ?>";
 
-var errorMessage = "<?php echo isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : ''; ?>";
+        if (errorMessage !== "") {
+            var errorMessageDiv = document.getElementById("errorMessage");
+            errorMessageDiv.textContent = errorMessage;
+            errorMessageDiv.style.display = "block";
 
-if (errorMessage !== "") {
-    var errorMessageDiv = document.getElementById("errorMessage");
-    errorMessageDiv.textContent = errorMessage;
-    errorMessageDiv.style.display = "block";
+            // Scroll to the error message for better visibility
+            errorMessageDiv.scrollIntoView({
+                behavior: 'smooth'
+            });
 
-    // Scroll to the error message for better visibility
-    errorMessageDiv.scrollIntoView({ behavior: 'smooth' });
-
-    <?php unset($_SESSION['errorMessage']); ?>
-}
-
-
-
-
-
-
-</script>
+            <?php unset($_SESSION['errorMessage']); ?>;
+        }
+    </script>
 
 </body>
 </html>

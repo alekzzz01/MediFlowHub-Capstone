@@ -1,6 +1,55 @@
 <?php 
 
 
+require '../session/db.php';
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+session_start();
+
+if (isset($_POST["submit"])) {
+    // Get user input
+    $email = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Validate user input
+    if (empty($email) || empty($password)) {
+        echo "Please enter both email and password.";
+    } else {
+        // Fetch user from the database
+        $stmt = $conn->prepare("SELECT * FROM doctors_table WHERE Email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            // Verify the password
+            if (password_verify($password, $row["Password"])) {
+                // Password is correct, set session variables
+                $_SESSION['doctor_id'] = $row["doctor_id"];
+                $_SESSION['username'] = $row["Email"];
+                $_SESSION["first_name"] = $row["First_Name"];
+
+                // Redirect to the dashboard or any other page
+                header("Location: doctor-dashboard.php");
+                exit();
+            } else {
+                echo "<script>alert('Incorrect password.')</script>";
+            }
+        } else {
+            echo "<script>alert('User not found.')</script>";
+        }
+
+        $stmt->close();
+    }
+}
+
+$conn->close();
 ?>
 
 
@@ -14,7 +63,7 @@
     <title>Doctor Login | MediFlowHub</title>
 
 
-    <link rel="icon" href="images/Logo.png" type="image/png">
+    <link rel="icon" href="images/logo.png" type="image/png">
 
 
 
@@ -44,7 +93,7 @@
 
     
 
-        <form action="login.php" method="post">
+        <form method="post">
 
           <h1>Login</h1>
                 

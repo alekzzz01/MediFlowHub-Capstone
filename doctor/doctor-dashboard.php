@@ -1,3 +1,29 @@
+<?php
+// Include the session manager
+require_once '../session/session_manager.php';
+require '../session/db.php';
+
+
+start_secure_session();
+
+
+// Check if the user is logged in
+if (!isset($_SESSION['doctor_id'])) {
+    header("Location: doctor-login.php");
+    exit();
+}
+
+// Access the first name
+$firstName = $_SESSION['first_name'];
+?>
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -178,7 +204,7 @@
 
     <div class="first-container">
 
-        <h1>Welcome, Dr. Elzie!</h1>
+        <h1>Welcome, <?php echo $firstName; ?>!</h1>
 
 
         <div class="inside-container">

@@ -2,6 +2,8 @@
 include('../session/auth.php');
 require_once '../session/session_manager.php';
 require '../session/db.php';
+require '../config/config.php';
+
 
 
 start_secure_session();
@@ -51,11 +53,11 @@ function sendDoctorDetailsEmail($to, $subject, $message) {
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
-    $mail->Username = 'tatsuki.ryota01@gmail.com';
-    $mail->Password = 'pazq ktqa mbfi ljzi';
+    $mail->Username = SMTP_USERNAME; // Use the constant
+    $mail->Password = SMTP_PASSWORD; // Use the constant
 
 
-    $mail->setFrom('tatsuki.ryota01@gmail.com', 'Doctors Account'); // Replace with your email and name
+    $mail->setFrom(SMTP_USERNAME, 'Doctors Account'); // Replace with your email and name
     $mail->addAddress($to);
     $mail->Subject = $subject;
     $mail->Body = $message;
