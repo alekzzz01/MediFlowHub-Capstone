@@ -1,5 +1,9 @@
 <?php
-session_start();
+
+require_once '../session/session_manager.php';
+require '../session/db.php';
+
+start_secure_session();
 
 if (!isset($_SESSION["user_id"])) {
     // If the user is not logged in, redirect to the login page
@@ -7,7 +11,6 @@ if (!isset($_SESSION["user_id"])) {
     exit;
 }
 
-require 'db.php';
 
 if (isset($_POST["verify"])) {
     // Set $userId based on the user session

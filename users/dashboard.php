@@ -1,18 +1,27 @@
 <?php
-session_start();
+// Include the session manager
+require_once '../session/session_manager.php';
+require '../session/db.php';
+
+
+start_secure_session();
+
+
+// Your other code here
 
 if (!isset($_SESSION["username"])) {
-
     header("Location: login.php"); 
     exit;
 }
-
 
 $firstName = $_SESSION["first_name"];
 
 
 
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

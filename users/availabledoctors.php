@@ -1,5 +1,5 @@
 <?php
-include('db.php'); // Include the database connection file
+require '../session/db.php';
 
 // Query the database to get doctor information from the 'doctors-table'
 $sql = "SELECT doctor_id, First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors_table`"; // Enclose the table name in backticks

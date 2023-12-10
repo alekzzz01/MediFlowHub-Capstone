@@ -1,7 +1,19 @@
-
-
 <?php
-include 'db.php'; // Include your database connection file
+
+
+
+
+session_start();
+
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../vendor/autoload.php';
+require '../session/db.php'; // Include your database connection file
+require '../config/config.php';
 
 if (isset($_POST["submit"])) {
     $last_name = $_POST["Last-name"];
@@ -10,6 +22,7 @@ if (isset($_POST["submit"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $confpassword = $_POST["confirm-password"];
+    $nowtime = date("Y-m-d");
 
     // Check if the checkbox is checked
     if (isset($_POST["agree-terms"]) && $_POST["agree-terms"] == "on") {
@@ -27,17 +40,22 @@ if (isset($_POST["submit"])) {
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
-            echo "<script>alert('Username already exists');</script>";
+        
+
+            $_SESSION['errorMessage'] = "Username already exists.";
             header("Location: signup.php");
             exit();
+
+            
         } else {
             // Validate the username as a valid email address
             if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
                 // Username is a valid email address
             } else {
-                echo "<script>alert('Username is not a valid email address.')</script>";
+            
+                $_SESSION['errorMessage'] = "Username is not a valid email address.";
                 header("Location: signup.php");
-                exit; // Stop further processing if the email is invalid
+                exit();
             }
 
             // Remove spaces and non-numeric characters from the phone number
@@ -47,11 +65,11 @@ if (isset($_POST["submit"])) {
             if (strlen($phonenumber) == 11 && substr($phonenumber, 0, 2) == '09') {
                 // Phone number is valid
             } else {
-                echo "<script>alert('Phone number is not a valid mobile number.')</script>";
+               
+                $_SESSION['errorMessage'] = "Phone number is not a valid mobile number.";
                 header("Location: signup.php");
-                exit; // Stop further processing if the phone number is invalid
+                exit();
             }
-
 
             $first_name = mb_convert_case($first_name, MB_CASE_TITLE);
             $last_name = mb_convert_case($last_name, MB_CASE_TITLE);
@@ -61,36 +79,77 @@ if (isset($_POST["submit"])) {
                 // Hash the password for security (you should use a proper hashing method)
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-                $query = "INSERT INTO users (`Last Name`, `First Name`, Email, password, `Phone Number`, `Role`) VALUES (?, ?, ?, ?, ?, 'user')";
+                // Generate a unique token for email verification
+                $token = md5($username);
+
+                // Insert user data into the database with the token
+                $query = "INSERT INTO users (`Last Name`, `First Name`, Email, password, `Phone Number`, `Role`, `Token`, `Date_Added`) VALUES (?, ?, ?, ?, ?, 'User', ?, '$nowtime')";
                 $stmt = mysqli_prepare($conn, $query);
-                
+
                 // Bind the parameters
-                mysqli_stmt_bind_param($stmt, "sssss", $last_name, $first_name, $username, $hashedPassword, $phonenumber, );
-                
+                mysqli_stmt_bind_param($stmt, "ssssss", $last_name, $first_name, $username, $hashedPassword, $phonenumber, $token);
+
                 // Execute the statement
                 mysqli_stmt_execute($stmt);
-                
+
                 // Check if the insertion was successful
                 if (mysqli_stmt_affected_rows($stmt) > 0) {
-                    echo "<script>alert('Registration Successful');</script>";
-                 
+                    // Send verification email
+                    sendVerificationEmail($username, $token, $first_name);
+                    $_SESSION['successMessage'] = "Registration Successfully Added, Please check your Email for Verification";
+                    header("Location: signup.php");
+                    exit();
                 } else {
-                    echo "<script>alert('Error registering user');</script>";
+                    $_SESSION['errorMessage'] = "Error registering user";
+                    header("Location: signup.php");
+                    exit();
+    
                 }
-                
+
                 // Close the statement
                 mysqli_stmt_close($stmt);
-
-
-                //otp
-
-
-
             } else {
-                echo "<script>alert('Password Does Not Match');</script>";
+           
+                $_SESSION['errorMessage'] = "Password does not match";
+                header("Location: signup.php");
+                exit();
+
             }
         }
     }
+}
+
+function sendVerificationEmail($username, $token, $first_name)
+{
+    // Create a new PHPMailer instance
+    $mail = new PHPMailer(true);
+    //Server settings
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->Username = SMTP_USERNAME; // Use the constant
+    $mail->Password = SMTP_PASSWORD; // Use the constant
+    $mail->Subject = 'Email Verification';
+
+ 
+
+    $verificationLink = 'http://localhost/dashboard/Capstone_PhpFiles/Capstone/session/verify.php?token=' . $token;
+    $mail->Body = 'Hi' . " " . $first_name . ',' . "\n" . "\n" . 
+    'We just need to verify your email address before you can access our website.' . "\n" .  "\n" . 
+    'To verify your email, please click this link: (' . $verificationLink . ').' . "\n" .  "\n" . 
+    'Thanks! - The MediflowHub Team';
+
+
+
+        
+
+    $mail->setFrom(SMTP_USERNAME, 'MediflowHub | Email Account Verification');
+    $mail->addAddress($username);
+
+    // Send the email
+    $mail->send();
 }
 ?>
 
@@ -111,6 +170,8 @@ if (isset($_POST["submit"])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FOR ICONS-->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -143,13 +204,17 @@ if (isset($_POST["submit"])) {
             <div class="input-box">
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <i class="fa fa-eye-slash toggle" id="eye-password" onclick="togglePasswordVisibility('password', 'eye-password')"></i>
+            
             </div>
+
+            <div id="password-strength" class="password-strength"></div>
 
             <div class="input-box">
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
                 <i class="fa fa-eye-slash toggle" id="eye-confirm-password" onclick="togglePasswordVisibility('confirm-password', 'eye-confirm-password')"></i>
             </div>
 
+       
           
 
 
@@ -165,7 +230,18 @@ if (isset($_POST["submit"])) {
             
             <button name="submit" class="Signup-btn" type="submit"><span>Signup</span></button>
             <p class="Login-btn"> Already have an Account? <a href="login.php"><span>Login</span></a></p>
+
+
+            
+        <div id="successMessage" class="success-message"><i class='bx bx-check'></i> Registration Successful,
+        Please check your email for Verification</div>
+
+        <div id="errorMessage" class="error-message"><i class='bx bxs-x-circle'></i> </div>
+
         </form>
+
+
+        
     </div>
 
     <script>
@@ -184,6 +260,80 @@ if (isset($_POST["submit"])) {
             }
         }
     </script>
+
+
+
+<script>
+$(document).ready(function() {
+    $('#password').on('input', function() {
+        checkPasswordStrength($(this).val());
+    });
+
+    function checkPasswordStrength(password) {
+        // Reset the password strength indicator
+        $('#password-strength').html('');
+
+        // Minimum length
+        if (password.length < 8) {
+            $('#password-strength').append('<span style="color:red;">Minimum 8 characters</span>');
+            return;
+        }
+
+        // Letters and numbers
+        if (!password.match(/([a-zA-Z])/) || !password.match(/([0-9])/)) {
+            $('#password-strength').append('<span style="color:red;">Include both letters and numbers</span>');
+            return;
+        }
+
+        // Special characters
+        if (!password.match(/([!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])/)) {
+            $('#password-strength').append('<span style="color:red;">Include at least one special character</span>');
+            return;
+        }
+
+        // Strong password
+        $('#password-strength').append('<span style="color:green;">Strong password</span>');
+    }
+});
+</script>
+
+
+<script>
+
+          // Check if the success parameter is present in the URL
+var successMessage = "<?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ''; ?>";
+if (successMessage !== "") {
+    var successMessageDiv = document.getElementById("successMessage");
+    successMessageDiv.textContent = successMessage;
+    successMessageDiv.style.display = "block";
+
+    // Scroll to the success message for better visibility
+    successMessageDiv.scrollIntoView({ behavior: 'smooth' });
+
+    // Remove the session variable to avoid displaying the message on subsequent page loads
+    <?php unset($_SESSION['successMessage']); ?>
+}
+
+var errorMessage = "<?php echo isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : ''; ?>";
+
+if (errorMessage !== "") {
+    var errorMessageDiv = document.getElementById("errorMessage");
+    errorMessageDiv.textContent = errorMessage;
+    errorMessageDiv.style.display = "block";
+
+    // Scroll to the error message for better visibility
+    errorMessageDiv.scrollIntoView({ behavior: 'smooth' });
+
+    <?php unset($_SESSION['errorMessage']); ?>
+}
+
+
+
+
+
+
+</script>
+
 </body>
 </html>
 

@@ -1,9 +1,22 @@
 <?php
+include('../session/auth.php');
+require_once '../session/session_manager.php';
+require '../session/db.php';
+
+start_secure_session();
 
 
-require '../users/db.php';
+// Set HTTP headers to prevent caching
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Pragma: no-cache");
 
-session_start();
+echo '<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>';
+
+
 
 if (!isset($_SESSION["username"])) {
 
@@ -11,7 +24,14 @@ if (!isset($_SESSION["username"])) {
     exit;
 }
 
-// Display the user's first name
+if (!check_admin_role()) {
+    // Redirect to the user dashboard or show an error message
+    header('Location: ../users/dashboard.php');
+    exit();
+}
+
+
+
 $firstName = $_SESSION["first_name"];
 
 

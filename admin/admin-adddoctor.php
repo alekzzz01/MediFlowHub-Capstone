@@ -1,6 +1,27 @@
 <?php
+include('../session/auth.php');
+require_once '../session/session_manager.php';
+require '../session/db.php';
 
-require '../users/db.php';
+
+start_secure_session();
+
+
+
+
+if (!isset($_SESSION["username"])) {
+
+    header("Location: ../users/login.php"); 
+    exit;
+}
+
+if (!check_admin_role()) {
+    // Redirect to the user dashboard or show an error message
+    header('Location: ../users/dashboard.php');
+    exit();
+}
+
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -9,8 +30,6 @@ use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php';
 
 
-
-session_start();
 
 
 // Function to generate a random 16-character password

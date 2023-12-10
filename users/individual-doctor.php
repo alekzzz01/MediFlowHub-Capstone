@@ -1,5 +1,6 @@
 <?php
-include('db.php'); // Include the database connection file
+require '../session/db.php';
+require_once '../session/session_manager.php';
 
 if (isset($_GET['doctor_id'])) {
     $doctor_id = $_GET['doctor_id'];

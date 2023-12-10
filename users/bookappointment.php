@@ -1,6 +1,7 @@
 <?php
 
-require 'db.php';
+require '../session/db.php';
+require_once '../session/session_manager.php';
 
 // Check connection
 if ($conn->connect_error) {

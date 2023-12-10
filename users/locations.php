@@ -1,5 +1,6 @@
 <?php
-include('db.php'); // Include the database connection file
+require '../session/db.php';
+require_once '../session/session_manager.php';
 
 
 $sql = "SELECT Clinic_ID, Clinic_Name, Address FROM `clinic_info`";

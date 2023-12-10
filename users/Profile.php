@@ -1,11 +1,15 @@
 <?php
+require '../session/db.php';// Include your database connection file
+require_once '../session/session_manager.php';
+
+
 session_start(); // Start the session
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username']; // Retrieve the username from the session
 
     // Include the database connection file
-    include 'db.php';
+    require '../session/db.php';
 
     $sql = "SELECT `Last Name`, `First Name`, Email, Password, `Phone Number` FROM users WHERE Email = '$username'";
     $result = $conn->query($sql);

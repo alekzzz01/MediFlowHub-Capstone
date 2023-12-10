@@ -1,6 +1,6 @@
 <?php
 // Include your database connection file
-require 'db.php';
+require '../session/db.php';
 
 
 

@@ -1,14 +1,24 @@
 <?php 
 
 
-require '../users/db.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+include('../session/auth.php');
+require_once '../session/session_manager.php';
+require '../session/db.php';
 
 
-require '../vendor/autoload.php';
+start_secure_session(); 
+
+
+if (!isset($_SESSION["username"])) {
+    header("Location: ../users/login.php"); 
+    exit;
+}
+
+if (!check_admin_role()) {
+    // Redirect to the user dashboard or show an error message
+    header('Location: ../users/dashboard.php');
+    exit();
+}
 
 
 

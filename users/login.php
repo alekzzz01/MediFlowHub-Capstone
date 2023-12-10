@@ -1,58 +1,61 @@
-<?php 
+<?php
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
 require '../vendor/autoload.php';
+require '../session/db.php';
+require '../config/config.php';
 
-?>
-
-
-
-<?php
-require 'db.php';
+session_start();
 
 if (isset($_POST["submit"])) {
-    $username = $_POST["username"];
+    $username = filter_var($_POST["username"], FILTER_VALIDATE_EMAIL);
     $password = $_POST["password"];
 
-    // Validate the username as a valid email address
-    if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-        // Username is a valid email address
-    } else {
+    if (!$username) {
         echo "<script>alert('Username is not a valid email address.')</script>";
-        exit; // Stop further processing if the email is invalid
+        exit;
     }
 
-    // Retrieve the user's information from the database
-    $query = "SELECT * FROM users WHERE Email = '$username'";
-    $result = mysqli_query($conn, $query);
+    $query = "SELECT * FROM users WHERE Email = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
     if (!$result) {
-        die("Database query error: " . mysqli_error($conn));
+        error_log("Database query error: " . mysqli_error($conn));
+        echo "<script>alert('An unexpected error occurred. Please try again.');</script>";
+        exit;
     }
 
     if (mysqli_num_rows($result) == 1) {
         // User found, check the password
         $row = mysqli_fetch_assoc($result);
-        $hashedPassword = $row["Password"]; // Check the column name in your database
+        $hashedPassword = $row["Password"];
 
         if (password_verify($password, $hashedPassword)) {
-            // Password is correct, log the user in
-            session_start();
-            $_SESSION["user_id"] = $row["user_id"]; // Assuming 'user_id' is the column name in your database
+            $_SESSION["user_id"] = $row["user_id"];
             $_SESSION["username"] = $row["Email"];
             $_SESSION["first_name"] = $row["First Name"];
-            $_SESSION["role"] = $row["Role"]; // Assuming 'Role' is the column name in your database
+            $_SESSION["role"] = $row["Role"];
 
+            // Check if the OTP is still valid
+            if ($row["OTP_expiration"] && strtotime($row["OTP_expiration"]) > time()) {
+                // OTP is still valid, redirect to the appropriate dashboard
+                header("Location: " . ($_SESSION["role"] == "Admin" ? "../admin/admin-dashboard.php" : "dashboard.php"));
+                exit;
+            }
 
-
+            // Generate and send a new OTP
             $otp = mt_rand(100000, 999999);
+            $otpExpiration = date('Y-m-d H:i:s', strtotime('+1 month'));
 
             // Send the OTP via email
             $mail = new PHPMailer(true);
-
             try {
                 //Server settings
                 $mail->isSMTP();
@@ -60,16 +63,13 @@ if (isset($_POST["submit"])) {
                 $mail->SMTPAuth = true;
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
-                $mail->Username = 'tatsuki.ryota01@gmail.com';
-                $mail->Password = 'pazq ktqa mbfi ljzi';
+                $mail->Username = SMTP_USERNAME; // Use the constant
+                $mail->Password = SMTP_PASSWORD; // Use the constant
 
-
-                $mail->setFrom('tatsuki.ryota01@gmail.com', 'MediflowHub | OTP Verification');
+                $mail->setFrom(SMTP_USERNAME, 'MediflowHub | OTP Verification');
                 $mail->addAddress($username); 
 
-                
-
-    
+       
                 // Content
                 $mail->isHTML(true);
                 $mail->Subject = 'OTP Code for Login';
@@ -80,8 +80,15 @@ if (isset($_POST["submit"])) {
         
                 $lastInsertedUserId = $row["user_id"]; // Use the user ID from the fetched user data
 
-                $query = "UPDATE users SET OTP = '$otp' WHERE user_id = $lastInsertedUserId";
+                $query = "UPDATE users SET OTP = '$otp', OTP_expiration = '$otpExpiration' WHERE user_id = $lastInsertedUserId";
                 mysqli_query($conn, $query);
+            
+
+
+                    
+                // Store the OTP in a cookie with a 1-month expiration
+                setcookie("otp", $otp, time() + 30 * 24 * 60 * 60); // 1 month expiration
+                setcookie("otp_expiration", $otpExpiration, time() + 30 * 24 * 60 * 60);
 
                 header("Location: otp.php");
                 exit;

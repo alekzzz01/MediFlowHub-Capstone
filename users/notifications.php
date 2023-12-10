@@ -1,6 +1,9 @@
 <?php
 
 
+require_once '../session/session_manager.php';
+
+
 
 ?>
 
