@@ -1,7 +1,11 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 require_once '../session/session_manager.php';
 require '../session/db.php';
+require '../config/config.php';
 
 start_secure_session();
 
@@ -47,6 +51,66 @@ if (isset($_POST["verify"])) {
         // Handle the case where 'OTP' key is not present in the array
         echo "<script>alert('Error: OTP not found for the user.');</script>";
     }
+
+    
+} 
+
+
+elseif (isset($_POST["resendOTP"])) {
+  // Resend OTP logic
+
+  // Generate a new OTP
+  $newOTP = mt_rand(100000, 999999);
+
+  // Set $userId based on the user session
+  $userId = $_SESSION["user_id"];
+
+  // Update the user's OTP in the database
+  $updateQuery = "UPDATE users SET OTP = $newOTP WHERE user_id = $userId";
+  $updateResult = mysqli_query($conn, $updateQuery);
+
+  if (!$updateResult) {
+      die("Database query error: " . mysqli_error($conn));
+  }
+
+  
+  $to = $_SESSION["username"]; 
+  $subject = "Your New OTP";
+  $message = "Your new OTP is: $newOTP";
+  
+
+  require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+
+  require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+  require '../vendor/phpmailer/phpmailer/src/Exception.php';
+
+  $mail = new PHPMailer(true);
+
+  try {
+     //Server settings
+     $mail->isSMTP();
+     $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+     $mail->SMTPAuth = true;
+     $mail->SMTPSecure = 'tls';
+     $mail->Port = 587;
+     $mail->Username = SMTP_USERNAME; // Use the constant
+     $mail->Password = SMTP_PASSWORD; // Use the constant
+
+     $mail->setFrom(SMTP_USERNAME, 'MediflowHub | OTP Verification');
+     $mail->addAddress($to); 
+
+      $mail->isHTML(true);
+      $mail->Subject = $subject;
+      $mail->Body = $message;
+
+      $mail->send();
+
+      echo "<script>alert('OTP has been resent. Check your email.'); window.onload = function() { startCountdown(); }</script>";
+
+
+  } catch (Exception $e) {
+      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  }
 }
 ?>
 
@@ -59,6 +123,7 @@ if (isset($_POST["verify"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP | MediFlowHub </title>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
     <link rel="icon" href="images/Logo.png" type="image/png">
 
 
@@ -75,7 +140,36 @@ if (isset($_POST["verify"])) {
 
     
     <link rel="stylesheet" href="otp.css">
+
     <script src="otp.js" defer></script>
+
+  
+
+    <script>
+    function startCountdown() {
+        let seconds = 30;
+        const countdownElement = document.getElementById('countdown');
+        const resendButton = document.getElementById('resendOTPButton');
+
+        const countdownInterval = setInterval(function () {
+            countdownElement.innerHTML = `Resend OTP in ${seconds} seconds`;
+
+            if (seconds === 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = '';
+                resendButton.disabled = false;
+            }
+
+            seconds--;
+        }, 1000);
+
+        resendButton.disabled = true;
+    }
+</script>
+
+
+
+
 
 </head>
 <body>
@@ -102,14 +196,37 @@ if (isset($_POST["verify"])) {
 
 
 
-    <button type="submit" name="verify">Verify OTP</button>
+    <button type="submit" name="verify" class="Verify-btn">Verify OTP</button>
 </form>
 
+<form action="" method="post" id="resendOTPForm">
+
+    <div class="container-resend">
+    <p>Didn't receive OTP?</p>
+    <button type="submit" name="resendOTP" id="resendOTPButton" class="Resend">Resend OTP</button>
 
     </div>
 
+
+</form>
+
+
+<div id="countdown"></div>
+
+
+
+  </div>
+
+
+
+
+</body>
+
+
 <script>
-   var otp_inputs = document.querySelectorAll(".otp__digit")
+
+
+var otp_inputs = document.querySelectorAll(".otp__digit")
 var mykey = "0123456789".split("")
 otp_inputs.forEach((_)=>{
   _.addEventListener("keyup", handle_next_input)
@@ -140,8 +257,6 @@ function handle_next_input(event){
 }
 </script>
 
-
-</body>
 
 
 
