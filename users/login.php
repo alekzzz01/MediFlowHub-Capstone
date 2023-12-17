@@ -1,9 +1,7 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
 
 require '../vendor/autoload.php';
 require '../session/db.php';
@@ -11,12 +9,9 @@ require '../config/config.php';
 
 session_start();
 
-
-
 if (isset($_GET['timeout']) && $_GET['timeout'] === 'true') {
     echo "<script>alert('Session Timeout. Please login again.')</script>";
 }
-
 
 if (isset($_POST["submit"])) {
     $username = filter_var($_POST["username"], FILTER_VALIDATE_EMAIL);
@@ -42,6 +37,13 @@ if (isset($_POST["submit"])) {
     if (mysqli_num_rows($result) == 1) {
         // User found, check the password
         $row = mysqli_fetch_assoc($result);
+
+        // Check if the user is activated
+        if ($row["Activated"] == 0) {
+            header("Location: ../session/resendemail.php");
+            exit;
+        }
+
         $hashedPassword = $row["Password"];
 
         if (password_verify($password, $hashedPassword)) {
@@ -50,63 +52,56 @@ if (isset($_POST["submit"])) {
             $_SESSION["first_name"] = $row["First Name"];
             $_SESSION["role"] = $row["Role"];
 
-            // Check if the OTP is still valid
-            if ($row["OTP_expiration"] && strtotime($row["OTP_expiration"]) > time()) {
-                // OTP is still valid, redirect to the appropriate dashboard
-                header("Location: " . ($_SESSION["role"] == "Admin" ? "../admin/admin-dashboard.php" : "dashboard.php"));
+            if ($row["OTP_used"] == 0) {
+                // Generate and send a new OTP
+                $otp = mt_rand(100000, 999999);
+                $otpExpiration = date('Y-m-d H:i:s', strtotime('+1 month'));
+
+                // Send the OTP via email
+                $mail = new PHPMailer(true);
+                try {
+                    //Server settings
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+                    $mail->Username = SMTP_USERNAME; // Use the constant
+                    $mail->Password = SMTP_PASSWORD; // Use the constant
+
+                    $mail->setFrom(SMTP_USERNAME, 'MediflowHub | OTP Verification');
+                    $mail->addAddress($username);
+
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'OTP Code for Login';
+                    $mail->Body    = 'Your OTP is: ' . $otp;
+
+                    $mail->send();
+                    echo "<script>alert('OTP sent to your email.');</script>";
+
+                    $lastInsertedUserId = $row["user_id"];
+
+                    $query = "UPDATE users SET OTP = '$otp', OTP_expiration = '$otpExpiration' WHERE user_id = $lastInsertedUserId";
+                    mysqli_query($conn, $query);
+
+                    // Store the OTP in a cookie with a 1-month expiration
+                    setcookie("otp", $otp, time() + 30 * 24 * 60 * 60); // 1 month expiration
+                    setcookie("otp_expiration", $otpExpiration, time() + 30 * 24 * 60 * 60);
+
+                    header("Location: otp.php");
+                    exit;
+                } catch (Exception $e) {
+                    echo "<script>alert('Error sending OTP. Please try again. Error: " . $e->getMessage() . "');</script>";
+                }
+            } else {
+                if ($_SESSION["role"] == "Admin") {
+                    header("Location: ../admin/admin-dashboard.php");
+                } else {
+                    header("Location: dashboard.php");
+                }
                 exit;
             }
-
-            // Generate and send a new OTP
-            $otp = mt_rand(100000, 999999);
-            $otpExpiration = date('Y-m-d H:i:s', strtotime('+1 month'));
-
-            // Send the OTP via email
-            $mail = new PHPMailer(true);
-            try {
-                //Server settings
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
-                $mail->Username = SMTP_USERNAME; // Use the constant
-                $mail->Password = SMTP_PASSWORD; // Use the constant
-
-                $mail->setFrom(SMTP_USERNAME, 'MediflowHub | OTP Verification');
-                $mail->addAddress($username); 
-
-       
-                // Content
-                $mail->isHTML(true);
-                $mail->Subject = 'OTP Code for Login';
-                $mail->Body    = 'Your OTP is: ' . $otp;
-        
-                $mail->send();
-                echo "<script>alert('OTP sent to your email.');</script>";
-        
-                $lastInsertedUserId = $row["user_id"]; // Use the user ID from the fetched user data
-
-                $query = "UPDATE users SET OTP = '$otp', OTP_expiration = '$otpExpiration' WHERE user_id = $lastInsertedUserId";
-                mysqli_query($conn, $query);
-            
-
-
-                    
-                // Store the OTP in a cookie with a 1-month expiration
-                setcookie("otp", $otp, time() + 30 * 24 * 60 * 60); // 1 month expiration
-                setcookie("otp_expiration", $otpExpiration, time() + 30 * 24 * 60 * 60);
-
-                header("Location: otp.php");
-                exit;
-            } catch (Exception $e) {
-                echo "<script>alert('Error sending OTP. Please try again. Error: " . $e->getMessage() . "');</script>";
-            }
-
-     
-
-
-          
         } else {
             echo "<script>alert('Incorrect password.')</script>";
         }
@@ -115,6 +110,7 @@ if (isset($_POST["submit"])) {
     }
 }
 ?>
+
 
 
 

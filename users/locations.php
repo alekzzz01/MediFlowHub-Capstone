@@ -3,6 +3,17 @@ require '../session/db.php';
 require_once '../session/session_manager.php';
 
 
+start_secure_session();
+
+
+// Your other code here
+
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); 
+    exit;
+}
+
+
 $sql = "SELECT Clinic_ID, Clinic_Name, Address FROM `clinic_info`";
 $result = $conn->query($sql);
 

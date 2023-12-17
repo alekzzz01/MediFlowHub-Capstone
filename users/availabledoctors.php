@@ -1,5 +1,18 @@
 <?php
 require '../session/db.php';
+require_once '../session/session_manager.php';
+
+
+
+start_secure_session();
+
+
+// Your other code here
+
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); 
+    exit;
+}
 
 // Query the database to get doctor information from the 'doctors-table'
 $sql = "SELECT doctor_id, First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors_table`"; // Enclose the table name in backticks

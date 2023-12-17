@@ -22,7 +22,8 @@ if (isset($_SESSION['username'])) {
         $phone_no = $row['Phone Number'];
     }
 } else {
-    // Handle the case where the username is not available in the session
+    header("Location: login.php"); 
+    exit;
 }
 ?>
 

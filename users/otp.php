@@ -15,13 +15,13 @@ if (!isset($_SESSION["user_id"])) {
     exit;
 }
 
-
+// Existing code for OTP verification
 if (isset($_POST["verify"])) {
     // Set $userId based on the user session
     $userId = $_SESSION["user_id"];
 
-    // Retrieve the user's OTP from the database
-    $query = "SELECT OTP FROM users WHERE user_id = $userId";
+    // Retrieve the user's OTP, OTP_used, and OTP_expiration from the database
+    $query = "SELECT OTP, OTP_used, OTP_expiration, role FROM users WHERE user_id = $userId";
     $result = mysqli_query($conn, $query);
 
     if (!$result) {
@@ -31,52 +31,70 @@ if (isset($_POST["verify"])) {
     $row = mysqli_fetch_assoc($result);
 
     // Check if the 'OTP' key exists in the $row array
-    if (isset($row["OTP"])) {
+    if (isset($row["OTP"]) && isset($row["OTP_used"])) {
         $storedOTP = $row["OTP"];
+        $otpExpiration = strtotime($row["OTP_expiration"]);
 
         // Concatenate individual OTP digits
         $enteredOTP = $_POST["otp1"] . $_POST["otp2"] . $_POST["otp3"] . $_POST["otp4"] . $_POST["otp5"] . $_POST["otp6"];
 
-               
-        if ($_SESSION["role"] == "Admin") {
-            // Redirect to admin dashboard or perform admin-specific actions
-            header("Location: ../admin/admin-dashboard.php");
-        } else {
-            // Redirect to user dashboard or perform user-specific actions
-            header("Location: dashboard.php");
-        }
-        exit;
+        if ($otpExpiration > time()) {
+            // Check if entered OTP is correct
+            if ($enteredOTP === $storedOTP) {
+                // Update OTP_used to mark the OTP as used
+                $updateQuery = "UPDATE users SET OTP_used = 1 WHERE user_id = $userId";
+                $updateResult = mysqli_query($conn, $updateQuery);
 
+                if (!$updateResult) {
+                    die("Database query error: " . mysqli_error($conn));
+                }
+
+                // Redirect to the appropriate dashboard based on the user's role
+                $dashboardURL = ($row["role"] == "Admin") ? "../admin/admin-dashboard.php" : "dashboard.php";
+                header("Location: $dashboardURL");
+                exit;
+            } else {
+                echo "<script>alert('Incorrect OTP. Please try again.');</script>";
+            }
+        } else {
+            // OTP has expired, reset OTP_used to 0
+            $updateExpiredQuery = "UPDATE users SET OTP_used = 0 WHERE user_id = $userId";
+            $updateExpiredResult = mysqli_query($conn, $updateExpiredQuery);
+
+            if (!$updateExpiredResult) {
+                die("Database query error: " . mysqli_error($conn));
+            }
+
+            echo "<script>alert('OTP has expired. Please request a new one.');</script>";
+        }
     } else {
         // Handle the case where 'OTP' key is not present in the array
         echo "<script>alert('Error: OTP not found for the user.');</script>";
     }
 
-    
-} 
+
+} elseif (isset($_POST["resendOTP"])) {
+    // Resend OTP logic
+
+    // Generate a new OTP
+    $newOTP = mt_rand(100000, 999999);
+
+    // Set $userId based on the user session
+    $userId = $_SESSION["user_id"];
+
+    // Update the user's OTP and reset OTP_used in the database
+    $updateQuery = "UPDATE users SET OTP = $newOTP, OTP_used = 0 WHERE user_id = $userId";
+    $updateResult = mysqli_query($conn, $updateQuery);
+
+    if (!$updateResult) {
+        die("Database query error: " . mysqli_error($conn));
+    }
+
+    $to = $_SESSION["username"];
+    $subject = "Your New OTP";
+    $message = "Your new OTP is: $newOTP";
 
 
-elseif (isset($_POST["resendOTP"])) {
-  // Resend OTP logic
-
-  // Generate a new OTP
-  $newOTP = mt_rand(100000, 999999);
-
-  // Set $userId based on the user session
-  $userId = $_SESSION["user_id"];
-
-  // Update the user's OTP in the database
-  $updateQuery = "UPDATE users SET OTP = $newOTP WHERE user_id = $userId";
-  $updateResult = mysqli_query($conn, $updateQuery);
-
-  if (!$updateResult) {
-      die("Database query error: " . mysqli_error($conn));
-  }
-
-  
-  $to = $_SESSION["username"]; 
-  $subject = "Your New OTP";
-  $message = "Your new OTP is: $newOTP";
   
 
   require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';

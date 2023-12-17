@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prescribe - Appointment <?php echo $appointmentId; ?></title>
+    <title>Prescribe - Appointment No. <?php echo $appointmentId; ?></title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">

@@ -5,6 +5,18 @@ require_once '../session/session_manager.php';
 
 
 
+start_secure_session();
+
+
+// Your other code here
+
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); 
+    exit;
+}
+
+
+
 ?>
 
 <!DOCTYPE html>

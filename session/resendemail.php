@@ -1,6 +1,69 @@
 <?php 
 
+
+session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../vendor/autoload.php';
 require 'db.php';
+require '../config/config.php';
+
+if (isset($_POST["submit"])) {
+    $username = $_POST["email"]; // Assuming you have an input field named "email" in your form
+
+    // Check if the user exists
+    $query = "SELECT * FROM users WHERE Email = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) > 0) {
+        $userData = mysqli_fetch_assoc($result);
+        $token = $userData['Token'];
+        $first_name = $userData['First Name'];
+
+        // Resend verification email
+        sendVerificationEmail($username, $token, $first_name);
+        $_SESSION['successMessage'] = "Verification email resent successfully.";
+        header("Location: resendemail.php");
+        exit();
+    } else {
+        $_SESSION['errorMessage'] = "User not found. Please make sure you entered the correct email address.";
+        header("Location: resendemail.php");
+        exit();
+    }
+}
+
+function sendVerificationEmail($username, $token, $first_name)
+{
+    // Create a new PHPMailer instance
+    $mail = new PHPMailer(true);
+    // Server settings
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->Username = SMTP_USERNAME; // Use the constant
+    $mail->Password = SMTP_PASSWORD; // Use the constant
+    $mail->Subject = 'Email Verification';
+
+    $verificationLink = 'http://localhost/dashboard/Capstone_PhpFiles/Capstone/session/verify.php?token=' . $token;
+    $mail->Body = 'Hi' . " " . $first_name . ',' . "\n" . "\n" . 
+        'We just need to verify your email address before you can access our website.' . "\n" .  "\n" . 
+        'To verify your email, please click this link: (' . $verificationLink . ').' . "\n" .  "\n" . 
+        'Thanks! - The MediflowHub Team';
+
+    $mail->setFrom(SMTP_USERNAME, 'MediflowHub | Email Account Verification');
+    $mail->addAddress($username);
+
+    // Send the email
+    $mail->send();
+}
 
 
 
@@ -48,8 +111,7 @@ require 'db.php';
 
  
 
-  <form action="">
-
+  <form method="post" action="resendemail.php">
 
         <div class="inputbox">
 
@@ -65,10 +127,8 @@ require 'db.php';
 
         <div class="buttons">
 
-        <button class="resend-email">
-
+        <button type="submit" class="resend-email" name="submit">
             Resend Email
-
         </button>
 
         <a href="../users/login.php">Return to Site</a>
@@ -83,6 +143,22 @@ require 'db.php';
   </form>
 
 
+  <?php
+        // Display success or error messages
+        if (isset($_SESSION['successMessage'])) {
+            echo "<p style='color: green;'>" . $_SESSION['successMessage'] . "</p>";
+            unset($_SESSION['successMessage']);
+        }
+        if (isset($_SESSION['errorMessage'])) {
+            echo "<p style='color: red;'>" . $_SESSION['errorMessage'] . "</p>";
+            unset($_SESSION['errorMessage']);
+        }
+        ?>
+
+
+
+
+
 
 
 
@@ -92,6 +168,7 @@ require 'db.php';
 
 
 </div>
+
 
 
   
@@ -254,6 +331,39 @@ span {
     text-decoration: none;
     color: var(--clr-primary-color);
 }
+
+
+
+.success-message {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    color: #270;
+    background-color: #DFF2BF;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+
+.error-message {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    color: #D8000C;
+    background-color: #FFBABA;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
 
 
 
