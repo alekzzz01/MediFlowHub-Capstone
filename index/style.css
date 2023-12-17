@@ -1,0 +1,465 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+
+
+:root{
+    
+    --clr-text: #0E0E0C;
+    --clr-text-lessopacity: #62645B;
+
+    --clr-nav-bar-color: #62645B;
+
+    --clr-background-color: #292D32;
+    --clr-primary-color: #01BCD6;
+    --clr-button-color: #6C70DC;
+    
+    --clr-light: #FFF;
+    --clr-dark: #000;
+
+
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    
+
+}
+
+
+
+
+body {
+  
+
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 16px;
+    line-height: 1.5;
+
+
+
+
+
+}
+
+
+header {
+
+
+
+
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    /* box-shadow: 0 1px 6px 0 rgb(32 33 36 / 10%); */
+    
+    
+}
+
+
+
+
+
+.site-header {
+   
+    transition: box-shadow 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out; 
+}
+
+.site-header.scrolled {
+    background-color: var(--clr-light);
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 10%);
+}
+
+
+.top-header {
+    padding: 1rem 11.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--clr-primary-color);
+
+}
+
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+
+
+
+.hotlines-name {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    color: white;
+}
+
+.hotlines-name p, i {
+    margin: 0;
+}
+
+
+.social-icons {
+    font-size: 24px;
+    color: white;
+    display: flex;
+    gap: 24px;
+}
+
+.social-icons a {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+
+
+
+
+.bottom-header {
+
+
+
+    padding: 1em 11.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+
+
+
+
+
+.nav_list { 
+
+font-size: 	1rem;
+font-weight: var(--fw-regular);
+color: var(--clr-text);
+
+
+display: flex;
+margin:0; 
+padding: 0;
+list-style: none;
+
+gap: 48px;
+
+cursor: pointer;
+
+}
+
+
+.nav_list-item {
+    position: relative;
+}
+
+.nav_list-item::before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: var(--clr-text);
+    border-radius: 50%; 
+    top: -7px; 
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav_list-item:hover::before {
+    opacity: 1;
+}
+
+
+
+
+
+
+.nav_link {
+text-decoration: none;
+color: var(--clr-text);
+letter-spacing: 1px;
+}
+
+
+
+
+
+.Sign-inBtn {
+
+    text-decoration: none;
+    color: white;
+
+    padding: 10px 32px;
+    border-radius: 56px;
+background: var(--clr-primary-color);
+
+}
+
+
+
+
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+ 
+    
+
+
+
+
+
+    height: 100vh;
+}
+
+
+
+
+
+h1 {
+    font-family: 'Spectral SC', serif;
+
+    text-align: center;
+    color: var(--clr-text);
+    font-weight: var(--fw-semibold);
+    font-size: 5.25rem;
+    margin: 0;
+}
+
+.main-section p {
+    font-size: 1.25rem;
+    font-weight: var(--fw-regular);
+    text-align: center;
+}
+
+
+.a-links {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+.Get-StartedBtn {
+    border-radius: 56px;
+    background: var(--clr-primary-color);
+    padding: 16px 32px;
+    color: white;
+    text-decoration: none;
+
+}
+
+
+
+
+.btn {
+    padding: 16px 32px;
+
+    border-radius: 56px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #171717;
+    color: #fff;
+    border: none;
+
+
+    transition: all .4s;
+   }
+   
+   .btn:hover {
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 7px 0 -2px #f85959,
+     0 15px 0 -4px #39a2db,
+     0 16px 10px -3px #39a2db;
+   }
+   
+   .btn:active {
+    transition: all 0.2s;
+    transform: translateY(-5px);
+    box-shadow: 0 2px 0 -2px #f85959,
+     0 8px 0 -4px #39a2db,
+     0 12px 10px -3px #39a2db;
+   }
+
+
+
+
+
+   .cta {
+    border: none;
+    background: none;
+  }
+  
+  .cta span {
+    padding-bottom: 7px;
+    letter-spacing: 2px;
+    font-size: 16px;
+    padding-right: 15px;
+
+  }
+  
+  .cta svg {
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+  }
+  
+  .cta:hover svg {
+    transform: translateX(0);
+  }
+  
+  .cta:active svg {
+    transform: scale(0.9);
+  }
+  
+  .hover-underline-animation {
+    position: relative;
+    color: black;
+    padding-bottom: 20px;
+  }
+  
+  .hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  .cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.second-section {
+    display: flex;
+    align-items: center;
+    gap: 150px;
+    height: 100vh;
+
+
+
+    padding: 1em 11.25rem;
+
+}
+
+
+
+
+.left-title-info {
+    font-size: 24px;
+    font-weight: var(--fw-regular);
+    color: var(--clr-primary-color);
+}
+
+
+.left-info h2 {
+    font-size: 64px;
+    font-weight: var(--fw-semibold);
+    font-family: 'Spectral SC', serif;
+}
+
+
+.left-description {
+    font-size: 20px;
+    font-weight: var(--fw-regular);
+}
+
+
+
+
+
+
+.third-section {
+    height: 80vh;
+    padding: 1em 11.25rem;
+}
+
+
+.third-section h2 {
+    text-align: center;
+    font-family: 'Spectral SC', serif;
+    font-weight: var(--fw-semibold);
+    font-size: 64px;
+    margin-bottom: 60px;
+}
+
+.container {
+
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 500px;
+    height: 400px;
+    padding: 24px;
+
+}
+
+.box p {
+    font-weight: var(--fw-medium);
+    color: var(--clr-text);
+    font-size: 20px;
+}
+
+
+.box a {
+
+
+    gap: 4px;
+    text-decoration: none;
+    color: var(--clr-text);
+}
+
+.box a:hover {
+    text-decoration: underline;
+}
+
