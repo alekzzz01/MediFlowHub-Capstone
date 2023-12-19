@@ -80,6 +80,24 @@ $conn->close();
                     </a>
                 </li>
 
+
+                <li>
+                <button class="dropdown-btn">
+                        <i class='bx bx-plus-medical' ></i>
+                        <span>Patients</span>
+                        <i class='bx bxs-chevron-down'></i>
+                    </button>
+
+                    <div class="dropdown-container">
+                            <a href="doctor-addpatient.php">Add New Patient</a>
+                            <a href="doctor-viewallpatient.php">View All Patient</a>
+                          
+                    </div>
+
+                </li>
+
+            
+
             
        
 

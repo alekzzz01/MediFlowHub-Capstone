@@ -3,7 +3,7 @@
 function start_secure_session() {
     session_start();
 
-    $session_timeout = 10; // 30 minutes in seconds
+    $session_timeout = 1800; // 30 minutes in seconds
 
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $session_timeout)) {
         // Session expired, destroy it

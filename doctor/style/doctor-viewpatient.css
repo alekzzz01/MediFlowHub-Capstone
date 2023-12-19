@@ -2,7 +2,6 @@
 *::before,
 *::after{
     box-sizing: border-box;
-  
 }
 
 
@@ -46,9 +45,6 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-
-
-  
 
 
 
@@ -123,6 +119,21 @@ body {
     gap: 2rem;
 }
 
+.menu button {
+    padding: 0;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+   
+    gap: 2rem;
+    background-color: transparent;
+
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size:24px;
+}
+
 
 .menu i {
 
@@ -136,6 +147,13 @@ body {
     font-size: 1rem;
     font-weight: var(--fw-medium);
 } 
+
+
+.bxs-chevron-down {
+   
+ 
+    margin-right: 20px;
+}
 
 
 
@@ -159,31 +177,31 @@ body {
 
 
 
-li a i {
+li a i  {
     transition: all 0.5s ease-in-out;
 }
 
-li a span {
+li a span  {
      transition: all 0.5s ease-in-out;
     
 }
 
-li:hover a i {
+li:hover a i  {
     color: var(--clr-primary-color);
 }
 
 
-li.active a i {
+li.active a i  {
     color: var(--clr-primary-color);
 }
 
 
-li:hover a span {
+li:hover a span  {
     color: var(--clr-light);
 }
 
 
-li.active a span {
+li.active a span  {
     color: var(--clr-light); 
 }
 
@@ -211,20 +229,35 @@ li.active a span {
 }
 
 
-.menu button {
-    padding: 0;
-    outline: none;
-    border: none;
-    display: flex;
-    align-items: center;
-   
-    gap: 2rem;
-    background-color: transparent;
 
-    font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-regular);
-    font-size:24px;
+li button i  {
+    transition: all 0.5s ease-in-out;
 }
+
+li button span  {
+     transition: all 0.5s ease-in-out;
+    
+}
+
+li:hover button i  {
+    color: var(--clr-primary-color);
+}
+
+
+li.active button i  {
+    color: var(--clr-primary-color);
+}
+
+
+li:hover button span  {
+    color: var(--clr-light);
+}
+
+
+li.active button span  {
+    color: var(--clr-light); 
+}
+
 
 
 
@@ -246,22 +279,6 @@ li.active a span {
     border: none;
     outline: none;
 }
-
-
-
-
-.main--content {
-    position: relative;
-    background-color: #F6F7FB; 
-    
-    width: 100%;
-    padding: 32px 40px;
-
-}
-
-
-
-
 
 
 .header--wrapper {
@@ -471,169 +488,104 @@ li.active a span {
 
 
 
-li button i  {
-    transition: all 0.5s ease-in-out;
-}
 
-li button span  {
-     transition: all 0.5s ease-in-out;
+
+
+.main--content {
+    position: relative;
+    background-color: #F6F7FB; 
     
-}
-
-li:hover button i  {
-    color: var(--clr-primary-color);
-}
-
-
-li.active button i  {
-    color: var(--clr-primary-color);
-}
-
-
-li:hover button span  {
-    color: var(--clr-light);
-}
-
-
-li.active button span  {
-    color: var(--clr-light); 
-}
-
-
-
-
-
-
-
-
-
-.first-container h1 {
-
-    font-weight: var(--fw-semibold);
-    margin: 0;
-    padding: 0;
-    margin-top: 36px;
-    font-size: 36px;
-}
-
-
-
-.info-available p {
-    margin: 0;
-    padding: 0;
-    margin-top: 8px;
-    margin-bottom: 36px;
-    font-weight: var(--fw-medium);
-    color: var(--clr-text);
-}
-
-
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 36px;
-    row-gap: 36px;
-    align-items: start;
-
-    margin-top: 36px;
-
+    width: 100%;
+    padding: 32px 40px;
 
 }
 
 
-.card-box {
-
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
-
+.inside-container {
+    margin-top: 24px;
 
 }
 
-
-.topbox {
+.profile-view {
     display: flex;
     align-items: center;
     gap: 24px;
-    padding: 24px;
-   
+
+     background-color: white;
+     padding: 16px;
+     border-radius: 4px;
+
+     
 }
 
-.bottombox {
-
-    border-top: 0.5px solid #ccc;
-
-    padding: 12px 24px 12px 24px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-   
-}
-
-.bottombox a {
-    color: var(--clr-text-lessopacity);
+.profile-view img {
+    border-radius: 56px;
 }
 
 
-.bx-chevron-right {
+
+
+.profile-view p {
     font-size: 24px;
-    color: #000;
-
-
-}
-
-
-.card-box p {
-    margin: 0;
-}
-
-.topbox i {
-    font-size: 1rem;
-    padding: 12px;
-    border-radius: 24px;
-}
-
-
-.bxs-user {
-    color: var(--clr-button-color);
-    background-color: #F1EDFB;
-}
-
-.bxs-group {
-    color: var(--clr-primary-color);
-    background-color: #d3f3fa;
-}
-
-.bxs-bed {
-    color: #DA9470;
-    background-color: #fce8de;
-}
-
-.bxs-book-content {
-    color: #E25782;
-    background-color: #fcd6e2;
-}
-
-
-.text-box {
-    display: flex;
-}
-
-.text-patients span {
+    color: var(--clr-text-lessopacity);
     font-weight: var(--fw-semibold);
-    color: var(--clr-dark);
-    font-size: 20px;
-    margin-left: 4px;
 }
 
-.text-patients {
+
+.information-view {
+    margin-top: 24px;
+    background-color: white;
+    padding: 16px;
+
+    border-radius: 4px;
+
+
+}
+
+
+.information-view p {
+    font-weight: var(--fw-bold);
+    color: var(--clr-text-lessopacity);
+}
+
+
+.information-view span {
+    font-weight: var(--fw-regular);
     color: var(--clr-text-lessopacity);
 }
 
 
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+
+.backbtn {
+    margin-top: 24px;
+   
+    text-align: center;
+}
+
+.backbtn a {
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--clr-light);
+    background-color: var(--clr-nav-bar-color);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 768px) and (max-width: 1800px) {
 
     .main--content {
         width: 100%;
@@ -642,24 +594,52 @@ li.active button span  {
     .search-box  {
     width: 300px;
     }
+  
+    .inside-container {
+        flex-direction: column;
+        justify-content: center;
+    }
 
-
+    .available-container {
+        width: 100%;
+    }
+    .available-doctors {
+        width: 100%;
+    }
     
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 24px;
-        row-gap: 24px;
+    .schedule-container {
+        justify-content: center;
+        gap: 24px;
+    } 
 
+
+
+    .daily-progress {
+        width: 100%;
+    }
+    
+    .bottom-container {
+        width: 100%; 
+     
+    }
+
+    .conditions-slider {
+        overflow-x: scroll;
     }
 
 
-  
-  
+    
+    .appointments-box {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
 
 
 
 } 
+
 
 
 @media screen and (min-width: 0px) and (max-width: 768px) {
@@ -679,6 +659,46 @@ li.active button span  {
     }
 
  
+  
+    .inside-container {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .available-container {
+        width: 100%;
+    }
+    .available-doctors {
+        width: 100%;
+    }
+    
+    .schedule-container {
+        justify-content: center;
+        gap: 24px;
+    } 
+
+
+
+    .daily-progress {
+        width: 100%;
+    }
+    
+    .bottom-container {
+        width: 100%; 
+     
+    }
+
+    .conditions-slider {
+        overflow-x: scroll;
+    }
+
+
+    .appointments-box {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
 
 
     .sidebar {
@@ -708,27 +728,12 @@ li.active button span  {
     }
 
 
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 24px;
-        row-gap: 24px;
-
-    }
-
-
-
-
-
-
    
  
 
 
 
 } 
-
-
 
 
 
@@ -763,6 +768,10 @@ li.active button span  {
     
 
 }
+
+
+
+
 
 
 

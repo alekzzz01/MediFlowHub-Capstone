@@ -229,6 +229,40 @@ li.active a span {
 
 
 
+li button i  {
+    transition: all 0.5s ease-in-out;
+}
+
+li button span  {
+     transition: all 0.5s ease-in-out;
+    
+}
+
+li:hover button i  {
+    color: var(--clr-primary-color);
+}
+
+
+li.active button i  {
+    color: var(--clr-primary-color);
+}
+
+
+li:hover button span  {
+    color: var(--clr-light);
+}
+
+
+li.active button span  {
+    color: var(--clr-light); 
+}
+
+
+
+
+
+
+
 
 
 
@@ -470,166 +504,167 @@ li.active a span {
 }
 
 
+.first-container {
 
-li button i  {
-    transition: all 0.5s ease-in-out;
-}
+    width: 100%;
+    height: 80vh;
 
-li button span  {
-     transition: all 0.5s ease-in-out;
-    
-}
-
-li:hover button i  {
-    color: var(--clr-primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 
-li.active button i  {
-    color: var(--clr-primary-color);
-}
-
-
-li:hover button span  {
-    color: var(--clr-light);
-}
-
-
-li.active button span  {
-    color: var(--clr-light); 
-}
-
-
-
-
-
-
-
-
-
-.first-container h1 {
-
-    font-weight: var(--fw-semibold);
-    margin: 0;
-    padding: 0;
-    margin-top: 36px;
-    font-size: 36px;
-}
-
-
-
-.info-available p {
-    margin: 0;
-    padding: 0;
-    margin-top: 8px;
-    margin-bottom: 36px;
-    font-weight: var(--fw-medium);
-    color: var(--clr-text);
-}
-
-
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 36px;
-    row-gap: 36px;
-    align-items: start;
-
-    margin-top: 36px;
-
-
-}
-
-
-.card-box {
+.inside-container {
+    width: 1000px;
+    border-radius: 4px;
 
     background-color: white;
     border-radius: 8px;
     box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
 
+}
+
+.title-1 {
+    background-color: #EEEEEE;
+
+    padding: 20px;
+
+  
+}
+
+
+.title-1 p {
+    margin: 0;
+    font-weight: var(--fw-medium);
+
+
 
 }
 
 
-.topbox {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 24px;
-   
+
+form {
+    padding: 20px;
+    background-color: white;
 }
 
-.bottombox {
+.input-container span {
+    color: red;
+}
 
-    border-top: 0.5px solid #ccc;
 
-    padding: 12px 24px 12px 24px;
+.input-container {
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-   
-}
-
-.bottombox a {
-    color: var(--clr-text-lessopacity);
-}
 
 
-.bx-chevron-right {
-    font-size: 24px;
-    color: #000;
+    margin-bottom: 24px;
 
 
 }
 
 
-.card-box p {
-    margin: 0;
-}
-
-.topbox i {
-    font-size: 1rem;
+.input-container input {
+    width: 750px;
     padding: 12px;
-    border-radius: 24px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-family: 'Poppins',   sans-serif;
+
 }
 
 
-.bxs-user {
-    color: var(--clr-button-color);
-    background-color: #F1EDFB;
-}
 
-.bxs-group {
-    color: var(--clr-primary-color);
-    background-color: #d3f3fa;
-}
+.input-container select {
+    width: 750px;
+    padding: 12px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 
-.bxs-bed {
-    color: #DA9470;
-    background-color: #fce8de;
-}
+    font-family: 'Poppins',   sans-serif;
 
-.bxs-book-content {
-    color: #E25782;
-    background-color: #fcd6e2;
 }
 
 
-.text-box {
-    display: flex;
+
+
+
+
+
+
+
+
+.success-message {
+ display: none;
+    margin: 16px;
+    color: #270;
+    background-color: #DFF2BF;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-.text-patients span {
-    font-weight: var(--fw-semibold);
-    color: var(--clr-dark);
-    font-size: 20px;
-    margin-left: 4px;
+
+.errorMessage {
+    display: none;
+    margin: 16px;
+  
+    color: #D8000C;
+    background-color: #FFBABA;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-.text-patients {
-    color: var(--clr-text-lessopacity);
+
+
+.savebtn {
+
+
+    cursor: pointer;
+
+    padding: 12px 24px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+
+    background:var(--clr-button-color);
+
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size: 1rem;
 }
+
+
+
+.backbtn {
+    margin-top: 24px;
+    text-align: center;
+    
+}
+
+.backbtn a {
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--clr-light);
+    background-color: var(--clr-nav-bar-color);
+
+}
+
+
+
+
+
+
+
+
 
 
 

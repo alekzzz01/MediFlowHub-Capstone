@@ -13,6 +13,7 @@ if (!isset($_SESSION['doctor_id'])) {
     exit();
 }
 
+
 // Access the first name
 $firstName = $_SESSION['first_name'];
 
@@ -107,6 +108,23 @@ $totalAppointments = $rowAppointments['total_appointments'];
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                     </a>
+                </li>
+
+
+                <li>
+                <button class="dropdown-btn">
+                        <i class='bx bx-plus-medical' ></i>
+                        <span>Patients</span>
+                        <i class='bx bxs-chevron-down'></i>
+                    </button>
+
+                    <div class="dropdown-container">
+                            <a href="doctor-addpatient.php">Add New Patient</a>
+                            <a href="doctor-viewallpatient.php">View All Patient</a>
+                          
+                    </div>
+
+
                 </li>
 
             
@@ -215,7 +233,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
         </div>
 
 
-        <div class="first-container">
+<div class="first-container">
 
 <h1>Welcome, <?php echo $firstName; ?></h1>
 
@@ -414,6 +432,32 @@ $totalAppointments = $rowAppointments['total_appointments'];
     chart.draw(data, options);
   }
 </script>
+
+
+
+<script> 
+
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+dropdown[i].addEventListener("click", function() {
+this.classList.toggle("active");
+var dropdownContent = this.nextElementSibling;
+if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+} else {
+  dropdownContent.style.display = "block";
+}
+});
+}
+
+
+</script>
+
+
+
 
 
  
