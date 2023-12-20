@@ -124,7 +124,7 @@ if (isset($_POST["submit"])) {
     <title>Login | MediFlowHub</title>
 
 
-    <link rel="icon" href="images/Logo.png" type="image/png">
+    <link rel="icon" href="images/logo.png" type="image/png">
 
 
 
