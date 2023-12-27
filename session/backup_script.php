@@ -1,5 +1,11 @@
 <?php
- include 'db.php';
+$host = 'localhost'; // Update with your database host
+$database = 'u804534960_usersform'; // Update with your database name
+$username = 'u804534960_MediflowHub'; // Update with your database username
+$password = 'MK,H|eJkf`iYEhI@1'; 
+
+
+
 
 // Backup location
 $backupDir = 'E:/Backup/';
