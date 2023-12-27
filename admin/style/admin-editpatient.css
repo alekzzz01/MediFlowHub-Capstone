@@ -2,6 +2,7 @@
 *::before,
 *::after{
     box-sizing: border-box;
+  
 }
 
 
@@ -47,6 +48,9 @@ body {
     line-height: 1.5;
 
 
+  
+
+
 
 
 
@@ -57,7 +61,7 @@ body {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 350px;
+    width: 300px;
     height: 100vh;
     overflow: hidden;
     transition: all 0.5s ease;
@@ -119,21 +123,6 @@ body {
     gap: 2rem;
 }
 
-.menu button {
-    padding: 0;
-    outline: none;
-    border: none;
-    display: flex;
-    align-items: center;
-   
-    gap: 2rem;
-    background-color: transparent;
-
-    font-family: 'Poppins', sans-serif;
-    font-weight: var(--fw-regular);
-    font-size:24px;
-}
-
 
 .menu i {
 
@@ -147,13 +136,6 @@ body {
     font-size: 1rem;
     font-weight: var(--fw-medium);
 } 
-
-
-.bxs-chevron-down {
-   
- 
-    margin-right: 20px;
-}
 
 
 
@@ -177,31 +159,31 @@ body {
 
 
 
-li a i  {
+li a i {
     transition: all 0.5s ease-in-out;
 }
 
-li a span  {
+li a span {
      transition: all 0.5s ease-in-out;
     
 }
 
-li:hover a i  {
+li:hover a i {
     color: var(--clr-primary-color);
 }
 
 
-li.active a i  {
+li.active a i {
     color: var(--clr-primary-color);
 }
 
 
-li:hover a span  {
+li:hover a span {
     color: var(--clr-light);
 }
 
 
-li.active a span  {
+li.active a span {
     color: var(--clr-light); 
 }
 
@@ -227,6 +209,23 @@ li.active a span  {
 .dropdown-container a:hover {
     color: var(--clr-light);
 }
+
+
+.menu button {
+    padding: 0;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+   
+    gap: 2rem;
+    background-color: transparent;
+
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size:24px;
+}
+
 
 
 
@@ -265,6 +264,8 @@ li.active button span  {
 
 
 
+
+
 .logout {
  
     position: absolute;
@@ -279,6 +280,22 @@ li.active button span  {
     border: none;
     outline: none;
 }
+
+
+
+
+.main--content {
+    position: relative;
+    background-color: #F6F7FB; 
+    
+    width: 100%;
+    padding: 32px 40px;
+
+}
+
+
+
+
 
 
 .header--wrapper {
@@ -487,219 +504,159 @@ li.active button span  {
 }
 
 
+.first-container {
 
-
-
-
-.main--content {
-    position: relative;
-    background-color: #F6F7FB; 
-    
     width: 100%;
-    padding: 32px 40px;
+    height: 80vh;
 
-}
-
-
-
-
-
-
-.inside-container{
-    overflow-x: auto;
-border-radius: 4px;
-background-color: white ;
-border: 1px solid #dddddd;
-
-padding: 30px 30px;
-margin-top: 36px;
-
-}
-
-
-
-
-table p {
-    padding: 0;
-    margin: 0;
-
-}
-
-
-
-
-
-.navigation p {
-    color:  var(--clr-primary-color);
-    font-weight: var(--fw-medium);
-    letter-spacing: 0.5px;
-    margin: 0;
-}
-
-.navigation span {
-    color: var(--clr-text-lessopacity);
-}
-
-
-
-
-
-.button-action {
     display: flex;
-    gap: 4px;
-}
-
-
-.view-button {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 4px;
-    text-decoration: none;
-    outline: none;
-    border: none;
-    background-color: rgb(46, 204, 113);
-    color: white;
-    padding: 8px;
+    justify-content: center;
+}
+
+
+.inside-container {
+    width: 1000px;
     border-radius: 4px;
 
-    font-family: 'Poppins' ,    sans-serif;
-
-    cursor: pointer;
-
-    transition: all 0.5s ease;
-}
-
-
-
-.edit-button {
-
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    text-decoration: none;
-    outline: none;
-    border: none;
-    background-color: rgb(230, 207, 0);
-    color: white;
-    padding: 8px;
-    border-radius: 4px;
-
-    font-family: 'Poppins' ,    sans-serif;
-
-    cursor: pointer;
-
-    transition: all 0.5s ease;
-
-
-}
-
-
-.delete-button {
-
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    text-decoration: none;
-    outline: none;
-    border: none;
-    background-color: rgb(192, 57, 43);
-    color: white;
-    padding: 8px;
-    border-radius: 4px;
-
-    font-family: 'Poppins' ,    sans-serif;
-
-    cursor: pointer;
-
-    transition: all 0.5s ease;
-
-}
-
-
-.view-button:hover, .delete-button:hover , .edit-button:hover {
-
-    box-shadow:2px 2px 5px rgba(0,0,0,0.20), inset 0 0 0 99999px rgba(0,0,0,0.2);
-
-}
-
-
-
-
-
-
-
-.delete-modal {
-    display: none;
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 100px; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-    
-    
-    
-    .delete-modal-content {
     background-color: white;
-    padding: 36px 36px;
-    position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      
-    }
+    border-radius: 8px;
+    box-shadow: 0px 12px 16px 0px rgba(16, 24, 40, 0.08);
+
+}
+
+.title-1 {
+    background-color: #EEEEEE;
+
+    padding: 20px;
+
+  
+}
+
+
+.title-1 p {
+    margin: 0;
+    font-weight: var(--fw-medium);
+
+
+
+}
+
+
+
+form {
+    padding: 20px;
+    background-color: white;
+}
+
+.input-container span {
+    color: red;
+}
+
+
+.input-container {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    margin-bottom: 24px;
+
+
+}
+
+
+.input-container input {
+    width: 750px;
+    padding: 12px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-family: 'Poppins',   sans-serif;
+
+}
+
+
+
+.input-container select {
+    width: 750px;
+    padding: 12px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-family: 'Poppins',   sans-serif;
+
+}
+
+
+
+
+
+
+
+
+
+
+.success-message {
+ display: none;
+    margin: 16px;
+    color: #270;
+    background-color: #DFF2BF;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.errorMessage {
+    display: none;
+    margin: 16px;
+  
+    color: #D8000C;
+    background-color: #FFBABA;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+.savebtn {
+
+
+    cursor: pointer;
+
+    padding: 12px 24px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+
+    background:var(--clr-button-color);
+
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size: 1rem;
+}
+
+
+
+.backbtn {
+    margin-top: 24px;
+    text-align: center;
     
-    
-    .modal-buttons {
-        display: flex;
-        justify-content: end;
-        gap: 12px;
-    
-    
-    }
-    
-    
-    .confirm {
-    
-        cursor: pointer;
-    
-        padding: 8px 16px;
-        border: none;
-        outline: none;
-        border-radius: 4px;
-        border: 1px solid #C70000;
-        background:#C70000;
-    
-        color: white;
-        font-family: 'Poppins', sans-serif;
-        font-weight: var(--fw-regular);
-        font-size: 1rem;
-    }
-    
-    
-    .close-btn {
-        cursor: pointer;
-    
-        padding: 8px 16px;
-        border: none;
-        outline: none;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        background:transparent;
-    
-        color: var(--clr-text-lessopacity);
-        font-family: 'Poppins', sans-serif;
-        font-weight: var(--fw-regular);
-        font-size: 1rem;
-    
-    }
-    
-    
+}
+
+.backbtn a {
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--clr-light);
+    background-color: var(--clr-nav-bar-color);
+
+}
 
 
 
@@ -711,12 +668,7 @@ table p {
 
 
 
-
-
-
-
-
-@media screen and (min-width: 768px) and (max-width: 1800px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
 
     .main--content {
         width: 100%;
@@ -725,52 +677,24 @@ table p {
     .search-box  {
     width: 300px;
     }
+
+
+    
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 24px;
+        row-gap: 24px;
+
+    }
+
+
   
-    .inside-container {
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .available-container {
-        width: 100%;
-    }
-    .available-doctors {
-        width: 100%;
-    }
-    
-    .schedule-container {
-        justify-content: center;
-        gap: 24px;
-    } 
-
-
-
-    .daily-progress {
-        width: 100%;
-    }
-    
-    .bottom-container {
-        width: 100%; 
-     
-    }
-
-    .conditions-slider {
-        overflow-x: scroll;
-    }
-
-
-    
-    .appointments-box {
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
+  
 
 
 
 } 
-
 
 
 @media screen and (min-width: 0px) and (max-width: 768px) {
@@ -790,46 +714,6 @@ table p {
     }
 
  
-  
-    .inside-container {
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .available-container {
-        width: 100%;
-    }
-    .available-doctors {
-        width: 100%;
-    }
-    
-    .schedule-container {
-        justify-content: center;
-        gap: 24px;
-    } 
-
-
-
-    .daily-progress {
-        width: 100%;
-    }
-    
-    .bottom-container {
-        width: 100%; 
-     
-    }
-
-    .conditions-slider {
-        overflow-x: scroll;
-    }
-
-
-    .appointments-box {
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
 
 
     .sidebar {
@@ -859,12 +743,27 @@ table p {
     }
 
 
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 24px;
+        row-gap: 24px;
+
+    }
+
+
+
+
+
+
    
  
 
 
 
 } 
+
+
 
 
 
@@ -899,10 +798,6 @@ table p {
     
 
 }
-
-
-
-
 
 
 

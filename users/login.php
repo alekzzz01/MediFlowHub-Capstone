@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php';
 require '../session/db.php';
 require '../config/config.php';
-
+    
 session_start();
 
 if (isset($_GET['timeout']) && $_GET['timeout'] === 'true') {

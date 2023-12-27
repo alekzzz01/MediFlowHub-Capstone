@@ -23,6 +23,55 @@ if (!check_admin_role()) {
 
 
 
+// Check for an error message in the session
+if (isset($_SESSION['error_message'])) {
+    // Display error alert using JavaScript
+    echo "<script>alert('{$_SESSION['error_message']}');</script>";
+
+    // Clear the error message from the session
+    unset($_SESSION['error_message']);
+}
+
+
+
+
+
+// Check if the form is submitted for patient deletion
+if (isset($_POST['ConfirmDelete'])) {
+    $patient_id_to_delete = $_POST['patient_id'];
+
+    // Add code here to perform the patient deletion from the database
+    $delete_sql = "DELETE FROM patients_table WHERE Patient_id = ?";
+    
+    // Use prepared statement to prevent SQL injection
+    $stmt = $conn->prepare($delete_sql);
+    $stmt->bind_param("i", $patient_id_to_delete);
+    
+    try {
+        if ($stmt->execute()) {
+            // Deletion successful
+            $stmt->close();
+            header("Location: admin-viewallpatient.php");
+            exit();
+        } else {
+            // Error occurred during deletion
+            throw new Exception("Error: " . $stmt->error);
+        }
+    } catch (Exception $e) {
+        // Store the error message in a session variable
+        $_SESSION['error_message'] = $e->getMessage();
+    
+        // Close the statement
+        $stmt->close();
+    
+        // Redirect to the same page using GET method
+        header("Location: admin-viewallpatient.php");
+        exit();
+    }
+}
+
+
+
 $sql = "SELECT * FROM patients_table";
 
 $result = $conn->query($sql);
@@ -224,57 +273,84 @@ $conn->close();
 
 
 
-<div class="inside-container">
-    <div class="rectangle">
-    <table id="myTable" class="display">
-    <thead id="thead" >
-    <tr>
-        <th>Patient ID</th>
-        <th>Full Name</th>
-        <th>Date of Birth</th>
-        
-    </tr>
-    </thead>
+            <div class="inside-container">
+                <div class="rectangle">
+                <table id="myTable" class="display">
+                <thead id="thead" >
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
+                    <th>Date of Birth</th>
 
-    <tbody>
+                    <th>Gender</th>
+                    <th>Height</th>
+                    <th>Weight</th>
 
-    <?php
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>{$row['Patient_id']}</td>";
-                echo "<td>{$row['Last_Name']}, {$row['First_Name']} </td>";
+                    <th>Actions</th>
+                    
+                </tr>
+                </thead>
 
-                $dateString = $row['Date_of_Birth'];
+                <tbody>
+                        <?php
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>{$row['Patient_id']}</td>";
+                        echo "<td>{$row['Last_Name']}, {$row['First_Name']} </td>";
+                        echo "<td>{$row['Phone']}</td>";
 
-                // Create a DateTime object from the database date string
-                $dateTime = new DateTime($dateString);
+                        $dateString = $row['Date_of_Birth'];
+                        $dateTime = new DateTime($dateString);
+                        $formattedDate = $dateTime->format('F j, Y');
+                        echo "<td>{$formattedDate}</td>";
 
-                // Format the date as desired, for example, 'November 23, 2023'
-                $formattedDate = $dateTime->format('F j, Y');
+                        echo "<td>{$row['Gender']}</td>";
+                        echo "<td>{$row['Height']}</td>";
+                        echo "<td>{$row['Weight']}</td>";
 
-                // Output the formatted date in your HTML
-                echo "<td>{$formattedDate}</td>";
-                
-            
-                echo "</tr>";
-            }
-    ?>
+                        echo "<td class='button-action'>
+                                <a href='admin-viewpatient.php?patient_id={$row['Patient_id']}' class='view-button'>View <i class='bx bxs-show'></i></a>
+                                <a href='admin-editpatient.php?patient_id={$row['Patient_id']}' class='edit-button'>Edit <i class='bx bxs-message-square-edit'></i></a>
+                                <button class='delete-button' data-patient-id='{$row['Patient_id']}' type='button'>Delete <i class='bx bxs-checkbox-minus'></i></button>
 
 
-</tbody>
+                            </td>";
 
-        </table>
+                        echo "</tr>";
+                    }
+                    ?>
+
+            </tbody>
+
+                    </table>
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+</div>
+
+
+
+<div class="delete-modal" id="delete-modal">
+    <div class="delete-modal-content">
+        <p id="modal-message">Are you sure you want to remove this patient?</p>
+        <div class="modal-buttons">
+            <button id="close-btn" class="close-btn">Close</button>
+            <form id="deleteForm" action="" method="post">
+                <input type="hidden" id="patient_id" name="patient_id" value="">
+                <button type="submit" class="confirm" name="ConfirmDelete">Confirm</button>
+            </form>
+        </div>
     </div>
-
-
-
-
 </div>
 
-
-
-
-</div>
 
 
 
@@ -301,6 +377,55 @@ for (i = 0; i < dropdown.length; i++) {
 
 
     </script>
+
+
+
+<script>
+// Get the modal
+var modal = document.getElementById("delete-modal");
+var span = document.getElementById("close-btn");
+var patientIdInput = document.getElementById("patient_id");
+
+var deleteBtns = document.querySelectorAll(".delete-button");
+deleteBtns.forEach(function (deleteBtn) {
+    deleteBtn.onclick = function() {
+        var patientId = this.dataset.patientId;
+        patientIdInput.value = patientId;
+
+        // Update the content of the modal with the patient ID
+        var modalContent = modal.querySelector(".delete-modal-content p");
+        modalContent.innerHTML = "Are you sure you want to remove patient with ID: " + patientId + "?";
+
+        modal.style.display = "block";
+        return false;
+    };
+});
+
+
+// When the user clicks on "Close", close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks on "Confirm", submit the delete form
+var confirmBtn = document.querySelector(".confirm");
+confirmBtn.onclick = function() {
+    document.getElementById("deleteForm").submit();
+}
+
+
+
+
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
 
 
 

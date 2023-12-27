@@ -186,16 +186,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $deleteStmt = $conn->prepare("DELETE FROM doctors_table WHERE doctor_id = ?");
             $deleteStmt->bind_param("i", $doctorId);
 
-            if ($deleteStmt->execute()) {
-                // Set the delete success message
-                $_SESSION['deleteSuccessMessage'] = "Doctor deleted successfully!";
+            try {
+                if ($deleteStmt->execute()) {
+                    // Set the delete success message
+                    $_SESSION['deleteSuccessMessage'] = "Doctor deleted successfully!";
+                    header("Location: admin-adddoctor.php");
+                    exit();
+                } else {
+                    // Set an error message if there's an issue
+                    $errorMessage = "Error: " . $deleteStmt->error;
+                    $_SESSION['errorMessage'] = "Error: Cannot delete the doctor because of existing appointments.";
+                    header("Location: admin-adddoctor.php");
+                    exit();
+                }
+            } catch (mysqli_sql_exception $e) {
+                // Catch the foreign key constraint exception
+                $errorMessage = "Error: Cannot delete the doctor because of existing appointments.";
+                $_SESSION['errorMessage'] = $errorMessage;
                 header("Location: admin-adddoctor.php");
                 exit();
-            } else {
-                // Set an error message if there's an issue
-                $errorMessage = "Error: " . $deleteStmt->error;
+            
+              
             }
-
+            
             // Close the statement
             $deleteStmt->close();
         }

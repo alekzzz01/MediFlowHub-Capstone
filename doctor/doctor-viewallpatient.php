@@ -18,6 +18,18 @@ if (!isset($_SESSION['doctor_id'])) {
 
 
 
+// Check for an error message in the session
+if (isset($_SESSION['error_message'])) {
+    // Display error alert using JavaScript
+    echo "<script>alert('{$_SESSION['error_message']}');</script>";
+
+    // Clear the error message from the session
+    unset($_SESSION['error_message']);
+}
+
+
+
+
 // Check if the form is submitted for patient deletion
 if (isset($_POST['ConfirmDelete'])) {
     $patient_id_to_delete = $_POST['patient_id'];
@@ -29,15 +41,26 @@ if (isset($_POST['ConfirmDelete'])) {
     $stmt = $conn->prepare($delete_sql);
     $stmt->bind_param("i", $patient_id_to_delete);
     
-    if ($stmt->execute()) {
-        // Deletion successful
+    try {
+        if ($stmt->execute()) {
+            // Deletion successful
+            $stmt->close();
+            header("Location: doctor-viewallpatient.php");
+            exit();
+        } else {
+            // Error occurred during deletion
+            throw new Exception("Error: " . $stmt->error);
+        }
+    } catch (Exception $e) {
+        // Store the error message in a session variable
+        $_SESSION['error_message'] = $e->getMessage();
+    
+        // Close the statement
         $stmt->close();
+    
+        // Redirect to the same page using GET method
         header("Location: doctor-viewallpatient.php");
         exit();
-    } else {
-        // Error occurred during deletion
-        echo "Error: " . $stmt->error;
-        $stmt->close();
     }
 }
 

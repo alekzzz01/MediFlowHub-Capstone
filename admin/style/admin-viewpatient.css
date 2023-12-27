@@ -549,6 +549,14 @@ li.active button span  {
 }
 
 
+.information-view h2 {
+    text-align: center;
+    font-weight: var(--fw-bold);
+    color: var(--clr-text-lessopacity);
+}
+
+
+
 .information-view span {
     font-weight: var(--fw-regular);
     color: var(--clr-text-lessopacity);
@@ -571,6 +579,13 @@ li.active button span  {
     color: var(--clr-light);
     background-color: var(--clr-nav-bar-color);
 
+}
+
+
+hr {
+    border: none;
+    outline: none;
+    border-top: 1px dashed #Ccc;
 }
 
 

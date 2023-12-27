@@ -1,15 +1,25 @@
 <?php
 // viewpatient.php
 
+include('../session/auth.php');
+require_once '../session/session_manager.php';
 require '../session/db.php';
 
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['doctor_id'])) {
-    header("Location: doctor-login.php");
+if (!isset($_SESSION["username"])) {
+
+    header("Location: ../users/login.php"); 
+    exit;
+}
+
+if (!check_admin_role()) {
+    // Redirect to the user dashboard or show an error message
+    header('Location: ../users/dashboard.php');
     exit();
 }
+
+
 
 // Check if the patient ID is provided in the URL
 if (!isset($_GET['patient_id'])) {
@@ -62,7 +72,7 @@ $roundedBmi = round($bmi, 2);
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="style/doctor-viewpatient.css">
+    <link rel="stylesheet" type="text/css" href="style/admin-viewpatient.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -246,7 +256,7 @@ $roundedBmi = round($bmi, 2);
 
                     <div class="backbtn">
 
-                    <a href="doctor-viewallpatient.php">Back to View All Patients</a>
+                    <a href="admin-viewallpatient.php">Back to View All Patients</a>
 
                     </div>
 

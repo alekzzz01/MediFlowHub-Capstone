@@ -1,4 +1,3 @@
-
 <?php
 require '../session/db.php';
 
@@ -34,8 +33,22 @@ if ($result->num_rows > 0) {
     echo "Error: Appointment not found.";
     exit();
 }
-?>
 
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the prescription text from the form
+    $prescriptionText = $_POST['prescription'];
+
+    // Update the database with the prescription information
+    $updateQuery = "UPDATE appointments SET Prescription = '$prescriptionText' WHERE Appointment_ID = $appointmentId";
+
+    if ($conn->query($updateQuery) === true) {
+        echo '<script>alert("Prescription saved successfully.");</script>';
+    } else {
+        echo '<script>alert("Error updating prescription: ' . $conn->error . '");</script>';
+    }
+}
+?>
 
 
 
@@ -112,29 +125,16 @@ if ($result->num_rows > 0) {
     </div>
 
 
-    <form action="">
+    <form action="" method="post">
+            <div class="text-prescribe">
+                <p>Prescription: </p>
+                <textarea name="prescription" cols="200" rows="10"></textarea>
+            </div>
+            <div class="button-prescribe">
+                <button class="submit" type="submit">Prescribe</button>
+            </div>
+        </form>
 
-        
-
-    <div class="text-prescribe">
-
-            <p>Prescription: </p>
-            <textarea name="" id="" cols="200" rows="10"></textarea>
-
-    </div>
-
-
-       
-    <div class="button-prescribe">
-
-        <button class="submit">Prescribe</button>
-    </div>
-
-       
-
-
-
-    </form>
 
 
 

@@ -1,23 +1,19 @@
 <?php
-// Database configuration
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'usersform';
+ include 'db.php';
 
 // Backup location
 $backupDir = 'E:/Backup/';
 
 // FTP configuration
-$ftpHost = 'ftp.example.com';
-$ftpUsername = 'ftp_username';
-$ftpPassword = 'ftp_password';
-$ftpRemoteDir = '/path/to/ftp/directory/';
+$ftpHost = 'ftp.mediflowhub.online';
+$ftpUsername = 'u804534960.u804534960';
+$ftpPassword = 'MK,H|eJkf`iYEhI@1';
+$ftpRemoteDir = '/public_html/path/to/ftp/directory/';
 
 while (true) {
     // Timestamp for the current backup
     $timestamp = date("Y-m-d-H-i-s");
-    
+
     // Backup file name
     $backupFile = $backupDir . $database . '-' . $timestamp . '.sql';
 
