@@ -112,36 +112,50 @@ if (isset($_GET['patient_id'])) {
 </head>
 <body>
 
-    <div id="sidebar" class="sidebar">
+<div id="sidebar" class="sidebar">
         <div class="logo">
             <img src="images/MediFlowHub.png" alt="">
 
             <i class='bx bx-x' id="close-sidebar"></i>
         </div>
+
+        
             <ul class="menu">
 
                 <li >
-                    <a href="doctor-dashboard.php" >
-                       <i class='bx bxs-dashboard'></i>
-                         <span>Dashboard</span>
+                    <a href="admin-dashboard.php" >
+                        <i class='bx bxs-dashboard'></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
+
                 
+            
                 <li>
-                    <a href="doctor-appointment.php">
-                        <i class='bx bxs-time-five'></i>
+                    <a href="admin-appointment.php">
+                        <i class='bx bxs-time-five' ></i>
                         <span>Appointments</span>
                     </a>
                 </li>
 
 
                 
+        
+
                 <li>
-                    <a href="doctor-all.php">
+                <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
-                    </a>
+                        <i class='bx bxs-chevron-down'></i>
+                    </button>
+
+                    <div class="dropdown-container">
+                            <a href="admin-adddoctor.php">Add/Delete Doctor</a>
+                            <a href="admin-viewalldoctor.php">View All Doctor</a>
+                          
+                    </div>
+
                 </li>
 
 
@@ -153,23 +167,17 @@ if (isset($_GET['patient_id'])) {
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="doctor-addpatient.php">Add New Patient</a>
-                            <a href="doctor-viewallpatient.php">View All Patient</a>
+                            <a href="admin-addpatient.php">Add New Patient</a>
+                            <a href="admin-viewallpatient.php">View All Patient</a>
                           
                     </div>
 
+
                 </li>
 
-            
-       
+               
 
-                <li>
-                    <a href="#">
-                        <i class='bx bxs-cog' ></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-
+          
 
                 <li class="logout">
                     <a href="logout.php" id="logout-link">
@@ -184,6 +192,10 @@ if (isset($_GET['patient_id'])) {
 
 
             </ul>
+
+
+
+
     
     </div>
 

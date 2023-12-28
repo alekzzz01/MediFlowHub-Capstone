@@ -1,11 +1,9 @@
 <?php
-$conn = new mysqli('localhost', 'u804534960_MediflowHub', 'MK,H|eJkf`iYEhI@1', 'u804534960_usersform');
+include('../config/databaseconfig.php');
 
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-
-?> 
-                    
+?>

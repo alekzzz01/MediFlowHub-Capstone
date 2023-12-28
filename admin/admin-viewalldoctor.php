@@ -240,6 +240,7 @@ $conn->close();
         <th>Fee</th>
         <th>Clinic</th>
         <th>Phone Number</th>
+        <th>Action</th>
        <!--  <th>Schedule Availability</th>
         <th>View</th> -->
     </tr>
@@ -259,9 +260,15 @@ $conn->close();
                 echo "<td>₱" . number_format($row['Fee'], 2) . "</td>";
                 echo "<td>{$row['Clinic_Name']}</td>";
                 echo "<td>{$row['Phone_Number']}</td>";
-                // echo "<td>{$row['Schedule_Availability']}</td>";
-                // Uncomment the line below if needed
-                // echo "<td>{$row['View']}</td>";
+
+                
+                echo "<td class='button-action'>
+                <a href='admin-viewpatient.php?doctor_id={$row['doctor_id']}' class='view-button'>View <i class='bx bxs-show'></i></a>
+                <a href='admin-editpatient.php?doctor_id={$row['doctor_id']}' class='edit-button'>Edit <i class='bx bxs-message-square-edit'></i></a>
+                <button class='delete-button' data-doctor_id='{$row['doctor_id']}' type='button'>Delete <i class='bx bxs-checkbox-minus'></i></button>
+
+
+                </td>";
                 echo "</tr>";
             }
     ?>
@@ -282,6 +289,21 @@ $conn->close();
 
 
 </div>
+
+
+<div class="delete-modal" id="delete-modal">
+    <div class="delete-modal-content">
+        <p id="modal-message">Are you sure you want to remove this patient?</p>
+        <div class="modal-buttons">
+            <button id="close-btn" class="close-btn">Close</button>
+            <form id="deleteForm" action="" method="post">
+                <input type="hidden" id="doctor_id" name="doctor_id" value="">
+                <button type="submit" class="confirm" name="ConfirmDelete">Confirm</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -308,6 +330,55 @@ for (i = 0; i < dropdown.length; i++) {
 
 
     </script>
+
+
+
+<script>
+// Get the modal
+var modal = document.getElementById("delete-modal");
+var span = document.getElementById("close-btn");
+var patientIdInput = document.getElementById("doctor_id");
+
+var deleteBtns = document.querySelectorAll(".delete-button");
+deleteBtns.forEach(function (deleteBtn) {
+    deleteBtn.onclick = function() {
+        var patientId = this.dataset.patientId;
+        patientIdInput.value = patientId;
+
+        // Update the content of the modal with the patient ID
+        var modalContent = modal.querySelector(".delete-modal-content p");
+        modalContent.innerHTML = "Are you sure you want to remove patient with ID: " + patientId + "?";
+
+        modal.style.display = "block";
+        return false;
+    };
+});
+
+
+// When the user clicks on "Close", close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks on "Confirm", submit the delete form
+var confirmBtn = document.querySelector(".confirm");
+confirmBtn.onclick = function() {
+    document.getElementById("deleteForm").submit();
+}
+
+
+
+
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
 
 
 

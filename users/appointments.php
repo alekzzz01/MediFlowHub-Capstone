@@ -259,8 +259,8 @@ $result = $conn->query($query);
                 <th>Appointment Time</th>
                 <th>Appointment Date</th>
                 <th>Status</th>
-             <!--   <th>Action</th>
-             <th>View</th> -->
+             <th>Action</th>
+           
             </tr>
 
 
@@ -321,9 +321,16 @@ $result = $conn->query($query);
                     
                         // Apply the CSS class to the Status column
                         echo "<td><p class='{$statusClass}'>{$status}</p></td>";
+
+
+                        echo "<td class='button-action'>
+                        <a href='viewappointment.php?appointment_id={$row['Appointment_ID']}' class='view-button'>View <i class='bx bx-book-content'></i></a>
+                     
+    
+    
+                    </td>";
                     
-                      
-                     //   echo "<td><a href='viewappointment.php?appointment_id={$row['Appointment_ID']}'>View Appointment</a></td>";
+                 
                         echo "</tr>";
                     }
 

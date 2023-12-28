@@ -545,6 +545,161 @@ table p {
 
 
 
+.button-action {
+    display: flex;
+    gap: 4px;
+}
+
+
+.view-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: rgb(46, 204, 113);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+
+    font-family: 'Poppins' ,    sans-serif;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+}
+
+
+
+.edit-button {
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: rgb(230, 207, 0);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+
+    font-family: 'Poppins' ,    sans-serif;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+
+
+}
+
+
+.delete-button {
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: rgb(192, 57, 43);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+
+    font-family: 'Poppins' ,    sans-serif;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+
+}
+
+
+.view-button:hover, .delete-button:hover , .edit-button:hover {
+
+    box-shadow:2px 2px 5px rgba(0,0,0,0.20), inset 0 0 0 99999px rgba(0,0,0,0.2);
+
+}
+
+
+
+
+
+
+
+.delete-modal {
+    display: none;
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    
+    
+    .delete-modal-content {
+    background-color: white;
+    padding: 36px 36px;
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      
+    }
+    
+    
+    .modal-buttons {
+        display: flex;
+        justify-content: end;
+        gap: 12px;
+    
+    
+    }
+    
+    
+    .confirm {
+    
+        cursor: pointer;
+    
+        padding: 8px 16px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        border: 1px solid #C70000;
+        background:#C70000;
+    
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-weight: var(--fw-regular);
+        font-size: 1rem;
+    }
+    
+    
+    .close-btn {
+        cursor: pointer;
+    
+        padding: 8px 16px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background:transparent;
+    
+        color: var(--clr-text-lessopacity);
+        font-family: 'Poppins', sans-serif;
+        font-weight: var(--fw-regular);
+        font-size: 1rem;
+    
+    }
+    
 
 
 

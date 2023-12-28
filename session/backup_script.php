@@ -1,20 +1,21 @@
 <?php
-$host = 'localhost'; // Update with your database host
-$database = 'u804534960_usersform'; // Update with your database name
-$username = 'u804534960_MediflowHub'; // Update with your database username
-$password = 'MK,H|eJkf`iYEhI@1'; 
-
-
-
-
-// Backup location
-$backupDir = 'E:/Backup/';
+// Database configuration
+$host = 'localhost';
+$database = 'u804534960_usersform';
+$username = 'u804534960_MediflowHub';
+$password = 'MK,H|eJkf`iYEhI@1';
 
 // FTP configuration
-$ftpHost = 'ftp.mediflowhub.online';
+$ftpHost = '154.41.240.136';
 $ftpUsername = 'u804534960.u804534960';
 $ftpPassword = 'MK,H|eJkf`iYEhI@1';
 $ftpRemoteDir = '/public_html/path/to/ftp/directory/';
+
+// Directory to store backups
+$backupDir = 'E:/Backup/';
+
+// Set maximum execution time to 5 minutes (adjust as needed)
+set_time_limit(300);
 
 while (true) {
     // Timestamp for the current backup
@@ -26,14 +27,15 @@ while (true) {
     // Database connection
     $mysqli = new mysqli($host, $username, $password, $database);
 
-    // Check connection
+    // Check database connection
     if ($mysqli->connect_error) {
-        die("Connection failed: " . $mysqli->connect_error);
+        die("Database connection failed: " . $mysqli->connect_error);
     }
 
     // Get all tables from the database
     $tables = [];
     $result = $mysqli->query("SHOW TABLES");
+
     while ($row = $result->fetch_row()) {
         $tables[] = $row[0];
     }
@@ -69,17 +71,22 @@ while (true) {
 
     // FTP upload
     $ftpConnection = ftp_connect($ftpHost);
-    $ftpLogin = ftp_login($ftpConnection, $ftpUsername, $ftpPassword);
 
-    if ($ftpConnection && $ftpLogin) {
-        ftp_put($ftpConnection, $ftpRemoteDir . basename($backupFile), $backupFile, FTP_BINARY);
-        echo "Backup uploaded to FTP server.\n";
+    if ($ftpConnection) {
+        $ftpLogin = ftp_login($ftpConnection, $ftpUsername, $ftpPassword);
+
+        if ($ftpLogin) {
+            ftp_put($ftpConnection, $ftpRemoteDir . basename($backupFile), $backupFile, FTP_BINARY);
+            echo "Backup uploaded to FTP server.\n";
+        } else {
+            echo "FTP login failed.\n";
+        }
+
+        // Close FTP connection
+        ftp_close($ftpConnection);
     } else {
         echo "FTP connection failed.\n";
     }
-
-    // Close FTP connection
-    ftp_close($ftpConnection);
 
     // Sleep for 24 hrs. before the next backup
     sleep(86400);
