@@ -210,7 +210,8 @@ function sendVerificationEmail($username, $token, $first_name)
             </div>
             
             
-            <button name="submit" class="Signup-btn" type="submit"><span>Signup</span></button>
+            <button name="submit" class="Signup-btn" type="submit" id="signupButton" disabled><span>Signup</span></button>
+
             <p class="Login-btn"> Already have an Account? <a href="login.php"><span>Login</span></a></p>
 
 
@@ -246,37 +247,50 @@ function sendVerificationEmail($username, $token, $first_name)
 
 
 <script>
-$(document).ready(function() {
-    $('#password').on('input', function() {
-        checkPasswordStrength($(this).val());
+    $(document).ready(function() {
+        $('#password').on('input', function() {
+            checkPasswordStrength($(this).val());
+        });
+
+        function checkPasswordStrength(password) {
+            // Reset the password strength indicator
+            $('#password-strength').html('');
+
+            // Minimum length
+            if (password.length < 8) {
+                $('#password-strength').append('<span style="color:red;">Minimum 8 characters</span>');
+                disableSignupButton();
+                return;
+            }
+
+            // Letters and numbers
+            if (!password.match(/([a-zA-Z])/) || !password.match(/([0-9])/)) {
+                $('#password-strength').append('<span style="color:red;">Include both letters and numbers</span>');
+                disableSignupButton();
+                return;
+            }
+
+            // Special characters
+            if (!password.match(/([!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])/)) {
+                $('#password-strength').append('<span style="color:red;">Include at least one special character</span>');
+                disableSignupButton();
+                return;
+            }
+
+            // Enable the signup button if the password is strong
+            enableSignupButton();
+        }
+
+        function enableSignupButton() {
+            var signupButton = document.getElementById("signupButton");
+            signupButton.disabled = false;
+        }
+
+        function disableSignupButton() {
+            var signupButton = document.getElementById("signupButton");
+            signupButton.disabled = true;
+        }
     });
-
-    function checkPasswordStrength(password) {
-        // Reset the password strength indicator
-        $('#password-strength').html('');
-
-        // Minimum length
-        if (password.length < 8) {
-            $('#password-strength').append('<span style="color:red;">Minimum 8 characters</span>');
-            return;
-        }
-
-        // Letters and numbers
-        if (!password.match(/([a-zA-Z])/) || !password.match(/([0-9])/)) {
-            $('#password-strength').append('<span style="color:red;">Include both letters and numbers</span>');
-            return;
-        }
-
-        // Special characters
-        if (!password.match(/([!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])/)) {
-            $('#password-strength').append('<span style="color:red;">Include at least one special character</span>');
-            return;
-        }
-
-        // Strong password
-        $('#password-strength').append('<span style="color:green;">Strong password</span>');
-    }
-});
 </script>
 
 <script>

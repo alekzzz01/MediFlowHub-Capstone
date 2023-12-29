@@ -459,8 +459,13 @@ $conn->close();
                 <div class="doctor-search">
                     <select name="specialty" >
                         <option hidden>Select a Specialty</option>
-                        <option value="Doctor">Doctor</option>
-                        <option value="Dentist">Dentist</option>
+                        <option value="InfantVaccine">Infant Vaccine</option>
+                        <option value="Consultation">Consultation</option>
+                        <option value="Mental Health">Mental Health</option>
+                        <option value="FamilyPlanning">Family Planning</option>
+                        <option value="Psychiatrists">Psychiatrists</option>
+                        <option value="Pediatrician">Pediatrician</option>
+                        <option value="AnimalVaccine">Animal Vaccine</option>
                      
                     </select>
                 </div>
