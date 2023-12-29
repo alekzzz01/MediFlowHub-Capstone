@@ -263,9 +263,9 @@ $conn->close();
 
                 
                 echo "<td class='button-action'>
-                <a href='admin-viewpatient.php?doctor_id={$row['doctor_id']}' class='view-button'>View <i class='bx bxs-show'></i></a>
-                <a href='admin-editpatient.php?doctor_id={$row['doctor_id']}' class='edit-button'>Edit <i class='bx bxs-message-square-edit'></i></a>
-                <button class='delete-button' data-doctor_id='{$row['doctor_id']}' type='button'>Delete <i class='bx bxs-checkbox-minus'></i></button>
+                <a href='admin-viewdoctor.php?doctor_id={$row['doctor_id']}' class='view-button'>View <i class='bx bxs-show'></i></a>
+                <a href='admin-editdoctor.php?doctor_id={$row['doctor_id']}' class='edit-button'>Edit <i class='bx bxs-message-square-edit'></i></a>
+               
 
 
                 </td>";
