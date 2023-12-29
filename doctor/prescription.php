@@ -1,5 +1,21 @@
 <?php
 require '../session/db.php';
+require_once '../session/session_manager.php';
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Assuming you have a session variable storing the user ID
+session_start();
+if (!isset($_SESSION['username'])) {
+    // Redirect to login or handle unauthorized access
+    header("Location: doctor-login.php");
+    exit();
+}
+
+
 
 // Check if the appointment_id is provided in the URL
 if (!isset($_GET['appointment_id'])) {
@@ -43,7 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateQuery = "UPDATE appointments SET Prescription = '$prescriptionText' WHERE Appointment_ID = $appointmentId";
 
     if ($conn->query($updateQuery) === true) {
-        echo '<script>alert("Prescription saved successfully.");</script>';
+        // Update the status to 'Completed'
+        $updateStatusQuery = "UPDATE appointments SET Status = 'Completed' WHERE Appointment_ID = $appointmentId";
+        if ($conn->query($updateStatusQuery) === true) {
+            echo '<script>alert("Prescription and status updated successfully.");</script>';
+        } else {
+            echo '<script>alert("Error updating status: ' . $conn->error . '");</script>';
+        }
     } else {
         echo '<script>alert("Error updating prescription: ' . $conn->error . '");</script>';
     }

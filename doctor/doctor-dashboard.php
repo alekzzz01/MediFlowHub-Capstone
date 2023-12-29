@@ -261,7 +261,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
 
                 <div class="bottombox">
 
-                    <a href="admin-viewallusers.php" target="_blank">View Details</a>
+                    <a href="#" >View Details</a>
 
                         <i class='bx bx-chevron-right'></i>
 
@@ -291,7 +291,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
 
             <div class="bottombox">
 
-            <a href="admin-viewalldoctor.php">View Details</a>
+            <a href="doctor-all.php">View Details</a>
             <i class='bx bx-chevron-right'></i>
 
 
@@ -321,7 +321,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
 
                 <div class="bottombox">
 
-                <a href="admin-viewallpatient.php">View Details</a>
+                <a href="doctor-viewallpatient.php">View Details</a>
                 <i class='bx bx-chevron-right'></i>
 
 
@@ -351,7 +351,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
 
                 <div class="bottombox">
 
-                    <a href="admin-appointment.php">View Details</a>
+                    <a href="doctor-appointment.php">View Details</a>
                     <i class='bx bx-chevron-right'></i>
 
 

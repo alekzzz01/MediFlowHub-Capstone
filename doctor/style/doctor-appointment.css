@@ -597,12 +597,11 @@ table p {
     font-family: 'Poppins' ,    sans-serif;
 
     cursor: pointer;
+
+    transition: all 0.5s ease;
    
 }
 
-.cancel-button:hover, .prescribe-button:hover {
-    opacity: 0.8;
-}
 
 .prescribe-button {
     text-decoration: none;
@@ -616,6 +615,8 @@ table p {
     font-family: 'Poppins' ,    sans-serif;
 
     cursor: pointer;
+
+    transition: all 0.5s ease;
   
 }
 
@@ -624,7 +625,43 @@ table p {
 }
 
 
+.button-action {
+    display: flex;
+    gap: 4px;
+}
 
+
+
+
+.edit-button {
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: rgb(230, 207, 0);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+
+    font-family: 'Poppins' ,    sans-serif;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+
+
+}
+
+
+
+.cancel-button:hover , .edit-button:hover  {
+
+    box-shadow:2px 2px 5px rgba(0,0,0,0.20), inset 0 0 0 99999px rgba(0,0,0,0.2);
+
+}
 
 
 
@@ -681,6 +718,16 @@ table p {
 .default-status {
     /* Default styles if the status doesn't match any case */
     color: black; /* Change the color or add other styles as needed */
+}
+
+
+
+
+hr {
+    
+
+
+    margin-top: 36px;
 }
 
 

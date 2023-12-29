@@ -330,6 +330,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     case 'Confirmed':
                                         $statusClass = 'c-pill c-pill--success'; 
                                         break;
+
+                                        case 'Completed':
+                                            $statusClass = 'c-pill c-pill--success'; 
+                                            break;
                                     case 'Cancelled':
                                         $statusClass = 'c-pill c-pill--danger'; 
                                         break;

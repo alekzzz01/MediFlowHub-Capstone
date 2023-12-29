@@ -25,7 +25,7 @@ $currentUserId = $_SESSION['doctor_id'];
 $query = "SELECT a.Appointment_ID, 
                 p.Last_Name AS Patient_Last_Name, p.First_Name AS Patient_First_Name, 
                  d.Last_Name AS Doctor_Last_Name, d.First_Name AS Doctor_First_Name, 
-                 d.Clinic_ID AS Clinic_ID, a.time_slot, a.Date, a.Status,
+                 d.Clinic_ID AS Clinic_ID, a.time_slot, a.Date, a.Status, a.Patient_id,
                  c.Clinic_Name, c.Address
           FROM appointments a
           JOIN patients_table p ON a.Patient_id = p.Patient_id
@@ -35,6 +35,23 @@ $query = "SELECT a.Appointment_ID,
 
 
 $result = $conn->query($query);
+
+// New code to fetch completed appointments
+$completedQuery = "SELECT a.Appointment_ID, 
+                       p.Last_Name AS Patient_Last_Name, p.First_Name AS Patient_First_Name, 
+                        d.Last_Name AS Doctor_Last_Name, d.First_Name AS Doctor_First_Name, 
+                        d.Clinic_ID AS Clinic_ID, a.time_slot, a.Date, a.Status, a.Patient_id,
+                        c.Clinic_Name, c.Address
+                 FROM appointments a
+                 JOIN patients_table p ON a.Patient_id = p.Patient_id
+                 JOIN doctors_table d ON a.doctor_id = d.doctor_id
+                 JOIN clinic_info c ON d.Clinic_ID = c.Clinic_ID
+                 WHERE a.doctor_id = $currentUserId AND a.Status = 'Completed'";
+
+$completedResult = $conn->query($completedQuery);
+
+
+
 
 
 
@@ -94,6 +111,25 @@ $result = $conn->query($query);
     $(document).ready(function () {
         // Initialize DataTable with additional options
         $('#myTable').DataTable({
+            "lengthMenu": [10, 25, 50, 75, 100],
+            "pageLength": 10,
+            "pagingType": "full_numbers",
+            "language": {
+                "lengthMenu": "Show _MENU_ entries",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "paginate": {
+                    "first": "First",
+                    "last": "Last",
+                    "next": "Next",
+                    "previous": "Previous"
+                }
+            }
+        });
+
+
+        $('#completedTable').DataTable({
             "lengthMenu": [10, 25, 50, 75, 100],
             "pageLength": 10,
             "pagingType": "full_numbers",
@@ -245,8 +281,8 @@ $result = $conn->query($query);
         <div class="rectangle">
 
  
-       
-            <table id="myTable" class="display">
+        <h2>Appointments </h2>
+        <table id="myTable" class="display">
 
             <thead id="thead" >
 
@@ -258,8 +294,9 @@ $result = $conn->query($query);
                 <th>Appointment Time</th>
                 <th>Appointment Date</th>
                 <th>Status</th>
-                <th>Cancel</th>
-                <th>Prescribe</th>
+           
+                <th>Action</th>
+      
             
             </tr>
 
@@ -273,6 +310,11 @@ $result = $conn->query($query);
                     <?php
                     // Display appointments in the HTML table
                     while ($row = $result->fetch_assoc()) {
+
+                        if ($row['Status'] === 'Completed') {
+                            continue;
+                        }
+            
                         echo "<tr>";
                         echo "<td>{$row['Appointment_ID']}</td>";
 
@@ -311,6 +353,10 @@ $result = $conn->query($query);
                             case 'Cancelled':
                                 $statusClass = 'c-pill c-pill--danger'; 
                                 break;
+                            
+
+                              
+                            
                 
                     
                             default:
@@ -323,9 +369,14 @@ $result = $conn->query($query);
                         echo "<td><p class='{$statusClass}'>{$status}</p></td>";
 
 
-                        echo '<td><button class="cancel-button">Cancel</button></td>';
-                        echo '<td><a href="prescription.php?appointment_id=' . $row['Appointment_ID'] . '" class="prescribe-button">Prescribe</a></td>';
-                        
+                     
+                        echo "<td class='button-action'>
+                        <a href='prescription.php?appointment_id={$row['Appointment_ID']}' class='prescribe-button'>Prescribe </a>
+                        <a href='doctor-viewpatient.php?patient_id={$row['Patient_id']}' class='edit-button'>View Patient </a>
+                      <button class='cancel-button'>Cancel</button>
+
+
+                        </td>";
                     
         
                         echo "</tr>";
@@ -368,7 +419,131 @@ $result = $conn->query($query);
 
                         </tbody>
 
-                </table>
+        </table>
+
+
+        <hr>
+
+        <h2>Completed Appointments </h2>
+        <table id="completedTable" class="display">
+                <thead id="thead" >
+
+                        <tr>
+                            <th>Appointment No.</th>
+                            <th>Patient Name</th>
+                            <th>Doctor Name</th>
+                            <th>Clinic</th>
+                            <th>Appointment Time</th>
+                            <th>Appointment Date</th>
+                            <th>Status</th>
+
+                            <th>Action</th>
+
+
+                        </tr>
+
+
+
+                        </thead>
+
+
+                        <tbody>
+
+                                <?php
+                                // Display appointments in the HTML table
+                                while ($row = $completedResult->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>{$row['Appointment_ID']}</td>";
+
+                                    echo "<td>{$row['Patient_Last_Name']}, {$row['Patient_First_Name']}</td>";
+                                    echo "<td>{$row['Doctor_Last_Name']}, {$row['Doctor_First_Name']}</td>";
+
+                                    // Display Clinic_Name based on Clinic_ID
+                                    $clinicId = $row['Clinic_ID'];
+                                    $clinicName = getClinicName($clinicId, $conn);
+                                    echo "<td>{$clinicName}</td>";// Replace this with a function to fetch Clinic_Name based on Clinic_ID
+
+                                
+                                    echo "<td>{$row['time_slot']}</td>";
+                                    
+                                    $dateString = $row['Date'];
+
+                                    // Create a DateTime object from the database date string
+                                    $dateTime = new DateTime($dateString);
+
+                                    // Format the date as desired, for example, 'November 23, 2023'
+                                    $formattedDate = $dateTime->format('F j, Y');
+
+                                    // Output the formatted date in your HTML
+                                    echo "<td>{$formattedDate}</td>";
+
+                                    $status = $row['Status'];
+                                    $statusClass = '';
+                                
+                                    switch ($status) {
+                                        case 'Pending':
+                                            $statusClass = 'c-pill c-pill--warning'; 
+                                            break;
+                                        case 'Confirmed':
+                                            $statusClass = 'c-pill c-pill--success'; 
+                                            break;
+                                        case 'Cancelled':
+                                            $statusClass = 'c-pill c-pill--danger'; 
+                                            break;
+                                        
+
+                                            case 'Completed':
+                                                $statusClass = 'c-pill c-pill--success'; 
+                                                break;
+
+                                        
+                            
+                                
+                                        default:
+                                
+                                            $statusClass = 'default-status';
+                                            break;
+                                    }
+                                
+                                    // Apply the CSS class to the Status column
+                                    echo "<td><p class='{$statusClass}'>{$status}</p></td>";
+
+
+                                
+                                    echo "<td class='button-action'>
+                                    <a href='prescription.php?appointment_id={$row['Appointment_ID']}' class='prescribe-button'>Prescribe </a>
+                                    <a href='doctor-viewpatient.php?patient_id={$row['Patient_id']}' class='edit-button'>View Patient </a>
+                                <button class='cancel-button'>Cancel</button>
+
+
+                                    </td>";
+                                
+
+                                    echo "</tr>";
+                                }
+
+
+
+                            
+                            
+
+                            
+                                ?>
+
+
+
+
+                    </tbody>
+        </table>
+
+
+
+
+
+
+
+
+        
 
             
 

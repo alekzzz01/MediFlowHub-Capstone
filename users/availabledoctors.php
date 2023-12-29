@@ -18,7 +18,7 @@ if (!isset($_SESSION["username"])) {
 $sql = "SELECT doctor_id, First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors_table`"; // Enclose the table name in backticks
 $result = $conn->query($sql);
 
-
+$doctorCount = 0;
 
 // Close the database connection (if needed)
 $conn->close();
@@ -87,7 +87,7 @@ $conn->close();
 
                             <div class="dropdown-container">
                                     <a href="appointments.php">View Appointments</a>
-                                    <a href="#">Book Appointments</a>
+                                    <a href="bookappointment.php">Book Appointments</a>
 
                             </div>
 
@@ -292,7 +292,7 @@ $conn->close();
         </div>
 
         <div class="number-results">
-            <p>We've found 2 Doctors/Providers you can book with!</p>
+            <p>We've found <?php echo $result->num_rows; ?> Doctors/Providers you can book with!</p>
         </div>
 
        
@@ -302,6 +302,8 @@ $conn->close();
                 <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+
+                        $doctorCount++;
                 ?>
 
                 <div class="doctors-container">
