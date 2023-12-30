@@ -114,14 +114,16 @@ echo "Error: Reset token not found.";
                 <i class="fa fa-eye-slash toggle" id="eye-password" onclick="togglePasswordVisibility('password', 'eye-password')"></i>
             </div>
 
+            <div id="password-strength" class="password-strength"></div>
+
+
             <div class="input-box">               
                 <input type="password" id="confirm-password" class="emailinput" name="confirm_password" placeholder="Confirm Password" >
                 <i class="fa fa-eye-slash toggle" id="eye-confirm-password" onclick="togglePasswordVisibility('confirm-password', 'eye-confirm-password')"></i>
             </div>
 
 
-            <div id="password-strength" class="password-strength"></div>
-
+           
 
             
 
