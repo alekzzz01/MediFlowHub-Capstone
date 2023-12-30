@@ -201,7 +201,7 @@ $conn->close();
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="admin-addpatient.php">Add New Patient</a>
+                          
                             <a href="admin-viewallpatient.php">View All Patient</a>
                           
                     </div>
