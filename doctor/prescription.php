@@ -27,7 +27,7 @@ if (!isset($_GET['appointment_id'])) {
 $appointmentId = $_GET['appointment_id'];
 
 // Query to fetch appointment details
-$query = "SELECT a.Appointment_ID, a.Date, p.Last_Name AS Patient_Last_Name, p.First_Name AS Patient_First_Name
+$query = "SELECT a.Appointment_ID, a.Date, p.Last_Name AS Patient_Last_Name, p.First_Name AS Patient_First_Name, a.Diagnosis, a.Prescription
           FROM appointments a
           JOIN patients_table p ON a.Patient_id = p.Patient_id
           WHERE a.Appointment_ID = $appointmentId";
@@ -44,6 +44,8 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $appointmentId = $row['Appointment_ID'];
     $date = $row['Date'];
+    $diagnosis = $row['Diagnosis'];
+    $prescription = $row['Prescription'];
     $patientFullName = $row['Patient_First_Name'] . ' ' . $row['Patient_Last_Name'];
 } else {
     echo "Error: Appointment not found.";
@@ -62,13 +64,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Update the status to 'Completed'
         $updateStatusQuery = "UPDATE appointments SET Status = 'Completed' WHERE Appointment_ID = $appointmentId";
         if ($conn->query($updateStatusQuery) === true) {
-            echo '<script>alert("Prescription and status updated successfully.");</script>';
+            // Redirect to the same page with a GET request
+            header("Location: ".$_SERVER['PHP_SELF']."?appointment_id=$appointmentId&success=true");
+            exit();
         } else {
             echo '<script>alert("Error updating status: ' . $conn->error . '");</script>';
         }
     } else {
         echo '<script>alert("Error updating prescription: ' . $conn->error . '");</script>';
     }
+}
+
+
+if (isset($_GET['success']) && $_GET['success'] == 'true') {
+    echo '<script>alert("Prescription and status updated successfully.");</script>';
 }
 ?>
 
@@ -112,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="Logo">
 
 
-        <a href="doctor-dashboard.php"><img src="images/logo.png" alt="" width="50px" /></a>
+        <a href="doctor-appointment.php"><img src="images/logo.png" alt="" width="50px" /></a>
                     
                     
 
@@ -143,6 +152,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
 
+        <div class="box">
+                <p>Diagnosis: <span><?php echo $diagnosis; ?></span>  </p>
+        </div>
+
+
+
 
     </div>
 
@@ -150,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form action="" method="post">
             <div class="text-prescribe">
                 <p>Prescription: </p>
-                <textarea name="prescription" cols="200" rows="10"></textarea>
+                <textarea name="prescription" cols="200" rows="10" ><?php echo $prescription; ?></textarea>
             </div>
             <div class="button-prescribe">
                 <button class="submit" type="submit">Prescribe</button>

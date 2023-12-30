@@ -204,7 +204,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
 
     <div class="first-container">
 
-        <h1>Welcome, <?php echo $firstName; ?></h1>
+        <h1>Welcome, <?php echo $firstName; ?> | Admin </h1>
 
 
         <div class="inside-container">

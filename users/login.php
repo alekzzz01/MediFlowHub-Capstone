@@ -174,7 +174,7 @@ if (isset($_POST["submit"])) {
 
                 <div class="Forgot-btn">
                   
-                    <a href="#">Forgot password?</a>
+                    <a href="../session/forgotpassword.php">Forgot password?</a>
                   </div>
                 
  

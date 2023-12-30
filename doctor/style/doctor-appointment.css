@@ -586,12 +586,24 @@ table p {
 }
 
 
+
+
+
+
+.button-action {
+    display: flex;
+    gap: 4px;
+}
+
+
+
+
 .cancel-button {
     outline: none;
     border: none;
     background-color: red;
     color: white;
-    padding: 8px;
+    padding: 10px;
     border-radius: 4px;
 
     font-family: 'Poppins' ,    sans-serif;
@@ -625,12 +637,6 @@ table p {
 }
 
 
-.button-action {
-    display: flex;
-    gap: 4px;
-}
-
-
 
 
 .edit-button {
@@ -645,22 +651,25 @@ table p {
     color: white;
     padding: 8px;
     border-radius: 4px;
-
     font-family: 'Poppins' ,    sans-serif;
-
     cursor: pointer;
-
     transition: all 0.5s ease;
 
 
 }
 
 
-
 .cancel-button:hover , .edit-button:hover  {
-
     box-shadow:2px 2px 5px rgba(0,0,0,0.20), inset 0 0 0 99999px rgba(0,0,0,0.2);
+}
 
+
+.disabled-button {
+    background-color: #ccc; 
+    color: #666; 
+    padding: 8px;
+    border-radius: 4px;
+    cursor: not-allowed;
 }
 
 

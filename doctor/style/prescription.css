@@ -124,6 +124,14 @@ form {
 }
 
 
+form textarea {
+    padding: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--fw-regular);
+    font-size: 1rem;
+}
+
+
 .button-prescribe {
     display: flex;
     align-items: center;

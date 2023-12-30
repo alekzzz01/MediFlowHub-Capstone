@@ -105,9 +105,11 @@ form input{
     
 }
 .Verify-btn:hover {
-    background: #0e4bf1;
+    background: var(--clr-text);
 
 }
+
+
 
 
 
@@ -178,3 +180,5 @@ form input{
   .timer {
     margin: 0;
   }
+
+

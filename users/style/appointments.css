@@ -548,6 +548,14 @@ body {
 
 
 
+.button-action {
+    display: flex;
+    gap: 4px;
+}
+
+
+
+
 
 
 
@@ -573,6 +581,21 @@ body {
 
 
 
+.cancel-button {
+    outline: none;
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+
+    font-family: 'Poppins' ,    sans-serif;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+   
+}
 
 
 
@@ -580,6 +603,10 @@ body {
 
 
 
+
+hr {
+    margin-top: 32px;
+}
 
 
 

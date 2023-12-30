@@ -53,7 +53,20 @@ $completedResult = $conn->query($completedQuery);
 
 
 
-
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_appointment"])) {
+    // Handle cancellation logic
+    $appointmentId = $_POST["appointment_id"];
+    $cancelQuery = "UPDATE appointments SET Status = 'Cancelled' WHERE Appointment_ID = $appointmentId";
+    
+    if ($conn->query($cancelQuery) === TRUE) {
+        // Cancellation successful
+        header("Location: doctor-appointment.php");
+        exit();
+    } else {
+        // Cancellation failed
+        echo "Error updating record: " . $conn->error;
+    }
+}
 
 
 
@@ -370,13 +383,19 @@ $completedResult = $conn->query($completedQuery);
 
 
                      
-                        echo "<td class='button-action'>
-                        <a href='prescription.php?appointment_id={$row['Appointment_ID']}' class='prescribe-button'>Prescribe </a>
-                        <a href='doctor-viewpatient.php?patient_id={$row['Patient_id']}' class='edit-button'>View Patient </a>
-                      <button class='cancel-button'>Cancel</button>
-
-
-                        </td>";
+                        echo "<td class='button-action'>";
+                        if ($row['Status'] !== 'Cancelled') {
+                            echo "<a href='prescription.php?appointment_id={$row['Appointment_ID']}' class='prescribe-button'>Prescribe </a>";
+                        } else {
+                            echo "<span class='disabled-button'>Prescribe</span>";
+                        }
+                        echo "<a href='doctor-viewpatient.php?patient_id={$row['Patient_id']}' class='edit-button'>View Patient </a>";
+                        echo "<form class='cancel-form'>
+                                <input type='hidden' name='appointment_id' value='{$row['Appointment_ID']}'>
+                                <button type='button' class='cancel-button'>Cancel</button>
+                              </form>";
+                        echo "</td>";
+                        
                     
         
                         echo "</tr>";
@@ -513,7 +532,7 @@ $completedResult = $conn->query($completedQuery);
                                     echo "<td class='button-action'>
                                     <a href='prescription.php?appointment_id={$row['Appointment_ID']}' class='prescribe-button'>Prescribe </a>
                                     <a href='doctor-viewpatient.php?patient_id={$row['Patient_id']}' class='edit-button'>View Patient </a>
-                                <button class='cancel-button'>Cancel</button>
+                            
 
 
                                     </td>";
@@ -594,6 +613,44 @@ $completedResult = $conn->query($completedQuery);
 
 
 
+<script>
+    $(document).ready(function () {
+        // ... (your existing code)
+
+        // Handle cancellation using AJAX
+        $('.cancel-button').on('click', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get the appointment ID
+            var appointmentId = $(this).closest('td').find('input[name="appointment_id"]').val();
+
+            // Ask for confirmation
+            var isConfirmed = confirm("Are you sure you want to cancel this appointment?");
+
+            if (isConfirmed) {
+                // If confirmed, proceed with the cancellation
+                $.ajax({
+                    type: 'POST',
+                    url: 'doctor-appointment.php',
+                    data: {
+                        cancel_appointment: true,
+                        appointment_id: appointmentId
+                    },
+                    success: function () {
+                        // Reload the page after successful cancellation
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error cancelling appointment:', error);
+                    }
+                });
+            } else {
+                // If not confirmed, do nothing or perform any other action
+                console.log('Appointment cancellation canceled by user.');
+            }
+        });
+    });
+</script>
 
 
 
