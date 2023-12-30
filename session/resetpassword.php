@@ -89,7 +89,7 @@ echo "Error: Reset token not found.";
     <link rel="stylesheet" href="../users/style/forgot.css">
 
 
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
 </head>
@@ -114,20 +114,19 @@ echo "Error: Reset token not found.";
                 <i class="fa fa-eye-slash toggle" id="eye-password" onclick="togglePasswordVisibility('password', 'eye-password')"></i>
             </div>
 
-
             <div class="input-box">               
                 <input type="password" id="confirm-password" class="emailinput" name="confirm_password" placeholder="Confirm Password" >
                 <i class="fa fa-eye-slash toggle" id="eye-confirm-password" onclick="togglePasswordVisibility('confirm-password', 'eye-confirm-password')"></i>
             </div>
 
 
-
+            <div id="password-strength" class="password-strength"></div>
 
 
             
 
 
-        <button type="submit" name="verify" class="Verify-btn">Reset Password</button>
+        <button type="submit" name="verify" class="Verify-btn" id="Reset-btn">Reset Password</button>
 
 
         <p class="Signup-btn"> Already have an account? <a href="../users/login.php"><span>Login</span></a></p>
@@ -197,7 +196,58 @@ if (errorMessage !== "") {
                 eyeIcon.classList.add("fa-eye-slash");
             }
         }
-    </script>
+</script>
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#password').on('input', function() {
+            checkPasswordStrength($(this).val());
+        });
+
+        function checkPasswordStrength(password) {
+            // Reset the password strength indicator
+            $('#password-strength').html('');
+
+            // Minimum length
+            if (password.length < 8) {
+                $('#password-strength').append('<span style="color:red;">Minimum 8 characters</span>');
+                disableSignupButton();
+                return;
+            }
+
+            // Letters and numbers
+            if (!password.match(/([a-zA-Z])/) || !password.match(/([0-9])/)) {
+                $('#password-strength').append('<span style="color:red;">Include both letters and numbers</span>');
+                disableSignupButton();
+                return;
+            }
+
+            // Special characters
+            if (!password.match(/([!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])/)) {
+                $('#password-strength').append('<span style="color:red;">Include at least one special character</span>');
+                disableSignupButton();
+                return;
+            }
+
+            // Enable the signup button if the password is strong
+            enableSignupButton();
+        }
+
+        function enableSignupButton() {
+            var signupButton = document.getElementById("Reset-btn");
+            signupButton.disabled = false;
+        }
+
+        function disableSignupButton() {
+            var signupButton = document.getElementById("Reset-btn");
+            signupButton.disabled = true;
+        }
+    });
+</script>
+
 
 
 </html>

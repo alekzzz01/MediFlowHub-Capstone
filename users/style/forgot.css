@@ -179,7 +179,7 @@ form input:focus {
 
 form input::placeholder {
     
-    color: var(--clr-text);
+    color: var(--clr-text-lessopacity);
     font-size: 1rem;
     font-weight: var(--fw-regular);
     line-height: 24px;
@@ -226,3 +226,8 @@ form input::placeholder {
 
 
 
+.password-strength {
+
+    margin-bottom: 16px;
+
+}
