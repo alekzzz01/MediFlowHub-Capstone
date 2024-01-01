@@ -1,14 +1,26 @@
 <?php
-// Include the session manager
+include('../session/auth.php');
+require_once '../session/session_manager.php';
 require '../session/db.php';
 
-session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['doctor_id'])) {
-    header("Location: doctor-login.php");
+start_secure_session();
+
+
+
+
+if (!isset($_SESSION["username"])) {
+
+    header("Location: ../users/login.php"); 
+    exit;
+}
+
+if (!check_admin_role()) {
+    // Redirect to the user dashboard or show an error message
+    header('Location: ../users/dashboard.php');
     exit();
 }
+
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -60,12 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor | Add Patient</title>
+    <title>Admin | Add Patient</title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="style/doctor-addpatient.css">
+    <link rel="stylesheet" type="text/css" href="style/admin-addpatient.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,59 +99,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <i class='bx bx-x' id="close-sidebar"></i>
         </div>
+
+        
             <ul class="menu">
 
                 <li >
-                    <a href="doctor-dashboard.php" >
-                       <i class='bx bxs-dashboard'></i>
-                         <span>Dashboard</span>
+                    <a href="admin-dashboard.php" >
+                        <i class='bx bxs-dashboard'></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
+
                 
+            
                 <li>
-                    <a href="doctor-appointment.php">
-                        <i class='bx bxs-time-five'></i>
+                    <a href="admin-appointment.php">
+                        <i class='bx bxs-time-five' ></i>
                         <span>Appointments</span>
                     </a>
                 </li>
 
 
                 
-                <li>
-                    <a href="doctor-all.php">
+        
+
+                <li >
+                    <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
-                    </a>
-                </li>
-
-
-                <li class="active">
-                <button class="dropdown-btn">
-                        <i class='bx bx-plus-medical' ></i>
-                        <span>Patients</span>
                         <i class='bx bxs-chevron-down'></i>
                     </button>
 
                     <div class="dropdown-container">
-                            <a href="doctor-addpatient.php">Add New Patient</a>
-                            <a href="doctor-viewallpatient.php">View All Patient</a>
+                            <a href="admin-adddoctor.php">Add/Delete Doctor</a>
+                            <a href="admin-viewalldoctor.php">View All Doctor</a>
                           
                     </div>
 
-
                 </li>
 
-            
-       
 
-                <li>
-                    <a href="#">
-                        <i class='bx bxs-cog' ></i>
-                        <span>Settings</span>
+                <li class="active">
+                    <a href="admin-viewallpatient.php">
+                        <i class='bx bx-plus-medical' ></i>
+                        <span>Patients</span>
                     </a>
                 </li>
 
+               
+
+          
 
                 <li class="logout">
                     <a href="logout.php" id="logout-link">
@@ -154,6 +164,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
             </ul>
+
+
+
+
     
     </div>
 
@@ -305,8 +319,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </form>
 
 
+             
+
+
 
                                 </div>
+
+                                                       
+                    <div class="backbtn">
+
+                    <a href="admin-viewallpatient.php">Back to View All Patients</a>
+
+                    </div>
 
 
 

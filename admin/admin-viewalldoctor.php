@@ -142,26 +142,18 @@ $conn->close();
 
                     <div class="dropdown-container">
                             <a href="admin-adddoctor.php">Add/Delete Doctor</a>
-                            <a href="#">View All Doctor</a>
+                            <a href="admin-viewalldoctor.php">View All Doctor</a>
                           
                     </div>
 
                 </li>
 
 
-                <li>
-                    <button class="dropdown-btn">
+                <li >
+                    <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                   
-                            <a href="admin-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
+                    </a>
                 </li>
 
                
@@ -187,7 +179,6 @@ $conn->close();
 
     
     </div>
-
 
 
 

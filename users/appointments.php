@@ -47,7 +47,7 @@ $completedQuery = "SELECT a.Appointment_ID,
                  JOIN patients_table p ON a.Patient_id = p.Patient_id
                  JOIN doctors_table d ON a.doctor_id = d.doctor_id
                  JOIN clinic_info c ON d.Clinic_ID = c.Clinic_ID
-                 WHERE a.doctor_id = $currentUserId AND a.Status = 'Completed'";
+                 WHERE a.user_id = $currentUserId AND a.Status = 'Completed'";
 
 $completedResult = $conn->query($completedQuery);
 

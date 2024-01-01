@@ -120,8 +120,8 @@ $roundedBmi = round($bmi, 2);
                 
         
 
-                <li>
-                <button class="dropdown-btn">
+                <li >
+                    <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
@@ -137,19 +137,10 @@ $roundedBmi = round($bmi, 2);
 
 
                 <li class="active">
-                <button class="dropdown-btn">
+                    <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                       
-                            <a href="admin-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
-
+                    </a>
                 </li>
 
                

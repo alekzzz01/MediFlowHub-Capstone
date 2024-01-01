@@ -112,7 +112,7 @@ if (isset($_GET['patient_id'])) {
 </head>
 <body>
 
-<div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar">
         <div class="logo">
             <img src="images/MediFlowHub.png" alt="">
 
@@ -143,8 +143,8 @@ if (isset($_GET['patient_id'])) {
                 
         
 
-                <li>
-                <button class="dropdown-btn">
+                <li >
+                    <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
@@ -160,19 +160,10 @@ if (isset($_GET['patient_id'])) {
 
 
                 <li class="active">
-                <button class="dropdown-btn">
+                    <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                        
-                            <a href="admin-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
-
+                    </a>
                 </li>
 
                

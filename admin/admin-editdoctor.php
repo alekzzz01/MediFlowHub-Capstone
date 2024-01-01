@@ -90,7 +90,7 @@ if (isset($_GET['doctor_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor | Add Patient</title>
+    <title>Admin | Edit Doctor</title>
 
 
     <link rel="icon" href="images/logo.png" type="image/png">
@@ -111,7 +111,7 @@ if (isset($_GET['doctor_id'])) {
 </head>
 <body>
 
-<div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar">
         <div class="logo">
             <img src="images/MediFlowHub.png" alt="">
 
@@ -142,8 +142,8 @@ if (isset($_GET['doctor_id'])) {
                 
         
 
-                <li>
-                <button class="dropdown-btn">
+                <li class="active">
+                    <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
@@ -158,20 +158,11 @@ if (isset($_GET['doctor_id'])) {
                 </li>
 
 
-                <li class="active">
-                <button class="dropdown-btn">
+                <li >
+                    <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                       
-                            <a href="admin-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
-
+                    </a>
                 </li>
 
                

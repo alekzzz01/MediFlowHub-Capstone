@@ -23,6 +23,15 @@ if (!check_admin_role()) {
 
 
 
+
+
+
+
+
+
+
+
+
 // Check for an error message in the session
 if (isset($_SESSION['error_message'])) {
     // Display error alert using JavaScript
@@ -194,19 +203,10 @@ $conn->close();
 
 
                 <li class="active">
-                    <button class="dropdown-btn">
+                    <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                          
-                            <a href="admin-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
-
+                    </a>
                 </li>
 
                
@@ -274,6 +274,18 @@ $conn->close();
 
 
             <div class="inside-container">
+
+                <div class="new-container">
+
+                        <div class="newbtn">
+                            <a href="admin-addpatient.php"><i class='bx bx-plus'></i>New</a>
+                        </div>
+                   
+
+                </div>
+
+
+
                 <div class="rectangle">
                 <table id="myTable" class="display">
                 <thead id="thead" >

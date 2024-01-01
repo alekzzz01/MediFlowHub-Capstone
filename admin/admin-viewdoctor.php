@@ -60,7 +60,7 @@ $conn->close();
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="style/admin-viewpatient.css">
+    <link rel="stylesheet" type="text/css" href="style/admin-viewdoctor.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,8 +108,8 @@ $conn->close();
                 
         
 
-                <li>
-                <button class="dropdown-btn">
+                <li class="active">
+                    <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
@@ -124,20 +124,11 @@ $conn->close();
                 </li>
 
 
-                <li class="active">
-                <button class="dropdown-btn">
+                <li >
+                    <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                          
-                            <a href="admin-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
-
+                    </a>
                 </li>
 
                

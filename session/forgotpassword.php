@@ -43,10 +43,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $subject = 'Password Reset';
         $body = 'Click the following link to reset your password: 
     
-        <a href="https://mediflowhub.online/session/resetpassword.php?resettoken=' . $token . '">Reset Password</a>'; 
-        
-        //<a href="http://localhost/dashboard/Capstone_PhpFiles/Capstone/session/resetpassword.php?resettoken=' . $token . '">Reset Password</a>'; 
 
+        
+   
+        <a href="https://mediflowhub.online/session/resetpassword.php?resettoken=' . $token . '">Reset Password</a>';
+
+
+        // <a href="http://localhost/dashboard/Capstone_PhpFiles/Capstone/session/resetpassword.php?resettoken=' . $token . '">Reset Password</a>'; 
        
 
         require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
@@ -77,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->send();
 
            // Set success status for JavaScript
-           $_SESSION['successMessage'] = 'Reset link sent successfully in your Email.';
+           $_SESSION['successMessage'] = 'Reset password link sent successfully.';
            header("Location: forgotpassword.php");
             exit();
         } catch (Exception $e) {

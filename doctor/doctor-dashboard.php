@@ -16,6 +16,7 @@ if (!isset($_SESSION['doctor_id'])) {
 
 // Access the first name
 $firstName = $_SESSION['first_name'];
+$username =  $_SESSION['username'];
 
 
 $sqlUsers = "SELECT COUNT(user_id) AS total_users FROM users";
@@ -62,7 +63,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
 
     <link rel="icon" href="images/logo.png" type="image/png">
 
-    <link rel="stylesheet" type="text/css" href="doctor-dashboard.css">
+    <link rel="stylesheet" type="text/css" href="style/doctor-dashboard.css">
     <link rel="stylesheet" href="style/transitions.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -111,21 +112,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
                 </li>
 
 
-                <li>
-                <button class="dropdown-btn">
-                        <i class='bx bx-plus-medical' ></i>
-                        <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                            <a href="doctor-addpatient.php">Add New Patient</a>
-                            <a href="doctor-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
-
-                </li>
+          
 
             
        
@@ -189,7 +176,7 @@ $totalAppointments = $rowAppointments['total_appointments'];
 
                                     <div class="user-info">
                                         <button class="usermain-profile"></button>
-                                        <p>Username</p>
+                                        <p><?php echo $username; ?></p>
                                     </div>
 
                                     <div class="edit-profile">

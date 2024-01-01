@@ -506,7 +506,7 @@ li.active button span  {
 
 
 .inside-container{
-    overflow-x: auto;
+overflow-x: auto;
 border-radius: 4px;
 background-color: white ;
 border: 1px solid #dddddd;
@@ -514,6 +514,36 @@ border: 1px solid #dddddd;
 padding: 30px 30px;
 margin-top: 36px;
 
+}
+
+
+.new-container {
+    border-bottom: 1px solid #Ccc;
+    margin-bottom: 24px;
+}
+
+.newbtn {
+    width: 85px;
+}
+
+
+
+.newbtn a {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background-color: var(--clr-primary-color);
+    text-decoration: none;
+    color: white;
+    padding: 8px;
+
+    margin-bottom: 24px;
+}
+
+.newbtn i {
+    font-size: 24px;
+    font-weight: var(--fw-bold);
 }
 
 

@@ -184,21 +184,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
 
 
+
                 <li>
-                <button class="dropdown-btn">
+                    <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                        
-                            <a href="admin-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
-
+                    </a>
                 </li>
+
+
+           
 
                
 
