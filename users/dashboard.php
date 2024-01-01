@@ -15,6 +15,8 @@ if (!isset($_SESSION["username"])) {
 }
 
 $firstName = $_SESSION["first_name"];
+$username = $_SESSION["username"];
+
 
 
 
@@ -172,7 +174,7 @@ $firstName = $_SESSION["first_name"];
 
                                     <div class="user-info">
                                         <button class="usermain-profile"></button>
-                                        <p>Username</p>
+                                        <p><?php echo $username  ?></p>
                                     </div>
 
                                     <div class="edit-profile">

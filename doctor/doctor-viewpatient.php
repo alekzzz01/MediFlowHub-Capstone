@@ -79,7 +79,7 @@ $roundedBmi = round($bmi, 2);
 </head>
 <body>
 
-<div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar">
         <div class="logo">
             <img src="images/MediFlowHub.png" alt="">
 
@@ -95,7 +95,7 @@ $roundedBmi = round($bmi, 2);
                 </li>
 
                 
-                <li>
+                <li class="active">
                     <a href="doctor-appointment.php">
                         <i class='bx bxs-time-five'></i>
                         <span>Appointments</span>
@@ -112,20 +112,7 @@ $roundedBmi = round($bmi, 2);
                 </li>
 
 
-                <li class="active">
-                <button class="dropdown-btn">
-                        <i class='bx bx-plus-medical' ></i>
-                        <span>Patients</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
-
-                    <div class="dropdown-container">
-                            <a href="doctor-addpatient.php">Add New Patient</a>
-                            <a href="doctor-viewallpatient.php">View All Patient</a>
-                          
-                    </div>
-
-                </li>
+          
 
             
        
@@ -246,7 +233,7 @@ $roundedBmi = round($bmi, 2);
 
                     <div class="backbtn">
 
-                    <a href="doctor-viewallpatient.php">Back to View All Patients</a>
+                    <a href="doctor-appointment.php">Back to Appointments</a>
 
                     </div>
 
