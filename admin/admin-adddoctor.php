@@ -149,7 +149,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $emailMessage .= "Name: $FirstName $LastName\n";
                 $emailMessage .= "Email: $Email\n";
                 $emailMessage .= "Password: $randomPassword\n\n";
-                $emailMessage .= "Thank you for joining!\n";
+                $emailMessage .= "Thank you for joining!\n\n";
+
+                $emailMessage .= "Please change your password after your first login.\n";
 
                 sendDoctorDetailsEmail($Email, $emailSubject, $emailMessage);
 

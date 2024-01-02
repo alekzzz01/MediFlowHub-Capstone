@@ -179,14 +179,14 @@ $totalAppointments = $rowAppointments['total_appointments'];
                                         <p><?php echo $username; ?></p>
                                     </div>
 
-                                    <div class="edit-profile">
+                                    <a href="profile.php" class="edit-profile">
                                         <div class="edit-profile1">
-                                        <i class='bx bxs-user-circle' ></i>
-                                        <p>Edit Profile</p>
+                                            <i class='bx bxs-user-circle'></i>
+                                            <p>Edit Profile</p>
                                         </div>
-                                    
-                                        <i class='bx bx-chevron-right' ></i>
-                                    </div>
+                                        <i class='bx bx-chevron-right'></i>
+                                    </a>
+
 
                                     <div class="help-support">
                                         <div class="edit-profile1">

@@ -444,6 +444,9 @@ li.active a span {
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+
+    color: var(--clr-text);
+    text-decoration: none;
 }
 
 .edit-profile1 i {

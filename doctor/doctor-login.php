@@ -95,7 +95,7 @@ $conn->close();
 
         <form method="post">
 
-          <h1>Login</h1>
+          <h1>Doctor - Login</h1>
                 
                 <div class="input-box">
                     <input type="text" id="username" name="username" placeholder="Email" required>
@@ -113,7 +113,7 @@ $conn->close();
 
                 <div class="Forgot-btn">
                   
-                    <a href="../session/forgotpassword.php">Forgot password?</a>
+                    <a href="forgotpassword.php">Forgot password?</a>
                   </div>
                 
  
