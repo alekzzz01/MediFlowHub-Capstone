@@ -880,16 +880,18 @@ background: var(--clr-primary-color);
 .terms-section {
     
     display: flex;
-    
+    padding: 0 20%;
+
+   
     justify-content: center;
 }
-
+/*
 .container-term {
     
     width: 90%;
     max-width: 1024px;
     margin-bottom: 24px;
-}
+} */
 
 .terms-section .backbtn {
     text-decoration: none;
