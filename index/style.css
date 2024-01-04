@@ -879,8 +879,8 @@ background: var(--clr-primary-color);
 
 .terms-section {
     
-    display: flex;
-    padding: 0 20%;
+
+    padding: 3% 20%;
 
    
     justify-content: center;
