@@ -312,8 +312,8 @@
   	 			<h4>Information</h4>
   	 			<ul>
   	 				<li><a href="#">Supports</a></li>
-  	 				<li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+  	 				<li><a href="./index/terms-conditions.html">Terms & Conditions</a></li>
+                    <li><a href="./index/privacypolicy.html">Privacy Policy</a></li>
   	 				
   	 			</ul>
   	 		</div>

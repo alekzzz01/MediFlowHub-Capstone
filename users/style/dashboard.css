@@ -345,6 +345,8 @@ outline: none;
     background-image: url(../images/PROFILE.png);
 }
 
+
+
 .user--info {
     display: flex;
     align-items: center;
@@ -617,6 +619,10 @@ html.is-animating .first-container{
     display: flex;
     flex-wrap: wrap;
     gap:36px;
+}
+
+.available-container img {
+    border-radius: 24px;
 }
 
 .inside-container {

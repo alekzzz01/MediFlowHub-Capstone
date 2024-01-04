@@ -288,9 +288,9 @@ $username = $_SESSION["username"];
                         <div class="available-container">
         
                          
-                            <img src="images/announcements/Rectangle 213.png" alt="" width="340px"  >
-                            <img src="images/announcements/Rectangle 213-1.png" alt="" width="340px" >
-                            <img class="third-image" src="images/announcements/Rectangle 214.png" alt=""  >
+                            <img src="images/announcements/1.jpg" alt="" width="330px"  >
+                            <img src="images/announcements/2.jpg" alt="" width="330px" >
+                            <img class="third-image" src="images/announcements/3.jpg" width="320px"  alt=""  >
                               
                             
                         </div>
