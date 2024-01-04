@@ -121,6 +121,9 @@ if (isset($_GET['doctor_id'])) {
         
             <ul class="menu">
 
+
+                <p>HOME</p>
+
                 <li >
                     <a href="admin-dashboard.php" >
                         <i class='bx bxs-dashboard'></i>
@@ -143,7 +146,7 @@ if (isset($_GET['doctor_id'])) {
         
 
                 <li class="active">
-                    <button class="dropdown-btn">
+                <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
@@ -158,13 +161,27 @@ if (isset($_GET['doctor_id'])) {
                 </li>
 
 
-                <li >
+                <li>
                     <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
                     </a>
                 </li>
 
+
+                <p>DATABASE</p>
+
+
+                <li>
+                    <a href="admin-viewallpatient.php">
+                    <i class='bx bxs-data'></i>
+                        <span>Backup</span>
+                    </a>
+                </li>
+
+
+
+                
                
 
           

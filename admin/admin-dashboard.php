@@ -105,6 +105,9 @@ $totalAppointments = $rowAppointments['total_appointments'];
         
             <ul class="menu">
 
+
+                <p>HOME</p>
+
                 <li class="active">
                     <a href="admin-dashboard.php" >
                         <i class='bx bxs-dashboard'></i>
@@ -148,6 +151,19 @@ $totalAppointments = $rowAppointments['total_appointments'];
                         <span>Patients</span>
                     </a>
                 </li>
+
+
+                <p>DATABASE</p>
+
+
+                <li>
+                <a href="backup.php">
+                    <i class='bx bxs-data'></i>
+                    <span>Backup</span>
+                </a>
+                </li>
+
+
 
 
                 

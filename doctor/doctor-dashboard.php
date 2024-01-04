@@ -42,6 +42,17 @@ $resultAppointments = $conn->query($sqlAppointments);
 $rowAppointments = $resultAppointments->fetch_assoc();
 $totalAppointments = $rowAppointments['total_appointments'];
 
+
+
+        // Fetch user profile image path from the database
+        $stmtFetchImage = $conn->prepare("SELECT `Profile_Image` FROM doctors_table WHERE Email = ?");
+        $stmtFetchImage->bind_param("s", $_SESSION['username']);
+        $stmtFetchImage->execute();
+        $stmtFetchImage->bind_result($profileImagePath);
+        $stmtFetchImage->fetch();
+        $stmtFetchImage->close();
+    
+
 ?>
 
 
@@ -117,8 +128,8 @@ $totalAppointments = $rowAppointments['total_appointments'];
             
        
 
-                <li>
-                    <a href="#">
+                <li>    
+                    <a href="profile.php">
                         <i class='bx bxs-cog' ></i>
                         <span>Settings</span>
                     </a>
@@ -165,7 +176,12 @@ $totalAppointments = $rowAppointments['total_appointments'];
                
                         <div class="user-profile">
 
-                            <button class="profile-icon" id="profile-icon"></button>
+                                <?php if (!empty($profileImagePath)): ?>
+                                    <img id="profile-icon"  class="profile-icon" src="<?php echo $profileImagePath; ?>" alt="User Profile Image">
+                                <?php else: ?>
+                                    <img id="profile-icon"  class="profile-icon" src="images/PROFILE1.png" alt="Default Profile Image">
+                                <?php endif; ?>
+                     
                             
                         </div>
 
@@ -175,7 +191,11 @@ $totalAppointments = $rowAppointments['total_appointments'];
                             <div class="sub-menu">
 
                                     <div class="user-info">
-                                        <button class="usermain-profile"></button>
+                                            <?php if (!empty($profileImagePath)): ?>
+                                                <img   class="usermain-profile" src="<?php echo $profileImagePath; ?>" alt="User Profile Image">
+                                            <?php else: ?>
+                                                <img   class="usermain-profile" src="images/PROFILE1.png" alt="Default Profile Image">
+                                            <?php endif; ?>
                                         <p><?php echo $username; ?></p>
                                     </div>
 

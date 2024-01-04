@@ -87,7 +87,10 @@ $conn->close();
         
             <ul class="menu">
 
-                <li >
+
+                <p>HOME</p>
+
+                <li>
                     <a href="admin-dashboard.php" >
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
@@ -108,8 +111,8 @@ $conn->close();
                 
         
 
-                <li class="active">
-                    <button class="dropdown-btn">
+                <li  class="active">
+                <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
@@ -124,13 +127,27 @@ $conn->close();
                 </li>
 
 
-                <li >
+                <li>
                     <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
                     </a>
                 </li>
 
+
+                <p>DATABASE</p>
+
+
+                <li>
+                    <a href="admin-viewallpatient.php">
+                    <i class='bx bxs-data'></i>
+                        <span>Backup</span>
+                    </a>
+                </li>
+
+
+
+                
                
 
           

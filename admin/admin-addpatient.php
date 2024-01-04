@@ -103,7 +103,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
             <ul class="menu">
 
-                <li >
+
+                <p>HOME</p>
+
+                <li class="active">
                     <a href="admin-dashboard.php" >
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
@@ -124,8 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
         
 
-                <li >
-                    <button class="dropdown-btn">
+                <li>
+                <button class="dropdown-btn">
                         <i class='bx bxs-user-rectangle' ></i>
                         <span>Doctors</span>
                         <i class='bx bxs-chevron-down'></i>
@@ -140,13 +143,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </li>
 
 
-                <li class="active">
+                <li>
                     <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
                         <span>Patients</span>
                     </a>
                 </li>
 
+
+                <p>DATABASE</p>
+
+
+                <li>
+                    <a href="admin-viewallpatient.php">
+                    <i class='bx bxs-data'></i>
+                        <span>Backup</span>
+                    </a>
+                </li>
+
+
+
+                
                
 
           

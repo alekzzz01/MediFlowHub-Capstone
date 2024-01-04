@@ -340,8 +340,9 @@ body {
     height: 48px;
     border: 1px solid var(--fw-light);
     border-radius: 24px;
+    object-fit: cover;
+
  
-    background-image: url(../images/PROFILE.png);
 }
 
 .user--info {
@@ -462,13 +463,15 @@ body {
     cursor: pointer;
 }
 
-.user-info button {
+.user-info img {
     width: 32px;
     height: 32px;
     border-radius: 50px;
   
     border: none;
     outline: none;
+
+    object-fit: cover;
 
     cursor: pointer;
 

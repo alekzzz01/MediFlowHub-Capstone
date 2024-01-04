@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-<div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar">
         <div class="logo">
             <img src="images/MediFlowHub.png" alt="">
 
@@ -146,6 +146,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
             <ul class="menu">
+
+
+                <p>HOME</p>
 
                 <li >
                     <a href="admin-dashboard.php" >
@@ -184,7 +187,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
 
 
-
                 <li>
                     <a href="admin-viewallpatient.php">
                         <i class='bx bx-plus-medical' ></i>
@@ -193,8 +195,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
 
 
-           
+                <p>DATABASE</p>
 
+
+                <li>
+                    <a href="admin-viewallpatient.php">
+                    <i class='bx bxs-data'></i>
+                        <span>Backup</span>
+                    </a>
+                </li>
+
+
+
+                
                
 
           

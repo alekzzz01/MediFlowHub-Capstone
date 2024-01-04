@@ -265,8 +265,22 @@ li.active a span {
     border-radius: 50px;
 }
 
-.menu3 p {
-    margin: 0;
+.menu3 select {
+   border: none;
+
+   outline: none;
+   background-color: #F5F6F8;
+}
+
+.menu3 button {
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    padding: 8px;
+    color: white;
+    background-color: var(--clr-primary-color);
+
+    margin-left: 16px;
 }
 
 

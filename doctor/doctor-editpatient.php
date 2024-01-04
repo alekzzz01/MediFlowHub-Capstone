@@ -150,12 +150,14 @@ if (isset($_GET['patient_id'])) {
             
        
 
-                <li>
-                    <a href="#">
+              
+                <li>    
+                    <a href="profile.php">
                         <i class='bx bxs-cog' ></i>
                         <span>Settings</span>
                     </a>
                 </li>
+
 
 
                 <li class="logout">

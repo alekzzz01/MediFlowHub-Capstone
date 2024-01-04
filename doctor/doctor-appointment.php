@@ -217,12 +217,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_appointment"])
 
                 
                       
-                        <li>
-                            <a href="Profile.php">
+                        
+                        <li>    
+                            <a href="profile.php">
                                 <i class='bx bxs-cog' ></i>
                                 <span>Settings</span>
                             </a>
                         </li>
+
 
 
                         <li class="logout">

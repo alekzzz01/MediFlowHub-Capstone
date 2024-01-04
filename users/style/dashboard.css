@@ -519,13 +519,15 @@ outline: none;
     cursor: pointer;
 }
 
-.user-info button {
+.user-info img {
     width: 32px;
     height: 32px;
     border-radius: 50px;
   
     border: none;
     outline: none;
+
+    object-fit: cover;
 
     cursor: pointer;
 
@@ -535,6 +537,9 @@ outline: none;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+
+    text-decoration: none;
+    color: var(--clr-text);
 }
 
 .edit-profile1 i {

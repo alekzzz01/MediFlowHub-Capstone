@@ -18,6 +18,13 @@ $firstName = $_SESSION["first_name"];
 $username = $_SESSION["username"];
 
 
+  // Fetch user profile image path from the database
+  $stmtFetchImage = $conn->prepare("SELECT `Profile_Image` FROM users WHERE Email = ?");
+  $stmtFetchImage->bind_param("s", $_SESSION['username']);
+  $stmtFetchImage->execute();
+  $stmtFetchImage->bind_result($profileImagePath);
+  $stmtFetchImage->fetch();
+  $stmtFetchImage->close();
 
 
 
@@ -163,28 +170,36 @@ $username = $_SESSION["username"];
                
                         <div class="user-profile">
 
-                            <button class="profile-icon" id="profile-icon"></button>
-                            
-                        </div>
+                            <?php if (!empty($profileImagePath)): ?>
+                                <img id="profile-icon"  class="profile-icon" src="<?php echo $profileImagePath; ?>" alt="User Profile Image">
+                            <?php else: ?>
+                                <img id="profile-icon"  class="profile-icon" src="images/PROFILE1.png" alt="Default Profile Image">
+                            <?php endif; ?>
 
+
+                        </div>
                         
                         <div class="dropdown-profile">
 
                             <div class="sub-menu">
 
-                                    <div class="user-info">
-                                        <button class="usermain-profile"></button>
-                                        <p><?php echo $username  ?></p>
+                                <div class="user-info">
+                                            <?php if (!empty($profileImagePath)): ?>
+                                                <img   class="usermain-profile" src="<?php echo $profileImagePath; ?>" alt="User Profile Image">
+                                            <?php else: ?>
+                                                <img   class="usermain-profile" src="images/PROFILE1.png" alt="Default Profile Image">
+                                            <?php endif; ?>
+                                        <p><?php echo $username; ?></p>
                                     </div>
 
-                                    <div class="edit-profile">
+
+                                    <a href="profile.php" class="edit-profile">
                                         <div class="edit-profile1">
-                                        <i class='bx bxs-user-circle' ></i>
-                                        <p>Edit Profile</p>
+                                            <i class='bx bxs-user-circle'></i>
+                                            <p>Edit Profile</p>
                                         </div>
-                                    
-                                        <i class='bx bx-chevron-right' ></i>
-                                    </div>
+                                        <i class='bx bx-chevron-right'></i>
+                                    </a>
 
                                     <div class="help-support">
                                         <div class="edit-profile1">

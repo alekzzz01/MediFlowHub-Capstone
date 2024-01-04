@@ -306,7 +306,7 @@ li.active a span {
     border: 1px solid var(--fw-light);
     border-radius: 24px;
  
-    background-image: url(../images/PROFILE.png);
+    object-fit: cover;
 
 }
 
@@ -428,13 +428,15 @@ li.active a span {
     cursor: pointer;
 }
 
-.user-info button {
+.user-info img {
     width: 32px;
     height: 32px;
     border-radius: 50px;
   
     border: none;
     outline: none;
+
+    object-fit: cover;
 
     cursor: pointer;
 

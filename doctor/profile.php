@@ -309,7 +309,7 @@ if (isset($_SESSION['username'])) {
        
 
                 <li class="active">
-                    <a href="#">
+                    <a href="profile.php">
                         <i class='bx bxs-cog' ></i>
                         <span>Settings</span>
                     </a>
@@ -361,8 +361,14 @@ if (isset($_SESSION['username'])) {
                         </div>
                
                         <div class="user-profile">
+                            
 
-                            <button class="profile-icon" id="profile-icon"></button>
+                        <?php if (!empty($profileImagePath)): ?>
+                            <img id="profile-icon"  class="profile-icon" src="<?php echo $profileImagePath; ?>" alt="User Profile Image">
+                        <?php else: ?>
+                            <img id="profile-icon"  class="profile-icon" src="images/PROFILE1.png" alt="Default Profile Image">
+                        <?php endif; ?>
+                     
                             
                         </div>
 
@@ -372,8 +378,14 @@ if (isset($_SESSION['username'])) {
                             <div class="sub-menu">
 
                                     <div class="user-info">
-                                        <button class="usermain-profile"></button>
-                                        <p>Username</p>
+
+                                    <?php if (!empty($profileImagePath)): ?>
+                                        <img   class="usermain-profile" src="<?php echo $profileImagePath; ?>" alt="User Profile Image">
+                                    <?php else: ?>
+                                        <img   class="usermain-profile" src="images/PROFILE1.png" alt="Default Profile Image">
+                                    <?php endif; ?>
+                                 
+                                    <p> <?php echo $username  ?></p>
                                     </div>
 
                                     <div class="edit-profile">

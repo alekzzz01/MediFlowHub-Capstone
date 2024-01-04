@@ -144,6 +144,12 @@ body {
     font-size: 1rem;
     font-weight: var(--fw-medium);
     } 
+
+    .menu p {
+        color: var(--clr-light);
+        margin-left: 32px;
+    }
+    
     
     
     

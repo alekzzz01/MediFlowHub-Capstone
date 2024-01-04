@@ -70,10 +70,10 @@
         <nav class="nav">
 
             <ul class="nav_list">
-                <li class="nav_list-item"><a href="#" class="nav_link">Home</a></li>
-                <li class="nav_list-item"><a href="#" class="nav_link">About us</a></li>
-                <li class="nav_list-item"><a href="#" class="nav_link">Services</a></li>
-                <li class="nav_list-item"><a href="#" class="nav_link">Community</a></li>
+                <li class="nav_list-item"><a href="#main-section" class="nav_link">Home</a></li>
+                <li class="nav_list-item"><a href="#second-section" class="nav_link">About us</a></li>
+                <li class="nav_list-item"><a href="#third-section" class="nav_link">Services</a></li>
+                <li class="nav_list-item"><a href="#fourth-section" class="nav_link">Community</a></li>
             </ul>
 
         </nav>
@@ -96,7 +96,7 @@
 </header>
 
 
-<section class="main-section">
+<section class="main-section" id="main-section">
 
 
 
@@ -110,8 +110,8 @@
         
             <div class="a-links">
 
-                <button class="btn">Get Started!
-                </button>
+                
+                <a href="./users/signup.php" class="btn">Get Started!</a>
 
                 <button class="cta">
                     <span class="hover-underline-animation"> Join Our Team </span>
@@ -143,7 +143,7 @@
 
 
 
-<section class="second-section">
+<section class="second-section" id="second-section">
 
 
     <div class="left-info">
@@ -189,7 +189,7 @@
 
 
 
-<section class="third-section">
+<section class="third-section" id="third-section">
 
 
     <h2>Health Care Services. We make it easy.</h2>
@@ -249,9 +249,101 @@
 
 
 
+
+<section class="fourth-section" id="fourth-section">
+
+        <div class="contact-form">
+
+
+                    <img src="./index/images/illustrationemail.png" alt="" width="600px">
+
+                    <form action="">
+                            
+                            <h3>Get in touch</h3>
+
+
+                            
+                            <input type="text" placeholder="Name">  
+                            <input type="email" placeholder="Email">
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+
+
+                            <button>Send</button>
+                           
+
+
+                    </form>
+
+
+
+
+
+        </div>
+
+
+   
+
+
+
+
+</section>
+
+
+
+<footer class="footer">
+  	 <div class="container1">
+  	 	<div class="row">
+  	 		<div class="footer-col">
+  	 			<h4>Company</h4>
+  	 			<ul>
+  	 				<li><a href="#second-section">about us</a></li>
+  	 				<li><a href="#third-section">our services</a></li>
+  	 				
+  	 				
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>Information</h4>
+  	 			<ul>
+  	 				<li><a href="#">Supports</a></li>
+  	 				<li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+  	 				
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>Quick Links</h4>
+  	 			<ul>
+  	 				<li><a href="./index/developers.html">Developers</a></li>
+  	 				<li><a href="fourth-section">Contact us</a></li>
+  	 				<li><a href="#">Features</a></li>
+  	 			
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>follow us</h4>
+  	 			<div class="social-links">
+  	 				<a href="#"><i class='bx bxl-facebook' ></i></a>
+  	 				
+  	 				<a href="#"><i class='bx bxl-instagram' ></i></a>
+  	 				
+  	 			</div>
+  	 		</div>
+  	 	</div>
+  	 </div>
+
+
+     
+       <p>Copyright © 2023-2024 <span>Developed by (Group 5 - CINS BSIT students of University of Makati).</span></p>
+  </footer>
+
+
+
     
 </body>
 
 
 <script src="./index/script.js"></script>
 </html>
+
+

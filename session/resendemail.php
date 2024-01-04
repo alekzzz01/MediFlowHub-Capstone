@@ -105,7 +105,7 @@ function sendVerificationEmail($username, $token, $first_name)
     
   </div>
 
-  <p>Didnt receive an email? </p>
+  <p>Account not yet activated or Didnt receive an email? </p>
 
   <span>It may take a few minutes for the email to reach your inbox. <br> Still nothing? Re-enter your email and try again.</span>
 

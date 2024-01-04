@@ -14,11 +14,29 @@ if (!isset($_SESSION["username"])) {
     exit;
 }
 
-// Query the database to get doctor information from the 'doctors-table'
-$sql = "SELECT doctor_id, First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors_table`"; // Enclose the table name in backticks
+// Initialize a variable to count the number of doctors
+$numDoctors = 0;
+
+// Set a default value for the selected specialty
+$selectedSpecialty = isset($_POST['specialty']) ? $_POST['specialty'] : '';
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get the selected specialty from the form
+    $selectedSpecialty = $_POST['specialty'];
+}
+
+// Modify the SQL query to include a WHERE clause based on the selected specialty
+$sql = "SELECT doctor_id, First_Name, Last_Name, Specialty, Experience, Fee FROM `doctors_table`";
+
+if (!empty($selectedSpecialty)) {
+    $sql .= " WHERE Specialty = '$selectedSpecialty'";
+}
+
 $result = $conn->query($sql);
 
-$doctorCount = 0;
+// Update the number of doctors based on the result set
+$numDoctors = $result !== false ? $result->num_rows : 0;
 
 // Close the database connection (if needed)
 $conn->close();
@@ -165,135 +183,41 @@ $conn->close();
                         </div>
 
 
+                       
                         <div class="menu3">
 
-                        <i class='bx bx-slider'></i>
-                        <p>Filters</p>
+                                <i class='bx bx-slider'></i>
+                            
+                                <form method="post" action="">
+                                    <select name="specialty" id="specialtyFilter">
+                                        <option value="">All Specialty</option>
+                                        <option value="InfantVaccine">Infant Vaccine</option>
+                                        <option value="Consultation">Consultation</option>
+                                        <option value="Mental Health">Mental Health</option>
+                                        <option value="FamilyPlanning">Family Planning</option>
+                                        <option value="Psychiatrists">Psychiatrists</option>
+                                        <option value="Pediatrician">Pediatrician</option>
+                                        <option value="AnimalVaccine">Animal Vaccine</option>
+                                    </select>
+                                    <button type="submit">Apply Filter</button>
+                                </form>
 
                         </div>
                         
             </div>
 
      
-            <div class="user--info">
-
-                        <div class="notification" id="notif-icon">
-                                    <i class='bx bx-bell'></i>
-                                    <span class="num">8</span>
-
-                        </div>
-
-                        <div class="user-profile">
-
-                            <button class="profile-icon" id="profile-icon"></button>
-                            
-                        </div>
-
-
-                        <div class="dropdown-profile">
-
-                            <div class="sub-menu">
-
-                                    <div class="user-info">
-                                        <button class="usermain-profile"></button>
-                                        <p>Username</p>
-                                    </div>
-
-                                    <div class="edit-profile">
-                                        <div class="edit-profile1">
-                                        <i class='bx bxs-user-circle' ></i>
-                                        <p>Edit Profile</p>
-                                        </div>
-                                    
-                                        <i class='bx bx-chevron-right' ></i>
-                                    </div>
-
-                                    <div class="help-support">
-                                        <div class="edit-profile1">
-                                        <i class='bx bxs-help-circle' ></i>
-                                        <p>Help & Support</p>
-                                        </div>
-                                        <i class='bx bx-chevron-right' ></i>
-                                    </div>
-
-
-
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dropdown-notifications">
-                                <p class="Notiftitle">Notifications</p>
-
-                                <p class="ReminderTitle">Reminder</p>
-                               
-                                <div class="notif-box">
-
-                                        <div class="notif-message">
-                                            <p>Your appointment with Dr. Quack Quack starts in 1hr.</p>
-
-                                            <i class='bx bx-chevron-right'></i>
-
-                                        </div>
-
-                                        <div class="notif-time">
-
-                                             <i class='bx bxs-time-five'></i>
-                                             <p>Now</p>
-                                            
-                                        </div>
-                                       
-
-                                </div>
-
-                                <div class="notif-box">
-
-                                        <div class="notif-message">
-                                            <p>Your appointment with Dr. Quack Quack starts in 1hr.</p>
-
-                                            <i class='bx bx-chevron-right'></i>
-
-                                        </div>
-
-                                        <div class="notif-time">
-
-                                             <i class='bx bxs-time-five'></i>
-                                             <p>Now</p>
-                                            
-                                        </div>
-                                       
-
-                                </div>
-
-
-
-
-                        </div>
-
-
-
-            </div>
+            
            
         </div>
 
 
-        <div class="filter-results">
-                <div class="results">
-                    <p>GENERAL CHECKUP</p>
-                    <i class='bx bx-x'></i>
-                </div>
+        
 
-                <div class="results">
-                    <p>MEDICAL</p>
-                    <i class='bx bx-x'></i>
-                </div>
-        </div>
-
+       
         <div class="number-results">
-            <p>We've found <?php echo $result->num_rows; ?> Doctors/Providers you can book with!</p>
-        </div>
+    <p>We've found <?php echo $numDoctors; ?> Doctors/Providers you can book with!</p>
+</div>
 
        
 
@@ -302,8 +226,6 @@ $conn->close();
                 <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-
-                        $doctorCount++;
                 ?>
 
                 <div class="doctors-container">
