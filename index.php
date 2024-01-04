@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,17 +36,17 @@
 
             <div class="hotlines-name">
 
-                    <p>Brgy. (Name) Health Center</p>
+                    <p>Brgy. Wawa Health Center</p>
                     
-
+            <!--
                     <div class="info">
                         <i class='bx bxs-phone'></i>
                         <p>#</p>
-                    </div>  
+                    </div>  -->
                  
                     <div class="info">
                         <i class='bx bx-current-location'></i>
-                        <p>Brgy. Location</p>
+                        <p>Brgy. Wawa, Taguig City, Philippines</p>
                     </div> 
                    
 
@@ -50,8 +55,8 @@
 
 
             <div class="social-icons">
-                <a href="https://www.facebook.com/Alekzzz01/"><i class='bx bxl-facebook'></i></a>
-                <a href=""><i class='bx bxl-tiktok' ></i></a> 
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href=""><i class='bx bxl-instagram'></i></a> 
             </div>
 
 
@@ -257,15 +262,16 @@
 
                     <img src="./index/images/illustrationemail.png" alt="" width="600px">
 
-                    <form action="">
+                    <form action="./session/process_form.php" method="post">
+
                             
                             <h3>Get in touch</h3>
 
 
                             
-                            <input type="text" placeholder="Name">  
-                            <input type="email" placeholder="Email">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                            <input type="text" placeholder="Name" name="Name">  
+                            <input type="email" placeholder="Email" name="Email">
+                            <textarea name="Message" id="" cols="30" rows="10" placeholder="Message"></textarea>
 
 
                             <button>Send</button>

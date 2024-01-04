@@ -253,8 +253,9 @@ function sendVerificationEmail($username, $token, $first_name)
         });
 
         function checkPasswordStrength(password) {
-            // Reset the password strength indicator
+            // Reset the password strength indicator and enable signup button
             $('#password-strength').html('');
+            enableSignupButton();
 
             // Minimum length
             if (password.length < 8) {
@@ -277,8 +278,8 @@ function sendVerificationEmail($username, $token, $first_name)
                 return;
             }
 
-            // Enable the signup button if the password is strong
-            enableSignupButton();
+            // If all criteria are met, display strong password indicator
+            $('#password-strength').append('<span style="color:green;">Strong password!</span>');
         }
 
         function enableSignupButton() {
@@ -292,6 +293,7 @@ function sendVerificationEmail($username, $token, $first_name)
         }
     });
 </script>
+
 
 <script>
         var successMessage = "<?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ''; ?>";

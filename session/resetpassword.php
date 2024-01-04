@@ -234,6 +234,8 @@ if (errorMessage !== "") {
                 return;
             }
 
+            $('#password-strength').append('<span style="color:green;">Strong password!</span>');
+
             // Enable the signup button if the password is strong
             enableSignupButton();
         }
@@ -249,6 +251,9 @@ if (errorMessage !== "") {
         }
     });
 </script>
+
+
+
 
 
 
