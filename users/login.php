@@ -9,6 +9,20 @@ require '../config/config.php';
     
 session_start();
 
+
+if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION["user_id"])) {
+    if ($_SESSION["role"] == "Admin") {
+        header("Location: ../admin/admin-dashboard.php");
+    } else {
+        header("Location: dashboard.php");
+    }
+    exit;
+}
+
+
+
+
+
 if (isset($_GET['timeout']) && $_GET['timeout'] === 'true') {
     echo "<script>alert('Session Timeout. Please login again.')</script>";
 }
@@ -60,14 +74,14 @@ if (isset($_POST["submit"])) {
                 // Send the OTP via email
                 $mail = new PHPMailer(true);
                 try {
-                    //Server settings
+                  
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+                    $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
-                    $mail->Username = SMTP_USERNAME; // Use the constant
-                    $mail->Password = SMTP_PASSWORD; // Use the constant
+                    $mail->Username = SMTP_USERNAME; 
+                    $mail->Password = SMTP_PASSWORD; 
 
                     $mail->setFrom(SMTP_USERNAME, 'MediflowHub | OTP Verification');
                     $mail->addAddress($username);

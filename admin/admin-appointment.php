@@ -297,7 +297,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <tbody>
 
                             <?php
-                            // Display appointments in the HTML table
+                 
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>";
                                 echo "<td>{$row['Appointment_ID']}</td>";
@@ -305,23 +305,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 echo "<td>{$row['Patient_Last_Name']}, {$row['Patient_First_Name']}</td>";
                                 echo "<td>{$row['Doctor_Last_Name']}, {$row['Doctor_First_Name']}</td>";
 
-                                // Display Clinic_Name based on Clinic_ID
+                         
                                 $clinicId = $row['Clinic_ID'];
                                 $clinicName = getClinicName($clinicId, $conn);
-                                echo "<td>{$clinicName}</td>";// Replace this with a function to fetch Clinic_Name based on Clinic_ID
+                                echo "<td>{$clinicName}</td>";
 
                             
                                 echo "<td>{$row['time_slot']}</td>";
 
                                 $dateString = $row['Date'];
 
-                                // Create a DateTime object from the database date string
+                         
                                 $dateTime = new DateTime($dateString);
 
-                                // Format the date as desired, for example, 'November 23, 2023'
                                 $formattedDate = $dateTime->format('F j, Y');
 
-                                // Output the formatted date in your HTML
                                 echo "<td>{$formattedDate}</td>";
 
 
@@ -352,8 +350,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         $statusClass = 'default-status';
                                         break;
                                 }
-                            
-                                // Apply the CSS class to the Status column
+                     
                                 echo "<td><p class='{$statusClass}'>{$status}</p></td>";
 
 
