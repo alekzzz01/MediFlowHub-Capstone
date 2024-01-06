@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Retrieve form data
         $date = $_POST['selecteddate'];
         $timeSlot = $_POST['timeSlot'];
-        $diagnosis = $_POST['diagnosis'];
+     
         $patientPhoneNum = $_POST['phone'];
         $doctorId = $_POST['doctor'];
 
@@ -52,15 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $userId = $_SESSION['user_id'];
 
         // Check if any required field is empty
-        if (empty($date) || empty($timeSlot) || empty($diagnosis) || empty($patientPhoneNum) || empty($doctorId) || empty($patientId) || empty($clinicId) || empty($userId)) {
+        if (empty($date) || empty($timeSlot) || empty($patientPhoneNum) || empty($doctorId) || empty($patientId) || empty($clinicId) || empty($userId)) {
             // Set an error message for empty fields
             $errorMessage = "Please fill in all required fields.";
         } else {
             // Prepare and execute the SQL query to insert data into the appointment table
-            $stmt = $conn->prepare("INSERT INTO appointments (Date, time_slot, Diagnosis, Patient_Phone_Num, doctor_id, Patient_id, user_id, Status) VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending')");
+            $stmt = $conn->prepare("INSERT INTO appointments (Date, time_slot, Patient_Phone_Num, doctor_id, Patient_id, user_id, Status) VALUES (?, ?, ?, ?, ?, ?, 'Pending')");
 
             // Bind parameters
-            $stmt->bind_param("sssssss", $date, $timeSlot, $diagnosis, $patientPhoneNum, $doctorId, $patientId, $userId);
+            $stmt->bind_param("ssssss", $date, $timeSlot, $patientPhoneNum, $doctorId, $patientId, $userId);
 
             // Execute the statement
             if ($stmt->execute()) {
@@ -454,26 +454,7 @@ $conn->close();
                                         </div>
                                     </div>
 
-
-                                <h2>Diagnosis </h2>
-
-                                <div class="paragraph1">
-                                    <p>Choose a diagnosis that best describes</p>
-                                </div>
-
-                                <div class="dialog_select">
-                                    <select name="diagnosis" id="reason-box">
-                                        <option hidden>Choose...</option>
-                                        <option value="Mental Health">Mental Health</option>
-                                        <option value="Vision changes">Vision changes</option>
-                                        <option value="Cough">Cough</option>
-                                        <option value="Shortness of breath">Shortness of breath</option>
-                                        <option value="Fatigue">Fatigue</option>
-                                        <option value="Pain">Pain</option>
-                                       
-                                    </select>
-                                </div>
-
+                                    
 
 
                                 <h2>Phone No. </h2>
@@ -595,7 +576,7 @@ $conn->close();
     document.getElementById('doctor-box').innerHTML = '<option hidden>Select a Doctor</option>';
     document.getElementById('selecteddate').value = '';
     document.getElementById('patient-box').value = '';
-    document.getElementById('reason-box').value = 'Choose...';
+
     document.getElementById('phone').value = '';
 
     // Close the form container with smooth transition
