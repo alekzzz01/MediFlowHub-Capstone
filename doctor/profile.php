@@ -59,7 +59,7 @@ if (isset($_SESSION['username'])) {
     
             // Set success message and redirect
             $_SESSION['successMessage'] = "Account changes saved successfully.";
-            header("Location: Profile.php");
+            header("Location: profile.php");
             exit;
         }
     }
@@ -94,18 +94,18 @@ if (isset($_SESSION['username'])) {
     
                     // Set success message and redirect
                     $_SESSION['successMessage'] = "Password changed successfully.";
-                    header("Location: Profile.php");
+                    header("Location: profile.php");
                     exit;
                 } else {
                     // Set error message for mismatched passwords and redirect
                     $_SESSION['errorMessage'] = "New password and confirm password do not match.";
-                    header("Location: Profile.php");
+                    header("Location: profile.php");
                     exit;
                 }
             } else {
                 // Set error message for incorrect current password and redirect
                 $_SESSION['errorMessage'] = "Incorrect current password.";
-                header("Location: Profile.php");
+                header("Location: profile.php");
                 exit;
             }
         }
@@ -160,7 +160,7 @@ if (isset($_SESSION['username'])) {
     
                 // Set success message and redirect
                 $_SESSION['successMessage'] = "Address changes saved successfully.";
-                header("Location: Profile.php");
+                header("Location: profile.php");
                 exit;
             } catch (Exception $e) {
                 // Rollback the transaction in case of an error
@@ -503,7 +503,7 @@ if (isset($_SESSION['username'])) {
 
                 <div id="account-edit" class="account-edit">
 
-                    <form class="account-input" action="Profile.php" method="POST" enctype="multipart/form-data">
+                    <form class="account-input" action="profile.php" method="POST" enctype="multipart/form-data">
 
                     <div class="image-edit">
 
@@ -617,7 +617,7 @@ if (isset($_SESSION['username'])) {
 
 
                 <div id="password-edit" class="password-edit">
-                <form class="form-input" action="Profile.php" method="POST">
+                <form class="form-input" action="profile.php" method="POST">
                     <div class="pass-box">
                         <p>CURRENT PASSWORD <span>*</span></p>
                         <input type="password" name="current_password" id="current_password" placeholder="Current Password....." required="required">
@@ -654,7 +654,7 @@ if (isset($_SESSION['username'])) {
                  <div id="address-edit" class="address-edit">
 
                    
-                 <form  class="form-input-address" action="Profile.php" method="POST">
+                 <form  class="form-input-address" action="" method="POST">
 
                         <div class="input-box">
                                 <p>Full Address<span>*</span></p>
