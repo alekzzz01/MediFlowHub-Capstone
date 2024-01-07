@@ -237,7 +237,7 @@ if (isset($_GET['doctor_id'])) {
 
 
                                     <div class="title-1">
-                                                <p>Edit patient</p>
+                                                <p>Edit doctor</p>
 
                                     </div>
 

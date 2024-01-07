@@ -217,11 +217,11 @@ $conn->close();
                     </div>
 
 
-
+                    <!--
                     <form action="individual-doctor.php" method="GET">
                         <input type="hidden" name="doctor_id" value="<?php echo $row['doctor_id']; ?>">
                         <button type="submit" class="viewdoctor">VIEW DOCTOR</button>
-                    </form>
+                    </form> -->
 
 
 

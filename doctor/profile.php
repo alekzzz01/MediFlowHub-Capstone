@@ -487,6 +487,8 @@ if (isset($_SESSION['username'])) {
                             <p>Profile</p>
                         </li>
 
+
+                        
                         <li id="address-btn" class="active3">
                             <i class='bx bxs-edit-location'></i>
                             <p>Address</p>
@@ -656,6 +658,7 @@ if (isset($_SESSION['username'])) {
                    
                  <form  class="form-input-address" action="" method="POST">
 
+                      <!--
                         <div class="input-box">
                                 <p>Full Address<span>*</span></p>
                                 <input type="text" name="full_address" value="<?php echo htmlspecialchars($full_address); ?>"  readonly>
@@ -666,11 +669,11 @@ if (isset($_SESSION['username'])) {
                      
                         <p>Region, Province, City, Barangay<span>*</span> </p>
                   
-
+                        
 
                         <div class="select-container">
 
-
+                           
 
                                 <div class="select-box">
                         
@@ -718,7 +721,7 @@ if (isset($_SESSION['username'])) {
                                                     
 
                     
-
+                            -->
 
                     </form>
 

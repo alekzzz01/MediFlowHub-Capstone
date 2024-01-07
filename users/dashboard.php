@@ -300,35 +300,35 @@ $username = $_SESSION["username"];
                             <p>Common Services</p>
 
                             <div class="conditions-slider">
-                                <div class="box">
+                                <a href="./pdf/baby-vaccine.pdf" class="box">
                                     <img src="images/conditions-icon/condition-1.png" alt="">
                                     <p>Baby Vaccines</p>
-                                </div>
+                                </a>
 
-                                <div class="box">
+                                <a href="" class="box">
                                     <img src="images/conditions-icon/condition-2.png" alt="">
                                     <p>Animal Bite</p>
-                                </div>
+                                    </a>
 
-                                <div class="box">
+                                <a href="" class="box">
                                     <img src="images/conditions-icon/condition-3.png" alt="">
                                     <p>Animal Vaccine</p>
-                                </div>
+                                    </a>
 
-                                <div class="box">
+                                <a href="./pdf/FLU.pdf" class="box">
                                     <img src="images/conditions-icon/condition-4.png" alt="">
                                     <p>Flu Vaccine</p>
-                                </div>
+                                    </a>
 
-                                <div class="box">
+                                <a href="./pdf/mental-help.pdf" class="box">
                                     <img src="images/conditions-icon/condition-5.png" alt="">
                                     <p>Mental Health</p>
-                                </div>
+                                    </a>
 
-                                <div class="box">
+                                <a href="./pdf/famplan.pdf" class="box">
                                     <img src="images/conditions-icon/condition-6.png" alt="">
                                     <p>Family Planning</p>
-                                </div>
+                                    </a>
                             </div>
                         </div>
                     

@@ -335,21 +335,13 @@ body {
     gap:24px;
 }
 
-.menu3 {
-    display: flex;
-    align-items: center;
-    gap:12px;
 
-    background-color: #F5F6F8;
-    padding: 12px 24px;
-    border-radius: 50px;
-}
 
 .menu3 select {
    border: none;
 
    outline: none;
-   background-color: #F5F6F8;
+
 }
 
 .menu3 button {

@@ -543,19 +543,19 @@ if (isset($_SESSION['username'])) {
 
                         <div class="input-box">
                                 <p>FIRST NAME<span>*</span></p>
-                                <input type="text" name="first_name"  placeholder="First Name....." required="required" value="<?php echo $first_name; ?>">
+                                <input type="text" name="first_name"  placeholder="First Name....." required="required" value="<?php echo $first_name; ?>" readonly>
                                 
                         </div>
 
                         <div class="input-box">
                                 <p>LAST NAME <span>*</span></p>
-                                <input type="text"  name="last_name"  placeholder="Last Name....." required="required" value="<?php echo $last_name; ?>">
+                                <input type="text"  name="last_name"  placeholder="Last Name....." required="required" value="<?php echo $last_name; ?>" readonly>
                                 
                         </div>
 
                         <div class="input-box">
                                 <p>EMAIL <span>*</span></p>
-                                <input type="text" name="email"   placeholder="Email Address....." required="required" value="<?php echo $email; ?>">
+                                <input type="text" name="email"   placeholder="Email Address....." required="required" value="<?php echo $email; ?>" readonly>
                                 
                         </div>
 

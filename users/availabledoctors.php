@@ -186,7 +186,7 @@ $conn->close();
                        
                         <div class="menu3">
 
-                                <i class='bx bx-slider'></i>
+                             
                             
                                 <form method="post" action="">
                                     <select name="specialty" id="specialtyFilter">
