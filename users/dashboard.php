@@ -305,12 +305,12 @@ $username = $_SESSION["username"];
                                     <p>Baby Vaccines</p>
                                 </a>
 
-                                <a href="" class="box">
+                                <a href="./pdf/ANIMAL.pdf" class="box">
                                     <img src="images/conditions-icon/condition-2.png" alt="">
                                     <p>Animal Bite</p>
                                     </a>
 
-                                <a href="" class="box">
+                                <a href="./pdf/ANIMAL.pdf" class="box">
                                     <img src="images/conditions-icon/condition-3.png" alt="">
                                     <p>Animal Vaccine</p>
                                     </a>
