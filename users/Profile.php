@@ -362,28 +362,14 @@ if (isset($_SESSION['username'])) {
             
                         <i class='bx bx-menu' id="menu-toggle"></i>
 
-                        <div class="search-box">
                         
-                        <input type="text" placeholder="Search...">
-                        <i class='bx bx-search'></i>
-                    
-                        </div>
 
             </div>
            
             <div class="user--info">
 
-                        <div class="notification" id="notif-icon">
-                                    <i class='bx bx-bell'   ></i>
-                                    <span class="num">8</span>
-
-                        </div>
-               
-                        <div class="user-profile">
-
-                            <button class="profile-icon" id="profile-icon"></button>
-                            
-                        </div>
+                      
+                     
 
                         
                         <div class="dropdown-profile">
