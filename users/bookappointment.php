@@ -29,8 +29,17 @@ $doctorQuery = "SELECT doctor_id, CONCAT(First_Name, ' ', Last_Name) AS doctor_n
 $doctorResult = $conn->query($doctorQuery);
 
 // Fetch patients
-$patientQuery = "SELECT Patient_id, CONCAT(First_Name, ' ', Last_Name) AS patient_name, Date_of_Birth FROM patients_table";
-$patientResult = $conn->query($patientQuery);
+// Fetch patients
+$userId = $_SESSION['user_id'];  // Get the user ID from the session
+$patientQuery = "SELECT Patient_id, CONCAT(First_Name, ' ', Last_Name) AS patient_name, Date_of_Birth 
+                FROM patients_table
+                WHERE user_id = ?";
+$patientStmt = $conn->prepare($patientQuery);
+$patientStmt->bind_param("s", $userId);
+$patientStmt->execute();
+$patientResult = $patientStmt->get_result();
+$patientStmt->close();
+
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -494,6 +503,9 @@ $conn->close();
 
 <div id="successMessage" class="success-message"><i class='bx bx-check'></i> Appointment booked successfully!</div>
 <div id="errorMessage" class="error-message"><i class='bx bxs-x-circle'></i> </div>
+
+
+<a href="user-addpatient.php" class="addpatientbtn">Add Patient</a>
 
 
 

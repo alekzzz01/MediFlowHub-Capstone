@@ -217,14 +217,13 @@ $roundedBmi = round($bmi, 2);
                     <h2>Appointments</h2>
 
                     <?php while ($appointmentDetails = $resultAppointments->fetch_assoc()) : ?>
-                        <p class="text-view">Appointment ID : <span class="information"> <?php echo $appointmentDetails['Appointment_ID']; ?> </span></p>
-                        <p class="text-view">Diagnosis : <span class="information"> <?php echo $appointmentDetails['Diagnosis']; ?> </span></p>
-                        <p class="text-view">Prescription : <span class="information"> <?php echo $appointmentDetails['Prescription']; ?> </span></p>
-                       
+    <?php if ($appointmentDetails['Status'] == 'Completed') : ?>
+        <p class="text-view">Appointment ID : <span class="information"><?php echo $appointmentDetails['Appointment_ID']; ?></span></p>
+        <p class="text-view">Prescription : <span class="information"><?php echo $appointmentDetails['Prescription']; ?></span></p>
+        <hr>
+    <?php endif; ?>
+<?php endwhile; ?>
 
-                        <hr> 
-
-                    <?php endwhile; ?>
 
            
 
