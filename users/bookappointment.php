@@ -348,17 +348,14 @@ $conn->close();
 
 
                     <div class="selection-container">
-
-                        
                         <label for="selecteddate">Choose a Date:</label>
                         <div class="selecteddate">
-                                    <div class="inputbox">
-                                        <input type="date" name="selecteddate" id="selecteddate" placeholder="Select a date" required="required" onchange="updateSelectedDate()">
-                                    </div>
+                            <div class="inputbox">
+                                <input type="date" name="selecteddate" id="selecteddate" placeholder="Select a date" required="required" onchange="updateSelectedDate()">
+                            </div>
                         </div>
-
-                    
                     </div>
+
 
 
                        
@@ -515,7 +512,24 @@ $conn->close();
 
 
 
+<script>
+        document.getElementById('selecteddate').min = new Date().toISOString().split('T')[0];
+        
+        function updateSelectedDate() {
+            // Additional logic when the date changes
+            var selectedDate = document.getElementById('selecteddate').value;
+            console.log('Selected Date:', selectedDate);
 
+            // Add your custom logic here
+            
+            // Example: Display an alert if the selected date is in the past
+            var currentDate = new Date().toISOString().split('T')[0];
+            if (selectedDate < currentDate) {
+                alert('Please select a future date.');
+                document.getElementById('selecteddate').value = currentDate;
+            }
+        }
+    </script>
 
 
 
