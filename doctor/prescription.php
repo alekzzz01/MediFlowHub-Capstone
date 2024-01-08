@@ -54,27 +54,27 @@ if ($result->num_rows > 0) {
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the prescription text from the form
+    // Get the prescription text and mode of payment from the form
     $prescriptionText = $_POST['prescription'];
+    $modeOfPayment = $_POST['mode_of_payment'];
 
-    // Update the database with the prescription information
-    $updateQuery = "UPDATE appointments SET Prescription = '$prescriptionText' WHERE Appointment_ID = $appointmentId";
+    // Update the database with the prescription and mode of payment information
+    $updateQuery = "UPDATE appointments SET Prescription = '$prescriptionText', Mode_of_Payment = '$modeOfPayment' WHERE Appointment_ID = $appointmentId";
 
     if ($conn->query($updateQuery) === true) {
         // Update the status to 'Completed'
         $updateStatusQuery = "UPDATE appointments SET Status = 'Completed' WHERE Appointment_ID = $appointmentId";
         if ($conn->query($updateStatusQuery) === true) {
             // Redirect to the same page with a GET request
-            header("Location: ".$_SERVER['PHP_SELF']."?appointment_id=$appointmentId&success=true");
+            header("Location: " . $_SERVER['PHP_SELF'] . "?appointment_id=$appointmentId&success=true");
             exit();
         } else {
             echo '<script>alert("Error updating status: ' . $conn->error . '");</script>';
         }
     } else {
-        echo '<script>alert("Error updating prescription: ' . $conn->error . '");</script>';
+        echo '<script>alert("Error updating prescription and mode of payment: ' . $conn->error . '");</script>';
     }
 }
-
 
 if (isset($_GET['success']) && $_GET['success'] == 'true') {
     echo '<script>alert("Prescription and status updated successfully.");</script>';
@@ -167,6 +167,22 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
                 <p>Prescription: </p>
                 <textarea name="prescription" cols="200" rows="10" ><?php echo $prescription; ?></textarea>
             </div>
+
+            <div class="text-prescribe">
+            <p>Mode of Payment: </p>
+            <select name="mode_of_payment">
+                <option value="hidden">Select Mode of Payment</option>
+                <option value="Cash">Cash</option>
+                <!-- Add other payment options as needed -->
+            </select>
+        </div>
+
+
+
+
+            
+
+
             <div class="button-prescribe">
                 <button class="submit" type="submit">Prescribe</button>
             </div>
