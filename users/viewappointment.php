@@ -16,7 +16,7 @@ $appointmentId = $_GET['appointment_id'];
 $query = "SELECT a.Appointment_ID, 
                  p.Last_Name AS Patient_Last_Name, p.First_Name AS Patient_First_Name, 
                  d.Last_Name AS Doctor_Last_Name, d.First_Name AS Doctor_First_Name, d.Fee,
-                 a.Status, a.time_slot, a.Date, a.Prescription, a.Mode_of_Payment
+                 a.Status, a.time_slot, a.Date, a.Prescription
           FROM appointments a
           JOIN patients_table p ON a.Patient_id = p.Patient_id
           JOIN doctors_table d ON a.doctor_id = d.doctor_id
@@ -122,7 +122,7 @@ $pdf->Cell(0, 10, 'Patient: ' . $appointmentDetails['Patient_Last_Name'] . ', ' 
 $pdf->Cell(0, 10, 'Doctor: ' . $appointmentDetails['Doctor_Last_Name'] . ', ' . $appointmentDetails['Doctor_First_Name'], 0, 1);
 $pdf->Cell(0, 10, 'Status: ' . $appointmentDetails['Status'], 0, 1);
 $pdf->Cell(0, 10, 'Fee: ' . $appointmentDetails['Fee'], 0, 1);
-$pdf->Cell(0, 10, 'Mode of Payment: ' . $appointmentDetails['Mode_of_Payment'], 0, 1);
+
 $pdf->Cell(0, 10, 'Date and Time: ' . date('F j, Y', strtotime($appointmentDetails['Date'])) . ', ' . $appointmentDetails['time_slot'], 0, 1);
 $pdf->Ln(10);
 $pdf->MultiCell(0, 10, 'Prescription: ' . $appointmentDetails['Prescription'], 0, 'L');

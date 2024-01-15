@@ -1,9 +1,14 @@
 <?php 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 
 include('../session/auth.php');
 require_once '../session/session_manager.php';
 require '../session/db.php';
+require '../config/config.php';
+require '../vendor/autoload.php';
 
 
 start_secure_session(); 
@@ -35,7 +40,7 @@ if ($conn->connect_error) {
 $query = "SELECT a.Appointment_ID, p.Last_Name AS Patient_Last_Name, p.First_Name AS Patient_First_Name, 
                  d.Last_Name AS Doctor_Last_Name, d.First_Name AS Doctor_First_Name, 
                  d.Clinic_ID AS Clinic_ID, a.time_slot, a.Date, a.Status,
-                 c.Clinic_Name, c.Address
+                 c.Clinic_Name, c.Address, d.Specialty, a.Diagnosis
                  
           FROM appointments a
           JOIN patients_table p ON a.Patient_id = p.Patient_id
@@ -46,22 +51,72 @@ $query = "SELECT a.Appointment_ID, p.Last_Name AS Patient_Last_Name, p.First_Nam
 
 $result = $conn->query($query);
 
+// ... Your existing code ...
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $appointmentId = $_POST['appointment_id'];
-    $newStatus = $_POST['new_status'];
+// Check if confirmation action is triggered
+if (isset($_GET['confirm_appointment']) && !empty($_GET['confirm_appointment'])) {
+    $appointmentId = $_GET['confirm_appointment'];
 
-    // Update the status in the database
-    $updateQuery = "UPDATE appointments SET Status = '$newStatus' WHERE Appointment_ID = $appointmentId";
-    $updateResult = $conn->query($updateQuery);
+    // Update the appointment status to 'Confirmed' in the database
+    $updateQuery = "UPDATE appointments SET Status = 'Confirmed' WHERE Appointment_ID = $appointmentId";
+    $conn->query($updateQuery);
 
-    if ($updateResult === false) {
-        die("Error updating the status: " . $conn->error);
-     } 
-    // Redirect back to the appointments page after updating the status
-    header("Location: admin-appointment.php");
-    exit();
+    // Retrieve user and doctor emails
+    $emailQuery = "SELECT p.Email AS Patient_Email, d.Email AS Doctor_Email
+                   FROM appointments a
+                   JOIN users p ON a.user_id = p.user_id
+                   JOIN doctors_table d ON a.doctor_id = d.doctor_id
+                   WHERE a.Appointment_ID = $appointmentId";
+
+    $emailResult = $conn->query($emailQuery);
+
+    if ($emailResult && $emailResult->num_rows > 0) {
+        $emailData = $emailResult->fetch_assoc();
+        $patientEmail = $emailData['Patient_Email'];
+        $doctorEmail = $emailData['Doctor_Email'];
+
+        // Send confirmation emails
+        sendConfirmationEmail($patientEmail, 'Patient');
+        sendConfirmationEmail($doctorEmail, 'Doctor');
+    }
 }
+
+
+
+function sendConfirmationEmail($recipientEmail, $recipientType) {
+    $mail = new PHPMailer(true);
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->Username = SMTP_USERNAME; 
+    $mail->Password = SMTP_PASSWORD; 
+
+    $mail->setFrom(SMTP_USERNAME, 'MediflowHub | Appointment Confirmation');
+    $mail->addAddress($recipientEmail);
+
+    $mail->isHTML(true);
+    $mail->Subject = 'Appointment Confirmation';
+
+    // Customize the email content based on the recipient type
+    if ($recipientType === 'Patient') {
+        $mail->Body = 'Your appointment has been confirmed. Thank you!';
+    } elseif ($recipientType === 'Doctor') {
+        $mail->Body = 'Your appointment has been confirmed. Please be prepared.';
+    }
+
+
+    if (!$mail->send()) {
+        $_SESSION['errorMessage'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+    } else {
+        $_SESSION['successMessage'] = "Message has been sent";
+        header("Location: admin-appointment.php");
+        exit();
+    }
+}
+
 
 
 
@@ -125,10 +180,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         });
-    });
+        $('.view-button').on('click', function (e) {
+        e.preventDefault();
 
+        // Get the appointment ID from the button's data attribute
+        var appointmentId = $(this).data('appointment-id');
+
+        // Make an AJAX request to get the appointment details
+        $.ajax({
+            type: 'POST',
+            url: 'get-appointment-details.php',
+            data: { appointment_id: appointmentId },
+            dataType: 'json',
+            success: function (response) {
+                if (response.error) {
+                    // Handle the error, for example, show an alert
+                    alert('Error: ' + response.error);
+                } else {
+                    // Display the appointment details in an alert box
+                    showAlert('Appointment Details', formatDetails(response));
+                }
+            },
+            error: function () {
+                // Handle AJAX error, for example, show an alert
+                alert('Error fetching appointment details');
+            }
+        });
+    });
+});
+
+// Function to format appointment details
+function formatDetails(details) {
+    var formattedDetails = '';
+    for (var key in details) {
+        formattedDetails += key + ': ' + details[key] + '\n';
+    }
+    return formattedDetails;
+}
+
+// Function to show an alert box with specified title and content
+function showAlert(title, content) {
+    alert(content);
+}
     /* Other scripts and functions */
 </script>
+
+
+
 
 
 
@@ -286,6 +384,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Clinic</th>
                         <th>Appointment Time</th>
                         <th>Appointment Date</th>
+                        <th>Diagnosis</th>
+                        <th>Chosen Service</th>
+                       
+                        
                         <th>Status</th>
                         <th>Action</th>
                         
@@ -323,7 +425,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 echo "<td>{$formattedDate}</td>";
 
 
-
+                                echo "<td>{$row['Diagnosis']}</td>";
+                                echo "<td>{$row['Specialty']}</td>";
                                 
 
                                 $status = $row['Status'];
@@ -353,21 +456,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                      
                                 echo "<td><p class='{$statusClass}'>{$status}</p></td>";
 
+                                echo "<td class='button-action'>";
 
-                                echo "<td>
-                                        <form action='' method='post'>
-                                            <input type='hidden' name='appointment_id' value='{$row['Appointment_ID']}'>
-                                            <select name='new_status'>
-                                                <option value='Confirmed'>Confirm</option>
-                                                <option value='Cancelled'>Cancel</option>
-                                            </select>
-                                            <input type='submit' value='Update'>
-                                        </form>
-                                    </td>";
-                        
+                                if ($status !== 'Cancelled') {
+                                    echo "<form action='' method='get'>
+                                            <input type='hidden' name='confirm_appointment' value='{$row['Appointment_ID']}'>
+                                            <button type='submit' class='confirm-button'>Confirm <i class='bx bxs-show'></i></button>
+                                          </form>";
+                                }
+                                
+                                if ($status !== 'Cancelled') {
+                                    echo "<a href='cancel-reason.php?appointment_id={$row['Appointment_ID']}' class='cancel-button'>Cancel <i class='bx bxs-message-square-edit'></i></a>";
+                                }
+                                
+                                // Add the view button here
+                                echo "<button class='view-button' data-appointment-id='{$row['Appointment_ID']}'>View <i class='bx bx-show'></i></button>";
+                                
+                                echo "</td>";
                                 
                             
-                            //   echo "<td><a href='viewappointment.php?appointment_id={$row['Appointment_ID']}'>View Appointment</a></td>";
+                            
+
+                                //
                                 echo "</tr>";
                             }
 
@@ -410,7 +520,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       
 
         </div>
-       
+                   
+<div id="successMessage" class="success-message"><i class='bx bx-check'></i></div>
+
+<div id="errorMessage" class="error-message"><i class='bx bxs-x-circle'></i> </div>
 
 
         
@@ -446,6 +559,42 @@ for (i = 0; i < dropdown.length; i++) {
 
 
     </script>
+
+
+
+
+
+<script>
+    var successMessage = "<?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ''; ?>";
+    if (successMessage !== "") {
+        var successMessageDiv = document.getElementById("successMessage");
+        successMessageDiv.textContent = successMessage;
+        successMessageDiv.style.display = "block";
+
+        // Scroll to the success message for better visibility
+        successMessageDiv.scrollIntoView({
+            behavior: 'smooth'
+        });
+
+        // Remove the session variable to avoid displaying the message on subsequent page loads
+        <?php unset($_SESSION['successMessage']); ?>;
+    }
+
+    var errorMessage = "<?php echo isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : ''; ?>";
+
+    if (errorMessage !== "") {
+        var errorMessageDiv = document.getElementById("errorMessage");
+        errorMessageDiv.textContent = errorMessage;
+        errorMessageDiv.style.display = "block";
+
+        // Scroll to the error message for better visibility
+        errorMessageDiv.scrollIntoView({
+            behavior: 'smooth'
+        });
+
+        <?php unset($_SESSION['errorMessage']); ?>;
+    }
+</script>
 
 
 

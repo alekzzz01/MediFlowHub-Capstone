@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Retrieve form data
         $date = $_POST['selecteddate'];
         $timeSlot = $_POST['timeSlot'];
+        $diagnosis = $_POST['diagnosis'];
      
         $patientPhoneNum = $_POST['phone'];
         $doctorId = $_POST['doctor'];
@@ -66,10 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errorMessage = "Please fill in all required fields.";
         } else {
             // Prepare and execute the SQL query to insert data into the appointment table
-            $stmt = $conn->prepare("INSERT INTO appointments (Date, time_slot, Patient_Phone_Num, doctor_id, Patient_id, user_id, Status) VALUES (?, ?, ?, ?, ?, ?, 'Pending')");
+            $stmt = $conn->prepare("INSERT INTO appointments (Date, time_slot, Patient_Phone_Num,Diagnosis , doctor_id, Patient_id, user_id, Status) VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending')");
 
             // Bind parameters
-            $stmt->bind_param("ssssss", $date, $timeSlot, $patientPhoneNum, $doctorId, $patientId, $userId);
+            $stmt->bind_param("sssssss", $date, $timeSlot, $patientPhoneNum,  $diagnosis, $doctorId, $patientId, $userId);
 
             // Execute the statement
             if ($stmt->execute()) {
@@ -145,7 +146,7 @@ $conn->close();
 
     // Populate Specialty dropdown
     var specialtyDropdown = $('#specialty-box');
-    specialtyDropdown.append('<option value="all">Select a Specialty</option>');
+    specialtyDropdown.append('<option value="all">Select a Service</option>');
     specialties.forEach(function (specialty) {
         specialtyDropdown.append('<option value="' + specialty.specialty + '">' + specialty.specialty + '</option>');
     });
@@ -321,7 +322,7 @@ $conn->close();
                     <div class="selection-container">
 
                         
-                        <label for="specialty-search">Specialty: </label>
+                        <label for="specialty-search">Choose a Service: </label>
                         <div class="specialty-search">
                             <select name="specialty" id="specialty-box">
                                 <!-- Specialty options will be populated dynamically using JavaScript -->
@@ -459,6 +460,18 @@ $conn->close();
                                             </select>
                                         </div>
                                     </div>
+
+
+                                <h2>Diagnosis </h2>
+                                <div class="paragraph1">
+                                    <p>Input your diagnosis here</p>
+                                </div>
+
+                                <div class="input-box">
+                                    <input type="text"  name="diagnosis" placeholder="Diagnosis....">
+
+                                </div>
+
 
                                     
 

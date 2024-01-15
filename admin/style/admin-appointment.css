@@ -469,6 +469,137 @@ table p {
 }
 
 
+.button-action {
+    display: flex;
+    align-items: start;
+
+  
+    gap: 4px;
+}
+
+
+.confirm-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: rgb(46, 204, 113);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+ 
+
+    font-family: 'Poppins' ,    sans-serif;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+}
+
+.view-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: rgb(230, 207, 0);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+ 
+
+    font-family: 'Poppins' ,    sans-serif;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+
+}
+
+
+
+.cancel-button {
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: rgb(192, 57, 43);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+
+    font-size: 16px;
+
+    font-family: 'Poppins' ,    sans-serif;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+
+}
+
+
+
+.confirm-button:hover, .cancel-button:hover , .view-button:hover {
+
+    box-shadow:2px 2px 5px rgba(0,0,0,0.20), inset 0 0 0 99999px rgba(0,0,0,0.2);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.success-message {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    color: #270;
+    background-color: #DFF2BF;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+
+.error-message {
+
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    color: #D8000C;
+    background-color: #FFBABA;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+
+
 
 
 

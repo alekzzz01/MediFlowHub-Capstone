@@ -511,7 +511,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["cancel_appointment"])
 
 
                         echo "<td class='button-action'>
-                        <a href='viewappointment.php?appointment_id={$row['Appointment_ID']}' class='view-button'>View <i class='bx bx-book-content'></i></a>
+                        <a href='viewprescription.php?appointment_id={$row['Appointment_ID']}' class='view-button'>View <i class='bx bx-book-content'></i></a>
                      
     
     

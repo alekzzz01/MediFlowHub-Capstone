@@ -54,12 +54,25 @@ if ($result->num_rows > 0) {
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the prescription text and mode of payment from the form
+    // Get the prescription text from the form
     $prescriptionText = $_POST['prescription'];
-    $modeOfPayment = $_POST['mode_of_payment'];
 
-    // Update the database with the prescription and mode of payment information
-    $updateQuery = "UPDATE appointments SET Prescription = '$prescriptionText', Mode_of_Payment = '$modeOfPayment' WHERE Appointment_ID = $appointmentId";
+    // Check if a file is uploaded
+    if (isset($_FILES['doctor_signature']) && $_FILES['doctor_signature']['error'] === UPLOAD_ERR_OK) {
+        $signatureTmpName = $_FILES['doctor_signature']['tmp_name'];
+        $signatureFileName = 'signature_' . $appointmentId . '_' . time() . '.png';  // Adjust file naming as needed
+        $signatureFilePath = '../admin/signature/' . $signatureFileName;  // Update the path accordingly
+
+        // Move the uploaded file to the desired directory
+        move_uploaded_file($signatureTmpName, $signatureFilePath);
+
+        // Update the database with the signature file path
+        $updateSignatureQuery = "UPDATE appointments SET Doctor_Signature = '$signatureFilePath' WHERE Appointment_ID = $appointmentId";
+        $conn->query($updateSignatureQuery);
+    }
+
+    // Update the database with the prescription information
+    $updateQuery = "UPDATE appointments SET Prescription = '$prescriptionText' WHERE Appointment_ID = $appointmentId";
 
     if ($conn->query($updateQuery) === true) {
         // Update the status to 'Completed'
@@ -72,9 +85,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo '<script>alert("Error updating status: ' . $conn->error . '");</script>';
         }
     } else {
-        echo '<script>alert("Error updating prescription and mode of payment: ' . $conn->error . '");</script>';
+        echo '<script>alert("Error updating prescription: ' . $conn->error . '");</script>';
     }
 }
+
 
 if (isset($_GET['success']) && $_GET['success'] == 'true') {
     echo '<script>alert("Prescription and status updated successfully.");</script>';
@@ -162,20 +176,19 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     </div>
 
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">    
             <div class="text-prescribe">
                 <p>Prescription: </p>
                 <textarea name="prescription" cols="200" rows="10" ><?php echo $prescription; ?></textarea>
             </div>
 
+          
+
             <div class="text-prescribe">
-            <p>Mode of Payment: </p>
-            <select name="mode_of_payment">
-                <option value="hidden">Select Mode of Payment</option>
-                <option value="Cash">Cash</option>
-                <!-- Add other payment options as needed -->
-            </select>
-        </div>
+                <p>Upload your signature:</p>
+                <input type="file" name="doctor_signature">
+            </div>
+
 
 
 
